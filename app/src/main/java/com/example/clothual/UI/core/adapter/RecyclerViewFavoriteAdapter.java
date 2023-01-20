@@ -25,7 +25,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
 
-public class RecyclerViewPreferiteAdapter extends RecyclerView.Adapter<RecyclerViewPreferiteAdapter.ShoesViewHolder> {
+public class RecyclerViewFavoriteAdapter extends RecyclerView.Adapter<RecyclerViewFavoriteAdapter.ShoesViewHolder> {
 
     private final List<Clothual> clothualList;
     private final  List<Image> imageList;
@@ -36,8 +36,8 @@ public class RecyclerViewPreferiteAdapter extends RecyclerView.Adapter<RecyclerV
         void buttonFavorite(String favorite);
     }
 
-    public RecyclerViewPreferiteAdapter(List<Clothual> clothualList, List<Image> imageList, ContentResolver contentResolver,
-                                        OnItemClickListener onItemClickListener, Application application){
+    public RecyclerViewFavoriteAdapter(List<Clothual> clothualList, List<Image> imageList, ContentResolver contentResolver,
+                                       OnItemClickListener onItemClickListener, Application application){
         this.clothualList = clothualList;
         this.imageList = imageList;
         this.contentResolver = contentResolver;
