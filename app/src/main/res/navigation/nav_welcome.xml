@@ -27,5 +27,9 @@
     <fragment
         android:id="@+id/fragment_registration"
         android:name="com.example.clothual.UI.welcome.RegistrationFragment.RegistrationFragment"
-        android:label="fragment_registration" />
+        android:label="fragment_registration" >
+        <action
+            android:id="@+id/action_fragment_registration_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

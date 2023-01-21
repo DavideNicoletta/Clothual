@@ -18,7 +18,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
+import com.example.clothual.R;
 import com.example.clothual.UI.core.CoreActivity;
 import com.example.clothual.databinding.FragmentRegistrationBinding;
 
@@ -68,6 +70,13 @@ public class RegistrationFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPref.edit();
 
         binding.policy.setText(POLICY);
+
+        binding.redirectLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(requireView()).navigate(R.id.action_fragment_registration_to_loginFragment);
+            }
+        });
 
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
