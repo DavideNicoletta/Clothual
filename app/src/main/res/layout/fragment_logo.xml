@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.clothual.UI.welcome.LogoFragment.LogoFragment"
     android:background="@color/black">
-
+<!--
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,8 +18,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:textStyle="bold"/>
-
-
+-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/clothual_03"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="230dp"/>
     <TextView
         android:id="@+id/credential1"
         android:layout_width="wrap_content"
