@@ -15,6 +15,7 @@ public class Constant {
     public static final String PASSWORD_CHANGE = "password_change";
     public static final String LANGUAGE = "language";
     public static final String URI = "uri";
+    public static final String DATE = "date";
 
     //Scritte iniziali
     public static final String GIANNI_VERSACE = (char)34 + "Non seguire i trend. Non lasciare che la moda ti possieda, sii tu a " +

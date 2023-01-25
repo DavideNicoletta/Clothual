@@ -124,12 +124,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="55dp"
         android:scrollbars="none">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -140,67 +140,80 @@
                 android:text="Tutto"
                 android:textColor="@color/white"
                 android:textSize="30sp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 android:background="@drawable/armadio"
                 android:textStyle="bold"
                 tools:ignore="SpeakableTextPresentCheck" />
 
 
             <Button
-                android:id="@+id/scarpe"
-                android:layout_width="match_parent"
+                android:id="@+id/shoes"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/scarpe"
-                android:layout_below="@id/total"
-                android:layout_marginTop="30dp"
                 android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/jeans"
+                android:layout_marginTop="30dp"
+                app:layout_constraintRight_toRightOf="parent"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
-                android:id="@+id/pantaloni"
-                android:layout_width="match_parent"
+                android:id="@+id/trousers"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/scarpe"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/pantaloni"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck"
+                app:layout_constraintTop_toBottomOf="@id/total"
+                app:layout_constraintLeft_toLeftOf="parent"/>
 
             <Button
                 android:id="@+id/t_shirt"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/pantaloni"
+                android:layout_below="@id/trousers"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/t_shirt"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck"
+                app:layout_constraintTop_toBottomOf="@id/total"
+                app:layout_constraintRight_toRightOf="parent"/>
 
             <Button
-                android:id="@+id/giacche"
-                android:layout_width="match_parent"
+                android:id="@+id/jackets"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/t_shirt"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/giacche"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck"
+                app:layout_constraintTop_toBottomOf="@id/trousers"
+                app:layout_constraintLeft_toLeftOf="parent"/>
 
             <Button
                 android:id="@+id/jeans"
-                android:layout_below="@id/giacche"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/jeans"/>
+                android:background="@drawable/jeans"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/t_shirt"
+                tools:ignore="SpeakableTextPresentCheck" />
+
 
             <Button
-                android:id="@+id/preferiti"
-                android:layout_width="match_parent"
+                android:id="@+id/favorite"
+                android:layout_width="300dp"
                 android:layout_height="100dp"
-                android:layout_below="@id/jeans"
-                android:layout_marginTop="32dp"
-                android:text="Preferiti"/>
+                android:layout_marginTop="30dp"
+                android:text="Preferiti"
+                app:layout_constraintTop_toBottomOf="@id/jackets"
+                app:layout_constraintLeft_toLeftOf="parent"/>
 
             <Button
-                android:id="@+id/mappa"
-                android:layout_below="@id/preferiti"
+                android:id="@+id/map"
                 android:layout_width="match_parent"
                 android:text="Mappa"
                 android:background="@drawable/mappa"
@@ -208,17 +221,18 @@
                 android:textSize="30sp"
                 android:fontFamily="@font/inter_semibold"
                 android:layout_height="100dp"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="30dp"
+                app:layout_constraintTop_toBottomOf="@id/favorite"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_below="@id/mappa">
+                android:layout_height="20dp"
+                app:layout_constraintTop_toBottomOf="@id/map">
             </LinearLayout>
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
-
-
 
 </RelativeLayout>

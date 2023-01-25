@@ -53,7 +53,14 @@
         android:id="@+id/calendarFragment"
         android:name="com.example.clothual.UI.core.Calendar.CalendarFragment"
         android:label="Calendar"
-        tools:layout="@layout/fragment_calendar" />
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_calendarFragment_to_addClothualOutfitFragment"
+            app:destination="@id/addClothualOutfitFragment" />
+        <action
+            android:id="@+id/action_calendarFragment_self"
+            app:destination="@id/calendarFragment" />
+    </fragment>
     <fragment
         android:id="@+id/personalFragment"
         android:name="com.example.clothual.UI.core.Personal.PersonalFragment"
@@ -131,6 +138,11 @@
         android:name="com.example.clothual.UI.core.Categories.Jeans.JeansFragment"
         android:label="fragment_jeans"
         tools:layout="@layout/fragment_jeans" />
+    <fragment
+        android:id="@+id/addClothualOutfitFragment"
+        android:name="com.example.clothual.UI.core.Calendar.AddClothualOutfitFragment"
+        android:label="fragment_add_clothual_outfit"
+        tools:layout="@layout/fragment_add_clothual_outfit" />
 
 
 </navigation>

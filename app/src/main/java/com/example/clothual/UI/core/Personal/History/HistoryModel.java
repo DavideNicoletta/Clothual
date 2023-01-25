@@ -6,6 +6,7 @@ import com.example.clothual.Database.ClothualDao;
 import com.example.clothual.Database.RoomDatabase;
 import com.example.clothual.Model.Clothual;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -54,10 +55,22 @@ public class HistoryModel {
     }
 
 
+    public List<String> mapToList(HashMap<String, Integer> rate, List<String> result, int size){
+        float max = (Collections.max(rate.values()));
+        for (Map.Entry<String, Integer> entry : rate.entrySet()) {
+            if (entry.getValue() == max) {
+                result.add(entry.getKey());
+                result.add("" + (int) ((max / size) * 100));
+                result.add(entry.getKey());
+                return result;
+            }
+        }
+        return null;
+    }
 
-    public String[] getRateColor(){
+    public List<String> getRateColor(){
         List<Clothual> clothualList = clothualDao.getAllClothual();
-        String result[] = new String[2];
+        List<String> result = new ArrayList<>();
         HashMap<String, Integer> rate = new HashMap<String, Integer>();
         for(int i = 0; i < clothualList.size(); i++){
             if(rate.containsKey(clothualList.get(i).getColor())){
@@ -67,16 +80,16 @@ public class HistoryModel {
                 rate.put(clothualList.get(i).getColor(), 1);
             }
         }
-        float max = (Collections.max(rate.values()));
-        System.out.println(max);
 
-        for(Map.Entry<String, Integer> entry : rate.entrySet()){
-            if(entry.getValue() == max){
-                result[0] = entry.getKey();
-                result[1] = "" + (int)((max/clothualList.size())*100);
+        for(int i = 0; i < 3; i++){
+            if(!rate.isEmpty()){
+                result = mapToList(rate, result, clothualList.size());
+                rate.remove(result.get(result.size()-1));
+                result.remove(result.size()-1);
+            }else{
+                return  result;
             }
         }
-
         return  result;
     }
 

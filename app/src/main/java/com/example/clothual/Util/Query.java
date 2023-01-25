@@ -32,4 +32,9 @@ public class Query {
     public static final String GET_ID_BY_URI = "SELECT ID FROM Image WHERE uri LIKE  :uri";
 
     public static final String GET_CLOTUAL_BY_ID = "SELECT * FROM Clothual WHERE id LIKE :idClothual";
+
+    //Query Outfir
+    public static final String GET_ALL_OUTFIT = "SELECT * FROM Outfit";
+
+    public static final String GET_OUTFIT_BY_DATE = "SELECT * FROM Outfit WHERE date LIKE :date";
 }
