@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.clothual.UI.welcome.LogoFragment.LogoFragment"
     android:background="@color/black">
-<!-- commento -->
+
     <!--
     <TextView
         android:layout_width="wrap_content"
