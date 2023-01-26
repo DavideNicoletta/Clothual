@@ -136,4 +136,16 @@
             android:text="@string/systemMode"/>
     </LinearLayout>
 
+    <Switch
+        android:id="@+id/myswitch"
+        android:layout_width="wrap_content"
+        android:layout_height="62dp"
+        android:layout_below="@id/viewButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="254dp"
+        android:layout_marginBottom="255dp"
+        android:text="night mode" />
+
 </RelativeLayout>
