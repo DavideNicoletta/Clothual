@@ -1,5 +1,5 @@
 package com.example.clothual.Util;
-//prova
+
 public class Constant {
 
     public static final String DATABASE_NAME = "clothual_db";

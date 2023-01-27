@@ -34,28 +34,30 @@ import java.util.Locale;
  * create an instance of this fragment.
  */
 public class SettingsFragment extends AppCompatActivity {
-    private class SettingsFragment extends Fragment {
+    public class SettingsFragment extends Fragment {
 
         public FragmentSettingsBinding binding;
-        @SuppressLint("UseSwitchCompatOrMaterialCode") //suggerimento di android studio, non so cosa faccia
+        @SuppressLint("UseSwitchCompatOrMaterialCode")
+        //suggerimento di android studio, non so cosa faccia
         private Switch myswitch;
 
 
-    public SettingsFragment() {
+        public SettingsFragment() {
         }
 
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
+         *
          * @return A new instance of fragment SettingsFragment.
          */
         // TODO: Rename and change types and number of parameters
-        public static SettingsFragment newInstance () {
+        public static SettingsFragment newInstance() {
             return new SettingsFragment();
         }
 
         @Override
-        public void onCreate (Bundle savedInstanceState){
+        public void onCreate(Bundle savedInstanceState) {
             if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
                 setTheme(R.style.darktheme);
             } else setTheme(R.style.lighttheme);
@@ -80,8 +82,8 @@ public class SettingsFragment extends AppCompatActivity {
         }
 
         @Override
-        public View onCreateView (LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState){
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
             binding = FragmentSettingsBinding.inflate(getLayoutInflater());
             binding.imageEnglish.setImageResource(R.drawable.circle_48px);
             binding.imageFrench.setImageResource(R.drawable.circle_48px);
@@ -90,7 +92,7 @@ public class SettingsFragment extends AppCompatActivity {
         }
 
         @Override
-        public void onViewCreated (@NonNull View view, @Nullable Bundle savedInstanceState){
+        public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
 
             Context context = getActivity();
@@ -160,13 +162,13 @@ public class SettingsFragment extends AppCompatActivity {
         }
 
         @SuppressWarnings("deprecation")
-        public void restartApp () {
+        public void restartApp() {
             Intent i = new Intent(getContext(), Settings.class);
             startActivity(i);
             finish();
         }
 
-        private void setLocale (String lang){
+        private void setLocale(String lang) {
             Locale locale = new Locale(lang);
             Locale.setDefault(locale);
             Configuration config = getActivity().getResources().getConfiguration();
@@ -176,7 +178,7 @@ public class SettingsFragment extends AppCompatActivity {
 
         }
 
-        public void setImage (String lang){
+        public void setImage(String lang) {
             switch (lang) {
                 case "en":
                     binding.imageEnglish.setImageResource(R.drawable.total_circle_48px__1_);
@@ -199,5 +201,8 @@ public class SettingsFragment extends AppCompatActivity {
                     binding.imageEnglish.setImageResource(R.drawable.circle_48px);
             }
         }
+
     }
 }
+
+
