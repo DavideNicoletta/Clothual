@@ -5,20 +5,16 @@ import static com.example.clothual.Util.Constant.LANGUAGE;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -33,13 +29,13 @@ import java.util.Locale;
  * Use the {@link SettingsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SettingsFragment extends AppCompatActivity {
+
     public class SettingsFragment extends Fragment {
 
         public FragmentSettingsBinding binding;
         @SuppressLint("UseSwitchCompatOrMaterialCode")
         //suggerimento di android studio, non so cosa faccia
-        private Switch myswitch;
+
 
 
         public SettingsFragment() {
@@ -58,26 +54,13 @@ public class SettingsFragment extends AppCompatActivity {
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
-            if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+          /*  if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
                 setTheme(R.style.darktheme);
-            } else setTheme(R.style.lighttheme);
+            } else setTheme(R.style.lighttheme);*/
             super.onCreate(savedInstanceState);
-            myswitch = (Switch) myswitch.findViewById(R.id.myswitch);
             if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-                myswitch.setChecked(true);
+               binding.myswitch.setChecked(true);
             }
-            myswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                        restartApp();
-                    } else {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                        restartApp();
-                    }
-                }
-            });
 
         }
 
@@ -101,6 +84,18 @@ public class SettingsFragment extends AppCompatActivity {
 
             setImage(share.getString(LANGUAGE, " "));
 
+            binding.myswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        restartApp();
+                    } else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        restartApp();
+                    }
+                }
+            });
 
             binding.english.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -163,11 +158,10 @@ public class SettingsFragment extends AppCompatActivity {
 
         @SuppressWarnings("deprecation")
         public void restartApp() {
-            Intent i = new Intent(getContext(), Settings.class);
-            startActivity(i);
-            finish();
+            Navigation.findNavController(requireView()).navigate(R.id.action_settingsFragment_self);
         }
 
+        @SuppressWarnings("deprecation")
         private void setLocale(String lang) {
             Locale locale = new Locale(lang);
             Locale.setDefault(locale);
@@ -203,6 +197,5 @@ public class SettingsFragment extends AppCompatActivity {
         }
 
     }
-}
 
 

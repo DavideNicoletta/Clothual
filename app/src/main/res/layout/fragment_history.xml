@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--android:background="@themes/backgroundTint"-->
 <ScrollView xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -8,8 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".UI.core.Personal.History.HistoryFragment"
     android:scrollbars="none"
-    android:layout_marginBottom="55dp"
-    app:BackgroundColor="@themes/backgroundTint">
+    android:layout_marginBottom="55dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,7 +24,6 @@
             android:layout_marginTop="30dp"
             android:text="@string/shoes"
             style="@style/textView"
-            android:textColor="@themes/textColorHint"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/inter_semibold"
             android:textSize="20sp"
