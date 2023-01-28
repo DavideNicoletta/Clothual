@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@attr/background_color"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UI.core.Personal.Settings.SettingsFragment">
@@ -16,16 +15,16 @@
        android:layout_marginTop="20dp"
        android:background="@drawable/search_border"
        android:orientation="vertical">
+
        <TextView
            android:id="@+id/scegliLingua"
+           style="@style/textView"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:text="Scegli Lingua"
-           android:layout_marginTop="10dp"
            android:layout_marginStart="20dp"
-           style="@style/textView"
-           android:textColor="?attr/text_color"
-           android:fontFamily="@font/inter_semibold"/>
+           android:layout_marginTop="10dp"
+           android:fontFamily="@font/inter_semibold"
+           android:text="Scegli Lingua" />
 
        <LinearLayout
             android:id="@+id/english"
