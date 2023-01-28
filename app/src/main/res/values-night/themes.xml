@@ -21,7 +21,7 @@
     <style name="Widget.App.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:textColorHint">@color/white</item>
         <item name="materialThemeOverlay">@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined</item>
-        <item name="boxStrokeColor">@color/white</item>
+        <item name="boxStrokeColor">#444242</item>
     </style>
 
     <style name="ThemeOverlay.AppTheme.TextInputEditText.Outlined" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox">
@@ -37,16 +37,5 @@
         <item name="itemIconTint">@color/white</item>
         <item name="itemTextColor">@color/white</item>
     </style>
-
-    //bisogna cambiare i colori di questi
-    <style name="NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
 
 </resources>

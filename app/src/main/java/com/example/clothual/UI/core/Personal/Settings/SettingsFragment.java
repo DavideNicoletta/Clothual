@@ -1,6 +1,7 @@
 package com.example.clothual.UI.core.Personal.Settings;
 
 import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
+import static com.example.clothual.Util.Constant.DMODE;
 import static com.example.clothual.Util.Constant.LANGUAGE;
 
 import android.annotation.SuppressLint;
@@ -52,13 +53,7 @@ public class SettingsFragment extends Fragment {
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
-            /*if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-                setTheme(R.style.darktheme);
-            } else setTheme(R.style.lighttheme);*/
             super.onCreate(savedInstanceState);
-            if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-                binding.myswitch.setChecked(true);
-            }
         }
 
         @Override
@@ -115,6 +110,9 @@ public class SettingsFragment extends Fragment {
                     binding.light.setChecked(false);
                     binding.system.setChecked(false);
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    editor.putString(DMODE, "dark");
+                    editor.apply();
+                    setLocale("dark");
                 }
             });
 
@@ -138,25 +136,26 @@ public class SettingsFragment extends Fragment {
                 }
             });
 
+
             binding.myswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
+                        binding.myswitch.setChecked(true);
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                        restartApp();
+                        editor.putBoolean(DMODE, true);
+                        editor.apply();
                     } else {
+                        binding.myswitch.setChecked(false);
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                        restartApp();
+                        editor.putBoolean(DMODE, false);
+                        editor.apply();
                     }
                 }
             });
 
         }
 
-        @SuppressWarnings("deprecation")
-        public void restartApp() {
-            Navigation.findNavController(requireView()).navigate(R.id.action_settingsFragment_self);
-        }
 
        @SuppressWarnings("deprecation")
         private void setLocale(String lang) {
