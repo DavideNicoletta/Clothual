@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@attr/background_color"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UI.core.Personal.Settings.SettingsFragment">
@@ -23,8 +24,10 @@
            android:layout_marginTop="10dp"
            android:layout_marginStart="20dp"
            style="@style/textView"
+           android:textColor="?attr/text_color"
            android:fontFamily="@font/inter_semibold"/>
-        <LinearLayout
+
+       <LinearLayout
             android:id="@+id/english"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,28 +71,30 @@
                 android:layout_centerHorizontal="true"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/french"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
+       <LinearLayout
+           android:id="@+id/french"
+           android:layout_width="wrap_content"
+           android:layout_height="57dp"
+           android:layout_gravity="center">
+
            <ImageView
                android:id="@+id/imageFrench"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:layout_marginTop="12dp"/>
-            <TextView
-                android:id="@+id/changeLanguageFr"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
-                android:layout_marginStart="5dp"
-                android:layout_below="@id/changeLanguageIt"
-                android:drawableEnd="@drawable/french_flag"
-                android:text="Francese"
-                android:layout_centerHorizontal="true"/>
-        </LinearLayout>
+               android:layout_marginTop="12dp" />
+
+           <TextView
+               android:id="@+id/changeLanguageFr"
+               android:layout_width="100dp"
+               android:layout_height="wrap_content"
+               android:layout_below="@id/changeLanguageIt"
+               android:layout_centerHorizontal="true"
+               android:layout_marginStart="5dp"
+               android:layout_marginTop="12dp"
+               android:layout_marginBottom="12dp"
+               android:drawableEnd="@drawable/french_flag"
+               android:text="Francese" />
+       </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -146,6 +151,7 @@
         android:layout_marginStart="29dp"
         android:layout_marginTop="254dp"
         android:layout_marginBottom="255dp"
-        android:text="night mode" />
+        android:text="night mode"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 </RelativeLayout>

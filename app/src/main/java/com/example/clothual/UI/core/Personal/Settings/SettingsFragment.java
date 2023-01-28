@@ -30,12 +30,11 @@ import java.util.Locale;
  * create an instance of this fragment.
  */
 
-    public class SettingsFragment extends Fragment {
+public class SettingsFragment extends Fragment {
 
         public FragmentSettingsBinding binding;
         @SuppressLint("UseSwitchCompatOrMaterialCode")
         //suggerimento di android studio, non so cosa faccia
-
 
 
         public SettingsFragment() {
@@ -44,7 +43,6 @@ import java.util.Locale;
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
-         *
          * @return A new instance of fragment SettingsFragment.
          */
         // TODO: Rename and change types and number of parameters
@@ -54,14 +52,13 @@ import java.util.Locale;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
-          /*  if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            /*if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
                 setTheme(R.style.darktheme);
             } else setTheme(R.style.lighttheme);*/
             super.onCreate(savedInstanceState);
             if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-               binding.myswitch.setChecked(true);
+                binding.myswitch.setChecked(true);
             }
-
         }
 
         @Override
@@ -83,19 +80,6 @@ import java.util.Locale;
             SharedPreferences.Editor editor = share.edit();
 
             setImage(share.getString(LANGUAGE, " "));
-
-            binding.myswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                        restartApp();
-                    } else {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                        restartApp();
-                    }
-                }
-            });
 
             binding.english.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -154,6 +138,19 @@ import java.util.Locale;
                 }
             });
 
+            binding.myswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        restartApp();
+                    } else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        restartApp();
+                    }
+                }
+            });
+
         }
 
         @SuppressWarnings("deprecation")
@@ -161,7 +158,7 @@ import java.util.Locale;
             Navigation.findNavController(requireView()).navigate(R.id.action_settingsFragment_self);
         }
 
-        @SuppressWarnings("deprecation")
+       @SuppressWarnings("deprecation")
         private void setLocale(String lang) {
             Locale locale = new Locale(lang);
             Locale.setDefault(locale);
@@ -196,6 +193,6 @@ import java.util.Locale;
             }
         }
 
-    }
+}
 
 
