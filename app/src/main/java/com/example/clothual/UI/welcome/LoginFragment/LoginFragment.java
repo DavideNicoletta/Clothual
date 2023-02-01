@@ -14,6 +14,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -102,6 +103,20 @@ public class LoginFragment extends Fragment {
         String password = sharedPref.getString(PASSWORD_PREFERENCE, "");
         binding.editTextUsername.setText(username);
         binding.editTextPassword.setText(password);
+
+
+        int nightModeFlags =
+                getContext().getResources().getConfiguration().uiMode &
+                        Configuration.UI_MODE_NIGHT_MASK;
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                binding.clothual.setImageResource(R.drawable.logo_white_on_backgroung);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_NO:
+                binding.clothual.setImageResource(R.drawable.logo_black_on_white);
+                break;
+        }
 
 
 

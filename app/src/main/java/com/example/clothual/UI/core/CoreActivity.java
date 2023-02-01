@@ -1,7 +1,9 @@
 package com.example.clothual.UI.core;
 
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,21 @@ public class CoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.core_layout);
+
+        ImageView clothual = findViewById(R.id.clothual);
+
+        int nightModeFlags =
+                getResources().getConfiguration().uiMode &
+                        Configuration.UI_MODE_NIGHT_MASK;
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                clothual.setImageResource(R.drawable.logo_white_on_backgroung);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_NO:
+                clothual.setImageResource(R.drawable.logo_black_on_white);
+                break;
+        }
 
 
         Toolbar toolbar = findViewById(R.id.top_appbar);
@@ -56,7 +73,7 @@ public class CoreActivity extends AppCompatActivity {
         // For the Toolbar
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // For the BottomNavigationView
         NavigationUI.setupWithNavController(bottomNav, navController);

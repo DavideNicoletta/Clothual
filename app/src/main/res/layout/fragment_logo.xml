@@ -23,9 +23,10 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/clothual_03"
+        android:src="@drawable/logo_white_on_black"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="230dp"/>
+
     <TextView
         android:id="@+id/credential1"
         android:layout_width="wrap_content"

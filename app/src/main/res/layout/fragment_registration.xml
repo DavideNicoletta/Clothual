@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".UI.welcome.RegistrationFragment.RegistrationFragment">
 
+    <!--
     <TextView
         android:id="@+id/clothual"
         android:layout_width="wrap_content"
@@ -18,7 +19,12 @@
         android:layout_marginTop="20dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"/>-->
+
+    <ImageView
+        android:id="@+id/clothual"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"/>
 
 
     <ScrollView
@@ -40,6 +46,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
                 app:endIconMode="clear_text"
+                app:hintEnabled="false"
                 app:startIconDrawable="@drawable/mail_48px"
                 >
 
@@ -51,7 +58,7 @@
                     android:maxLength="20"
                     android:hint="@string/email"
                     android:background="@drawable/border_edit_text"
-                    android:textColorHint="@color/black"
+                    android:textColorHint="@color/grey"
                     android:textSize="20sp"
                     android:fontFamily="@font/inter_semibold"
                     android:textStyle="bold|italic"
@@ -67,6 +74,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 app:endIconMode="clear_text"
+                app:hintEnabled="false"
                 app:startIconDrawable="@drawable/person_48px"
                 >
 
@@ -78,7 +86,7 @@
                     android:importantForAutofill="no"
                     android:inputType="text"
                     android:maxLength="20"
-                    android:textColorHint="@color/black"
+                    android:textColorHint="@color/grey"
                     android:hint="@string/surname"
                     android:fontFamily="@font/inter_semibold"
                     android:textStyle="bold|italic"
@@ -94,6 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 app:endIconMode="clear_text"
+                app:hintEnabled="false"
                 android:layout_gravity="center_horizontal"
                 app:startIconDrawable="@drawable/person_48px"
                 >
@@ -106,7 +115,7 @@
                     android:importantForAutofill="no"
                     android:inputType="text"
                     android:maxLength="20"
-                    android:textColorHint="@color/black"
+                    android:textColorHint="@color/grey"
                     android:hint="@string/name"
                     android:fontFamily="@font/inter_semibold"
                     android:textStyle="bold|italic"
@@ -122,6 +131,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
                 app:endIconMode="clear_text"
+                app:hintEnabled="false"
                 app:startIconDrawable="@drawable/account_circle_48px2">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -132,7 +142,7 @@
                     android:importantForAutofill="no"
                     android:inputType="text"
                     android:maxLength="20"
-                    android:textColorHint="@color/black"
+                    android:textColorHint="@color/grey"
                     android:hint="@string/username"
                     android:fontFamily="@font/inter_semibold"
                     android:textStyle="bold|italic" />
@@ -146,6 +156,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
                 app:passwordToggleEnabled="true"
+                app:hintEnabled="false"
                 app:startIconDrawable="@drawable/key_48px"
                 >
 
@@ -158,7 +169,7 @@
                     android:inputType="textPassword"
                     android:maxLength="20"
                     android:hint="@string/password"
-                    android:textColor="@color/black"
+                    android:textColor="@color/grey"
                     android:fontFamily="@font/inter_semibold"
                     android:textStyle="bold|italic"
                     />

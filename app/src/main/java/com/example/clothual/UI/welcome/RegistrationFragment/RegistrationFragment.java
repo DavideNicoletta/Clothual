@@ -1,16 +1,12 @@
 package com.example.clothual.UI.welcome.RegistrationFragment;
 
-import static com.example.clothual.Util.Constant.ACCESS_PREFERENCE;
 import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
-import static com.example.clothual.Util.Constant.ID_ACCOUNT;
-import static com.example.clothual.Util.Constant.PASSWORD_PREFERENCE;
 import static com.example.clothual.Util.Constant.POLICY;
-import static com.example.clothual.Util.Constant.USERNAME_PREFERENCE;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,17 +19,13 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.clothual.R;
-import com.example.clothual.UI.core.CoreActivity;
 import com.example.clothual.databinding.FragmentRegistrationBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import org.apache.commons.validator.routines.EmailValidator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,6 +74,20 @@ public class RegistrationFragment extends Fragment {
         Context context = getActivity();
         SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
+
+
+        int nightModeFlags =
+                getContext().getResources().getConfiguration().uiMode &
+                        Configuration.UI_MODE_NIGHT_MASK;
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                binding.clothual.setImageResource(R.drawable.logo_white_on_backgroung);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_NO:
+                binding.clothual.setImageResource(R.drawable.logo_black_on_white);
+                break;
+        }
 
         binding.policy.setText(POLICY);
 

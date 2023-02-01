@@ -33,10 +33,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:minHeight="?attr/actionBarSize"
-                app:titleTextColor="@color/black"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/PopupOverlay"  >
-
+<!--
                    <TextView
                        android:id="@+id/title"
                        style="@style/textView"
@@ -49,7 +48,11 @@
                        android:textColor="@color/black"
                        android:textSize="30sp"
                        android:textStyle="bold"
-                       tools:ignore="MissingConstraints" />
+                       tools:ignore="MissingConstraints" />-->
+                   <ImageView
+                       android:id="@+id/clothual"
+                       android:layout_width="match_parent"
+                       android:layout_height="70dp"/>
 
             </com.google.android.material.appbar.MaterialToolbar>
        <!--</com.google.android.material.appbar.CollapsingToolbarLayout>-->
