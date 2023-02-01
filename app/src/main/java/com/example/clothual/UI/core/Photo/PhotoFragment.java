@@ -74,17 +74,34 @@ public class PhotoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        binding.fab1Upload.setVisibility(View.GONE);
+        binding.fab2Make.setVisibility(View.GONE);
+        binding.makePhoto.setVisibility(View.GONE);
+        binding.upload.setVisibility(View.GONE);
+
+        isFABOpen = false;
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(!isFABOpen){
-                    showFABMenu1();
+                    binding.fab1Upload.show();
+                    binding.fab2Make.show();
+                    binding.upload.setVisibility(View.VISIBLE);
+                    binding.makePhoto.setVisibility(View.VISIBLE);
+
+                    isFABOpen = true;
                 }else{
-                    closeFABMenu();
+                    binding.fab1Upload.hide();
+                    binding.fab2Make.hide();
+                    binding.upload.setVisibility(View.GONE);
+                    binding.makePhoto.setVisibility(View.GONE);
+
+                    isFABOpen = false;
                 }
             }
         });
+
 
 
 
@@ -143,6 +160,7 @@ public class PhotoFragment extends Fragment {
         startActivityForResult(Intent.createChooser(i, "Select Picture"), 1);
     }
 
+    /*
     private void showFABMenu1() {
         isFABOpen = true;
         binding.fab2Make.animate().translationY(-205);
@@ -156,13 +174,14 @@ public class PhotoFragment extends Fragment {
         binding.upload.setVisibility(View.VISIBLE);
     }
 
-        private void closeFABMenu () {
-            isFABOpen = false;
-            binding.fab1Upload.animate().translationY(0);
-            binding.fab2Make.animate().translationY(0);
-            binding.upload.setVisibility(View.INVISIBLE);
-            binding.makePhoto.setVisibility(View.INVISIBLE);
+     private void closeFABMenu () {
+        isFABOpen = false;
+        binding.fab1Upload.animate().translationY(0);
+        binding.fab2Make.animate().translationY(0);
+        binding.upload.setVisibility(View.INVISIBLE);
+        binding.makePhoto.setVisibility(View.INVISIBLE);
         }
+     */
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)

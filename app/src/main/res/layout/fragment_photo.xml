@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,88 +7,72 @@
     android:layout_height="match_parent"
     tools:context=".UI.core.Photo.PhotoFragment">
 
-
-
-
-
-        <TextView
-            android:id="@+id/upload"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="Scegli dalla galleria"
-            android:textAlignment="viewEnd"
-            android:layout_gravity="bottom|end"
-            android:layout_marginBottom="250dp"
-            android:layout_marginEnd="100dp"
-            android:visibility="invisible"
-            style="@style/textView"/>
-
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab1Upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="35dp"
-        android:layout_gravity="end|bottom"
-        android:layout_marginBottom="85dp"
-        android:backgroundTint="#D60707"
-        app:fabCustomSize="45dp"
-        app:borderWidth="0dp"
-        app:fabSize="normal"
-        android:tint="@color/white"
-        app:srcCompat="@drawable/upload_48px"
-        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
-
-       <TextView
-        android:id="@+id/makePhoto"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="Scatta foto"
-        android:textAlignment="viewEnd"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="175dp"
-        android:layout_marginEnd="100dp"
-        android:visibility="invisible"
-        style="@style/textView"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab2Make"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_marginEnd="35dp"
-        android:layout_marginBottom="85dp"
-        android:backgroundTint="#F29203"
-        app:borderWidth="0dp"
-        app:fabSize="normal"
-        android:tint="@color/white"
-        app:fabCustomSize="45dp"
-        app:srcCompat="@drawable/camera_enhance_48px"
-        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="70dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="end"
+        android:src="@drawable/add_48px"
+        android:tint="@color/white"
+        android:backgroundTint="@color/black"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="80dp"
+        android:id="@+id/fab1Upload"
+        app:layout_constraintBottom_toTopOf="@id/fab"
+        app:layout_constraintEnd_toEndOf="@id/fab"
+        android:layout_marginBottom="30dp"
+        android:gravity="end"
+        android:src="@drawable/upload_48px"
+        android:tint="@color/white"
         android:backgroundTint="@color/black"
-        android:layout_gravity="end|bottom"
-        app:srcCompat="@drawable/add_48px"
-        app:borderWidth="0dp"
-        app:fabSize="normal"
-        app:tint="@color/white"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:contentDescription="TODO" />
+        app:fabSize="normal"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/upload"
+        android:text="Carica una foto"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/fab1Upload"
+        app:layout_constraintEnd_toStartOf="@id/fab1Upload"
+        app:layout_constraintTop_toTopOf="@id/fab1Upload"
+        android:textColor="@color/black"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fab2Make"
+        app:layout_constraintBottom_toTopOf="@id/fab1Upload"
+        app:layout_constraintEnd_toEndOf="@id/fab1Upload"
+        app:layout_constraintStart_toStartOf="@id/fab1Upload"
+        android:layout_marginBottom="20dp"
+        android:gravity="end"
+        android:src="@drawable/camera_enhance_48px"
+        android:tint="@color/white"
+        android:backgroundTint="@color/black"
+        app:fabSize="normal"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/makePhoto"
+        android:text="Scatta una foto"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/fab2Make"
+        app:layout_constraintEnd_toStartOf="@id/fab2Make"
+        app:layout_constraintTop_toTopOf="@id/fab2Make"
+        android:textColor="@color/black"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="50dp"/>
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="-166dp" />
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
