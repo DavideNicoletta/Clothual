@@ -32,6 +32,7 @@
     <string name="trousers">Pantaloni</string>
     <string name="jackets">Giacca</string>
     <string name="close_app">Premere il tasto Home per uscire da Clothual</string>
+    <string name="already_an_user_login">Sei già registrato? Accedi</string>
 
 
 </resources>
