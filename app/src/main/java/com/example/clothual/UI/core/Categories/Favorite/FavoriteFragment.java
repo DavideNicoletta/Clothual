@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Image;
 import com.example.clothual.UI.core.Categories.CategoryModel;
-import com.example.clothual.UI.core.adapter.RecyclerViewPreferiteAdapter;
+import com.example.clothual.UI.core.adapter.RecyclerViewFavoriteAdapter;
 import com.example.clothual.databinding.FragmentFavoriteBinding;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -65,8 +65,8 @@ public class FavoriteFragment extends Fragment {
 
         List<Clothual> clothual = model.getPreferiteList();
         List<Image> image = model.getImagePreferiteList(clothual);
-        RecyclerViewPreferiteAdapter adapter = new RecyclerViewPreferiteAdapter(clothual, image,
-                getActivity().getContentResolver(), new RecyclerViewPreferiteAdapter.OnItemClickListener() {
+        RecyclerViewFavoriteAdapter adapter = new RecyclerViewFavoriteAdapter(clothual, image,
+                getActivity().getContentResolver(), new RecyclerViewFavoriteAdapter.OnItemClickListener() {
             @Override
             public void buttonFavorite(String favorite) {
                 Snackbar.make(view, favorite, Snackbar.LENGTH_LONG).show();

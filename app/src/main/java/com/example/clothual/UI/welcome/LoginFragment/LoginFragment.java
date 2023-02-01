@@ -1,6 +1,14 @@
 package com.example.clothual.UI.welcome.LoginFragment;
 
-import static com.example.clothual.Util.Constant.*;
+import static com.example.clothual.Util.Constant.COCO_CHANEL;
+import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
+import static com.example.clothual.Util.Constant.DONATELLA_VERSACE;
+import static com.example.clothual.Util.Constant.GIANNI_VERSACE;
+import static com.example.clothual.Util.Constant.GIORGIO_ARMANI;
+import static com.example.clothual.Util.Constant.PASSWORD_PREFERENCE;
+import static com.example.clothual.Util.Constant.PIER_CARDIN;
+import static com.example.clothual.Util.Constant.RALPH_LAUREN;
+import static com.example.clothual.Util.Constant.USERNAME_PREFERENCE;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -45,6 +53,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
  */
 
 
+@SuppressWarnings("deprecation")
 public class LoginFragment extends Fragment {
 
 

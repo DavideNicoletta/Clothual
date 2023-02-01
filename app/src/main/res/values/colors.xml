@@ -11,4 +11,6 @@
     <color name="grey_persona_layout">#D4D5D5</color>
     <color name="celeste">#8DCDFF</color>
     <color name="backGroundAdapter">#999999</color>
+    <color name="gray_backround">#42000000</color>
+    <color name="box_color" />
 </resources>

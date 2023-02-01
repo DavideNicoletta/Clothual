@@ -7,9 +7,6 @@
         android:radius="10dp"
         />
 
-    <solid
-        android:color="@color/white"/>
-
     <stroke
         android:width="3dp"
         android:color="@color/black"/>

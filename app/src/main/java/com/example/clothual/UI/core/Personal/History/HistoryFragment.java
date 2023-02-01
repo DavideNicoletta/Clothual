@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.clothual.databinding.FragmentHistoryBinding;
 
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link HistoryFragment#newInstance} factory method to
@@ -54,9 +56,32 @@ public class HistoryFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         float [] rate = historyModel.getRateTypeClothual();
-        String [] color = historyModel.getRateColor();
+        List<String> color = historyModel.getRateColor();
         //binding.mostUsedColor.setText("Most used Color: " + color[0] + ", " + color[1] + " %");
 
+
+        switch (color.size()){
+            case 2:
+                binding.firstColorText.setText(color.get(0) + ": " + color.get(1) + "%");
+                binding.firstColorRate.setProgress(Integer.parseInt(color.get(1)));
+                break;
+            case 4:
+                binding.firstColorText.setText(color.get(0) + ": " + color.get(1) + "%");
+                binding.firstColorRate.setProgress(Integer.parseInt(color.get(1)));
+                binding.secondColorText.setText(color.get(2) + ": " + color.get(3) + "%");
+                binding.secondColorRate.setProgress(Integer.parseInt(color.get(3)));
+                break;
+            case 6:
+                binding.firstColorText.setText(color.get(0) + ": " + color.get(1) + "%");
+                binding.firstColorRate.setProgress(Integer.parseInt(color.get(1)));
+                binding.secondColorText.setText(color.get(2) + ": " + color.get(3) + "%");
+                binding.secondColorRate.setProgress(Integer.parseInt(color.get(3)));
+                binding.thirtColorText.setText(color.get(4) + ": " + color.get(5) + "%");
+                binding.thirtColorRate.setProgress(Integer.parseInt(color.get(5)));
+                break;
+            default:
+                break;
+        }
 
         binding.shoesCircularProgressbar.setProgress((int)rate[0]);
         binding.rateShoes.setText((int)rate[0] + "%");
@@ -72,7 +97,6 @@ public class HistoryFragment extends Fragment {
 
         binding.jeansCircularProgressbar.setProgress((int)rate[4]);
         binding.rateJeans.setText((int)rate[4] + "%");
-
     }
 
 

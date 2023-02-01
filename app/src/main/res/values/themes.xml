@@ -1,9 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. Theme.AppCompat.DayNight.NoActionBar -->
-    <style name="Theme.Clothual" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="theme.Clothual" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnSurface">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -12,6 +13,8 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="textInputStyle">@style/Widget.App.TextInputLayout</item>
+
     </style>
 
 
@@ -23,6 +26,8 @@
     </style>
 
     <style name="ThemeOverlay.AppTheme.TextInputEditText.Outlined" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorOnSurface">@color/white</item>
         <item name="android:textCursorDrawable">@color/black</item>
     </style>
 
@@ -36,6 +41,14 @@
         <item name="itemTextColor">@color/black</item>
     </style>
 
+    <style name="NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
 </resources>

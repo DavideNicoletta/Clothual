@@ -147,7 +147,7 @@ public class CategoryModel {
         List<Clothual> list = clothualDao.getAllClothual();
         List<Clothual> jeans = new ArrayList<>();
         for(int i = 0; i < list.size(); i++){
-            if(list.get(i).getType() == 3){
+            if(list.get(i).getType() == 5){
                 jeans.add(list.get(i));
             }
         }
