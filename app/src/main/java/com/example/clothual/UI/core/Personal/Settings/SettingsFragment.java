@@ -147,15 +147,7 @@ public class SettingsFragment extends Fragment {
                 binding.myswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    int currentNightMode = context.getResources().getConfiguration().uiMode
-                            & Configuration.UI_MODE_NIGHT_MASK;
                     if (isChecked) {
-                        if(currentNightMode == Configuration.UI_MODE_NIGHT_YES) {
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                            editor.putBoolean(DMODE, false);
-                            editor.apply();
-                            setMode();
-                        }
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                         editor.putBoolean(DMODE, true);
                         editor.apply();

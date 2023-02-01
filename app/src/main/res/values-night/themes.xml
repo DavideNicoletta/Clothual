@@ -15,8 +15,6 @@
         <!-- Customize your theme here. -->
         <item name="textInputStyle">@style/Widget.App.TextInputLayout</item>
 
-        <item name="box_color">@color/backGroundAdapter</item>
-
     </style>
 
     <!-- Styles for TextInputLayout -->

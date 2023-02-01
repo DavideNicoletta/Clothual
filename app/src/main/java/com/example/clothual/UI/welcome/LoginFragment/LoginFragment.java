@@ -78,7 +78,7 @@ public class LoginFragment extends Fragment {
         String password = sharedPref.getString(PASSWORD_PREFERENCE, "");
         binding.editTextUsername.setText(username);
         binding.editTextPassword.setText(password);
-
+        //binding.signInButton.setColorScheme(SignInButton.COLOR_AUTO);
 
 
         Runnable runnable = new Runnable() {
