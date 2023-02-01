@@ -2,6 +2,7 @@ package com.example.clothual.UI.welcome.LoginFragment;
 
 import static com.example.clothual.Util.Constant.*;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +22,20 @@ import androidx.navigation.Navigation;
 import com.example.clothual.R;
 import com.example.clothual.UI.core.CoreActivity;
 import com.example.clothual.databinding.FragmentLoginBinding;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 
 /**
@@ -37,6 +53,16 @@ public class LoginFragment extends Fragment {
     LoginModel loginModel;
     private Thread thread;
     boolean check = true;
+
+    //
+    FirebaseAuth firebaseAuth;
+    ProgressDialog progressDialog;
+
+    //Google
+    private static final int RC_SIGN_IN = 100;
+    private GoogleSignInClient gsc;
+
+    private static final String TAG = "GOOGLE_SIGN_IN_TAG";
 
     public LoginFragment() { }
 
@@ -96,6 +122,66 @@ public class LoginFragment extends Fragment {
         thread = new Thread(runnable);
         thread.start();
 
+        //Firebase
+        firebaseAuth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(getContext());
+
+        binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = binding.editTextUsername.getText().toString().trim();
+                String password = binding.editTextPassword.getText().toString().trim();
+                progressDialog.show();
+                firebaseAuth.signInWithEmailAndPassword(email, password)
+                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                            @Override
+                            public void onSuccess(AuthResult authResult) {
+                                progressDialog.cancel();
+                                Intent intet = new Intent(requireContext(), CoreActivity.class);
+                                startActivity(intet);
+                                getActivity().finish();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progressDialog.cancel();
+                                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
+
+        binding.textViewForgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = binding.editTextUsername.getText().toString();
+                //controllo
+                if (email.isEmpty()){
+                    Toast.makeText(getContext(), R.string.login_mail_empty, Toast.LENGTH_SHORT).show();
+                } else {
+                    progressDialog.setTitle("Sending Mail");
+                    progressDialog.show();
+                    firebaseAuth.sendPasswordResetEmail(email)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    progressDialog.cancel();
+                                    Toast.makeText(getContext(), "Email Sent", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    progressDialog.cancel();
+                                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
+            }
+        });
+
+        /*
         binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,6 +208,7 @@ public class LoginFragment extends Fragment {
 
             }
         });
+        */
 
        binding.textViewRegister.setOnClickListener(view12 -> {
 
@@ -130,15 +217,82 @@ public class LoginFragment extends Fragment {
            Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_fragment_registration);
        });
 
+       //Google
+        checkGoogle();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .build();
+        gsc = GoogleSignIn.getClient(getActivity(), gso);
+
        binding.signInButton.setOnClickListener(view1 -> {
+           Intent intet = gsc.getSignInIntent();
+           startActivityForResult(intet, RC_SIGN_IN);
+           /*
            Intent intent = new Intent(requireContext(), CoreActivity.class);
            startActivity(intent);
            getActivity().finish();
+           */
        });
-
-
-
-
-
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogleAccount(account);
+            } catch (ApiException e) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    void checkGoogle(){
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
+        if (account != null) {
+            navigateToMainActivity();
+        }
+    }
+
+    private void navigateToMainActivity() {
+        Intent intent = new Intent(requireContext(), CoreActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+    }
+
+    private void firebaseAuthWithGoogleAccount(GoogleSignInAccount account) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        firebaseAuth.signInWithCredential(credential)
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        //login success
+                        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                        /*
+                        String uid = firebaseUser.getUid();
+                        String email = firebaseUser.getEmail();
+                        //check
+                        if (authResult.getAdditionalUserInfo().isNewUser()){
+                            //Account created
+                            Snackbar.make(getView(), "Welcome to Clothual", Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            //Existing user - Logged In
+                            Snackbar.make(getView(), "Welcome Back to Clothual", Snackbar.LENGTH_SHORT).show();
+                        }
+                        */
+                        //Start
+                        navigateToMainActivity();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //login failed
+                        Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
 }

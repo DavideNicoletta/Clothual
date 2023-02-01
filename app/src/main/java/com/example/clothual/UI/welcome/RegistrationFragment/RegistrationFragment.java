@@ -7,6 +7,7 @@ import static com.example.clothual.Util.Constant.PASSWORD_PREFERENCE;
 import static com.example.clothual.Util.Constant.POLICY;
 import static com.example.clothual.Util.Constant.USERNAME_PREFERENCE;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,13 +15,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
+import com.example.clothual.R;
 import com.example.clothual.UI.core.CoreActivity;
 import com.example.clothual.databinding.FragmentRegistrationBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
@@ -34,6 +45,11 @@ public class RegistrationFragment extends Fragment {
     private FragmentRegistrationBinding binding;
     public RegistrationModel registrationModel;
     public RegistrationFragment() { }
+
+    //
+    FirebaseAuth firebaseAuth;
+    FirebaseFirestore firebaseFirestore;
+    ProgressDialog progressDialog;
 
     /**
      * Use this factory method to create a new instance of
@@ -69,7 +85,51 @@ public class RegistrationFragment extends Fragment {
 
         binding.policy.setText(POLICY);
 
+        //Login Firebase
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        progressDialog = new ProgressDialog(getContext());
+
         binding.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = binding.editTextEmail.getText().toString();
+                String surname = binding.editTextSurname.getText().toString();
+                String name = binding.editTextName.getText().toString();
+                String username = binding.editTextUsername.getText().toString();
+                String password = binding.editTextPassword.getText().toString();
+
+                progressDialog.show();
+                firebaseAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                Navigation.findNavController(requireView()).navigate(R.id.action_fragment_registration_to_loginFragment);
+                                progressDialog.cancel();
+
+                                firebaseFirestore.collection("User")
+                                        .document(FirebaseAuth.getInstance().getUid())
+                                        .set(new UserModel(username, name, surname, email));
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                progressDialog.cancel();
+                            }
+                        });
+            }
+        });
+
+        binding.redirectLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(requireView()).navigate(R.id.action_fragment_registration_to_loginFragment);
+            }
+        });
+
+        /*binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -146,7 +206,7 @@ public class RegistrationFragment extends Fragment {
             return true;
         }else{
             return false;
-        }
+        }*/
     }
 
 }
