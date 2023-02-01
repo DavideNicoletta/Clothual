@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/settings_48px"
-            android:background="@color/grey_persona_layout"
+            android:background="@color/backGroundAdapter"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             />
@@ -90,7 +90,7 @@
             android:layout_marginStart="40dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:background="@color/grey_persona_layout"/>
+            android:background="@color/backGroundAdapter"/>
         </LinearLayout>
         <!--
         <View
@@ -138,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/history_48px"
-                android:background="@color/grey_persona_layout"
+                android:background="@color/backGroundAdapter"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
                 />
@@ -152,7 +152,7 @@
                 android:layout_marginStart="40dp"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:background="@color/grey_persona_layout"/>
+                android:background="@color/backGroundAdapter"/>
         </LinearLayout>
         <View
             android:layout_width="wrap_content"
@@ -169,7 +169,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/help_48px"
-                android:background="@color/grey_persona_layout"
+                android:background="@color/backGroundAdapter"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
                 />
@@ -183,7 +183,7 @@
                 android:layout_marginStart="40dp"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:background="@color/grey_persona_layout"/>
+                android:background="@color/backGroundAdapter"/>
         </LinearLayout>
         <View
             android:layout_width="wrap_content"
@@ -200,7 +200,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/logout_48px"
-                android:background="@color/grey_persona_layout"
+                android:background="@color/backGroundAdapter"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
                 />
@@ -214,7 +214,7 @@
                 android:layout_marginStart="40dp"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:background="@color/grey_persona_layout"/>
+                android:background="@color/backGroundAdapter"/>
         </LinearLayout>-->
         <!--
         <View

@@ -70,6 +70,12 @@ public class SettingsFragment extends Fragment {
         public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
 
+            /*if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+                binding.myswitch.setChecked(true);
+            } else binding.myswitch.setChecked(false);
+            */
+
+
             Context context = getActivity();
             SharedPreferences share = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = share.edit();
@@ -110,9 +116,6 @@ public class SettingsFragment extends Fragment {
                     binding.light.setChecked(false);
                     binding.system.setChecked(false);
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    editor.putString(DMODE, "dark");
-                    editor.apply();
-                    setLocale("dark");
                 }
             });
 
@@ -136,20 +139,32 @@ public class SettingsFragment extends Fragment {
                 }
             });
 
+                if (isNightModeActive(context)) {
+                    binding.myswitch.setChecked(true);
+                } else binding.myswitch.setChecked(false);
 
-            binding.myswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                binding.myswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    int currentNightMode = context.getResources().getConfiguration().uiMode
+                            & Configuration.UI_MODE_NIGHT_MASK;
                     if (isChecked) {
-                        binding.myswitch.setChecked(true);
+                        if(currentNightMode == Configuration.UI_MODE_NIGHT_YES) {
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                            editor.putBoolean(DMODE, false);
+                            editor.apply();
+                            setMode();
+                        }
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                         editor.putBoolean(DMODE, true);
                         editor.apply();
+                        setMode();
                     } else {
-                        binding.myswitch.setChecked(false);
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                         editor.putBoolean(DMODE, false);
                         editor.apply();
+                        setMode();
                     }
                 }
             });
@@ -167,6 +182,35 @@ public class SettingsFragment extends Fragment {
             Navigation.findNavController(requireView()).navigate(R.id.action_settingsFragment_self);
 
         }
+
+        private void setMode(){
+            Configuration config = getActivity().getResources().getConfiguration();
+            getActivity().getResources().updateConfiguration(config, getActivity().getResources().getDisplayMetrics());
+            Navigation.findNavController(requireView()).navigate(R.id.action_settingsFragment_self);
+        }
+
+        public static boolean isNightModeActive(Context context) {
+            int defaultNightMode = AppCompatDelegate.getDefaultNightMode();
+            if (defaultNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
+                return true;
+            }
+            if (defaultNightMode == AppCompatDelegate.MODE_NIGHT_NO) {
+                return false;
+            }
+
+            int currentNightMode = context.getResources().getConfiguration().uiMode
+                    & Configuration.UI_MODE_NIGHT_MASK;
+            switch (currentNightMode) {
+                case Configuration.UI_MODE_NIGHT_NO:
+                    return false;
+                case Configuration.UI_MODE_NIGHT_YES:
+                    return true;
+                case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                    return false;
+            }
+            return false;
+        }
+
 
         public void setImage(String lang) {
             switch (lang) {
