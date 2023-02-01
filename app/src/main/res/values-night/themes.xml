@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="darktheme" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:colorBackground">@color/black</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnSurface">@color/gray_backround</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -13,18 +13,20 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="background_color">@color/black</item>
-        <item name="text_color">@color/white</item>
+        <item name="textInputStyle">@style/Widget.App.TextInputLayout</item>
+
     </style>
 
     <!-- Styles for TextInputLayout -->
     <style name="Widget.App.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:textColorHint">@color/white</item>
+        <item name="boxStrokeColor">@color/black</item>
         <item name="materialThemeOverlay">@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined</item>
-        <item name="boxStrokeColor">#444242</item>
     </style>
 
     <style name="ThemeOverlay.AppTheme.TextInputEditText.Outlined" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorOnSurface">@color/gray_backround</item>
         <item name="android:textCursorDrawable">@color/white</item>
     </style>
 
@@ -37,5 +39,14 @@
         <item name="itemIconTint">@color/white</item>
         <item name="itemTextColor">@color/white</item>
     </style>
+
+    <style name="NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

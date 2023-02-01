@@ -25,27 +25,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        app:layout_constraintTop_toBottomOf="@id/clothual"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColorHint="@color/backGroundAdapter"
         app:endIconMode="clear_text"
         app:errorEnabled="true"
-        app:startIconDrawable="@drawable/account_circle_48px2"
-        >
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clothual"
+        app:startIconDrawable="@drawable/account_circle_48px2">
 
         <EditText
             android:id="@+id/editTextUsername"
+            style="@style/textView"
             android:layout_width="250dp"
             android:layout_height="60dp"
+            android:autofillHints="username"
             android:background="@drawable/border_edit_text"
+            android:fontFamily="@font/inter_semibold"
+            android:hint="@string/username"
             android:inputType="text"
             android:maxLength="20"
-            android:hint="@string/username"
-            android:textColorHint="@color/black"
-            android:fontFamily="@font/inter_semibold"
             android:textStyle="bold|italic"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:autofillHints="username"/>
+            tools:ignore="SpeakableTextPresentCheck" />
+        <!-- android:textColorHint="@color/black"-->
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,14 +68,14 @@
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:background="@drawable/border_edit_text"
-            android:importantForAutofill="no"
             android:inputType="textPassword"
             android:maxLength="20"
-            android:textColorHint="@color/black"
+            style="@style/textView"
             android:hint="@string/password"
             android:fontFamily="@font/inter_semibold"
             android:textStyle="bold|italic"
             />
+            <!-- android:textColorHint="@color/black"-->
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -131,12 +132,12 @@
 
         <TextView
             android:id="@+id/textview_or"
+            style="@style/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            style="@style/textView"
             android:text="@string/or" />
 
         <View
@@ -171,10 +172,10 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/textViewRegister"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:visibility="visible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewRegister"
         />
 
     <TextView
@@ -190,8 +191,10 @@
         android:layout_marginStart="20dp"
         android:fontFamily="@font/cookie"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        style="@style/textView"
         android:textSize="25sp"
-        android:textStyle="italic" />
-    
+        android:textStyle="italic"
+        />
+    <!-- android:textColor="@color/black"-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

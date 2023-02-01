@@ -8,7 +8,7 @@
         />
 
     <solid
-        android:color="@color/grey_persona_layout"
+        android:color="@color/backGroundAdapter"
         />
 </shape>
 
