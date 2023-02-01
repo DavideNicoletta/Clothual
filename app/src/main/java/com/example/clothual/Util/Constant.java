@@ -16,6 +16,7 @@ public class Constant {
     public static final String LANGUAGE = "language";
     public static final String URI = "uri";
     public static final String DATE = "date";
+    public static final String DMODE = "dark_mode";
 
     //Scritte iniziali
     public static final String GIANNI_VERSACE = (char)34 + "Non seguire i trend. Non lasciare che la moda ti possieda, sii tu a " +

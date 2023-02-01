@@ -257,13 +257,13 @@
 
             <TextView
                 android:id="@+id/secondColorText"
+                style="@style/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/firstColorText"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                style="@style/textView"
-                android:text="Second Color"/>
+                android:layout_marginTop="7dp"
+                android:text="Second Color" />
 
             <ProgressBar
                 android:id="@+id/secondColorRate"
@@ -301,6 +301,15 @@
                 android:layout_alignParentEnd="true"
                 />
         </RelativeLayout>
+
+        <!--
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="144dp"
+            android:layout_height="128dp"
+            tools:layout_editor_absoluteX="64dp"
+            tools:layout_editor_absoluteY="175dp" />-->
 
         <!--
         <TextView
