@@ -1,6 +1,5 @@
 package com.example.clothual.UI.core.adapter;
 
-
 import android.app.Application;
 import android.content.ContentResolver;
 import android.graphics.Bitmap;
@@ -17,100 +16,96 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clothual.Model.Clothual;
+import com.example.clothual.Model.Converters;
 import com.example.clothual.Model.Image;
+import com.example.clothual.Model.Outfit;
 import com.example.clothual.R;
-import com.example.clothual.UI.core.Categories.CategoryModel;
+import com.example.clothual.UI.core.Calendar.CalendarModel;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
 
-public class RecyclerViewPreferiteAdapter extends RecyclerView.Adapter<RecyclerViewPreferiteAdapter.ShoesViewHolder> {
+public class RecyclerViewOutfitAddAdapter extends RecyclerView.Adapter<RecyclerViewOutfitAddAdapter.OutfitViewHolder> {
 
     private final List<Clothual> clothualList;
-    private final  List<Image> imageList;
+    private final List<Image> imageList;
     private final ContentResolver contentResolver;
-    private OnItemClickListener onItemClickListener;
-    private Application application;
-    public interface OnItemClickListener{
-        void buttonFavorite(String favorite);
+    private final OnItemClickListener onItemClickListener;
+    private final Application application;
+    private final String date;
+
+    public interface OnItemClickListener {
+        void buttonAddRemove(String add);
     }
 
-    public RecyclerViewPreferiteAdapter(List<Clothual> clothualList, List<Image> imageList, ContentResolver contentResolver,
-                                        OnItemClickListener onItemClickListener, Application application){
+    public RecyclerViewOutfitAddAdapter(List<Clothual> clothualList, List<Image> imageList, ContentResolver contentResolver,
+                                        OnItemClickListener onItemClickListener, Application application, String date) {
         this.clothualList = clothualList;
         this.imageList = imageList;
         this.contentResolver = contentResolver;
         this.onItemClickListener = onItemClickListener;
         this.application = application;
+        this.date = date;
     }
 
     @NonNull
     @Override
-    public ShoesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerViewOutfitAddAdapter.OutfitViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.clothual_total_adapter,
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.clothual_calendar,
                 parent, false);
-        return  new ShoesViewHolder(view);
+        return new RecyclerViewOutfitAddAdapter.OutfitViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ShoesViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerViewOutfitAddAdapter.OutfitViewHolder holder, int position) {
         int image = clothualList.get(position).getIdImage();
-        if(imageList.get(position).getID() == image){
+        if (imageList.get(position).getID() == image) {
             holder.bind(clothualList.get(position), imageList.get(position).getUri());
         }
     }
 
     @Override
     public int getItemCount() {
-        if(clothualList != null){
+        if (clothualList != null) {
             return clothualList.size();
         }
         return 0;
     }
 
-    public class ShoesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class OutfitViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final ImageView imageView;
-
         private final TextView brand;
         private final TextView template;
         private final TextView color;
-        private final TextView type;
         private final TextView description;
-        private final ImageButton delite;
-        private final ImageButton favorite;
-        private final ImageButton edit;
-        private final CategoryModel model;
+        private final ImageButton add;
+        private final CalendarModel model;
+        private final TextView type;
 
-        public ShoesViewHolder(@NonNull View itemView) {
+        public OutfitViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageViewAdapterClothual);
             brand = itemView.findViewById(R.id.brand);
             template = itemView.findViewById(R.id.template);
             color = itemView.findViewById(R.id.color);
-            edit = itemView.findViewById(R.id.edit);
-            type = itemView.findViewById(R.id.type);
             description = itemView.findViewById(R.id.descritpion);
-            delite = itemView.findViewById(R.id.delite);
-            model = new CategoryModel(application);
-            favorite = itemView.findViewById(R.id.favorite);
+            add = itemView.findViewById(R.id.add);
+            type = itemView.findViewById(R.id.type);
+            model = new CalendarModel(application);
             itemView.setOnClickListener(this);
-            favorite.setOnClickListener(this);
-
+            add.setOnClickListener(this);
         }
 
-        public void bind(Clothual clothual, String uri){
-            edit.setVisibility(View.INVISIBLE);
-            delite.setVisibility(View.INVISIBLE);
-            favorite.setImageResource(R.drawable.favorite_fil_48px);
+        public void bind(Clothual clothual, String uri) {
+            add.setImageResource(R.drawable.add_30px);
             brand.setText(clothual.getBrand());
-            System.out.println(clothual.getBrand());
             template.setText(clothual.getTemplate());
             color.setText(clothual.getColor());
             description.setText(clothual.getDescription());
-            switch (clothual.getType()){
+            switch (clothual.getType()) {
                 case 1:
                     type.setText(application.getString(R.string.shoes));
                     break;
@@ -140,12 +135,30 @@ public class RecyclerViewPreferiteAdapter extends RecyclerView.Adapter<RecyclerV
 
         @Override
         public void onClick(View view) {
-            if(view.getId() == R.id.favorite){
-                clothualList.get(getAdapterPosition()).setPreferite(false);
-                model.updateClothaulElement(clothualList.get(getAdapterPosition()));
-                clothualList.remove(getAdapterPosition());
-                notifyItemRemoved(getAdapterPosition());
-                onItemClickListener.buttonFavorite("Removed by Favorite");
+
+            if (view.getId() == R.id.add) {
+                Outfit outfit = model.getOutfitByDate(date);
+                if (outfit != null) {
+                    List<String> listIdClothual = Converters.fromString(outfit.getClothualString());
+                    for(int i = 0; i < listIdClothual.size(); i++){
+                        outfit.setClothualList(model.getClothualByID(Integer.parseInt(listIdClothual.get(i))));
+                    }
+                    outfit.setClothualList(clothualList.get(getAdapterPosition()));
+                    outfit.converter();
+                    outfit.removeClothualList();
+                    model.updateOutfit(outfit);
+                    clothualList.remove(getAdapterPosition());
+                    notifyItemRemoved(getAdapterPosition());
+                }else{
+                    outfit = new Outfit(date);
+                    outfit.setClothualList(clothualList.get(getAdapterPosition()));
+                    outfit.converter();
+                    outfit.removeClothualList();
+                    model.insertOutfit(outfit);
+                    clothualList.remove(getAdapterPosition());
+                    notifyItemRemoved(getAdapterPosition());
+                }
+                onItemClickListener.buttonAddRemove("Clothual aggiunto all'outfit del " + date);
             }
         }
     }

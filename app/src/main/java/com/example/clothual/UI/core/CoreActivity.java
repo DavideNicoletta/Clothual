@@ -27,15 +27,23 @@ public class CoreActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.top_appbar);
         setSupportActionBar(toolbar);
 
+       /* CollapsingToolbarLayout toolBarLayout = findViewById(R.id.toolbar_layout);
+        toolBarLayout.setTitle(getTitle());
+
+        */
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().
                 findFragmentById(R.id.nav_host_fragment);
+
         NavController navController = navHostFragment.getNavController();
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.homeFragment, R.id.calendarFragment,
                 R.id.matchingFragment, R.id.photoFragment, R.id.personalFragment).build();
+
+
 
         // add back arrow to toolbar
         if (getSupportActionBar() != null){
@@ -47,8 +55,6 @@ public class CoreActivity extends AppCompatActivity {
 
         // For the Toolbar
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-
 
 
 
