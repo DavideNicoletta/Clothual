@@ -18,7 +18,8 @@
             app:alignmentMode="alignMargins"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            app:columnCount="1">
+            app:columnCount="1"
+            tools:ignore="MissingClass">
 
             <!-- TUTTO -->
             <androidx.cardview.widget.CardView
