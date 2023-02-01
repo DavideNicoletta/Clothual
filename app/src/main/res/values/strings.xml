@@ -74,8 +74,8 @@
         <item>@string/english</item>
         <item>@string/french</item>
     </array>
-    <string name="title_activity_scrolling">ScrollingActivity</string>
-    <string name="large_text">
+    <string name="title_activity_scrolling" translatable="false">ScrollingActivity</string>
+    <string name="large_text" translatable="false">
         "Material is the metaphor.\n\n"
 
         "A material metaphor is the unifying theory of a rationalized space and a system of motion."
@@ -164,9 +164,17 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name="action_settings">Settings</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+ <string name="action_settings" translatable="false">Settings</string>
+    <!--
+     <string name="default_web_client_id" translatable="false">149067861032-i8o3cd406e1t7bgdhdolkrm3a60rjuji.apps.googleusercontent.com</string>
+
+     <string name="gcm_defaultSenderId" translatable="false">149067861032</string>
+     <string name="google_api_key" translatable="false">AIzaSyBKN5TltOwxIZFIwV_y75Ax-4Ggj_-BSHI</string>
+     <string name="google_app_id" translatable="false">1:149067861032:android:7fc7b030574c5c95a3b91d</string>
+     <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBKN5TltOwxIZFIwV_y75Ax-4Ggj_-BSHI</string>
+     <string name="google_storage_bucket" translatable="false">clothual-b1925.appspot.com</string>
+     <string name="project_id" translatable="false">clothual-b1925</string>-->
 
 
 </resources>

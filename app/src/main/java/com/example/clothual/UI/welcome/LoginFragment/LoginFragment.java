@@ -1,6 +1,14 @@
 package com.example.clothual.UI.welcome.LoginFragment;
 
-import static com.example.clothual.Util.Constant.*;
+import static com.example.clothual.Util.Constant.COCO_CHANEL;
+import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
+import static com.example.clothual.Util.Constant.DONATELLA_VERSACE;
+import static com.example.clothual.Util.Constant.GIANNI_VERSACE;
+import static com.example.clothual.Util.Constant.GIORGIO_ARMANI;
+import static com.example.clothual.Util.Constant.PASSWORD_PREFERENCE;
+import static com.example.clothual.Util.Constant.PIER_CARDIN;
+import static com.example.clothual.Util.Constant.RALPH_LAUREN;
+import static com.example.clothual.Util.Constant.USERNAME_PREFERENCE;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -30,7 +38,6 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,6 +52,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
  */
 
 
+@SuppressWarnings("deprecation")
 public class LoginFragment extends Fragment {
 
 
