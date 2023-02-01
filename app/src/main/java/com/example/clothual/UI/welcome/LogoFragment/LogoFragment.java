@@ -3,10 +3,12 @@ package com.example.clothual.UI.welcome.LogoFragment;
 
 import static com.example.clothual.Util.Constant.ACCESS_PREFERENCE;
 import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
+import static com.example.clothual.Util.Constant.LANGUAGE;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -20,6 +22,8 @@ import androidx.navigation.Navigation;
 
 import com.example.clothual.R;
 import com.example.clothual.UI.core.CoreActivity;
+
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,6 +69,13 @@ public class LogoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Context context = getActivity();
+        SharedPreferences share = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = share.edit();
+        String lenguage = share.getString(LANGUAGE, " ");
+        if(!lenguage.equals(" ")){
+            setLocale(lenguage);
+        }
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -80,6 +91,16 @@ public class LogoFragment extends Fragment {
 
             }
         }, 500);
+    }
+
+    @SuppressWarnings("deprecation")
+    private void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = getActivity().getResources().getConfiguration();
+        config.locale = locale;
+        getActivity().getResources().updateConfiguration(config, getActivity().getResources().getDisplayMetrics());
+
     }
 
 

@@ -70,18 +70,15 @@ public class SettingsFragment extends Fragment {
         public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
 
-            /*if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-                binding.myswitch.setChecked(true);
-            } else binding.myswitch.setChecked(false);
-            */
-
-
             Context context = getActivity();
             SharedPreferences share = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = share.edit();
 
-            setImage(share.getString(LANGUAGE, " "));
-
+            if(!share.getString(LANGUAGE, " ").equals(" ")) {
+                setImage(share.getString(LANGUAGE, " "));
+            }else{
+                setImage(Locale.getDefault().getLanguage());
+            }
             binding.english.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

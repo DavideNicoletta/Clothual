@@ -192,7 +192,7 @@
                     android:layout_gravity="center_horizontal|center_vertical"/>
             </androidx.cardview.widget.CardView>
 
-            <!-- MAPPA -->
+            <!-- MAPPA
             <androidx.cardview.widget.CardView
                 android:id="@+id/map"
                 android:layout_width="match_parent"
@@ -215,7 +215,7 @@
                     android:textSize="35dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center_horizontal|center_vertical"/>
-            </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView> -->
 
         </androidx.gridlayout.widget.GridLayout>
     </androidx.core.widget.NestedScrollView>

@@ -41,7 +41,7 @@ public class CoreActivity extends AppCompatActivity {
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.homeFragment, R.id.calendarFragment,
-                R.id.matchingFragment, R.id.photoFragment, R.id.personalFragment).build();
+                R.id.mapFragment, R.id.photoFragment, R.id.personalFragment).build();
 
 
 

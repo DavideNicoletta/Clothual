@@ -14,9 +14,6 @@
             android:id="@+id/action_homeFragment_to_shoesFragment"
             app:destination="@id/shoesFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_mapFragment"
-            app:destination="@id/mapFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_totalFragment"
             app:destination="@id/totalFragment" />
         <action
@@ -94,11 +91,6 @@
         android:name="com.example.clothual.UI.core.Categories.Shoes.ShoesFragment"
         android:label="fragment_shoes"
         tools:layout="@layout/fragment_shoes" />
-    <fragment
-        android:id="@+id/matchingFragment"
-        android:name="com.example.clothual.UI.core.Matching.MatchingFragment"
-        android:label="fragment_matching"
-        tools:layout="@layout/fragment_matching" />
     <fragment
         android:id="@+id/totalFragment"
         android:name="com.example.clothual.UI.core.Categories.Total.TotalFragment"
