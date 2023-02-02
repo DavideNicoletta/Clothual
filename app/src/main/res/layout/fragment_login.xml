@@ -5,20 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UI.welcome.LoginFragment.LoginFragment">
-<!--
-    <TextView
-        android:id="@+id/clothual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/clothual"
-        style="@style/textView"
-        android:fontFamily="@font/montserrat_subrayada"
-        android:textSize="50sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold"/>-->
+
     <ImageView
         android:id="@+id/clothual"
         android:layout_width="wrap_content"

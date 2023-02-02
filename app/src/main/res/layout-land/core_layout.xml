@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".UI.core.CoreActivity">
 
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
@@ -13,7 +14,24 @@
         android:layout_gravity="top"
         android:fitsSystemWindows="true"
         android:theme="@style/AppBarOverlay"
-        app:layout_anchor="@id/nav_host_fragment"/>
+        app:layout_anchor="@id/nav_host_fragment"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/top_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_collapseMode="pin"
+            app:popupTheme="@style/PopupOverlay">
+
+            <ImageView
+                android:id="@+id/clothual"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
@@ -26,6 +44,16 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appBar"
         app:navGraph="@navigation/nav_core" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_gravity="top"
+        android:background="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

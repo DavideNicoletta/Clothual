@@ -43,28 +43,14 @@
                 android:text="@string/edit_profile"
                 android:textColor="@color/white"
                 tools:ignore="TouchTargetSizeCheck" />
-            <Button
-                android:id="@+id/go_out"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_below="@id/editProfile"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/border_button"
-                android:text="@string/go_out"
-                android:textColor="@color/white"
-                tools:ignore="TouchTargetSizeCheck" />
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/go_out"
+                android:layout_below="@id/editProfile"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="190dp"
+                android:layout_marginTop="20dp"
                 android:orientation="vertical"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="60dp"
@@ -79,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/settings_48px"
-                    android:background="@color/grey_persona_layout"
+                    android:background="@color/backGroundAdapter"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="10dp"
                     />
@@ -93,39 +79,9 @@
                     android:layout_marginStart="40dp"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:background="@color/grey_persona_layout"/>
+                    android:background="@color/backGroundAdapter"/>
                 </LinearLayout>
-                <!--
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="60dp"
-                    android:background="@color/black" />
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/list_48px"
-                        android:background="@color/grey_persona_layout"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="10dp"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@string/yourClothes"
-                        style="@style/textView"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="40dp"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:background="@color/grey_persona_layout"/>
-                </LinearLayout>-->
+
                 <View
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
@@ -141,7 +97,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/history_48px"
-                        android:background="@color/grey_persona_layout"
+                        android:background="@color/backGroundAdapter"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="10dp"
                         />
@@ -155,7 +111,7 @@
                         android:layout_marginStart="40dp"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:background="@color/grey_persona_layout"/>
+                        android:background="@color/backGroundAdapter"/>
                 </LinearLayout>
                 <View
                     android:layout_width="wrap_content"
@@ -172,7 +128,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/help_48px"
-                        android:background="@color/grey_persona_layout"
+                        android:background="@color/backGroundAdapter"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="10dp"
                         />
@@ -186,15 +142,9 @@
                         android:layout_marginStart="40dp"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:background="@color/grey_persona_layout"/>
+                        android:background="@color/backGroundAdapter"/>
                 </LinearLayout>
-                <!--
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="60dp"
-                    android:background="@color/black" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
@@ -203,22 +153,23 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/lightbulb_48px"
-                        android:background="@color/grey_persona_layout"
+                        android:src="@drawable/logout_48px"
+                        android:background="@color/backGroundAdapter"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="10dp"
                         />
                     <TextView
+                        android:id="@+id/go_out"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="@string/tips"
+                        android:text="@string/go_out"
                         style="@style/textView"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="40dp"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:background="@color/grey_persona_layout"/>
-                </LinearLayout>-->
+                        android:background="@color/backGroundAdapter"/>
+                </LinearLayout>
 
 
             </LinearLayout>

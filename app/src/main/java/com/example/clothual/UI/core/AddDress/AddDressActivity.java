@@ -1,6 +1,7 @@
 package com.example.clothual.UI.core.AddDress;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,10 +32,27 @@ public class AddDressActivity extends AppCompatActivity {
     public EditText description;
     public Button buttonSave;
 
+    public ImageView clothual;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_dress_layout);
+
+        clothual = findViewById(R.id.clothualAddDress);
+
+        int nightModeFlags =
+                getResources().getConfiguration().uiMode &
+                        Configuration.UI_MODE_NIGHT_MASK;
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                clothual.setImageResource(R.drawable.logo_white_on_appbar);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_NO:
+                clothual.setImageResource(R.drawable.logo_black_on_white);
+                break;
+        }
 
         model = new AddDressModel(getApplication());
 

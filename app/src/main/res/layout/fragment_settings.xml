@@ -170,10 +170,10 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
-        android:text="Night Mode"
+        android:minHeight="48dp"
 
 
-        />
+        android:text="Night Mode" />
 
 
 </RelativeLayout>
