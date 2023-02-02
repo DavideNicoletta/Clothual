@@ -13,40 +13,7 @@
         android:layout_gravity="top"
         android:fitsSystemWindows="true"
         android:theme="@style/AppBarOverlay"
-        app:layout_anchor="@id/nav_host_fragment">
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/top_appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleCentered="true"
-        app:titleTextColor="@color/black">
-
-        <!--<TextView
-            android:id="@+id/title"
-            style="@style/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/montserrat_subrayada"
-            android:paddingTop="16dp"
-            android:text="@string/clothual"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            tools:ignore="MissingConstraints" />-->
-        <ImageView
-            android:id="@+id/clothual"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            />
-    </com.google.android.material.appbar.MaterialToolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+        app:layout_anchor="@id/nav_host_fragment"/>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
