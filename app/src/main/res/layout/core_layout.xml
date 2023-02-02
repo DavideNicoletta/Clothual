@@ -8,16 +8,16 @@
     tools:context=".UI.core.CoreActivity">
 
 
-   <com.google.android.material.appbar.AppBarLayout
-       android:id="@+id/appBar"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       app:layout_anchor="@id/nav_host_fragment"
-       android:layout_gravity="top"
-       android:fitsSystemWindows="true"
-       android:theme="@style/AppBarOverlay">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppBarOverlay"
+        app:layout_anchor="@id/nav_host_fragment">
 
-      <!-- <com.google.android.material.appbar.CollapsingToolbarLayout
+        <!-- <com.google.android.material.appbar.CollapsingToolbarLayout
            android:id="@+id/toolbar_layout"
            style="@style/Widget.MaterialComponents.Toolbar.Primary"
            android:layout_width="match_parent"
@@ -28,14 +28,14 @@
            app:toolbarId="@+id/top_appbar">
 
 -->
-               <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/top_appbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:minHeight="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/PopupOverlay"  >
-<!--
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/top_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_collapseMode="pin"
+            app:popupTheme="@style/PopupOverlay">
+            <!--
                    <TextView
                        android:id="@+id/title"
                        style="@style/textView"
@@ -49,15 +49,15 @@
                        android:textSize="30sp"
                        android:textStyle="bold"
                        tools:ignore="MissingConstraints" />-->
-                   <ImageView
-                       android:id="@+id/clothual"
-                       android:layout_width="match_parent"
-                       android:layout_height="70dp"/>
+            <ImageView
+                android:id="@+id/clothual"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:src="@drawable/logo_black_on_white" />
 
-            </com.google.android.material.appbar.MaterialToolbar>
-       <!--</com.google.android.material.appbar.CollapsingToolbarLayout>-->
-   </com.google.android.material.appbar.AppBarLayout>
-
+        </com.google.android.material.appbar.MaterialToolbar>
+        <!--</com.google.android.material.appbar.CollapsingToolbarLayout>-->
+    </com.google.android.material.appbar.AppBarLayout>
 
 
     <androidx.fragment.app.FragmentContainerView
@@ -73,9 +73,9 @@
         android:id="@+id/view"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        app:layout_anchor="@id/bottom_navigation"
         android:layout_gravity="top"
-        android:background="@color/black" />
+        android:background="@color/black"
+        app:layout_anchor="@id/bottom_navigation" />
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

@@ -46,7 +46,13 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:windowBackground">@color/celeste</item>
+        <item name="android:colorBackground">@color/celeste</item>
+        <item name="android:colorForeground">@color/celeste</item>
+        <item name="android:colorForegroundInverse">@color/celeste</item>
+
+    </style>
 
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
