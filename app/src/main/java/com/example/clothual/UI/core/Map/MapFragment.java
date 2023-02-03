@@ -14,11 +14,13 @@ import android.view.ViewGroup;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.example.clothual.R;
 import com.example.clothual.databinding.FragmentMapBinding;
@@ -31,20 +33,18 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.Map;
 
-public class MapFragment extends Fragment {
+public class MapFragment extends Fragment{
 
-    private GoogleMap mMap;
-
-    private ActivityResultLauncher<String> singlePermissionLauncher;
-    private ActivityResultContracts.RequestPermission singlePermissionContract;
-
-    private Location pos = new Location("");
-    private FusedLocationProviderClient fusedLocationClient;
+    Location position;
+    private FusedLocationProviderClient client;
+    private static final int REQUEST_CODE = 101;
 
     private FragmentMapBinding binding;
+
 
     public MapFragment() {
 
@@ -59,22 +59,9 @@ public class MapFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        pos.setLatitude(38.9);
-        pos.setLongitude(16.583333);
-
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
-        singlePermissionContract = new ActivityResultContracts.RequestPermission();
-        singlePermissionLauncher = registerForActivityResult(singlePermissionContract, isGranted -> {
-            if(isGranted){
-                Log.d(TAG, "single permission has been granted");
-                Location tmp = getLocation();
-                pos.setLatitude(tmp.getLatitude());
-                pos.setLongitude(tmp.getLongitude());
-            } else {
-                Log.d(TAG, "single permission has not been granted");
-            }
-        });
+        client = LocationServices.getFusedLocationProviderClient(getActivity());
     }
+
 
     @Nullable
     @Override
@@ -89,53 +76,35 @@ public class MapFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]
+                    {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+            return;
+        }
+        Task<Location> task = client.getLastLocation();
 
-
-
-        SupportMapFragment supportMapFragment = (SupportMapFragment)
-                getChildFragmentManager().findFragmentById(R.id.mapView);
-        // Async map
-        supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+        task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
-            public void onMapReady(GoogleMap googleMap) {
-                // When map is loaded
-                LatLng latLng = new LatLng(pos.getLatitude(), pos.getLongitude());
-                // When clicked on map
-                // Initialize marker options
-                MarkerOptions markerOptions=new MarkerOptions();
-                // Set position of marker
-                markerOptions.position(latLng);
-                // Set title of marker
-                markerOptions.title(latLng.latitude+" : "+latLng.longitude);
-                // Remove all marker
-                googleMap.clear();
-                // Animating to zoom the marker
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
-                // Add marker on map
-                googleMap.addMarker(markerOptions);
+            public void onSuccess(Location location) {
+                if (location != null){
+                    position = location;
+                    SupportMapFragment supportMapFragment = (SupportMapFragment)
+                            getChildFragmentManager().findFragmentById(R.id.mapView);
+                    supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+                        @Override
+                        public void onMapReady(@NonNull GoogleMap googleMap) {
+                            LatLng latLng = new LatLng(position.getLatitude(), position.getLongitude());
+                            MarkerOptions mo = new MarkerOptions().position(latLng).title("I Am Here");
+                            googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                            googleMap.addMarker(mo);
+                        }
+                    });
+                }
             }
         });
-    }
 
-
-    private Location getLocation(){
-        Location tmp = new Location("");
-        boolean multiplePermissionsStatus =
-                ActivityCompat.checkSelfPermission(getContext(),
-                        Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-        if(multiplePermissionsStatus) {
-            fusedLocationClient.getLastLocation()
-                    .addOnSuccessListener(getActivity(), location -> {
-                       if(location != null){
-                           tmp.setLatitude(location.getLatitude());
-                           tmp.setLongitude(location.getLongitude());
-                       }
-                    });
-        } else {
-            Log.d(TAG, "Permission has not been granted");
-            singlePermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION);
-        }
-        return tmp;
     }
 
 }

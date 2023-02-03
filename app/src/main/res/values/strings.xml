@@ -60,6 +60,7 @@
     <string name="systemMode" translatable="false">System Mode</string>
     <string name="close_app" >Press home button to exit Clothual</string>
     <string name="already_an_user_login" >Already an user? Login</string>
+    <string name="map_key" translatable="false">AIzaSyBFB-yRv-o6lxXh2P5Ay2nTfb-EE_OAfUk</string>
 
     <array name="type">
         <item>@string/shoes</item>
