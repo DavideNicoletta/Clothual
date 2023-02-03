@@ -20,5 +20,4 @@ public class DataViewModel extends ViewModel {
     private void updateMyObject() {
 // aggiorna in modalità asincrona myObject
     }
-
 }

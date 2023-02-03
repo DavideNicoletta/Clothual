@@ -63,6 +63,7 @@ public class SettingsFragment extends Fragment {
             binding.imageEnglish.setImageResource(R.drawable.circle_48px);
             binding.imageFrench.setImageResource(R.drawable.circle_48px);
             binding.imageItalian.setImageResource(R.drawable.circle_48px);
+
             return binding.getRoot();
         }
 
@@ -106,35 +107,6 @@ public class SettingsFragment extends Fragment {
                 }
             });
 
-            binding.darkmode.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    binding.darkmode.setChecked(true);
-                    binding.light.setChecked(false);
-                    binding.system.setChecked(false);
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                }
-            });
-
-            binding.light.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    binding.darkmode.setChecked(false);
-                    binding.light.setChecked(true);
-                    binding.system.setChecked(false);
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                }
-            });
-
-            binding.system.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    binding.darkmode.setChecked(false);
-                    binding.light.setChecked(false);
-                    binding.system.setChecked(true);
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-                }
-            });
 
                 if (isNightModeActive(context)) {
                     binding.myswitch.setChecked(true);
@@ -172,11 +144,15 @@ public class SettingsFragment extends Fragment {
 
         }
 
-        private void setMode(){
+    private void setMode(){
+        recreate();
+    }
+
+       /* private void setMode(){
             Configuration config = getActivity().getResources().getConfiguration();
             getActivity().getResources().updateConfiguration(config, getActivity().getResources().getDisplayMetrics());
-            Navigation.findNavController(requireView()).navigate(R.id.action_settingsFragment_self);
-        }
+            recreate();
+        }*/
 
         public static boolean isNightModeActive(Context context) {
             int defaultNightMode = AppCompatDelegate.getDefaultNightMode();
@@ -224,6 +200,12 @@ public class SettingsFragment extends Fragment {
                     binding.imageEnglish.setImageResource(R.drawable.circle_48px);
             }
         }
+
+        public void recreate(){
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.containerSettings, SettingsFragment.newInstance()).commit();
+        }
+
 
 }
 
