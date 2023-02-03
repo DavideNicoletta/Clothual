@@ -79,37 +79,35 @@ public class MapFragment extends Fragment {
 
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
                 }
+                Location pos = new Location("");
+                pos.setLatitude(38.9);
+                pos.setLongitude(16.583333);
                 fusedLocationClient.getLastLocation()
                         .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
                             @Override
                             public void onSuccess(Location location) {
                                 // Got last known location. In some rare situations this can be null.
                                 if (location != null) {
+                                    pos.setLatitude(location.getLatitude());
+                                    pos.setLongitude(location.getLongitude());
                                     // Logic to handle location object
                                 }
                             }
                         });
-
-                Location pos = fusedLocationClient.getLastLocation().getResult();
-                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                    @Override
-                    public void onMapClick(LatLng latLng) {
-                        latLng = new LatLng(pos.getLatitude(), pos.getLongitude());
-                        // When clicked on map
-                        // Initialize marker options
-                        MarkerOptions markerOptions=new MarkerOptions();
-                        // Set position of marker
-                        markerOptions.position(latLng);
-                        // Set title of marker
-                        markerOptions.title(latLng.latitude+" : "+latLng.longitude);
-                        // Remove all marker
-                        googleMap.clear();
-                        // Animating to zoom the marker
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
-                        // Add marker on map
-                        googleMap.addMarker(markerOptions);
-                    }
-                });
+                    LatLng latLng = new LatLng(pos.getLatitude(), pos.getLongitude());
+                    // When clicked on map
+                    // Initialize marker options
+                    MarkerOptions markerOptions=new MarkerOptions();
+                    // Set position of marker
+                    markerOptions.position(latLng);
+                    // Set title of marker
+                    markerOptions.title(latLng.latitude+" : "+latLng.longitude);
+                    // Remove all marker
+                    googleMap.clear();
+                    // Animating to zoom the marker
+                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
+                    // Add marker on map
+                    googleMap.addMarker(markerOptions);
             }
         });
     }
