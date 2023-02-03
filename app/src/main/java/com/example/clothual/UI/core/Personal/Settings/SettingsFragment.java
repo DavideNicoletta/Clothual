@@ -107,10 +107,16 @@ public class SettingsFragment extends Fragment {
                 }
             });
 
-
+/*
                 if (isNightModeActive(context)) {
                     binding.myswitch.setChecked(true);
-                } else binding.myswitch.setChecked(false);
+                } else binding.myswitch.setChecked(false);*/
+
+            Boolean booleanValue = share.getBoolean(DMODE, true);
+            if(booleanValue){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                binding.myswitch.setChecked(true);
+            }
 
 
                 binding.myswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -118,14 +124,18 @@ public class SettingsFragment extends Fragment {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        binding.myswitch.setChecked(true);
                         editor.putBoolean(DMODE, true);
-                        editor.apply();
+                        editor.commit();
                         setMode();
+
                     } else {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        binding.myswitch.setChecked(false);
                         editor.putBoolean(DMODE, false);
-                        editor.apply();
+                        editor.commit();
                         setMode();
+
                     }
                 }
             });
@@ -144,15 +154,15 @@ public class SettingsFragment extends Fragment {
 
         }
 
-    private void setMode(){
+   /* private void setMode(){
         recreate();
-    }
+    }*/
 
-       /* private void setMode(){
+        private void setMode() {
             Configuration config = getActivity().getResources().getConfiguration();
             getActivity().getResources().updateConfiguration(config, getActivity().getResources().getDisplayMetrics());
             recreate();
-        }*/
+        }
 
         public static boolean isNightModeActive(Context context) {
             int defaultNightMode = AppCompatDelegate.getDefaultNightMode();
@@ -202,8 +212,11 @@ public class SettingsFragment extends Fragment {
         }
 
         public void recreate(){
+
             getParentFragmentManager().beginTransaction()
                     .replace(R.id.containerSettings, SettingsFragment.newInstance()).commit();
+
+
         }
 
 

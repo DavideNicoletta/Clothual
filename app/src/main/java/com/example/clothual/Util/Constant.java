@@ -10,9 +10,6 @@ public class Constant {
     public static final String PASSWORD_PREFERENCE = "Password";
     public static final String ACCESS_PREFERENCE = "Access";
     public static final String ID_ACCOUNT = "Id_Account";
-    public static final String EMAIL_CHANGE = "email_change";
-    public static final String USERNAME_CHANGE = "username_change";
-    public static final String PASSWORD_CHANGE = "password_change";
     public static final String LANGUAGE = "language";
     public static final String URI = "uri";
     public static final String DATE = "date";

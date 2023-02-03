@@ -32,7 +32,7 @@ public class CoreActivity extends AppCompatActivity {
                         Configuration.UI_MODE_NIGHT_MASK;
         switch (nightModeFlags) {
             case Configuration.UI_MODE_NIGHT_YES:
-                clothual.setImageResource(R.drawable.logo_white_on_appbar);
+                clothual.setImageResource(R.drawable.logo_white_on_backgroung);
                 break;
 
             case Configuration.UI_MODE_NIGHT_NO:

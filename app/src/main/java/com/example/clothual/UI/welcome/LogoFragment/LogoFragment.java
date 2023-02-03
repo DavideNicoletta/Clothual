@@ -69,13 +69,16 @@ public class LogoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+
         Context context = getActivity();
         SharedPreferences share = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = share.edit();
         String lenguage = share.getString(LANGUAGE, " ");
         if(!lenguage.equals(" ")){
             setLocale(lenguage);
         }
+
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
