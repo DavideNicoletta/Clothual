@@ -10,7 +10,7 @@
     <string name="or" translatable="false">OR</string>
     <string name="register">Register</string>
     <string name="login" translatable="false">Login</string>
-    <string name="forgot_credential">forgot credential?</string>
+    <string name="forgot_credential">Forgot Password?</string>
     <string name="go_registration">Sing in</string>
 
     <string name="design" translatable="false">designed by</string>
@@ -167,6 +167,10 @@
     </string>
 
  <string name="action_settings" translatable="false">Settings</string>
+    <string name="all">ALL</string>
+    <string name="sweatshirt">Sweatshirt</string>
+    <string name="favorites">Favorites</string>
+    <string name="map">Map</string>
     <!--
      <string name="default_web_client_id" translatable="false">149067861032-i8o3cd406e1t7bgdhdolkrm3a60rjuji.apps.googleusercontent.com</string>
 

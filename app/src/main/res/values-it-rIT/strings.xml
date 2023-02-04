@@ -4,7 +4,7 @@
     <string name="name">Nome</string>
     <string name="surname">Cognome</string>
     <string name="register">Registrati</string>
-    <string name="forgot_credential">credenziali dimenticate?</string>
+    <string name="forgot_credential">Password dimenticata?</string>
     <string name="go_registration">Accedi</string>
     <string name="filters">Filtri</string>
     <string name="search">Cerca</string>
@@ -33,7 +33,15 @@
     <string name="jackets">Giacca</string>
     <string name="close_app">Premere il tasto Home per uscire da Clothual</string>
     <string name="already_an_user_login">Sei già registrato? Accedi</string>
+
     <string name="login_mail_empty">L\'email non può essere vuota</string>
+
+    <string name="jacket">Giacca</string>
+    <string name="all">TUTTO</string>
+    <string name="sweatshirt">Felpa</string>
+    <string name="favorites">Preferiti</string>
+    <string name="map">Mappa</string>
+
 
 
 </resources>
