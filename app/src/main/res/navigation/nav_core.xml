@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_photoFragment_to_addDressActivity"
             app:destination="@id/addDressActivity" />
+        <action
+            android:id="@+id/action_photoFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/calendarFragment"

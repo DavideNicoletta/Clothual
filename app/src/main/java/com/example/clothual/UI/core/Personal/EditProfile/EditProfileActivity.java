@@ -176,18 +176,27 @@ public class EditProfileActivity extends AppCompatActivity {
 
         Uri uri;
         if (requestCode == 0) {
-            assert databack != null;
-            Bitmap immagine = (Bitmap) databack.getExtras().get("data");
+            if (databack == null) {
+               Intent intent = new Intent(EditProfileActivity.this, EditProfileActivity.class);
+               startActivity(intent);
+            }else {
+                assert databack != null;
+                Bitmap immagine = (Bitmap) databack.getExtras().get("data");
 
-            try {
-                editor.putString(URI, modifyModel.saveImage(getContentResolver(), immagine, modifyModel.getNameImage(), "profile").toString());
-                editor.apply();
-                binding.imagePersonal.setImageBitmap(immagine);
-            } catch (IOException e) {
-                e.printStackTrace();
+                try {
+                    editor.putString(URI, modifyModel.saveImage(getContentResolver(), immagine, modifyModel.getNameImage(), "profile").toString());
+                    editor.apply();
+                    binding.imagePersonal.setImageBitmap(immagine);
+                } catch (IOException e) {
+                    e.printStackTrace();
 
+                }
             }
         }else{
+            if (databack == null) {
+                Intent intent = new Intent(EditProfileActivity.this, EditProfileActivity.class);
+                startActivity(intent);
+            }
             uri = databack.getData();
             if(uri != null){
                 modifyModel.createImage(modifyModel.getNameImage(), "", uri.toString());
