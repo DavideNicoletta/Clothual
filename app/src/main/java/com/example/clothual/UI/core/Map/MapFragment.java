@@ -95,10 +95,10 @@ public class MapFragment extends Fragment{
                         @Override
                         public void onMapReady(@NonNull GoogleMap googleMap) {
                             LatLng latLng = new LatLng(position.getLatitude(), position.getLongitude());
-                            MarkerOptions mo = new MarkerOptions().position(latLng).title("I Am Here");
+                            MarkerOptions mo = new MarkerOptions().position(latLng).title("");
+                            googleMap.addMarker(mo);
                             googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-                            googleMap.addMarker(mo);
                         }
                     });
                 }
