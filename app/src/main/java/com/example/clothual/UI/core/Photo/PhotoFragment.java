@@ -23,7 +23,6 @@ import com.example.clothual.R;
 import com.example.clothual.UI.core.AddDress.AddDressActivity;
 import com.example.clothual.UI.core.adapter.RecyclerViewPhotoAdapter;
 import com.example.clothual.databinding.FragmentPhotoBinding;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -110,7 +109,7 @@ public class PhotoFragment extends Fragment {
             RecyclerViewPhotoAdapter adapter = new RecyclerViewPhotoAdapter(image, new RecyclerViewPhotoAdapter.OnItemClickListener() {
                 @Override
                 public void delete() {
-                    Snackbar.make(view, "Photo Delite", Snackbar.LENGTH_LONG).show();
+
                 }
 
             }, getActivity().getApplication(), getContext().getContentResolver());
