@@ -27,9 +27,10 @@
 
             <ImageView
                 android:id="@+id/clothual"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="70dp"
                 tools:ignore="ContentDescription"
+                android:background="@color/appbar"
                 />
 
         </com.google.android.material.appbar.MaterialToolbar>

@@ -12,10 +12,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clothual.Model.Clothual;
@@ -89,7 +89,7 @@ public class RecyclerViewClothualAdapter extends RecyclerView.Adapter<RecyclerVi
         private final ImageButton favorite;
         private final ImageButton edit;
 
-        private final CardView cardView;
+        private final RelativeLayout cardView;
 
         private final Button yes;
 
@@ -111,9 +111,9 @@ public class RecyclerViewClothualAdapter extends RecyclerView.Adapter<RecyclerVi
             delite.setOnClickListener(this);
             favorite.setOnClickListener(this);
             edit.setOnClickListener(this);
-            cardView = itemView.findViewById(R.id.cardViewTotal);
             yes = itemView.findViewById(R.id.yesTotal);
             no = itemView.findViewById(R.id.noTotal);
+            cardView = itemView.findViewById(R.id.cardViewTotal);
             cardView.setOnClickListener(this);
             yes.setOnClickListener(this);
             no.setOnClickListener(this);

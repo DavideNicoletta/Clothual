@@ -60,7 +60,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"/>
 
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
         android:id="@+id/viewUpload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,6 +71,7 @@
         <LinearLayout
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/border_layout_adapter_category"
             android:orientation="vertical">
         <Button
             android:id="@+id/upload"
@@ -86,7 +87,7 @@
             android:textAlignment="center"
             android:text="Scatta Foto"/>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/modifyImage"

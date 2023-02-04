@@ -20,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.clothual.Model.Account;
 import com.example.clothual.R;
-import com.example.clothual.UI.core.AddDress.AddDressActivity;
 import com.example.clothual.UI.core.CoreActivity;
 import com.example.clothual.databinding.EditProfileLayoutBinding;
 
@@ -64,15 +63,24 @@ public class EditProfileActivity extends AppCompatActivity {
 
         binding.total.setOnClickListener(view19 -> binding.viewUpload.setVisibility(View.INVISIBLE));
 
-        binding.modifyImage.setOnClickListener(view13 -> binding.viewUpload.setVisibility(View.VISIBLE));
+        binding.modifyImage.setOnClickListener(new View.OnClickListener() {
+                                                   @Override
+                                                   public void onClick(View view13) {
+                                                       binding.viewUpload.setVisibility(View.VISIBLE);
+                                                       binding.modifyImage.setVisibility(View.INVISIBLE);
+                                                   }
+                                               });
+
 
         binding.upload.setOnClickListener(view12 -> {
             binding.viewUpload.setVisibility(View.INVISIBLE);
+            binding.modifyImage.setVisibility(View.VISIBLE);
             imageChooser();
         });
 
         binding.makePhoto.setOnClickListener(view14 -> {
             binding.viewUpload.setVisibility(View.INVISIBLE);
+            binding.modifyImage.setVisibility(View.VISIBLE);
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 0);
         });
@@ -116,48 +124,51 @@ public class EditProfileActivity extends AppCompatActivity {
         });
 
 
-        binding.close.setOnClickListener(view18 -> {
-            int id = sharedPref.getInt(ID_ACCOUNT, 0);
-            Account account = modifyModel.getAccountByID(id);
-            if(binding.editTextEmail.isEnabled()){
-                if(modifyModel.checkEmail(binding.editTextEmail.getText().toString())){
-                    binding.inputViewEmail.setError(null);
-                    //editor.putString(EMAIL_CHANGE, binding.editTextEmail.getText().toString());
-                    account.setEmail(binding.editTextEmail.getText().toString());
-                }else{
-                    binding.inputViewEmail.setError("Mail non valida");
-                    //editor.putString(EMAIL_CHANGE, modifyModel.getEmail(sharedPref.getInt(ID_ACCOUNT, 0)));
-                }
-            }
-
-            if(binding.editTextUsername.isEnabled()){
-                if(binding.editTextUsername.getText().toString().isEmpty()){
-                    binding.inputUsername.setError("Username non valido");
-
-                }else{
-                    binding.inputUsername.setError(null);
-                    account.setUsername(binding.editTextUsername.getText().toString());
-                    //editor.putString(USERNAME_CHANGE, binding.editTextUsername.getText().toString());
-                }
-            }
-
-            if(binding.editTextPassword.isEnabled()){
-                if(modifyModel.checkPassword(binding.editTextUsername.getText().toString(), sharedPref.getInt(ID_ACCOUNT, 0))){
-                    if(binding.editTextPasswordNuovo.getText().toString().isEmpty()){
-                        binding.inputPassword.setError("Password non valida");
-
-                    }else{
-                        binding.inputPassword.setError(null);
-                        //editor.putString(PASSWORD_CHANGE, );
-                        account.setPassword(binding.editTextPasswordNuovo.getText().toString());
+        binding.close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view18) {
+                int id = sharedPref.getInt(ID_ACCOUNT, 0);
+                Account account = modifyModel.getAccountByID(id);
+                if (binding.editTextEmail.isEnabled()) {
+                    if (modifyModel.checkEmail(binding.editTextEmail.getText().toString())) {
+                        binding.inputViewEmail.setError(null);
+                        //editor.putString(EMAIL_CHANGE, binding.editTextEmail.getText().toString());
+                        account.setEmail(binding.editTextEmail.getText().toString());
+                    } else {
+                        binding.inputViewEmail.setError("Mail non valida");
+                        //editor.putString(EMAIL_CHANGE, modifyModel.getEmail(sharedPref.getInt(ID_ACCOUNT, 0)));
                     }
-                }else{
-                    binding.inputPassword.setError("Password Errata");
-
                 }
-            }
 
-            modifyModel.upoloadEditAccount(account);
+                if (binding.editTextUsername.isEnabled()) {
+                    if (binding.editTextUsername.getText().toString().isEmpty()) {
+                        binding.inputUsername.setError("Username non valido");
+
+                    } else {
+                        binding.inputUsername.setError(null);
+                        account.setUsername(binding.editTextUsername.getText().toString());
+                        //editor.putString(USERNAME_CHANGE, binding.editTextUsername.getText().toString());
+                    }
+                }
+
+                if (binding.editTextPassword.isEnabled()) {
+                    if (modifyModel.checkPassword(binding.editTextUsername.getText().toString(), sharedPref.getInt(ID_ACCOUNT, 0))) {
+                        if (binding.editTextPasswordNuovo.getText().toString().isEmpty()) {
+                            binding.inputPassword.setError("Password non valida");
+
+                        } else {
+                            binding.inputPassword.setError(null);
+                            //editor.putString(PASSWORD_CHANGE, );
+                            account.setPassword(binding.editTextPasswordNuovo.getText().toString());
+                        }
+                    } else {
+                        binding.inputPassword.setError("Password Errata");
+
+                    }
+                }
+
+                modifyModel.upoloadEditAccount(account);
+            }
         });
 
         binding.cancel.setOnClickListener(view1 -> {
@@ -204,9 +215,11 @@ public class EditProfileActivity extends AppCompatActivity {
                     Bitmap bitmap = modifyModel.importImageFromMemory(this, getApplicationContext(), getContentResolver(), uri);
                     Uri newUri = modifyModel.saveImage(getContentResolver(), bitmap,
                             modifyModel.getNameImage(), "profile");
-                    Intent intent = new Intent(this, AddDressActivity.class);
+                  /*  Intent intent = new Intent(this, AddDressActivity.class);
                     intent.putExtra("uri", newUri.toString());
-                    startActivity(intent);
+                    startActivity(intent);*/
+                    binding.imagePersonal.setImageBitmap(bitmap);
+
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {

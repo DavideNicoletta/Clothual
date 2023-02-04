@@ -16,5 +16,5 @@
     <color name="grayDarkBackgroundMode">#303030</color>
     <color name="box_color" />
     <color name="text">@color/black</color>
-    <color name="appbar">#202020</color>
+    <color name="appbar">@color/backGroundMain</color>
 </resources>
