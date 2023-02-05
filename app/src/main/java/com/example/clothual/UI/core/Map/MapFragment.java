@@ -33,6 +33,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -104,6 +105,7 @@ public class MapFragment extends Fragment {
                             longitude = position.getLongitude();
                             LatLng latLng = new LatLng(latitude, longitude);
                             MarkerOptions mo = new MarkerOptions().position(latLng).title("");
+                            mo.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                             mMap.addMarker(mo);
                             mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
@@ -117,7 +119,6 @@ public class MapFragment extends Fragment {
                             Object transferData[] = new Object[2];
                             GetNearbyPlaces getNearbyPlaces = new GetNearbyPlaces();
                             if (v.getId() == R.id.shopButton) {
-                                mMap.clear();
                                 String url = getUrl(latitude, longitude, shops);
                                 transferData[0] = mMap;
                                 transferData[1] = url;
