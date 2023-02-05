@@ -54,6 +54,7 @@
     <string name="jackets">Jackets</string>
     <string name="jacket">Jacket</string>
     <string name="jeans" translatable="false">Jeans</string>
+    <string name="sweatshirt">Sweatshirt</string>
 
     <string name="darkMode" translatable="false">Dark Mode</string>
     <string name="lightMode" translatable="false">Ligth Mode</string>
@@ -65,7 +66,7 @@
         <item>@string/shoes</item>
         <item>@string/trousers</item>
         <item>@string/tshirt</item>
-        <item>@string/jackets</item>
+        <item>@string/sweatshirt</item>
         <item>@string/jeans</item>
     </array>
 

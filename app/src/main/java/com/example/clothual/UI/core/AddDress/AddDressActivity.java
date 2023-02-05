@@ -18,6 +18,7 @@ import com.example.clothual.Model.Image;
 import com.example.clothual.R;
 import com.example.clothual.UI.core.CoreActivity;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 
@@ -94,12 +95,13 @@ public class AddDressActivity extends AppCompatActivity {
             if(spinner.getSelectedItem().toString().equals(getString(R.string.tshirt))){
                 spinnerValue = 3;
             }
-            if(spinner.getSelectedItem().toString().equals(getString(R.string.jackets))){
+            if(spinner.getSelectedItem().toString().equals(getString(R.string.sweatshirt))){
                 spinnerValue = 4;
             }
             if(spinner.getSelectedItem().toString().equals(getString(R.string.jeans))){
                 spinnerValue = 5;
             }
+
 
             switch(action){
                 case 0:
@@ -132,6 +134,10 @@ public class AddDressActivity extends AppCompatActivity {
     public void onBackPressed() {
         model = new AddDressModel(getApplication());
         String uri = getIntent().getExtras().getString("uri");
+        //Delite
+        File file = new File(Uri.parse(uri).getPath());
+        file.delete();
+        //Delite
         List<Image> imageList = model.getAllImage();
         for(int i = 0; i < imageList.size(); i++){
             if(imageList.get(i).getUri().equals(uri)){

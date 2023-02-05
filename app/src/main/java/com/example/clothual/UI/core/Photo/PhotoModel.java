@@ -22,10 +22,14 @@ import androidx.core.content.ContextCompat;
 
 import com.example.clothual.Database.ClothualDao;
 import com.example.clothual.Database.ImageDao;
+import com.example.clothual.Database.OutfitDao;
 import com.example.clothual.Database.RoomDatabase;
 import com.example.clothual.Model.Clothual;
+import com.example.clothual.Model.Converters;
 import com.example.clothual.Model.Image;
+import com.example.clothual.Model.Outfit;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,6 +38,7 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PhotoModel {
@@ -43,11 +48,14 @@ public class PhotoModel {
     private final ImageDao imageDao;
     private final ClothualDao clothualDao;
 
+    public final OutfitDao outfitDao;
+
     public PhotoModel(Application application) {
         this.application = application;
         database = RoomDatabase.getDatabase(application);
         imageDao = database.imageDao();
         clothualDao = database.clothualDao();
+        outfitDao = database.outfitDao();
     }
 
     public Uri saveImage(ContentResolver contentResolver, Bitmap image, String title, String description) throws IOException {
@@ -121,6 +129,60 @@ public class PhotoModel {
 
     public List<Clothual> getAllClothual(){
         return clothualDao.getAllClothual();
+    }
+
+
+    public void deleteElement(Uri uri, int ID){
+        int index = takeIDClothualByIDImage(ID);
+        deleteFromOutfit(index);
+        File file = new File(uri.getPath());
+        file.delete();
+    }
+
+    public int takeIDClothualByIDImage(int idImage){
+        List<Clothual> clothualList = clothualDao.getAllClothual();
+        for(int i = 0; i < clothualList.size(); i++){
+            if(clothualList.get(i).getIdImage() == idImage){
+                return clothualList.get(i).getId();
+            }
+        }
+        return -1;
+    }
+
+    public void deleteFromOutfit(int ID){
+        List<Outfit> outfitList = outfitDao.getAlLOutfit();
+        System.out.println("Outfit List size: " + outfitList.size());
+        for(int i = 0; i < outfitList.size(); i++){
+            Outfit outfit = outfitList.get(i);
+            List<Clothual> clothualList = getClothualOutfit(outfit);
+            System.out.println("Outfit ClothualList " + (i+1) + " size: " + outfitList.size());
+            for(int j = 0; j < clothualList.size(); j++) {
+                    if (clothualList.get(j).getId() == ID) {
+                        clothualList.remove(j);
+                        System.out.println("ClothualList new dimesione after delite: " + clothualList.size());
+                    }
+                }
+
+            outfit.setClothualListByList(clothualList);
+            outfit.converter();
+            outfit.removeClothualList();
+            outfitDao.updateOutfit(outfit);
+
+        }
+    }
+
+    public List<Clothual> getClothualOutfit(Outfit outfit){
+        List<Clothual> clothualList = clothualDao.getAllClothual();
+        List<String> listIdClothual = Converters.fromString(outfit.getClothualString());
+        List<Clothual> clothualOutfit = new ArrayList<>();
+        for(int i = 0; i < clothualList.size(); i++){
+            for(int j = 0; j < listIdClothual.size(); j++){
+                if(clothualList.get(i).getId() == Integer.parseInt(listIdClothual.get(j))){
+                    clothualOutfit.add(clothualList.get(i));
+                }
+            }
+        }
+        return clothualOutfit;
     }
 
 }

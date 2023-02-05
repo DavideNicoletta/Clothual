@@ -141,7 +141,7 @@ public class RecyclerViewClothualAdapter extends RecyclerView.Adapter<RecyclerVi
                     type.setText(application.getString(R.string.tshirt));
                     break;
                 case 4:
-                    type.setText(application.getString(R.string.jackets));
+                    type.setText(application.getString(R.string.sweatshirt));
                     break;
                 case 5:
                     type.setText(application.getString(R.string.jeans));
@@ -190,6 +190,9 @@ public class RecyclerViewClothualAdapter extends RecyclerView.Adapter<RecyclerVi
                 case R.id.yesTotal:
                     String string = clothualList.get(getAdapterPosition()).getBrand() + " " +
                             clothualList.get(getAdapterPosition()).getTemplate() + " has been deleted";
+                    //Delite
+                    model.deleteElement(Uri.parse(imageList.get(getAdapterPosition()).getUri()), clothualList.get(getAdapterPosition()).getId());
+                    //Delite
                     model.deleteImage(imageList.get(getAdapterPosition()));
                     model.deleteClothual(clothualList.get(getAdapterPosition()));
                     imageList.remove(getAdapterPosition());

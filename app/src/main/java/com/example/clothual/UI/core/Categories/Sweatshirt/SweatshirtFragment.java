@@ -1,4 +1,4 @@
-package com.example.clothual.UI.core.Categories.Jackets;
+package com.example.clothual.UI.core.Categories.Sweatshirt;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,22 +17,22 @@ import com.example.clothual.Model.Image;
 import com.example.clothual.UI.core.AddDress.AddDressActivity;
 import com.example.clothual.UI.core.Categories.CategoryModel;
 import com.example.clothual.UI.core.adapter.RecyclerViewClothualAdapter;
-import com.example.clothual.databinding.FragmentJacketsBinding;
+import com.example.clothual.databinding.FragmentSweatshirtBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link JacketsFragment#newInstance} factory method to
+ * Use the {@link SweatshirtFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class JacketsFragment extends Fragment {
+public class SweatshirtFragment extends Fragment {
 
-    private FragmentJacketsBinding binding;
+    private FragmentSweatshirtBinding binding;
     private CategoryModel model;
 
-    public JacketsFragment() {
+    public SweatshirtFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +40,11 @@ public class JacketsFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment JacketsFragment.
+     * @return A new instance of fragment SweatshirtFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static JacketsFragment newInstance() {
-        return new JacketsFragment();
+    public static SweatshirtFragment newInstance() {
+        return new SweatshirtFragment();
     }
 
     @Override
@@ -56,7 +56,7 @@ public class JacketsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentJacketsBinding.inflate(getLayoutInflater());
+        binding = FragmentSweatshirtBinding.inflate(getLayoutInflater());
         return binding.getRoot();
     }
 

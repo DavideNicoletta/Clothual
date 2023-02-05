@@ -125,9 +125,9 @@
         tools:layout="@layout/fragment_t_shirt" />
     <fragment
         android:id="@+id/jacketsFragment"
-        android:name="com.example.clothual.UI.core.Categories.Jackets.JacketsFragment"
+        android:name="com.example.clothual.UI.core.Categories.Sweatshirt.SweatshirtFragment"
         android:label="fragment_jackets"
-        tools:layout="@layout/fragment_jackets" />
+        tools:layout="@layout/fragment_sweatshirt" />
     <fragment
         android:id="@+id/jeansFragment"
         android:name="com.example.clothual.UI.core.Categories.Jeans.JeansFragment"
