@@ -1,5 +1,6 @@
 package com.example.clothual.UI.core.AddDress;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -18,7 +19,6 @@ import com.example.clothual.Model.Image;
 import com.example.clothual.R;
 import com.example.clothual.UI.core.CoreActivity;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 
@@ -33,12 +33,16 @@ public class AddDressActivity extends AppCompatActivity {
     public EditText description;
     public Button buttonSave;
 
+    public ContentResolver contentResolver;
+
     public ImageView clothual;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_dress_layout);
+
+        contentResolver = getApplication().getContentResolver();
 
         clothual = findViewById(R.id.clothualAddDress);
 
@@ -135,8 +139,7 @@ public class AddDressActivity extends AppCompatActivity {
         model = new AddDressModel(getApplication());
         String uri = getIntent().getExtras().getString("uri");
         //Delite
-        File file = new File(Uri.parse(uri).getPath());
-        file.delete();
+        contentResolver.delete(Uri.parse(uri),null ,null );
         //Delite
         List<Image> imageList = model.getAllImage();
         for(int i = 0; i < imageList.size(); i++){

@@ -1,6 +1,7 @@
 package com.example.clothual.UI.core.Categories;
 
 import android.app.Application;
+import android.content.ContentResolver;
 import android.net.Uri;
 
 import com.example.clothual.Database.ClothualDao;
@@ -12,7 +13,7 @@ import com.example.clothual.Model.Converters;
 import com.example.clothual.Model.Image;
 import com.example.clothual.Model.Outfit;
 
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -205,31 +206,31 @@ public class CategoryModel {
         clothualDao.updateClothual(clothual);
     }
 
-    public void deleteElement(Uri uri, int ID){
+    public void deleteElement(ContentResolver contentResolver, Uri uri, int ID) throws FileNotFoundException {
         deleteFromOutfit(ID);
-        File file = new File(uri.getPath());
-        file.delete();
+        contentResolver.delete (uri,null ,null );
     }
 
     public void deleteFromOutfit(int ID){
         List<Outfit> outfitList = outfitDao.getAlLOutfit();
-        System.out.println("Outfit List size: " + outfitList.size());
-        for(int i = 0; i < outfitList.size(); i++){
-            Outfit outfit = outfitList.get(i);
-            List<Clothual> clothualList = getClothualOutfit(outfit);
-            System.out.println("Outfit ClothualList " + (i+1) + " size: " + outfitList.size());
-            for(int j = 0; j < clothualList.size(); j++) {
-                if (clothualList.get(j).getId() == ID) {
-                    clothualList.remove(j);
-                    System.out.println("ClothualList new dimesione after delite: " + clothualList.size());
+        if(outfitList.size()!=0) {
+            for (int i = 0; i < outfitList.size(); i++) {
+                Outfit outfit = outfitList.get(i);
+                List<Clothual> clothualList = getClothualOutfit(outfit);
+
+                for (int j = 0; j < clothualList.size(); j++) {
+                    if (clothualList.get(j).getId() == ID) {
+                        clothualList.remove(j);
+
+                    }
                 }
+
+                outfit.setClothualListByList(clothualList);
+                outfit.converter();
+                outfit.removeClothualList();
+                outfitDao.updateOutfit(outfit);
+
             }
-
-            outfit.setClothualListByList(clothualList);
-            outfit.converter();
-            outfit.removeClothualList();
-            outfitDao.updateOutfit(outfit);
-
         }
     }
 

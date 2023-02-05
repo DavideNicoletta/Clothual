@@ -110,7 +110,7 @@ public class RecyclerViewPhotoAdapter extends RecyclerView.Adapter<RecyclerViewP
             if(view.getId() == R.id.yes){
                 int index = imageList.get(getAdapterPosition()).getID();
                 //Delite
-                model.deleteElement(Uri.parse(imageList.get(getAdapterPosition()).getUri()), index);
+                model.deleteElement(contentResolver, Uri.parse(imageList.get(getAdapterPosition()).getUri()), index);
                 //Delite
                 model.deliteImage(imageList.get(getAdapterPosition()));
                 List<Clothual> listClothual = model.getAllClothual();
