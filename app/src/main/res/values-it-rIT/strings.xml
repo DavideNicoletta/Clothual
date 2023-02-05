@@ -41,7 +41,7 @@
     <string name="sweatshirt">Felpa</string>
     <string name="favorites">Preferiti</string>
     <string name="map">Mappa</string>
-
+    <string name="login_password_empty">La password non può essere vuota</string>
 
 
 </resources>

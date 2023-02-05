@@ -141,23 +141,31 @@ public class LoginFragment extends Fragment {
                 String email = binding.editTextUsername.getText().toString().trim();
                 String password = binding.editTextPassword.getText().toString().trim();
                 progressDialog.show();
-                firebaseAuth.signInWithEmailAndPassword(email, password)
-                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                            @Override
-                            public void onSuccess(AuthResult authResult) {
-                                progressDialog.cancel();
-                                Intent intet = new Intent(requireContext(), CoreActivity.class);
-                                startActivity(intet);
-                                getActivity().finish();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                progressDialog.cancel();
-                                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                if (email.isEmpty()){
+                    progressDialog.cancel();
+                    Toast.makeText(getContext(), R.string.login_mail_empty, Toast.LENGTH_SHORT).show();
+                } if (password.isEmpty()){
+                    progressDialog.cancel();
+                    Toast.makeText(getContext(), R.string.login_password_empty, Toast.LENGTH_SHORT).show();
+                } else {
+                    firebaseAuth.signInWithEmailAndPassword(email, password)
+                            .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                @Override
+                                public void onSuccess(AuthResult authResult) {
+                                    progressDialog.cancel();
+                                    Intent intet = new Intent(requireContext(), CoreActivity.class);
+                                    startActivity(intet);
+                                    getActivity().finish();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    progressDialog.cancel();
+                                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
             }
         });
 

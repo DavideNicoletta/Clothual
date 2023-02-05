@@ -39,6 +39,7 @@
     <string name="favorites">Favoris</string>
     <string name="map">Carte</string>
     <string name="login_mail_empty">L\'e-mail ne peut pas etre vide</string>
+    <string name="login_password_empty">Password ne peut pas etre vide</string>
 
 
 </resources>
