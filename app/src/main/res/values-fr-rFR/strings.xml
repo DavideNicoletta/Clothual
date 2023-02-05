@@ -40,6 +40,9 @@
     <string name="map">Carte</string>
     <string name="login_mail_empty">L\'e-mail ne peut pas etre vide</string>
     <string name="login_password_empty">Password ne peut pas etre vide</string>
+    <string name="login_surname_empty">Nom ne peut pas etre vide</string>
+    <string name="login_name_empty">Prénome ne peut pas etre vide</string>
+    <string name="login_username_empty">Nom d\'utilisateur ne peut pas etre vide</string>
 
 
 </resources>

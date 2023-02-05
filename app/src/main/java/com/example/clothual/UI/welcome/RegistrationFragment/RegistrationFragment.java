@@ -99,26 +99,40 @@ public class RegistrationFragment extends Fragment {
                 String username = binding.editTextUsername.getText().toString();
                 String password = binding.editTextPassword.getText().toString();
 
-                progressDialog.show();
-                firebaseAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                Navigation.findNavController(requireView()).navigate(R.id.action_fragment_registration_to_loginFragment);
-                                progressDialog.cancel();
+                //controlli
+                if (email.isEmpty()){
+                    Toast.makeText(getContext(), R.string.login_mail_empty, Toast.LENGTH_SHORT).show();
+                } if (surname.isEmpty()){
+                    Toast.makeText(getContext(), R.string.login_surname_empty, Toast.LENGTH_SHORT).show();
+                } if (name.isEmpty()){
+                    Toast.makeText(getContext(), R.string.login_name_empty, Toast.LENGTH_SHORT).show();
+                } if (username.isEmpty()){
+                    Toast.makeText(getContext(), R.string.login_username_empty, Toast.LENGTH_SHORT).show();
+                } if (password.isEmpty()){
+                    Toast.makeText(getContext(), R.string.login_password_empty, Toast.LENGTH_SHORT).show();
+                } else {
 
-                                firebaseFirestore.collection("User")
-                                        .document(FirebaseAuth.getInstance().getUid())
-                                        .set(new UserModel(username, name, surname, email));
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                                progressDialog.cancel();
-                            }
-                        });
+                    progressDialog.show();
+                    firebaseAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    Navigation.findNavController(requireView()).navigate(R.id.action_fragment_registration_to_loginFragment);
+                                    progressDialog.cancel();
+
+                                    firebaseFirestore.collection("User")
+                                            .document(FirebaseAuth.getInstance().getUid())
+                                            .set(new UserModel(username, name, surname, email));
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    progressDialog.cancel();
+                                }
+                            });
+                }
             }
         });
 
