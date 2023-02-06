@@ -44,11 +44,12 @@ import java.util.Map;
 public class MapFragment extends Fragment {
 
     private GoogleMap mMap;
-    private  int ProximityRadius = 10000;
+    private int ProximityRadius = 10000;
     private Location position;
     private FusedLocationProviderClient client;
     private static final int REQUEST_CODE = 101;
     private Double latitude, longitude;
+    private Task<Location> task;
 
     private FragmentMapBinding binding;
 
@@ -66,6 +67,11 @@ public class MapFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         client = LocationServices.getFusedLocationProviderClient(getActivity());
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        task = client.getLastLocation();
     }
 
 
@@ -73,7 +79,6 @@ public class MapFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentMapBinding.inflate(getLayoutInflater());
-
         return binding.getRoot();
     }
 
@@ -82,13 +87,6 @@ public class MapFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]
-                    {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
-            return;
-        }
-        Task<Location> task = client.getLastLocation();
 
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
