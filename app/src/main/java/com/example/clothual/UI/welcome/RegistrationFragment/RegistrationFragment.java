@@ -138,6 +138,7 @@ public class RegistrationFragment extends Fragment {
                                     progressDialog.cancel();
                                 }
                             });
+                    registrationModel.createUser(username, name, surname, password, email);
                 }
             }
         });
