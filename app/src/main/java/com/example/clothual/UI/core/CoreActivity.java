@@ -1,17 +1,13 @@
 package com.example.clothual.UI.core;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.widget.ImageView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -24,7 +20,7 @@ import com.example.clothual.UI.core.Map.MapFragment;
 import com.example.clothual.UI.core.Personal.PersonalFragment;
 import com.example.clothual.UI.core.Photo.PhotoFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
+
 
 public class CoreActivity extends AppCompatActivity{
 
@@ -69,7 +65,7 @@ public class CoreActivity extends AppCompatActivity{
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.homeFragment, R.id.calendarFragment,
-                R.id.mapFragment, R.id.photoFragment, R.id.personalFragment).build();
+                R.id.favoriteFragment, R.id.photoFragment, R.id.personalFragment).build();
 
 
 
@@ -89,39 +85,11 @@ public class CoreActivity extends AppCompatActivity{
         // For the BottomNavigationView
         NavigationUI.setupWithNavController(bottomNav, navController);
 
-        bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
 
-                switch(item.getItemId()){
-                    case R.id.homeFragment:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,homeFragment).commit();
-                        break;
-                    case R.id.mapFragment:
-                        if (ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                                ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                            ActivityCompat.requestPermissions(CoreActivity.this, new String[]
-                                    {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
-                        }
-                        else{
-                            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,mapFragment).commit();
-                        }
-                        break;
-                    case R.id.photoFragment:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,photoFragment).commit();
-                        break;
-                    case R.id.calendarFragment:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,calendarFragment).commit();
-                        break;
-                    case R.id.personalFragment:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,personalFragment).commit();
-                        break;
-                }
-                return false;
-            }
-        });
 
     }
+
+
 
 /*
     @Override

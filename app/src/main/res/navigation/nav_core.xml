@@ -17,9 +17,6 @@
             android:id="@+id/action_homeFragment_to_totalFragment"
             app:destination="@id/totalFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_preferiteFragment"
-            app:destination="@id/preferiteFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_trousersFragment"
             app:destination="@id/trousersFragment" />
         <action
@@ -31,16 +28,12 @@
         <action
             android:id="@+id/action_homeFragment_to_jeansFragment"
             app:destination="@id/jeansFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/mapFragment"
-        android:name="com.example.clothual.UI.core.Map.MapFragment"
-        android:label="Map"
-        tools:layout="@layout/fragment_map" >
         <action
-            android:id="@+id/action_mapFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_homeFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
+
+
     <fragment
         android:id="@+id/photoFragment"
         android:name="com.example.clothual.UI.core.Photo.PhotoFragment"
@@ -53,6 +46,8 @@
             android:id="@+id/action_photoFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+
+
     <fragment
         android:id="@+id/calendarFragment"
         android:name="com.example.clothual.UI.core.Calendar.CalendarFragment"
@@ -65,6 +60,8 @@
             android:id="@+id/action_calendarFragment_self"
             app:destination="@id/calendarFragment" />
     </fragment>
+
+
     <fragment
         android:id="@+id/personalFragment"
         android:name="com.example.clothual.UI.core.Personal.PersonalFragment"
@@ -80,10 +77,14 @@
             android:id="@+id/action_personalFragment_to_informationFragment"
             app:destination="@id/informationFragment" />
     </fragment>
+
+
     <activity
         android:id="@+id/addDressActivity"
         android:name="com.example.clothual.UI.core.AddDress.AddDressActivity"
         android:label="AddDressActivity" />
+
+
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.clothual.UI.core.Personal.Settings.SettingsFragment"
@@ -93,55 +94,81 @@
             android:id="@+id/action_settingsFragment_self"
             app:destination="@id/settingsFragment" />
     </fragment>
+
+
     <fragment
         android:id="@+id/shoesFragment"
         android:name="com.example.clothual.UI.core.Categories.Shoes.ShoesFragment"
         android:label="fragment_shoes"
         tools:layout="@layout/fragment_shoes" />
+
+
     <fragment
         android:id="@+id/totalFragment"
         android:name="com.example.clothual.UI.core.Categories.Total.TotalFragment"
         android:label="TotalFragment" />
+
+
     <fragment
-        android:id="@+id/preferiteFragment"
+        android:id="@+id/favoriteFragment"
         android:name="com.example.clothual.UI.core.Categories.Favorite.FavoriteFragment"
-        android:label="fragment_preferite"
+        android:label="Favorite"
         tools:layout="@layout/fragment_favorite" />
+
+
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.example.clothual.UI.core.Personal.History.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
+
+
     <fragment
         android:id="@+id/informationFragment"
         android:name="com.example.clothual.UI.core.Personal.Information.InformationFragment"
         android:label="fragment_information"
         tools:layout="@layout/fragment_information" />
+
+
     <fragment
         android:id="@+id/trousersFragment"
         android:name="com.example.clothual.UI.core.Categories.Trousers.TrousersFragment"
         android:label="fragment_trousers"
         tools:layout="@layout/fragment_trousers" />
+
+
     <fragment
         android:id="@+id/TShirtFragment"
         android:name="com.example.clothual.UI.core.Categories.TShirt.TShirtFragment"
         android:label="fragment_t_shirt"
         tools:layout="@layout/fragment_t_shirt" />
+
+
     <fragment
         android:id="@+id/jacketsFragment"
         android:name="com.example.clothual.UI.core.Categories.Sweatshirt.SweatshirtFragment"
         android:label="fragment_jackets"
         tools:layout="@layout/fragment_sweatshirt" />
+
+
     <fragment
         android:id="@+id/jeansFragment"
         android:name="com.example.clothual.UI.core.Categories.Jeans.JeansFragment"
         android:label="fragment_jeans"
         tools:layout="@layout/fragment_jeans" />
+
+
     <fragment
         android:id="@+id/addClothualOutfitFragment"
         android:name="com.example.clothual.UI.core.Calendar.AddClothualOutfitFragment"
         android:label="fragment_add_clothual_outfit"
         tools:layout="@layout/fragment_add_clothual_outfit" />
 
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.clothual.UI.core.Map.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
 
 </navigation>

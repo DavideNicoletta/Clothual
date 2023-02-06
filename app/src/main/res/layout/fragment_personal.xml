@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".UI.core.Personal.PersonalFragment">
 
-
-
     <ImageView
         android:id="@+id/imagePersonal"
         android:layout_width="150dp"

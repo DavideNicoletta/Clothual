@@ -159,13 +159,33 @@ public class PersonalFragment extends Fragment {
             Intent intent = new Intent(requireContext(), EditProfileActivity.class);
             startActivity(intent);
         });
+        binding.settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(requireView()).navigate(R.id.action_personalFragment_to_settingsFragment);
+            }
+        });
 
+        binding.information.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(requireView()).navigate(R.id.action_personalFragment_to_informationFragment);
+            }
+        });
+
+        binding.history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(requireView()).navigate(R.id.action_personalFragment_to_historyFragment);
+            }
+        });
+/*
         binding.settings.setOnClickListener(view13 -> Navigation.findNavController(requireView()).navigate(R.id.action_personalFragment_to_settingsFragment));
 
         binding.information.setOnClickListener(view14 -> Navigation.findNavController(requireView()).navigate(R.id.action_personalFragment_to_informationFragment));
 
         binding.history.setOnClickListener(view15 -> Navigation.findNavController(requireView()).navigate(R.id.action_personalFragment_to_historyFragment));
-
+*/
     }
 
     void signOut() {
