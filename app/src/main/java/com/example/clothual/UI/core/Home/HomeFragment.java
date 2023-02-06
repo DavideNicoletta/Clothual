@@ -1,22 +1,17 @@
 package com.example.clothual.UI.core.Home;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.clothual.R;
 import com.example.clothual.databinding.FragmentHomeBinding;
-import com.example.clothual.databinding.FragmentMapBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,44 +54,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        /*binding.filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_filterFragment);
-
-            }
-        });*/
-
-
-/*
-        binding.ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                binding.viewFilter.setVisibility(View.INVISIBLE);
-            }
-        });
-
-        binding.cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                binding.viewFilter.setVisibility(View.INVISIBLE);
-            }
-        });
-
-
-        binding.filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                    binding.viewFilter.setVisibility(View.VISIBLE);
-
-            }
-        });
-*/
-
-        //binding.map.setOnClickListener(view12 -> Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_mapFragment));
 
         binding.shoes.setOnClickListener(view1 -> Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_shoesFragment));
 

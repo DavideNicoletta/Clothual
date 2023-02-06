@@ -36,7 +36,11 @@
         android:id="@+id/mapFragment"
         android:name="com.example.clothual.UI.core.Map.MapFragment"
         android:label="Map"
-        tools:layout="@layout/fragment_map" />
+        tools:layout="@layout/fragment_map" >
+        <action
+            android:id="@+id/action_mapFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/photoFragment"
         android:name="com.example.clothual.UI.core.Photo.PhotoFragment"
