@@ -177,15 +177,6 @@
         android:visibility="visible"
         />
 
-    <Button
-        android:id="@+id/salta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/sign_in_button"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:background="@color/celeste"/>
-
     <TextView
         android:id="@+id/changeText"
         android:layout_width="match_parent"

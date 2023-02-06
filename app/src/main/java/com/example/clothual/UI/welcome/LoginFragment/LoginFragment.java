@@ -269,13 +269,6 @@ public class LoginFragment extends Fragment {
            */
        });
 
-       binding.salta.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               navigateToMainActivity();
-           }
-       });
-
     }
 
     @Override
