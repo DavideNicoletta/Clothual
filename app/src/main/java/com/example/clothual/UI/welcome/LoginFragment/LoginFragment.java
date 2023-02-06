@@ -46,6 +46,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.util.List;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -156,6 +158,8 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 String email = binding.editTextUsername.getText().toString().trim();
                 String password = binding.editTextPassword.getText().toString().trim();
+                edit.putInt(ID, loginModel.getIDByEmail(email));
+                edit.apply();
                 progressDialog.show();
                 if (email.isEmpty()){
                     progressDialog.cancel();
@@ -306,7 +310,13 @@ public class LoginFragment extends Fragment {
                     public void onSuccess(AuthResult authResult) {
                         //login success
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                        loginModel.FuncGoogle(account);
+                        List<String> listString = loginModel.FuncGoogle(account);
+
+                        loginModel.createUserGoogle(
+                                (listString.get(0) + "." + loginModel.getUsernameGoogle(listString.get(1))),
+                                listString.get(0),
+                                null, listString.get(1));
+
                         /*
                         String uid = firebaseUser.getUid();
                         String email = firebaseUser.getEmail();

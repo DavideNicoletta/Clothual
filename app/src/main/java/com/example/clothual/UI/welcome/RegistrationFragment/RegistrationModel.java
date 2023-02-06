@@ -33,14 +33,7 @@ public class RegistrationModel {
     }
 
 
-    public void createUserGoogle(String username, String name, String surname, String email){
-        RoomDatabase.databaseWriteExecutor.execute(() -> {
-            Account account = new Account(username, email, null);
-            accountDao.insertAccount(account);
-            User user = new User(surname, name, accountDao.getId(username));
-            userDao.insertUser(user);
-        });
-    }
+
     public int idAccount(String username){
         return accountDao.getId(username);
     }

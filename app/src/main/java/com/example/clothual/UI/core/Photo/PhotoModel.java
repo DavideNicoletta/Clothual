@@ -85,10 +85,11 @@ public class PhotoModel {
     }
 
 
-    public List<Image> getImageList(){//Activity act, Context ctx, ContentResolver contentResolver) {
+    public List<Image> getImageList(int ID){//Activity act, Context ctx, ContentResolver contentResolver) {
+
         List<Image> image = imageDao.getAllImage();
         for(int i = 0; i < image.size(); i++){
-            if(image.get(i).getDescription().equals("profile")){
+            if(image.get(i).getDescription().equals("profile") || image.get(i).getIdAccount() != ID){
                 image.remove(i);
             }
         }

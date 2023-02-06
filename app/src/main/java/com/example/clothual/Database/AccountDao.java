@@ -3,6 +3,7 @@ package com.example.clothual.Database;
 import static com.example.clothual.Util.Query.GET_ACCOUNT_BY_ID;
 import static com.example.clothual.Util.Query.GET_EMAIL;
 import static com.example.clothual.Util.Query.GET_ID;
+import static com.example.clothual.Util.Query.GET_ID_BY_EMAIL;
 import static com.example.clothual.Util.Query.GET_PASSWORD;
 import static com.example.clothual.Util.Query.GET_USERNAME;
 import static com.example.clothual.Util.Query.SELECT_ALL_ACCOUNT;
@@ -31,7 +32,7 @@ public interface AccountDao {
     void deleteAccount(Account account);
 
     @Query(GET_ID)
-    int getId(String email);
+    int getId(String username);
 
     @Query(GET_EMAIL)
     String getEmail(int idAccount);
@@ -47,5 +48,8 @@ public interface AccountDao {
 
     @Update
     void updateAccount(Account account);
+
+    @Query(GET_ID_BY_EMAIL)
+    int getIdByEmail(String email);
 
 }

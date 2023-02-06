@@ -109,8 +109,8 @@ public class PhotoFragment extends Fragment {
         });
 
         RecyclerView.LayoutManager manager = new GridLayoutManager(requireContext(), 3);
-
-            List<Image> image = photoModel.getImageList();
+            SharedPreferences sharedPref = getActivity().getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
+            List<Image> image = photoModel.getImageList(sharedPref.getInt(ID, 0));
             RecyclerViewPhotoAdapter adapter = new RecyclerViewPhotoAdapter(image, new RecyclerViewPhotoAdapter.OnItemClickListener() {
                 @Override
                 public void delete() {

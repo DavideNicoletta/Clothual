@@ -1,17 +1,17 @@
 package com.example.clothual.UI.welcome.LoginFragment;
 
 import android.app.Application;
-import android.util.Log;
 
-import com.example.clothual.Model.Account;
 import com.example.clothual.Database.AccountDao;
 import com.example.clothual.Database.RoomDatabase;
 import com.example.clothual.Database.UserDao;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.example.clothual.Model.Account;
+import com.example.clothual.Model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoginModel {
@@ -46,7 +46,8 @@ public class LoginModel {
         return false;
     }
 
-    public String FuncGoogle (GoogleSignInAccount acct){
+    public List<String> FuncGoogle (GoogleSignInAccount acct){
+        List<String> returnList = new ArrayList<>();
         String personName = "";
         String personEmail = "";
         //gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
@@ -55,12 +56,36 @@ public class LoginModel {
         if (acct != null) {
             personName = acct.getDisplayName();
             personEmail = acct.getEmail();
+            returnList.add(personName);
+            returnList.add(personEmail);
         }
-    return (personName+ " " + personEmail);
+    return returnList;
     }
 
-    public int idAccountByEmail(String email){
-        return accountDao.getId(email);
+    public int getIDByEmail(String email){
+        return accountDao.getIdByEmail(email);
+    }
+
+    public void createUserGoogle(String username, String name, String surname, String email){
+        RoomDatabase.databaseWriteExecutor.execute(() -> {
+            Account account = new Account(username, email, null);
+            accountDao.insertAccount(account);
+            User user = new User(surname, name, accountDao.getId(username));
+            userDao.insertUser(user);
+        });
+    }
+
+    public String getUsernameGoogle(String string){
+        char [] stringChar = string.toCharArray();
+        String toReturn = "";
+        for(int i = 0; i < stringChar.length; i++){
+            if(stringChar[i] != '@'){
+                toReturn += stringChar[i];
+            }else{
+                return toReturn;
+            }
+        }
+        return toReturn;
     }
 
 }
