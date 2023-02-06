@@ -306,6 +306,7 @@ public class LoginFragment extends Fragment {
                     public void onSuccess(AuthResult authResult) {
                         //login success
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                        loginModel.FuncGoogle(account);
                         /*
                         String uid = firebaseUser.getUid();
                         String email = firebaseUser.getEmail();
