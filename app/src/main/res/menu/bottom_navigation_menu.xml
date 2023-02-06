@@ -9,7 +9,7 @@
             android:id="@+id/mapFragment"
             android:enabled="true"
             android:icon="@drawable/map_48px"
-            android:title="Match" />
+            android:title="Map" />
         <item
             android:id="@+id/photoFragment"
             android:enabled="true"
