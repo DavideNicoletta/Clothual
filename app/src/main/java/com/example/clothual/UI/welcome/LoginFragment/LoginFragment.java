@@ -169,8 +169,8 @@ public class LoginFragment extends Fragment {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
                                     progressDialog.cancel();
-                                    edit.putInt(ID, loginModel.idAccountByEmail(email));
-                                    edit.apply();
+                                    //edit.putInt(ID, loginModel.idAccountByEmail(email));
+                                    //edit.apply();
                                     Intent intet = new Intent(requireContext(), CoreActivity.class);
                                     startActivity(intet);
                                     getActivity().finish();
