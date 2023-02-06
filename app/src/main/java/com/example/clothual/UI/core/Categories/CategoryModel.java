@@ -1,13 +1,19 @@
 package com.example.clothual.UI.core.Categories;
 
 import android.app.Application;
+import android.content.ContentResolver;
+import android.net.Uri;
 
 import com.example.clothual.Database.ClothualDao;
 import com.example.clothual.Database.ImageDao;
+import com.example.clothual.Database.OutfitDao;
 import com.example.clothual.Database.RoomDatabase;
 import com.example.clothual.Model.Clothual;
+import com.example.clothual.Model.Converters;
 import com.example.clothual.Model.Image;
+import com.example.clothual.Model.Outfit;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +24,14 @@ public class CategoryModel {
     private ImageDao imageDao;
     private ClothualDao clothualDao;
 
+    private OutfitDao outfitDao;
+
     public CategoryModel(Application application) {
         this.application = application;
         database = RoomDatabase.getDatabase(application);
         imageDao = database.imageDao();
         clothualDao = database.clothualDao();
+        outfitDao = database.outfitDao();
     }
 
     public List<Image> getImageList(){
@@ -197,4 +206,47 @@ public class CategoryModel {
         clothualDao.updateClothual(clothual);
     }
 
+    public void deleteElement(ContentResolver contentResolver, Uri uri, int ID) throws FileNotFoundException {
+        deleteFromOutfit(ID);
+        contentResolver.delete (uri,null ,null );
+    }
+
+    public void deleteFromOutfit(int ID){
+        List<Outfit> outfitList = outfitDao.getAlLOutfit();
+        if(outfitList.size()!=0) {
+            for (int i = 0; i < outfitList.size(); i++) {
+                Outfit outfit = outfitList.get(i);
+                List<Clothual> clothualList = getClothualOutfit(outfit);
+
+                for (int j = 0; j < clothualList.size(); j++) {
+                    if (clothualList.get(j).getId() == ID) {
+                        clothualList.remove(j);
+
+                    }
+                }
+
+                outfit.setClothualListByList(clothualList);
+                outfit.converter();
+                outfit.removeClothualList();
+                outfitDao.updateOutfit(outfit);
+
+            }
+        }
+    }
+
+
+    public List<Clothual> getClothualOutfit(Outfit outfit){
+        List<Clothual> clothualList = clothualDao.getAllClothual();
+        List<String> listIdClothual = Converters.fromString(outfit.getClothualString());
+        List<Clothual> clothualOutfit = new ArrayList<>();
+        for(int i = 0; i < clothualList.size(); i++){
+            for(int j = 0; j < listIdClothual.size(); j++){
+                if(clothualList.get(i).getId() == Integer.parseInt(listIdClothual.get(j))){
+                    clothualOutfit.add(clothualList.get(i));
+                }
+            }
+        }
+        return clothualOutfit;
+    }
 }
+

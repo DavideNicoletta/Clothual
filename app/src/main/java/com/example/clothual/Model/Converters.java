@@ -31,4 +31,17 @@ public class Converters {
 
     }
 
+    public static String fromList(List<String> list){
+        String toReturn = "";
+        for(int i = 0; i < list.size(); i++){
+            if( i != list.size()-1){
+                toReturn += list.get(i) + "-";
+            }else{
+                toReturn += list.get(i);
+            }
+        }
+
+        return toReturn;
+    }
+
 }

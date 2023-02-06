@@ -54,6 +54,7 @@
     <string name="jackets">Jackets</string>
     <string name="jacket">Jacket</string>
     <string name="jeans" translatable="false">Jeans</string>
+    <string name="sweatshirt">Sweatshirt</string>
 
     <string name="darkMode" translatable="false">Dark Mode</string>
     <string name="lightMode" translatable="false">Ligth Mode</string>
@@ -66,7 +67,7 @@
         <item>@string/shoes</item>
         <item>@string/trousers</item>
         <item>@string/tshirt</item>
-        <item>@string/jackets</item>
+        <item>@string/sweatshirt</item>
         <item>@string/jeans</item>
     </array>
 
@@ -75,8 +76,8 @@
         <item>@string/english</item>
         <item>@string/french</item>
     </array>
-    <string name="title_activity_scrolling">ScrollingActivity</string>
-    <string name="large_text">
+    <string name="title_activity_scrolling" translatable="false">ScrollingActivity</string>
+    <string name="large_text" translatable="false">
         "Material is the metaphor.\n\n"
 
         "A material metaphor is the unifying theory of a rationalized space and a system of motion."
@@ -165,9 +166,9 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name="action_settings">Settings</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
-
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="removeImage">Remove image?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

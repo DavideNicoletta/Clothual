@@ -6,10 +6,10 @@
             android:icon="@drawable/home_48px"
             android:title="Home" />
         <item
-            android:id="@+id/matchingFragment"
+            android:id="@+id/mapFragment"
             android:enabled="true"
-            android:icon="@drawable/join_inner_48px"
-            android:title="Match" />
+            android:icon="@drawable/map_48px"
+            android:title="Map" />
         <item
             android:id="@+id/photoFragment"
             android:enabled="true"

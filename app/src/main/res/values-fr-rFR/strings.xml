@@ -28,10 +28,15 @@
     <string name="template">Modèle</string>
     <string name="brand">Marque</string>
     <string name="save">Sauver</string>
-    <string name="jackets">Vestes</string>
     <string name="trousers">Pantalon</string>
     <string name="shoes">Chaussures</string>
+    <string name="sweatshirt">Sweat-shirt</string>
+    <string name="close_app">Appuyez sur le bouton d\'accueil pour quitter Clothual</string>
+    <string name="already_an_user_login">Déjà utilisateur? Connexion</string>
     <string name="jacket">Veste</string>
+    <string name="removeImage">Supprimer l\'image ?</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
 
 
 </resources>

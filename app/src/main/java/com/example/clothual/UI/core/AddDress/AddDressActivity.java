@@ -1,6 +1,8 @@
 package com.example.clothual.UI.core.AddDress;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,10 +33,31 @@ public class AddDressActivity extends AppCompatActivity {
     public EditText description;
     public Button buttonSave;
 
+    public ContentResolver contentResolver;
+
+    public ImageView clothual;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_dress_layout);
+
+        contentResolver = getApplication().getContentResolver();
+
+        clothual = findViewById(R.id.clothualAddDress);
+
+        int nightModeFlags =
+                getResources().getConfiguration().uiMode &
+                        Configuration.UI_MODE_NIGHT_MASK;
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                clothual.setImageResource(R.drawable.logo_white_on_appbar);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_NO:
+                clothual.setImageResource(R.drawable.logo_black_on_white);
+                break;
+        }
 
         model = new AddDressModel(getApplication());
 
@@ -76,12 +99,13 @@ public class AddDressActivity extends AppCompatActivity {
             if(spinner.getSelectedItem().toString().equals(getString(R.string.tshirt))){
                 spinnerValue = 3;
             }
-            if(spinner.getSelectedItem().toString().equals(getString(R.string.jackets))){
+            if(spinner.getSelectedItem().toString().equals(getString(R.string.sweatshirt))){
                 spinnerValue = 4;
             }
             if(spinner.getSelectedItem().toString().equals(getString(R.string.jeans))){
                 spinnerValue = 5;
             }
+
 
             switch(action){
                 case 0:
@@ -114,6 +138,9 @@ public class AddDressActivity extends AppCompatActivity {
     public void onBackPressed() {
         model = new AddDressModel(getApplication());
         String uri = getIntent().getExtras().getString("uri");
+        //Delite
+        contentResolver.delete(Uri.parse(uri),null ,null );
+        //Delite
         List<Image> imageList = model.getAllImage();
         for(int i = 0; i < imageList.size(); i++){
             if(imageList.get(i).getUri().equals(uri)){

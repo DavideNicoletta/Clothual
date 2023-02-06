@@ -23,6 +23,13 @@ import com.example.clothual.R;
 import com.example.clothual.UI.core.Personal.EditProfile.EditProfileActivity;
 import com.example.clothual.UI.welcome.WelcomeActivity;
 import com.example.clothual.databinding.FragmentPersonalBinding;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.squareup.picasso.Picasso;
 
 import java.io.FileNotFoundException;
 
@@ -36,6 +43,10 @@ public class PersonalFragment extends Fragment {
     private FragmentPersonalBinding binding;
     private PersonalModel personalModel;
 
+    //Google
+    GoogleSignInOptions gso;
+    GoogleSignInClient gsc;
+
     public PersonalFragment() {
         // Required empty public constructor
     }
@@ -43,6 +54,7 @@ public class PersonalFragment extends Fragment {
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
+     *
      * @return A new instance of fragment PersonalFragment.
      */
     // TODO: Rename and change types and number of parameters
@@ -67,6 +79,53 @@ public class PersonalFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //Google
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        gsc = GoogleSignIn.getClient(getActivity(), gso);
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getContext());
+        if (acct != null) {
+            String personName = acct.getDisplayName();
+            String personEmail = acct.getEmail();
+            Uri personImage = acct.getPhotoUrl();
+            binding.textName.setText(personName);
+            //binding.googleEmail.setText(personEmail);
+            Picasso.get().load(personImage).into(binding.imagePersonal);
+        } else {
+            Context context = getActivity();
+            SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            String username = sharedPref.getString(USERNAME_PREFERENCE, "");
+            String nameSurname = personalModel.getName(username);
+            binding.textName.setText(nameSurname);
+
+            if (sharedPref.getString(URI, " ").equals(" ")) {
+                binding.imagePersonal.setImageResource(R.drawable.avatar);
+            } else {
+                try {
+                    binding.imagePersonal.setImageBitmap(personalModel.importImageFromMemory(getActivity(), getContext(), getActivity().getContentResolver(),
+                            Uri.parse(sharedPref.getString(URI, " "))));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+            binding.goOut.setOnClickListener(view1 -> {
+                editor.putInt(ACCESS_PREFERENCE, 0);
+                editor.apply();
+                Intent intent = new Intent(requireContext(), WelcomeActivity.class);
+                startActivity(intent);
+                signOut();
+            });
+        }
+
+        binding.goOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signOut();
+            }
+        });
+
+
+        /*
         Context context = getActivity();
         SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -74,9 +133,9 @@ public class PersonalFragment extends Fragment {
         String nameSurname = personalModel.getName(username);
         binding.textName.setText(nameSurname);
 
-        if(sharedPref.getString(URI, " ").equals(" ")){
+        if (sharedPref.getString(URI, " ").equals(" ")) {
             binding.imagePersonal.setImageResource(R.drawable.avatar);
-        }else{
+        } else {
             try {
                 binding.imagePersonal.setImageBitmap(personalModel.importImageFromMemory(getActivity(), getContext(), getActivity().getContentResolver(),
                         Uri.parse(sharedPref.getString(URI, " "))));
@@ -85,16 +144,20 @@ public class PersonalFragment extends Fragment {
             }
         }
 
+
         binding.goOut.setOnClickListener(view1 -> {
             editor.putInt(ACCESS_PREFERENCE, 0);
             editor.apply();
             Intent intent = new Intent(requireContext(), WelcomeActivity.class);
             startActivity(intent);
+            signOut();
         });
 
+        */
+
         binding.editProfile.setOnClickListener(view12 -> {
-          Intent intent = new Intent(requireContext(), EditProfileActivity.class);
-          startActivity(intent);
+            Intent intent = new Intent(requireContext(), EditProfileActivity.class);
+            startActivity(intent);
         });
 
         binding.settings.setOnClickListener(view13 -> Navigation.findNavController(requireView()).navigate(R.id.action_personalFragment_to_settingsFragment));
@@ -105,6 +168,13 @@ public class PersonalFragment extends Fragment {
 
     }
 
-
-
+    void signOut() {
+        gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(Task<Void> task) {
+                startActivity(new Intent(getActivity(), WelcomeActivity.class));
+                getActivity().finish();
+            }
+        });
+    }
 }

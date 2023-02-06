@@ -14,14 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clothual.Model.Image;
+import com.example.clothual.R;
 import com.example.clothual.UI.core.AddDress.AddDressActivity;
 import com.example.clothual.UI.core.adapter.RecyclerViewPhotoAdapter;
 import com.example.clothual.databinding.FragmentPhotoBinding;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -102,30 +103,18 @@ public class PhotoFragment extends Fragment {
             }
         });
 
-
-
-
-
-
         RecyclerView.LayoutManager manager = new GridLayoutManager(requireContext(), 3);
 
-
-
-
-            List<Image> image = photoModel.getImageList();//(getActivity(), getContext(), getActivity().getContentResolver());
+            List<Image> image = photoModel.getImageList();
             RecyclerViewPhotoAdapter adapter = new RecyclerViewPhotoAdapter(image, new RecyclerViewPhotoAdapter.OnItemClickListener() {
                 @Override
                 public void delete() {
-                    Snackbar.make(view, "Photo Delite", Snackbar.LENGTH_LONG).show();
+
                 }
 
             }, getActivity().getApplication(), getContext().getContentResolver());
             binding.recyclerView.setLayoutManager(manager);
             binding.recyclerView.setAdapter(adapter);
-           /* binding.recyclerView.addItemDecoration(new RecyclerViewPhotoAdapter.GridSpacingItemDecoration
-                   (3, 20, true));
-
-            */
 
 
         binding.fab1Upload.setOnClickListener(new View.OnClickListener() {
@@ -139,13 +128,74 @@ public class PhotoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.putExtra("option", 0);
+               // someActivityResultLauncher.launch(intent);
                 startActivityForResult(intent, 0);
             }
         });
 
     }
 
+    /*
+    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    Intent intent = result.getData();
+                    assert intent != null;
+                    int option = intent.getIntExtra("option", 0);
+                    Uri uri;
+                    if(option == 0) {
+                        if (result == null) {
 
+                            Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
+
+                        } else {
+                            assert result != null;
+                            Bitmap immagine = (Bitmap) intent.getExtras().get("data");
+
+                            try {
+                                uri = photoModel.saveImage(getActivity().getContentResolver(), immagine, photoModel.getNameImage(), "");
+                                Intent intentToAdd = new Intent(getActivity(), AddDressActivity.class);
+                                intent.putExtra("uri", uri.toString());
+                                intent.putExtra("action", 0);
+                                startActivity(intentToAdd);
+                            } catch (IOException e) {
+
+                                Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
+
+                            }
+
+                        }
+                    }else{
+                        if (result == null) {
+                            Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
+                        }else {
+                            uri = intent.getData();
+                            if (uri != null) {
+                                try {
+                                    Bitmap bitmap = photoModel.importImageFromMemory(getActivity(), getContext(), getActivity().getContentResolver(), uri);
+                                    Uri newUri = photoModel.saveImage(getActivity().getContentResolver(), bitmap,
+                                            photoModel.getNameImage(), "");
+                                    Intent intenToAdd = new Intent(getActivity(), AddDressActivity.class);
+                                    intent.putExtra("uri", newUri.toString());
+                                    intent.putExtra("action", 0);
+                                    startActivity(intenToAdd);
+                                } catch (FileNotFoundException e) {
+                                    Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
+                                } catch (IOException e) {
+                                    Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+
+    );*/
 
     void imageChooser() {
 
@@ -160,72 +210,56 @@ public class PhotoFragment extends Fragment {
         startActivityForResult(Intent.createChooser(i, "Select Picture"), 1);
     }
 
-    /*
-    private void showFABMenu1() {
-        isFABOpen = true;
-        binding.fab2Make.animate().translationY(-205);
-        binding.makePhoto.setVisibility(View.VISIBLE);
-        showFABMenu2();
-    }
-
-    private void showFABMenu2() {
-        isFABOpen = true;
-        binding.fab1Upload.animate().translationY(-415);
-        binding.upload.setVisibility(View.VISIBLE);
-    }
-
-     private void closeFABMenu () {
-        isFABOpen = false;
-        binding.fab1Upload.animate().translationY(0);
-        binding.fab2Make.animate().translationY(0);
-        binding.upload.setVisibility(View.INVISIBLE);
-        binding.makePhoto.setVisibility(View.INVISIBLE);
-        }
-     */
-
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent databack) {
         Uri uri;
         if(requestCode == 0) {
-            assert databack != null;
-            Bitmap immagine = (Bitmap) databack.getExtras().get("data");
+            if (databack == null) {
 
-            try {
-                uri = photoModel.saveImage(getActivity().getContentResolver(), immagine, photoModel.getNameImage(), "");
-                Intent intent = new Intent(getActivity(), AddDressActivity.class);
-                intent.putExtra("uri", uri.toString());
-                intent.putExtra("action", 0);
-                startActivity(intent);
-            } catch (IOException e) {
-                e.printStackTrace();
+                Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
 
-            }
-        }else{
-            uri = databack.getData();
-            if(uri != null){
+            } else {
+                assert databack != null;
+                Bitmap immagine = (Bitmap) databack.getExtras().get("data");
+
                 try {
-                    Bitmap bitmap = photoModel.importImageFromMemory(getActivity(), getContext(), getActivity().getContentResolver(), uri);
-                    Uri newUri = photoModel.saveImage(getActivity().getContentResolver(), bitmap,
-                            photoModel.getNameImage(), "");
+                    uri = photoModel.saveImage(getActivity().getContentResolver(), immagine, photoModel.getNameImage(), "");
                     Intent intent = new Intent(getActivity(), AddDressActivity.class);
-                    intent.putExtra("uri", newUri.toString());
+                    intent.putExtra("uri", uri.toString());
                     intent.putExtra("action", 0);
                     startActivity(intent);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
                 } catch (IOException e) {
-                    e.printStackTrace();
+
+                    Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
+
                 }
 
+             }
+        }else{
+            if (databack == null) {
+                Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
+            }else {
+                    uri = databack.getData();
+                    if (uri != null) {
+                        try {
+                            Bitmap bitmap = photoModel.importImageFromMemory(getActivity(), getContext(), getActivity().getContentResolver(), uri);
+                            Uri newUri = photoModel.saveImage(getActivity().getContentResolver(), bitmap,
+                                    photoModel.getNameImage(), "");
+                            Intent intent = new Intent(getActivity(), AddDressActivity.class);
+                            intent.putExtra("uri", newUri.toString());
+                            intent.putExtra("action", 0);
+                            startActivity(intent);
+                        } catch (FileNotFoundException e) {
+                            Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
+                        } catch (IOException e) {
+                            Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
+                        }
+
+                    }
+                }
             }
-        }
-
-
     }
-
-
-
 }
 

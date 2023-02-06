@@ -9,8 +9,10 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -87,6 +89,12 @@ public class RecyclerViewClothualAdapter extends RecyclerView.Adapter<RecyclerVi
         private final ImageButton favorite;
         private final ImageButton edit;
 
+        private final RelativeLayout cardView;
+
+        private final Button yes;
+
+        private final Button no;
+
         public ClothualViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageViewAdapterClothual);
@@ -103,6 +111,12 @@ public class RecyclerViewClothualAdapter extends RecyclerView.Adapter<RecyclerVi
             delite.setOnClickListener(this);
             favorite.setOnClickListener(this);
             edit.setOnClickListener(this);
+            yes = itemView.findViewById(R.id.yesTotal);
+            no = itemView.findViewById(R.id.noTotal);
+            cardView = itemView.findViewById(R.id.cardViewTotal);
+            cardView.setOnClickListener(this);
+            yes.setOnClickListener(this);
+            no.setOnClickListener(this);
         }
 
         public void bind(Clothual clothual, String uri){
@@ -127,7 +141,7 @@ public class RecyclerViewClothualAdapter extends RecyclerView.Adapter<RecyclerVi
                     type.setText(application.getString(R.string.tshirt));
                     break;
                 case 4:
-                    type.setText(application.getString(R.string.jackets));
+                    type.setText(application.getString(R.string.sweatshirt));
                     break;
                 case 5:
                     type.setText(application.getString(R.string.jeans));
@@ -148,14 +162,7 @@ public class RecyclerViewClothualAdapter extends RecyclerView.Adapter<RecyclerVi
         public void onClick(View view) {
             switch (view.getId()){
                 case R.id.delite:
-                    String string = clothualList.get(getAdapterPosition()).getBrand() + " " +
-                            clothualList.get(getAdapterPosition()).getTemplate() + " has been deleted";
-                    model.deleteImage(imageList.get(getAdapterPosition()));
-                    model.deleteClothual(clothualList.get(getAdapterPosition()));
-                    imageList.remove(getAdapterPosition());
-                    clothualList.remove(getAdapterPosition());
-                    notifyItemRemoved(getAdapterPosition());
-                    onItemClickListener.buttonDelete(string);
+                    cardView.setVisibility(View.VISIBLE);
                     break;
 
                 case R.id.favorite:
@@ -178,6 +185,29 @@ public class RecyclerViewClothualAdapter extends RecyclerView.Adapter<RecyclerVi
                 case R.id.edit:
                     onItemClickListener.buttonEdit(imageList.get(getAdapterPosition()).getUri(), 1,
                             clothualList.get(getAdapterPosition()).getId());
+                    break;
+
+                case R.id.yesTotal:
+                    String string = clothualList.get(getAdapterPosition()).getBrand() + " " +
+                            clothualList.get(getAdapterPosition()).getTemplate() + " has been deleted";
+                    //Delite
+                    try {
+                        model.deleteElement(contentResolver, Uri.parse(imageList.get(getAdapterPosition()).getUri()), clothualList.get(getAdapterPosition()).getId());
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                    //Delite
+                    model.deleteImage(imageList.get(getAdapterPosition()));
+                    model.deleteClothual(clothualList.get(getAdapterPosition()));
+                    imageList.remove(getAdapterPosition());
+                    clothualList.remove(getAdapterPosition());
+                    notifyItemRemoved(getAdapterPosition());
+                    onItemClickListener.buttonDelete(string);
+                    break;
+
+                case R.id.noTotal:
+                    cardView.setVisibility(View.INVISIBLE);
+                    break;
 
                 default:
                     break;

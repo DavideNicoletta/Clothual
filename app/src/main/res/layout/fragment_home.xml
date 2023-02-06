@@ -1,225 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.core.Home.HomeFragment"
-    >
-<!--
-    <TextView
-        android:id="@+id/textViewSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/search"
-        style="@style/textView"
-        android:textSize="15sp"
-        tools:ignore="TextContrastCheck" />
+    tools:context=".UI.core.Home.HomeFragment">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/viewFilter"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_below="@id/textViewSearch"
-        android:layout_marginStart="60dp"
-        android:visibility="invisible"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/filters"
-            android:textSize="20sp"
-            android:layout_marginStart="20dp"
-            android:textColor="@color/grey"/>
-
-        <CheckBox
-            android:id="@+id/checkbox1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:hint="example"/>
-
-        <CheckBox
-            android:id="@+id/checkbox2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:hint="example"
-            android:layout_marginTop="60dp" />
-
-        <CheckBox
-            android:id="@+id/checkbox3"
-            android:layout_width="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="90dp"
-            android:layout_height="wrap_content"
-            android:hint="example"/>
-
-        <CheckBox
-            android:id="@+id/checkbox4"
-            android:layout_width="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
-            android:hint="example"/>
-
-        <ImageView
-            android:id="@+id/ok"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="160dp"
-            android:layout_marginStart="20dp"
-            android:src="@drawable/done_48px" />
-
-        <ImageView
-            android:id="@+id/cancel"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="160dp"
-            android:layout_marginStart="250dp"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/close_48px" />
-
-    </androidx.cardview.widget.CardView>
-
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="310dp"
-        android:layout_below="@id/textViewSearch"
-        android:background="@drawable/search_border">
-        <ImageView
-            android:id="@+id/filter"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/filter_list_48px"/>
-    </androidx.cardview.widget.CardView>
-
-
-    <TextView
-        android:id="@+id/textViewFilter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="310dp"
-        android:layout_marginTop="20dp"
-        style="@style/textView"
-        android:text="@string/filters"
-        android:textSize="15sp" />
-
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/simpleSearchView"
-        android:layout_width="263dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="30dp"
-        android:layout_below="@id/textViewSearch"
-        android:background="@drawable/search_border"
-        android:queryHint="Search clothes..."/>
--->
-    <ScrollView
+    <!-- ScrollView -->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="55dp"
-        android:scrollbars="none">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <androidx.gridlayout.widget.GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:alignmentMode="alignMargins"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            app:columnCount="1"
+            tools:ignore="MissingClass">
 
-            <Button
+            <!-- TUTTO -->
+            <androidx.cardview.widget.CardView
                 android:id="@+id/total"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:text="Tutto"
-                android:textColor="@color/white"
-                android:textSize="30sp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/armadio"
-                android:textStyle="bold"
-                tools:ignore="SpeakableTextPresentCheck" />
+                android:layout_height="150dp"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/all"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TUTTO"
+                    android:fontFamily="@font/montserrat_subrayada"
+                    android:textStyle="bold"
+                    android:textSize="35sp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_horizontal|center_vertical"/>
+            </androidx.cardview.widget.CardView>
 
-
-            <Button
+            <!-- SCARPE -->
+            <androidx.cardview.widget.CardView
                 android:id="@+id/shoes"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/scarpe"
-                android:layout_below="@id/total"
-                android:layout_marginTop="30dp"
-                android:textStyle="bold"
-                tools:ignore="SpeakableTextPresentCheck" />
+                android:layout_height="150dp"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/shoes"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SCARPE"
+                    android:fontFamily="@font/montserrat_subrayada"
+                    android:textStyle="bold"
+                    android:textSize="35sp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_horizontal|center_vertical"/>
+            </androidx.cardview.widget.CardView>
 
-            <Button
+            <!-- PANTALONI -->
+            <androidx.cardview.widget.CardView
                 android:id="@+id/trousers"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/shoes"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/pantaloni"
-                tools:ignore="SpeakableTextPresentCheck" />
+                android:layout_height="150dp"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp">
 
-            <Button
+                <ImageView
+                    android:layout_width="400dp"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/trousers" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:fontFamily="@font/montserrat_subrayada"
+                    android:text="PANTALONI"
+                    android:textColor="@color/white"
+                    android:textSize="35sp"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- T-SHIRT -->
+            <androidx.cardview.widget.CardView
                 android:id="@+id/t_shirt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/trousers"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/t_shirt"
-                tools:ignore="SpeakableTextPresentCheck" />
+                android:layout_height="150dp"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp">
+                <ImageView
+                    android:layout_width="375dp"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/tshirt"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="T-SHIRT"
+                    android:fontFamily="@font/montserrat_subrayada"
+                    android:textStyle="bold"
+                    android:textSize="35sp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_horizontal|center_vertical"/>
+            </androidx.cardview.widget.CardView>
 
-            <Button
+            <!-- FELPE -->
+            <androidx.cardview.widget.CardView
                 android:id="@+id/jackets"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/t_shirt"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/giacche"
-                tools:ignore="SpeakableTextPresentCheck" />
+                android:layout_height="150dp"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                android:layout_marginBottom="10dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/sweatshirts"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FELPE"
+                    android:fontFamily="@font/montserrat_subrayada"
+                    android:textStyle="bold"
+                    android:textSize="35dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_horizontal|center_vertical"/>
+            </androidx.cardview.widget.CardView>
 
-            <Button
+            <!-- JEANS -->
+            <androidx.cardview.widget.CardView
                 android:id="@+id/jeans"
-                android:layout_below="@id/jackets"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/jeans"/>
+                android:layout_height="150dp"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                android:layout_marginBottom="10dp">
+                <ImageView
+                    android:layout_width="375dp"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/jeans"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="JEANS"
+                    android:fontFamily="@font/montserrat_subrayada"
+                    android:textStyle="bold"
+                    android:textSize="35dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_horizontal|center_vertical"/>
+            </androidx.cardview.widget.CardView>
 
-            <Button
+            <!-- PREFERITI -->
+            <androidx.cardview.widget.CardView
                 android:id="@+id/favorite"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_below="@id/jeans"
-                android:layout_marginTop="32dp"
-                android:text="Preferiti"/>
+                android:layout_height="150dp"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                android:layout_marginBottom="70dp">
+                <ImageView
+                    android:layout_width="375dp"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PREFERITI"
+                    android:fontFamily="@font/montserrat_subrayada"
+                    android:textStyle="bold"
+                    android:textSize="35dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_horizontal|center_vertical"/>
+            </androidx.cardview.widget.CardView>
 
-            <Button
+            <!-- MAPPA
+            <androidx.cardview.widget.CardView
                 android:id="@+id/map"
-                android:layout_below="@id/favorite"
                 android:layout_width="match_parent"
-                android:text="Mappa"
-                android:background="@drawable/mappa"
-                android:textColor="@color/white"
-                android:textSize="30sp"
-                android:fontFamily="@font/inter_semibold"
-                android:layout_height="100dp"
-                android:layout_marginTop="30dp"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_below="@id/map">
-            </LinearLayout>
-        </RelativeLayout>
+                android:layout_height="150dp"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                android:layout_marginBottom="70dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/mappa"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MAPPA"
+                    android:fontFamily="@font/montserrat_subrayada"
+                    android:textStyle="bold"
+                    android:textSize="35dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_horizontal|center_vertical"/>
+            </androidx.cardview.widget.CardView>-->
 
-    </ScrollView>
-
-
-
-
-</RelativeLayout>
+        </androidx.gridlayout.widget.GridLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

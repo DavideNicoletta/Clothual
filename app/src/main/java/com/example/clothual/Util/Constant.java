@@ -3,19 +3,17 @@ package com.example.clothual.Util;
 public class Constant {
 
     public static final String DATABASE_NAME = "clothual_db";
-    public static final String CREDENTIALS_LOGIN_FILE = "com.example.myapplication.credentials_preference";
+    public static final String CREDENTIALS_LOGIN_FILE = "com.example.myapplication.share_preference";
 
     //SharePreference
     public static final String USERNAME_PREFERENCE = "Username";
     public static final String PASSWORD_PREFERENCE = "Password";
     public static final String ACCESS_PREFERENCE = "Access";
     public static final String ID_ACCOUNT = "Id_Account";
-    public static final String EMAIL_CHANGE = "email_change";
-    public static final String USERNAME_CHANGE = "username_change";
-    public static final String PASSWORD_CHANGE = "password_change";
     public static final String LANGUAGE = "language";
     public static final String URI = "uri";
     public static final String DATE = "date";
+    public static final String DMODE = "dark_mode";
 
     //Scritte iniziali
     public static final String GIANNI_VERSACE = (char)34 + "Non seguire i trend. Non lasciare che la moda ti possieda, sii tu a " +

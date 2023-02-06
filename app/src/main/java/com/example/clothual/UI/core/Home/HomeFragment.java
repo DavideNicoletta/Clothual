@@ -98,8 +98,6 @@ public class HomeFragment extends Fragment {
 
         //binding.map.setOnClickListener(view12 -> Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_mapFragment));
 
-
-
         binding.shoes.setOnClickListener(view1 -> Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_shoesFragment));
 
         binding.total.setOnClickListener(view13 -> Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_totalFragment));

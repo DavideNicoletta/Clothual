@@ -1,4 +1,4 @@
-package com.example.clothual.UI.welcome.CrdentialRecovery;
+package com.example.clothual.UI.welcome.CredentialRecovery;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

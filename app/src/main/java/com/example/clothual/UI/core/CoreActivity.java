@@ -1,7 +1,9 @@
 package com.example.clothual.UI.core;
 
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +25,21 @@ public class CoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.core_layout);
 
+        ImageView clothual = findViewById(R.id.clothual);
+
+        int nightModeFlags =
+                getResources().getConfiguration().uiMode &
+                        Configuration.UI_MODE_NIGHT_MASK;
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                clothual.setImageResource(R.drawable.logo_white_on_appbar);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_NO:
+                clothual.setImageResource(R.drawable.logo_black_on_white);
+                break;
+        }
+
 
         Toolbar toolbar = findViewById(R.id.top_appbar);
         setSupportActionBar(toolbar);
@@ -41,7 +58,7 @@ public class CoreActivity extends AppCompatActivity {
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.homeFragment, R.id.calendarFragment,
-                R.id.matchingFragment, R.id.photoFragment, R.id.personalFragment).build();
+                R.id.mapFragment, R.id.photoFragment, R.id.personalFragment).build();
 
 
 
@@ -56,7 +73,7 @@ public class CoreActivity extends AppCompatActivity {
         // For the Toolbar
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // For the BottomNavigationView
         NavigationUI.setupWithNavController(bottomNav, navController);

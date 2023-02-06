@@ -30,9 +30,13 @@
     <string name="save">Salva</string>
     <string name="shoes">Scarpe</string>
     <string name="trousers">Pantaloni</string>
-    <string name="jackets">Giacca</string>
+    <string name="sweatshirt">Felpa</string>
     <string name="close_app">Premere il tasto Home per uscire da Clothual</string>
     <string name="already_an_user_login">Sei già registrato? Accedi</string>
+    <string name="jacket">Giacca</string>
+    <string name="removeImage">Rimuovere l\'immagine?</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
 
 
 </resources>

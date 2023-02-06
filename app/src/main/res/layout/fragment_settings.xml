@@ -1,48 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/containerSettings"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UI.core.Personal.Settings.SettingsFragment">
 
-   <LinearLayout
-       android:id="@+id/viewButton"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_centerHorizontal="true"
-       android:layout_marginStart="20dp"
-       android:layout_marginEnd="20dp"
-       android:layout_marginTop="20dp"
-       android:background="@drawable/search_border"
-       android:orientation="vertical">
-       <TextView
-           android:id="@+id/scegliLingua"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="Scegli Lingua"
-           android:layout_marginTop="10dp"
-           android:layout_marginStart="20dp"
-           style="@style/textView"
-           android:fontFamily="@font/inter_semibold"/>
+    <LinearLayout
+        android:id="@+id/viewButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/search_border"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/scegliLingua"
+            style="@style/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/inter_semibold"
+            android:text="Scegli Lingua" />
+
         <LinearLayout
             android:id="@+id/english"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
+
             <ImageView
                 android:id="@+id/imageEnglish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"/>
+                android:layout_marginTop="12dp" />
+
             <TextView
                 android:id="@+id/changeLanguageEn"
-                android:drawableEnd="@drawable/united_kingdom"
                 android:layout_width="100dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginStart="5dp"
                 android:layout_height="wrap_content"
-                android:text="Inglese"
-                android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="12dp"
+                android:drawableEnd="@drawable/united_kingdom"
+                android:text="Inglese" />
         </LinearLayout>
 
         <LinearLayout
@@ -51,89 +56,72 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-           <ImageView
-               android:id="@+id/imageItalian"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="12dp"/>
+            <ImageView
+                android:id="@+id/imageItalian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" />
+
             <TextView
                 android:id="@+id/changeLanguageIt"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginStart="5dp"
-                android:drawableEnd="@drawable/italian_flag"
                 android:layout_below="@id/changeLanguageEn"
-                android:text="italiano"
-                android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="12dp"
+                android:drawableEnd="@drawable/italian_flag"
+                android:text="italiano" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/french"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="57dp"
             android:layout_gravity="center">
-           <ImageView
-               android:id="@+id/imageFrench"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="12dp"/>
+
+            <ImageView
+                android:id="@+id/imageFrench"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" />
+
             <TextView
                 android:id="@+id/changeLanguageFr"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/changeLanguageIt"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
-                android:layout_marginStart="5dp"
-                android:layout_below="@id/changeLanguageIt"
                 android:drawableEnd="@drawable/french_flag"
-                android:text="Francese"
-                android:layout_centerHorizontal="true"/>
+                android:text="Francese" />
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
+
+    <TextView
+        android:id="@+id/informazioniView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/viewButton"
-        android:layout_marginTop="40dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
-        android:orientation="vertical"
-        android:background="@drawable/search_border">
-    <TextView
-        android:id="@+id/dark_ligth_mode"
+        android:text="Informazioni"
+        android:textSize="20sp" />
+
+    <Switch
+        android:id="@+id/myswitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/informazioniView"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:text="Scegli Tema"
-        style="@style/textView"
-        android:fontFamily="@font/inter_semibold"
-        android:layout_below="@id/viewButton"/>
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:minHeight="48dp"
+        android:text="Night Mode" />
 
-    <RadioButton
-        android:id="@+id/darkmode"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_below="@id/dark_ligth_mode"
-        android:layout_marginStart="20dp"
-        android:text="@string/darkMode"/>
-        <RadioButton
-            android:id="@+id/light"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_below="@id/dark_ligth_mode"
-            android:shadowColor="@color/black"
-            android:layout_marginStart="20dp"
-            android:text="@string/lightMode"/>
-        <RadioButton
-            android:id="@+id/system"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_below="@id/dark_ligth_mode"
-            android:layout_marginStart="20dp"
-            android:text="@string/systemMode"/>
-    </LinearLayout>
 
 </RelativeLayout>

@@ -61,6 +61,8 @@ public class Outfit {
 
             }
             setClothualString(db);
+        }else{
+            setClothualString("");
         }
     }
 

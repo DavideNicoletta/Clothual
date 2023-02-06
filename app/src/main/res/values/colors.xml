@@ -7,8 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="backGroundMain">#F9F9F9</color>
     <color name="grey">#818181</color>
     <color name="grey_persona_layout">#D4D5D5</color>
     <color name="celeste">#8DCDFF</color>
     <color name="backGroundAdapter">#999999</color>
+    <color name="gray_backround">#42000000</color>
+    <color name="grayDarkBackgroundMode">#303030</color>
+    <color name="box_color" />
+    <color name="text">@color/black</color>
+    <color name="appbar">@color/backGroundMain</color>
 </resources>
