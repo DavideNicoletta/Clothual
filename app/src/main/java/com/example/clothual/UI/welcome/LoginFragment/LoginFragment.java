@@ -297,12 +297,14 @@ public class LoginFragment extends Fragment {
 
     private void navigateToMainActivity() {
         Intent intent = new Intent(requireContext(), CoreActivity.class);
+        intent.putExtra("option", "old");
         startActivity(intent);
         getActivity().finish();
     }
 
     private void navigateToMainActivityNew(String nome, String email, String username) {
         Intent intent = new Intent(requireContext(), CoreActivity.class);
+        intent.putExtra("option", "new");
         intent.putExtra("name", nome);
         intent.putExtra("email", email);
         intent.putExtra("username", username);
