@@ -310,7 +310,7 @@ public class LoginFragment extends Fragment {
                     public void onSuccess(AuthResult authResult) {
                         //login success
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                        List<String> listString = loginModel.FuncGoogle(account);
+                        List<String> listString = loginModel.funcGoogle(account);
 
                         loginModel.createUserGoogle(
                                 (listString.get(0) + "." + loginModel.getUsernameGoogle(listString.get(1))),

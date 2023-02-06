@@ -46,7 +46,7 @@ public class LoginModel {
         return false;
     }
 
-    public List<String> FuncGoogle (GoogleSignInAccount acct){
+    public List<String> funcGoogle (GoogleSignInAccount acct){
         List<String> returnList = new ArrayList<>();
         String personName = "";
         String personEmail = "";
@@ -67,7 +67,7 @@ public class LoginModel {
     }
 
     public void createUserGoogle(String username, String name, String surname, String email){
-            Account account = new Account(username, email, null);
+            Account account = new Account(username, email, username.hashCode()+"");
             accountDao.insertAccount(account);
             User user = new User(surname, name, accountDao.getId(username));
             userDao.insertUser(user);
