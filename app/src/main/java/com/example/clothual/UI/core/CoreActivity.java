@@ -37,7 +37,7 @@ public class CoreActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.core_layout);
-        if(getIntent().getStringExtra("username").equals("new")) {
+        if(getIntent().getStringExtra("option").equals("new")) {
             coreModel.createUserGoogle(
                     getIntent().getStringExtra("username"),
                     getIntent().getStringExtra("name"),
