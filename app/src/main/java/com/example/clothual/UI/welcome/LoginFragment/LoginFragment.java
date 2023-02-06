@@ -40,6 +40,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -310,14 +311,7 @@ public class LoginFragment extends Fragment {
                     public void onSuccess(AuthResult authResult) {
                         //login success
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                        List<String> listString = loginModel.funcGoogle(account);
 
-                        loginModel.createUserGoogle(
-                                (listString.get(0) + "." + loginModel.getUsernameGoogle(listString.get(1))),
-                                listString.get(0),
-                                "", listString.get(1));
-
-                        /*
                         String uid = firebaseUser.getUid();
                         String email = firebaseUser.getEmail();
                         //check
@@ -328,9 +322,9 @@ public class LoginFragment extends Fragment {
                             //Existing user - Logged In
                             Snackbar.make(getView(), "Welcome Back to Clothual", Snackbar.LENGTH_SHORT).show();
                         }
-                        */
+
                         //Start
-                        navigateToMainActivity();
+                        //navigateToMainActivity();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
