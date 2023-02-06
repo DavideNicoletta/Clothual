@@ -57,12 +57,12 @@ public class PhotoModel {
         outfitDao = database.outfitDao();
     }
 
-    public Uri saveImage(ContentResolver contentResolver, Bitmap image, String title, String description) throws IOException {
-        return saveImageToMemory( contentResolver,  image,  title,  description);
+    public Uri saveImage(ContentResolver contentResolver, Bitmap image, String title, String description, int id) throws IOException {
+        return saveImageToMemory( contentResolver,  image,  title,  description, id);
     }
 
 
-    public Uri saveImageToMemory(ContentResolver contentResolver, Bitmap bitmap, String title, String description) throws IOException {
+    public Uri saveImageToMemory(ContentResolver contentResolver, Bitmap bitmap, String title, String description, int id) throws IOException {
         // Crea una nuova entrata per l'immagine nella memoria del dispositivo
         System.out.println("Salvataggio");
         ContentValues values = new ContentValues();
@@ -79,7 +79,7 @@ public class PhotoModel {
         outputStream.close();
 
         // Restituisce l'URI dell'immagine appena salvata
-        Image image = new Image(title, description, uri.toString());
+        Image image = new Image(title, description, uri.toString(), id);
         imageDao.insertImage(image);
         return uri;
     }

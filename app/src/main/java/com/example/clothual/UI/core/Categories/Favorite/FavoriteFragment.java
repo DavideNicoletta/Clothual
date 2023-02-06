@@ -1,5 +1,10 @@
 package com.example.clothual.UI.core.Categories.Favorite;
 
+import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
+import static com.example.clothual.Util.Constant.ID;
+
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,9 +67,10 @@ public class FavoriteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(requireContext());
-
-        List<Clothual> clothual = model.getPreferiteList();
-        List<Image> image = model.getImagePreferiteList(clothual);
+        Context context = getActivity();
+        SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
+        List<Clothual> clothual = model.getPreferiteList(sharedPref.getInt(ID, 0));
+        List<Image> image = model.getImagePreferiteList(clothual, sharedPref.getInt(ID, 0));
         RecyclerViewFavoriteAdapter adapter = new RecyclerViewFavoriteAdapter(clothual, image,
                 getActivity().getContentResolver(), new RecyclerViewFavoriteAdapter.OnItemClickListener() {
             @Override

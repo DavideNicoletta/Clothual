@@ -148,7 +148,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="@string/jackets"
+            android:text="@string/sweatshirt"
             style="@style/textView"
             android:fontFamily="@font/inter_semibold"
             app:layout_constraintStart_toStartOf="@id/shoes"

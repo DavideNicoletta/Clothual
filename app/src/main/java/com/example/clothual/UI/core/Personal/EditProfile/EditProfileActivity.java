@@ -1,6 +1,7 @@
 package com.example.clothual.UI.core.Personal.EditProfile;
 
 import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
+import static com.example.clothual.Util.Constant.ID;
 import static com.example.clothual.Util.Constant.ID_ACCOUNT;
 import static com.example.clothual.Util.Constant.URI;
 
@@ -195,7 +196,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 Bitmap immagine = (Bitmap) databack.getExtras().get("data");
 
                 try {
-                    editor.putString(URI, modifyModel.saveImage(getContentResolver(), immagine, modifyModel.getNameImage(), "profile").toString());
+                    editor.putString(URI, modifyModel.saveImage(getContentResolver(), immagine, modifyModel.getNameImage(), "profile", share.getInt(ID, 0)).toString());
                     editor.apply();
                     binding.imagePersonal.setImageBitmap(immagine);
                 } catch (IOException e) {
@@ -210,11 +211,11 @@ public class EditProfileActivity extends AppCompatActivity {
             }
             uri = databack.getData();
             if(uri != null){
-                modifyModel.createImage(modifyModel.getNameImage(), "", uri.toString());
+                modifyModel.createImage(modifyModel.getNameImage(), "", uri.toString(), share.getInt(ID, 0));
                 try {
                     Bitmap bitmap = modifyModel.importImageFromMemory(this, getApplicationContext(), getContentResolver(), uri);
                     Uri newUri = modifyModel.saveImage(getContentResolver(), bitmap,
-                            modifyModel.getNameImage(), "profile");
+                            modifyModel.getNameImage(), "profile", share.getInt(ID, 0));
                   /*  Intent intent = new Intent(this, AddDressActivity.class);
                     intent.putExtra("uri", newUri.toString());
                     startActivity(intent);*/

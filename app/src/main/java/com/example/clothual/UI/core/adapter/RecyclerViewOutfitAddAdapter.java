@@ -116,7 +116,7 @@ public class RecyclerViewOutfitAddAdapter extends RecyclerView.Adapter<RecyclerV
                     type.setText(application.getString(R.string.tshirt));
                     break;
                 case 4:
-                    type.setText(application.getString(R.string.jackets));
+                    type.setText(application.getString(R.string.sweatshirt));
                     break;
                 case 5:
                     type.setText(application.getString(R.string.jeans));

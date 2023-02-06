@@ -17,7 +17,9 @@ public class Clothual {
     private int idImage;
     private boolean isPreferite;
 
-    public Clothual(int type, String brand, String description, String color, String template, int idImage) {
+    private int idUserAccount;
+
+    public Clothual(int type, String brand, String description, String color, String template, int idImage, int idUserAccount) {
         this.type = type;
         this.brand = brand;
         this.description = description;
@@ -25,6 +27,7 @@ public class Clothual {
         this.template = template;
         this.idImage = idImage;
         this.isPreferite = false;
+        this.idUserAccount = idUserAccount;
     }
 
     public int getId() {
@@ -89,5 +92,13 @@ public class Clothual {
 
     public void setPreferite(boolean preferite) {
         isPreferite = preferite;
+    }
+
+    public int getIdUserAccount() {
+        return idUserAccount;
+    }
+
+    public void setIdUserAccount(int idUserAccount) {
+        this.idUserAccount = idUserAccount;
     }
 }

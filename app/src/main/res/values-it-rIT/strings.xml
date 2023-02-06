@@ -36,12 +36,10 @@
 
     <string name="login_mail_empty">L\'email non può essere vuota</string>
 
-    <string name="jacket">Giacca</string>
     <string name="removeImage">Rimuovere l\'immagine?</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="all">TUTTO</string>
-    <string name="sweatshirt">Felpa</string>
     <string name="favorites">Preferiti</string>
     <string name="map">Mappa</string>
     <string name="login_password_empty">La password non può essere vuota</string>

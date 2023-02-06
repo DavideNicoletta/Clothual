@@ -1,6 +1,11 @@
 package com.example.clothual.UI.core.Categories.Total;
 
+import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
+import static com.example.clothual.Util.Constant.ID;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,9 +69,10 @@ public class TotalFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(requireContext());
-
-        List<Image> image = model.getImageList();
-        List<Clothual> clothual = model.getClothualList();
+        Context context = getActivity();
+        SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
+        List<Image> image = model.getImageList(sharedPref.getInt(ID, 0));
+        List<Clothual> clothual = model.getClothualList(sharedPref.getInt(ID, 0));
         RecyclerViewClothualAdapter adapter = new RecyclerViewClothualAdapter(clothual, image,
                 getActivity().getContentResolver(), new RecyclerViewClothualAdapter.OnItemClickListener() {
 

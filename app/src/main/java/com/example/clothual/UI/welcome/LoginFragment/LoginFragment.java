@@ -5,6 +5,7 @@ import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
 import static com.example.clothual.Util.Constant.DONATELLA_VERSACE;
 import static com.example.clothual.Util.Constant.GIANNI_VERSACE;
 import static com.example.clothual.Util.Constant.GIORGIO_ARMANI;
+import static com.example.clothual.Util.Constant.ID;
 import static com.example.clothual.Util.Constant.PASSWORD_PREFERENCE;
 import static com.example.clothual.Util.Constant.PIER_CARDIN;
 import static com.example.clothual.Util.Constant.RALPH_LAUREN;
@@ -39,7 +40,6 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -100,6 +100,7 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Context context = getActivity();
         SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPref.edit();
         String username = sharedPref.getString(USERNAME_PREFERENCE, "");
         String password = sharedPref.getString(PASSWORD_PREFERENCE, "");
         binding.editTextUsername.setText(username);
@@ -168,6 +169,8 @@ public class LoginFragment extends Fragment {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
                                     progressDialog.cancel();
+                                    edit.putInt(ID, loginModel.idAccountByEmail(email));
+                                    edit.apply();
                                     Intent intet = new Intent(requireContext(), CoreActivity.class);
                                     startActivity(intet);
                                     getActivity().finish();

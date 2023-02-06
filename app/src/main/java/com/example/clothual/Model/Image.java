@@ -13,10 +13,13 @@ public class Image {
     private String description;
     private String uri;
 
-    public Image(String title, String description, String uri) {
+    private int idAccount;
+
+    public Image(String title, String description, String uri, int idAccount) {
         this.title = title;
         this.description = description;
         this.uri = uri;
+        this.idAccount = idAccount;
     }
 
     public String getTitle() {
@@ -44,5 +47,13 @@ public class Image {
 
     public void setID(int ID) {
         this.ID = ID;
+    }
+
+    public int getIdAccount() {
+        return idAccount;
+    }
+
+    public void setIdAccount(int idAccount) {
+        this.idAccount = idAccount;
     }
 }

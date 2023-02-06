@@ -15,6 +15,9 @@ public class Constant {
     public static final String DATE = "date";
     public static final String DMODE = "dark_mode";
 
+    public static final String ID = "id";
+
+
     //Scritte iniziali
     public static final String GIANNI_VERSACE = (char)34 + "Non seguire i trend. Non lasciare che la moda ti possieda, sii tu a " +
             "decidere chi sei, ciò che vuoi esprimere nel modo in cui vesti e il modo in cui vivi" + (char)34 +" - Gianni Versace";

@@ -1,7 +1,12 @@
 package com.example.clothual.UI.core.AddDress;
 
+import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
+import static com.example.clothual.Util.Constant.ID;
+
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -41,7 +46,7 @@ public class AddDressActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_dress_layout);
-
+        SharedPreferences sharedPref = getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
         contentResolver = getApplication().getContentResolver();
 
         clothual = findViewById(R.id.clothualAddDress);
@@ -110,7 +115,8 @@ public class AddDressActivity extends AppCompatActivity {
             switch(action){
                 case 0:
                     model.createClothual(spinnerValue, brand.getText().toString(), description
-                            .getText().toString(), color.getText().toString(), template.getText().toString(), model.getIdByUri(uri));
+                            .getText().toString(), color.getText().toString(), template.getText().toString(),
+                            model.getIdByUri(uri), sharedPref.getInt(ID, 0));
                     Intent intentFirstAction = new Intent(AddDressActivity.this, CoreActivity.class);
                     startActivity(intentFirstAction);
                     break;

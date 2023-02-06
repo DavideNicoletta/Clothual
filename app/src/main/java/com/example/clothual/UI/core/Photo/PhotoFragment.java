@@ -1,6 +1,11 @@
 package com.example.clothual.UI.core.Photo;
 
+import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
+import static com.example.clothual.Util.Constant.ID;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -215,6 +220,8 @@ public class PhotoFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent databack) {
         Uri uri;
+        Context context = getActivity();
+        SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
         if(requestCode == 0) {
             if (databack == null) {
 
@@ -225,7 +232,7 @@ public class PhotoFragment extends Fragment {
                 Bitmap immagine = (Bitmap) databack.getExtras().get("data");
 
                 try {
-                    uri = photoModel.saveImage(getActivity().getContentResolver(), immagine, photoModel.getNameImage(), "");
+                    uri = photoModel.saveImage(getActivity().getContentResolver(), immagine, photoModel.getNameImage(), "", sharedPref.getInt(ID, 0));
                     Intent intent = new Intent(getActivity(), AddDressActivity.class);
                     intent.putExtra("uri", uri.toString());
                     intent.putExtra("action", 0);
@@ -246,7 +253,7 @@ public class PhotoFragment extends Fragment {
                         try {
                             Bitmap bitmap = photoModel.importImageFromMemory(getActivity(), getContext(), getActivity().getContentResolver(), uri);
                             Uri newUri = photoModel.saveImage(getActivity().getContentResolver(), bitmap,
-                                    photoModel.getNameImage(), "");
+                                    photoModel.getNameImage(), "", sharedPref.getInt(ID, 0));
                             Intent intent = new Intent(getActivity(), AddDressActivity.class);
                             intent.putExtra("uri", newUri.toString());
                             intent.putExtra("action", 0);

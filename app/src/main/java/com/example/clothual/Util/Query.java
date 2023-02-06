@@ -10,7 +10,7 @@ public class Query {
     //Query Account
     public static final String SELECT_ALL_ACCOUNT = "SELECT * FROM Account";
 
-    public static final String GET_ID = "SELECT id FROM Account WHERE username LIKE :username";
+    public static final String GET_ID = "SELECT id FROM Account WHERE email LIKE :email";
 
     public static final String GET_PASSWORD = "SELECT password FROM Account WHERE id LIKE :idAccount";
 

@@ -51,8 +51,6 @@
     <string name="shoes">Shoes</string>
     <string name="trousers">Trousers</string>
     <string name="tshirt" translatable="false">T-Shirt</string>
-    <string name="jackets">Jackets</string>
-    <string name="jacket">Jacket</string>
     <string name="jeans" translatable="false">Jeans</string>
     <string name="sweatshirt">Sweatshirt</string>
 
@@ -172,4 +170,11 @@
     <string name="removeImage">Remove image?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="favorites">Favorite</string>
+    <string name="all">All</string>
+    <string name="login_password_empty">The password cannot be empty</string>
+    <string name="map">Map</string>
+    <string name="login_surname_empty">Last name cannot be empty</string>
+    <string name="login_name_empty">Name cannot be empty</string>
+    <string name="login_username_empty">Username cannot be empty</string>
 </resources>

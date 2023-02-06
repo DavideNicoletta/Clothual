@@ -121,7 +121,7 @@ public class RecyclerViewFavoriteAdapter extends RecyclerView.Adapter<RecyclerVi
                     type.setText(application.getString(R.string.tshirt));
                     break;
                 case 4:
-                    type.setText(application.getString(R.string.jackets));
+                    type.setText(application.getString(R.string.sweatshirt));
                     break;
                 case 5:
                     type.setText(application.getString(R.string.jeans));

@@ -36,7 +36,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TUTTO"
+                    android:text="@string/all"
                     android:fontFamily="@font/montserrat_subrayada"
                     android:textStyle="bold"
                     android:textSize="35sp"
@@ -60,7 +60,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SCARPE"
+                    android:text="@string/shoes"
                     android:fontFamily="@font/montserrat_subrayada"
                     android:textStyle="bold"
                     android:textSize="35sp"
@@ -88,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:fontFamily="@font/montserrat_subrayada"
-                    android:text="PANTALONI"
+                    android:text="@string/trousers"
                     android:textColor="@color/white"
                     android:textSize="35sp"
                     android:textStyle="bold" />
@@ -110,7 +110,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="T-SHIRT"
+                    android:text="@string/tshirt"
                     android:fontFamily="@font/montserrat_subrayada"
                     android:textStyle="bold"
                     android:textSize="35sp"
@@ -135,7 +135,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="FELPE"
+                    android:text="@string/sweatshirt"
                     android:fontFamily="@font/montserrat_subrayada"
                     android:textStyle="bold"
                     android:textSize="35dp"
@@ -160,7 +160,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="JEANS"
+                    android:text="@string/jeans"
                     android:fontFamily="@font/montserrat_subrayada"
                     android:textStyle="bold"
                     android:textSize="35dp"
@@ -184,7 +184,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="PREFERITI"
+                    android:text="@string/favorites"
                     android:fontFamily="@font/montserrat_subrayada"
                     android:textStyle="bold"
                     android:textSize="35dp"

@@ -74,11 +74,11 @@ public class EditProfileModel {
     }
 
 
-    public Uri saveImage(ContentResolver contentResolver, Bitmap image, String title, String description) throws IOException {
-        return saveImageToMemory( contentResolver,  image,  title,  description);
+    public Uri saveImage(ContentResolver contentResolver, Bitmap image, String title, String description, int ID) throws IOException {
+        return saveImageToMemory( contentResolver,  image,  title,  description, ID);
     }
 
-    public Uri saveImageToMemory(ContentResolver contentResolver, Bitmap bitmap, String title, String description) throws IOException {
+    public Uri saveImageToMemory(ContentResolver contentResolver, Bitmap bitmap, String title, String description, int ID) throws IOException {
         // Crea una nuova entrata per l'immagine nella memoria del dispositivo
         System.out.println("Salvataggio");
         ContentValues values = new ContentValues();
@@ -95,7 +95,7 @@ public class EditProfileModel {
         outputStream.close();
 
         // Restituisce l'URI dell'immagine appena salvata
-        Image image = new Image(title, description, uri.toString());
+        Image image = new Image(title, description, uri.toString(), ID);
         imageDao.insertImage(image);
         return uri;
     }
@@ -111,8 +111,8 @@ public class EditProfileModel {
         return formatterDate.format(instant)+"__"+timeColonFormatter.format(instant);
     }
 
-    public void createImage(String title, String description, String uri){
-        Image image = new Image(title, description, uri);
+    public void createImage(String title, String description, String uri, int ID){
+        Image image = new Image(title, description, uri, ID);
         imageDao.insertImage(image);
     }
 

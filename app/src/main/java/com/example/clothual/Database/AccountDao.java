@@ -31,7 +31,7 @@ public interface AccountDao {
     void deleteAccount(Account account);
 
     @Query(GET_ID)
-    int getId(String username);
+    int getId(String email);
 
     @Query(GET_EMAIL)
     String getEmail(int idAccount);

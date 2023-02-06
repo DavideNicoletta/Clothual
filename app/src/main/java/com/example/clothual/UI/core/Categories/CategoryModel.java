@@ -34,16 +34,24 @@ public class CategoryModel {
         outfitDao = database.outfitDao();
     }
 
-    public List<Image> getImageList(){
-        return imageDao.getAllImage();
+    public List<Image> getImageList(int ID){
+        List<Image> listImage = imageDao.getAllImage();
+        List<Image> returnList = new ArrayList<>();
+        for( int i = 0; i < listImage.size(); i++){
+            if(listImage.get(i).getIdAccount() == ID) {
+                returnList.add(listImage.get(i));
+            }
+        }
+
+        return returnList;
     }
 
-    public List<Image> getImageShoesList(List<Clothual> clothualList) {
+    public List<Image> getImageShoesList(List<Clothual> clothualList, int ID) {
         List<Image> imageList = imageDao.getAllImage();
         List<Image> shoes = new ArrayList<>();
         for(int i = 0; i < clothualList.size(); i++){
             for(int j = 0; j < imageList.size(); j++){
-                if(clothualList.get(i).getIdImage() == imageList.get(j).getID()){
+                if(clothualList.get(i).getIdImage() == imageList.get(j).getID() && clothualList.get(i).getIdUserAccount() == ID){
                     shoes.add(imageList.get(j));
                 }
             }
@@ -51,12 +59,12 @@ public class CategoryModel {
         return shoes;
     }
 
-    public List<Image> getImagePreferiteList(List<Clothual> clothualList) {
+    public List<Image> getImagePreferiteList(List<Clothual> clothualList, int ID) {
         List<Image> imageList = imageDao.getAllImage();
         List<Image> preferite = new ArrayList<>();
         for(int i = 0; i < clothualList.size(); i++){
             for(int j = 0; j < imageList.size(); j++){
-                if(clothualList.get(i).getIdImage() == imageList.get(j).getID()){
+                if(clothualList.get(i).getIdImage() == imageList.get(j).getID() && clothualList.get(i).getIdUserAccount() == ID){
                     preferite.add(imageList.get(j));
                 }
             }
@@ -64,11 +72,11 @@ public class CategoryModel {
         return preferite;
     }
 
-   public List<Clothual> getShoesList(){
+   public List<Clothual> getShoesList(int ID){
         List<Clothual> list = clothualDao.getAllClothual();
         List<Clothual> shoes = new ArrayList<>();
         for(int i = 0; i < list.size(); i++){
-            if(list.get(i).getType() == 1){
+            if(list.get(i).getType() == 1 && list.get(i).getIdUserAccount() == ID){
                 shoes.add(list.get(i));
             }
         }
@@ -77,11 +85,11 @@ public class CategoryModel {
 
     }
 
-    public List<Clothual> getTrousersList(){
+    public List<Clothual> getTrousersList(int ID){
         List<Clothual> list = clothualDao.getAllClothual();
         List<Clothual> trousers = new ArrayList<>();
         for(int i = 0; i < list.size(); i++){
-            if(list.get(i).getType() == 2){
+            if(list.get(i).getType() == 2 && list.get(i).getIdUserAccount() == ID){
                 trousers.add(list.get(i));
             }
         }
@@ -89,12 +97,12 @@ public class CategoryModel {
 
     }
 
-    public List<Image> getImageTrousersList(List<Clothual> clothualList) {
+    public List<Image> getImageTrousersList(List<Clothual> clothualList, int ID) {
         List<Image> imageList = imageDao.getAllImage();
         List<Image> trousers = new ArrayList<>();
         for(int i = 0; i < clothualList.size(); i++){
             for(int j = 0; j < imageList.size(); j++){
-                if(clothualList.get(i).getIdImage() == imageList.get(j).getID()){
+                if(clothualList.get(i).getIdImage() == imageList.get(j).getID() && clothualList.get(i).getIdUserAccount() == ID){
                     trousers.add(imageList.get(j));
                 }
             }
@@ -102,11 +110,11 @@ public class CategoryModel {
         return trousers;
     }
 
-    public List<Clothual> getJacketsList(){
+    public List<Clothual> getJacketsList(int ID){
         List<Clothual> list = clothualDao.getAllClothual();
         List<Clothual> jackets = new ArrayList<>();
         for(int i = 0; i < list.size(); i++){
-            if(list.get(i).getType() == 4){
+            if(list.get(i).getType() == 4 && list.get(i).getIdUserAccount() == ID){
                 jackets.add(list.get(i));
             }
         }
@@ -114,12 +122,12 @@ public class CategoryModel {
 
     }
 
-    public List<Image> getImageJacketsList(List<Clothual> clothualList) {
+    public List<Image> getImageJacketsList(List<Clothual> clothualList, int ID) {
         List<Image> imageList = imageDao.getAllImage();
         List<Image> jackets = new ArrayList<>();
         for(int i = 0; i < clothualList.size(); i++){
             for(int j = 0; j < imageList.size(); j++){
-                if(clothualList.get(i).getIdImage() == imageList.get(j).getID()){
+                if(clothualList.get(i).getIdImage() == imageList.get(j).getID() && clothualList.get(i).getIdUserAccount() == ID){
                     jackets.add(imageList.get(j));
                 }
             }
@@ -127,11 +135,11 @@ public class CategoryModel {
         return jackets;
     }
 
-    public List<Clothual> getTShirtList(){
+    public List<Clothual> getTShirtList(int ID){
         List<Clothual> list = clothualDao.getAllClothual();
         List<Clothual> tShirt = new ArrayList<>();
         for(int i = 0; i < list.size(); i++){
-            if(list.get(i).getType() == 3){
+            if(list.get(i).getType() == 3 && list.get(i).getIdUserAccount() == ID){
                 tShirt.add(list.get(i));
             }
         }
@@ -139,12 +147,12 @@ public class CategoryModel {
 
     }
 
-    public List<Image> getImageTShirtList(List<Clothual> clothualList) {
+    public List<Image> getImageTShirtList(List<Clothual> clothualList, int ID) {
         List<Image> imageList = imageDao.getAllImage();
         List<Image> tShirt = new ArrayList<>();
         for(int i = 0; i < clothualList.size(); i++){
             for(int j = 0; j < imageList.size(); j++){
-                if(clothualList.get(i).getIdImage() == imageList.get(j).getID()){
+                if(clothualList.get(i).getIdImage() == imageList.get(j).getID() && clothualList.get(i).getIdUserAccount() == ID){
                     tShirt.add(imageList.get(j));
                 }
             }
@@ -152,11 +160,11 @@ public class CategoryModel {
         return tShirt;
     }
 
-    public List<Clothual> getJeansList(){
+    public List<Clothual> getJeansList(int ID){
         List<Clothual> list = clothualDao.getAllClothual();
         List<Clothual> jeans = new ArrayList<>();
         for(int i = 0; i < list.size(); i++){
-            if(list.get(i).getType() == 5){
+            if(list.get(i).getType() == 5 && list.get(i).getIdUserAccount() == ID){
                 jeans.add(list.get(i));
             }
         }
@@ -164,12 +172,12 @@ public class CategoryModel {
 
     }
 
-    public List<Image> getImageJeansList(List<Clothual> clothualList) {
+    public List<Image> getImageJeansList(List<Clothual> clothualList, int ID) {
         List<Image> imageList = imageDao.getAllImage();
         List<Image> jeans = new ArrayList<>();
         for(int i = 0; i < clothualList.size(); i++){
             for(int j = 0; j < imageList.size(); j++){
-                if(clothualList.get(i).getIdImage() == imageList.get(j).getID()){
+                if(clothualList.get(i).getIdImage() == imageList.get(j).getID() && clothualList.get(i).getIdUserAccount() == ID){
                     jeans.add(imageList.get(j));
                 }
             }
@@ -178,15 +186,22 @@ public class CategoryModel {
     }
 
 
-    public List<Clothual> getClothualList(){
-        return clothualDao.getAllClothual();
+    public List<Clothual> getClothualList(int ID){
+        List<Clothual> listClothual = clothualDao.getAllClothual();
+        List<Clothual> returnList = new ArrayList<>();
+        for( int i = 0; i < listClothual.size(); i++){
+            if(listClothual.get(i).getIdUserAccount() == ID) {
+                returnList.add(listClothual.get(i));
+            }
+        }
+        return returnList;
     }
 
-    public List<Clothual> getPreferiteList(){
+    public List<Clothual> getPreferiteList(int ID){
         List<Clothual> list = clothualDao.getAllClothual();
         List<Clothual> preferite = new ArrayList<>();
         for(int i = 0; i < list.size(); i++){
-            if(list.get(i).isPreferite()){
+            if(list.get(i).isPreferite() && list.get(i).getIdUserAccount() == ID){
                 preferite.add(list.get(i));
             }
         }

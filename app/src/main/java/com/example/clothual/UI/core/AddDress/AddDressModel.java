@@ -42,8 +42,8 @@ public class AddDressModel {
         return imageDao.getIDByUri(uri);
     }
 
-    public void createClothual(int type, String brand, String description, String color, String template, int idImage){
-        Clothual clothual = new Clothual(type, brand, description, color, template, idImage);
+    public void createClothual(int type, String brand, String description, String color, String template, int idImage, int id){
+        Clothual clothual = new Clothual(type, brand, description, color, template, idImage, id);
         clothualDao.insertClothual(clothual);
     }
 
