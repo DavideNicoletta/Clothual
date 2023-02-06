@@ -33,10 +33,21 @@
     <string name="sweatshirt">Felpa</string>
     <string name="close_app">Premere il tasto Home per uscire da Clothual</string>
     <string name="already_an_user_login">Sei già registrato? Accedi</string>
+
+    <string name="login_mail_empty">L\'email non può essere vuota</string>
+
     <string name="jacket">Giacca</string>
     <string name="removeImage">Rimuovere l\'immagine?</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
+    <string name="all">TUTTO</string>
+    <string name="sweatshirt">Felpa</string>
+    <string name="favorites">Preferiti</string>
+    <string name="map">Mappa</string>
+    <string name="login_password_empty">La password non può essere vuota</string>
+    <string name="login_surname_empty">Il cognome non può essere vuoto</string>
+    <string name="login_name_empty">Il nome non può essere vuoto</string>
+    <string name="login_username_empty">Il nome utente non può essere vuoto</string>
 
 
 </resources>

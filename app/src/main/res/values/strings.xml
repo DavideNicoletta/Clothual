@@ -10,7 +10,7 @@
     <string name="or" translatable="false">OR</string>
     <string name="register">Register</string>
     <string name="login" translatable="false">Login</string>
-    <string name="forgot_credential">forgot credential?</string>
+    <string name="forgot_credential">Forgot Password?</string>
     <string name="go_registration">Sing in</string>
 
     <string name="design" translatable="false">designed by</string>
@@ -62,6 +62,7 @@
     <string name="close_app" >Press home button to exit Clothual</string>
     <string name="already_an_user_login" >Already an user? Login</string>
     <string name="map_key" translatable="false">AIzaSyBFB-yRv-o6lxXh2P5Ay2nTfb-EE_OAfUk</string>
+    <string name="login_mail_empty">Email cannot be empty</string>
 
     <array name="type">
         <item>@string/shoes</item>
