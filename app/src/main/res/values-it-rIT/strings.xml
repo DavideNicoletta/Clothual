@@ -46,6 +46,8 @@
     <string name="login_surname_empty">Il cognome non può essere vuoto</string>
     <string name="login_name_empty">Il nome non può essere vuoto</string>
     <string name="login_username_empty">Il nome utente non può essere vuoto</string>
+    <string name="scatta_una_foto">Scatta una foto</string>
+    <string name="carica_una_foto">Carica una foto</string>
 
 
 </resources>

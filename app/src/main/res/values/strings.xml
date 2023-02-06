@@ -177,4 +177,6 @@
     <string name="login_surname_empty">Last name cannot be empty</string>
     <string name="login_name_empty">Name cannot be empty</string>
     <string name="login_username_empty">Username cannot be empty</string>
+    <string name="scatta_una_foto">Take a photo</string>
+    <string name="carica_una_foto">Upload a photo</string>
 </resources>
