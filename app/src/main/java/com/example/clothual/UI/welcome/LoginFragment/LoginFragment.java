@@ -315,7 +315,7 @@ public class LoginFragment extends Fragment {
                         loginModel.createUserGoogle(
                                 (listString.get(0) + "." + loginModel.getUsernameGoogle(listString.get(1))),
                                 listString.get(0),
-                                null, listString.get(1));
+                                "", listString.get(1));
 
                         /*
                         String uid = firebaseUser.getUid();
