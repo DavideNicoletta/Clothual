@@ -1,23 +1,43 @@
 package com.example.clothual.UI.core;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.clothual.R;
+import com.example.clothual.UI.core.Calendar.CalendarFragment;
+import com.example.clothual.UI.core.Home.HomeFragment;
+import com.example.clothual.UI.core.Map.MapFragment;
+import com.example.clothual.UI.core.Personal.PersonalFragment;
+import com.example.clothual.UI.core.Personal.Settings.SettingsFragment;
+import com.example.clothual.UI.core.Photo.PhotoFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
-public class CoreActivity extends AppCompatActivity {
+public class CoreActivity extends AppCompatActivity{
 
+    private static final int REQUEST_CODE = 101;
+    private BottomNavigationView bottomNavigationView;
+    private HomeFragment homeFragment = new HomeFragment();
+    private MapFragment mapFragment = new MapFragment();
+    private PhotoFragment photoFragment = new PhotoFragment();
+    private CalendarFragment calendarFragment = new CalendarFragment();
+    private PersonalFragment personalFragment = new PersonalFragment();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -44,17 +64,52 @@ public class CoreActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.top_appbar);
         setSupportActionBar(toolbar);
 
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,homeFragment).commit();
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+
+                switch(item.getItemId()){
+                    case R.id.homeFragment:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,homeFragment).commit();
+                        break;
+                    case R.id.mapFragment:
+                        if (ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                                ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                                ActivityCompat.requestPermissions(CoreActivity.this, new String[]
+                                        {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+                        }
+                        else{
+                            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,mapFragment).commit();
+                        }
+                        break;
+                    case R.id.photoFragment:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,photoFragment).commit();
+                        break;
+                    case R.id.calendarFragment:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,calendarFragment).commit();
+                        break;
+                    case R.id.personalFragment:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,personalFragment).commit();
+                        break;
+                }
+                return false;
+            }
+        });
+
        /* CollapsingToolbarLayout toolBarLayout = findViewById(R.id.toolbar_layout);
         toolBarLayout.setTitle(getTitle());
 
         */
 
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().
+        /*NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().
                 findFragmentById(R.id.nav_host_fragment);
 
         NavController navController = navHostFragment.getNavController();
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.homeFragment, R.id.calendarFragment,
@@ -76,9 +131,10 @@ public class CoreActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // For the BottomNavigationView
-        NavigationUI.setupWithNavController(bottomNav, navController);
+        NavigationUI.setupWithNavController(bottomNav, navController);*/
 
     }
+
 /*
     @Override
     public void onBackPressed() {
