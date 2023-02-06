@@ -30,12 +30,22 @@ public class CoreActivity extends AppCompatActivity{
     private PhotoFragment photoFragment = new PhotoFragment();
     private CalendarFragment calendarFragment = new CalendarFragment();
     private PersonalFragment personalFragment = new PersonalFragment();
+    private CoreModel coreModel = new CoreModel(getApplication());
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.core_layout);
+
+        coreModel.createUserGoogle(
+                getIntent().getStringExtra("username"),
+                getIntent().getStringExtra("name"),
+                "",
+                getIntent().getStringExtra("email")
+
+        );
+
 
         ImageView clothual = findViewById(R.id.clothual);
 
@@ -88,6 +98,7 @@ public class CoreActivity extends AppCompatActivity{
 
 
     }
+
 
 
 

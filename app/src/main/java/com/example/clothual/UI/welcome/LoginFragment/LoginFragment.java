@@ -47,8 +47,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-import java.util.List;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -303,6 +301,15 @@ public class LoginFragment extends Fragment {
         getActivity().finish();
     }
 
+    private void navigateToMainActivityNew(String nome, String email, String username) {
+        Intent intent = new Intent(requireContext(), CoreActivity.class);
+        intent.putExtra("name", nome);
+        intent.putExtra("email", email);
+        intent.putExtra("username", username);
+        startActivity(intent);
+        getActivity().finish();
+    }
+
     private void firebaseAuthWithGoogleAccount(GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         firebaseAuth.signInWithCredential(credential)
@@ -314,13 +321,16 @@ public class LoginFragment extends Fragment {
 
                         String uid = firebaseUser.getUid();
                         String email = firebaseUser.getEmail();
+                        String name = firebaseUser.getDisplayName();
                         //check
                         if (authResult.getAdditionalUserInfo().isNewUser()){
                             //Account created
                             Snackbar.make(getView(), "Welcome to Clothual", Snackbar.LENGTH_SHORT).show();
+                            navigateToMainActivityNew(name, email, uid);
                         } else {
                             //Existing user - Logged In
                             Snackbar.make(getView(), "Welcome Back to Clothual", Snackbar.LENGTH_SHORT).show();
+                            navigateToMainActivity();
                         }
 
                         //Start
