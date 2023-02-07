@@ -46,6 +46,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 /**
@@ -67,6 +68,9 @@ public class LoginFragment extends Fragment {
 
     //
     FirebaseAuth firebaseAuth;
+
+    FirebaseFirestore firebaseFirestore;
+
     ProgressDialog progressDialog;
 
     //Google
@@ -151,7 +155,7 @@ public class LoginFragment extends Fragment {
         //Firebase
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(getContext());
-
+        firebaseFirestore = FirebaseFirestore.getInstance();
         binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,6 +177,8 @@ public class LoginFragment extends Fragment {
                                 public void onSuccess(AuthResult authResult) {
                                     progressDialog.cancel();
                                     //edit.putInt(ID, loginModel.idAccountByEmail(email));
+                                    //edit.apply();
+                                    //edit.putInt(ID, loginModel.getIDByEmail(email));
                                     //edit.apply();
                                     Intent intet = new Intent(requireContext(), CoreActivity.class);
                                     startActivity(intet);
@@ -311,7 +317,8 @@ public class LoginFragment extends Fragment {
         intent.putExtra("username", username);
         startActivity(intent);
         getActivity().finish();
-    }*/
+    }
+    */
 
     private void firebaseAuthWithGoogleAccount(GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
