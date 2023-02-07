@@ -1,6 +1,7 @@
 package com.example.clothual.Database;
 
 import static com.example.clothual.Util.Query.GET_ACCOUNT_BY_ID;
+import static com.example.clothual.Util.Query.GET_ACCOUNT_BY_USERNAME;
 import static com.example.clothual.Util.Query.GET_EMAIL;
 import static com.example.clothual.Util.Query.GET_ID;
 import static com.example.clothual.Util.Query.GET_ID_BY_EMAIL;
@@ -51,5 +52,10 @@ public interface AccountDao {
 
     @Query(GET_ID_BY_EMAIL)
     int getIdByEmail(String email);
+
+    @Query(GET_ACCOUNT_BY_USERNAME)
+    Account getAccountByUerName(String username);
+
+
 
 }

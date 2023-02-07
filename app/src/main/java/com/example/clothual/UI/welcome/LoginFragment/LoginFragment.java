@@ -1,5 +1,6 @@
 package com.example.clothual.UI.welcome.LoginFragment;
 
+import static com.example.clothual.Util.Constant.ACCESS_PREFERENCE;
 import static com.example.clothual.Util.Constant.COCO_CHANEL;
 import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
 import static com.example.clothual.Util.Constant.DONATELLA_VERSACE;
@@ -51,8 +52,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-
-import org.w3c.dom.Document;
 
 
 /**
@@ -184,22 +183,26 @@ public class LoginFragment extends Fragment {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
                                     progressDialog.cancel();
-
                                     //edit.putInt(ID, loginModel.idAccountByEmail(email));
                                     //edit.apply();
                                     //edit.putInt(ID, loginModel.getIDByEmail(email));
                                     //edit.apply();
                                     //Recupero dati
+                                    edit.putInt(ACCESS_PREFERENCE, 1);
+                                    edit.apply();
                                     userId = firebaseAuth.getCurrentUser().getUid();
                                     DocumentReference documentReference = firebaseFirestore.collection("User").document(userId);
                                     documentReference.addSnapshotListener(getActivity(), new EventListener<DocumentSnapshot>() {
                                         @Override
                                         public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                                             String name = value.getString("name");
+                                            String surname = value.getString("surname");
+                                            String username = value.getString("username");
+                                            if(!loginModel.userEsxiste(username)) {
+                                                loginModel.createUser(username, name, surname, password, email);
+                                            }
                                         }
                                     });
-
-
                                     Intent intet = new Intent(requireContext(), CoreActivity.class);
                                     startActivity(intet);
                                     getActivity().finish();

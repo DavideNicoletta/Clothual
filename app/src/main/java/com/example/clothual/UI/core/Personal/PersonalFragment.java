@@ -78,7 +78,9 @@ public class PersonalFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        Context context = getActivity();
+        SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
         //Google
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(getActivity(), gso);
@@ -91,9 +93,6 @@ public class PersonalFragment extends Fragment {
             //binding.googleEmail.setText(personEmail);
             Picasso.get().load(personImage).into(binding.imagePersonal);
         } else {
-            Context context = getActivity();
-            SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPref.edit();
             String username = sharedPref.getString(USERNAME_PREFERENCE, "");
             String nameSurname = personalModel.getName(username);
             binding.textName.setText(nameSurname);
@@ -108,18 +107,21 @@ public class PersonalFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
+            /*
             binding.goOut.setOnClickListener(view1 -> {
                 editor.putInt(ACCESS_PREFERENCE, 0);
                 editor.apply();
                 Intent intent = new Intent(requireContext(), WelcomeActivity.class);
                 startActivity(intent);
                 signOut();
-            });
+            });*/
         }
 
         binding.goOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                editor.putInt(ACCESS_PREFERENCE, 0);
+                editor.apply();
                 signOut();
             }
         });

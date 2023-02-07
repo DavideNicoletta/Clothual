@@ -6,6 +6,7 @@ import com.example.clothual.Database.AccountDao;
 import com.example.clothual.Database.RoomDatabase;
 import com.example.clothual.Database.UserDao;
 import com.example.clothual.Model.Account;
+import com.example.clothual.Model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -86,5 +87,22 @@ public class LoginModel {
         return toReturn;
     }
 */
+
+    public void createUser(String username, String name, String surname, String passowrd, String email){
+        RoomDatabase.databaseWriteExecutor.execute(() -> {
+            Account account = new Account(username, email, passowrd);
+            accountDao.insertAccount(account);
+            User user = new User(surname, name, accountDao.getId(username));
+            userDao.insertUser(user);
+        });
+
+    }
+
+    public boolean userEsxiste(String username){
+        if(accountDao.getAccountByUerName(username).getUsername().equals(username)){
+            return true;
+        }
+        return false;
+    }
 
 }

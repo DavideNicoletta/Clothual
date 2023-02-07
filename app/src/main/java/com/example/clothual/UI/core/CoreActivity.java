@@ -14,23 +14,11 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.clothual.R;
-import com.example.clothual.UI.core.Calendar.CalendarFragment;
-import com.example.clothual.UI.core.Home.HomeFragment;
-import com.example.clothual.UI.core.Map.MapFragment;
-import com.example.clothual.UI.core.Personal.PersonalFragment;
-import com.example.clothual.UI.core.Photo.PhotoFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class CoreActivity extends AppCompatActivity{
 
-    private static final int REQUEST_CODE = 101;
-    private HomeFragment homeFragment = new HomeFragment();
-    private MapFragment mapFragment = new MapFragment();
-    private PhotoFragment photoFragment = new PhotoFragment();
-    private CalendarFragment calendarFragment = new CalendarFragment();
-    private PersonalFragment personalFragment = new PersonalFragment();
-    private CoreModel coreModel = new CoreModel(getApplication());
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
