@@ -187,6 +187,7 @@ public class LoginFragment extends Fragment {
                                     //edit.apply();
                                     //edit.putInt(ID, loginModel.getIDByEmail(email));
                                     //edit.apply();
+
                                     //Recupero dati
                                     edit.putInt(ACCESS_PREFERENCE, 1);
                                     edit.apply();
