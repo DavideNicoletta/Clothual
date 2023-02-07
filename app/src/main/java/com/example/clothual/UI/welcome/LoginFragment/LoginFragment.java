@@ -46,7 +46,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+
+import org.w3c.dom.Document;
 
 
 /**
@@ -70,6 +76,7 @@ public class LoginFragment extends Fragment {
     FirebaseAuth firebaseAuth;
 
     FirebaseFirestore firebaseFirestore;
+    String userId;
 
     ProgressDialog progressDialog;
 
@@ -156,6 +163,7 @@ public class LoginFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(getContext());
         firebaseFirestore = FirebaseFirestore.getInstance();
+
         binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,6 +184,21 @@ public class LoginFragment extends Fragment {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
                                     progressDialog.cancel();
+
+                                    //edit.putInt(ID, loginModel.idAccountByEmail(email));
+                                    //edit.apply();
+                                    //edit.putInt(ID, loginModel.getIDByEmail(email));
+                                    //edit.apply();
+                                    //Recupero dati
+                                    userId = firebaseAuth.getCurrentUser().getUid();
+                                    DocumentReference documentReference = firebaseFirestore.collection("User").document(userId);
+                                    documentReference.addSnapshotListener(getActivity(), new EventListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                            String name = value.getString("name");
+                                        }
+                                    });
+
 
                                     Intent intet = new Intent(requireContext(), CoreActivity.class);
                                     startActivity(intet);
