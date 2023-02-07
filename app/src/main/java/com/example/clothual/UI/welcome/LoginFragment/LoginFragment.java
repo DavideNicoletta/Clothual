@@ -189,6 +189,7 @@ public class LoginFragment extends Fragment {
                                     //edit.apply();
                                     //edit.putInt(ID, loginModel.getIDByEmail(email));
                                     //edit.apply();
+
                                     //Recupero dati
                                     userId = firebaseAuth.getCurrentUser().getUid();
                                     DocumentReference documentReference = firebaseFirestore.collection("User").document(userId);

@@ -29,6 +29,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.squareup.picasso.Picasso;
 
 import java.io.FileNotFoundException;
@@ -46,6 +52,9 @@ public class PersonalFragment extends Fragment {
     //Google
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
+    FirebaseAuth firebaseAuth;
+    FirebaseFirestore firebaseFirestore;
+    String userId;
 
     public PersonalFragment() {
         // Required empty public constructor
@@ -79,6 +88,10 @@ public class PersonalFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        userId = firebaseAuth.getCurrentUser().getUid();
+
         //Google
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(getActivity(), gso);
@@ -91,6 +104,17 @@ public class PersonalFragment extends Fragment {
             //binding.googleEmail.setText(personEmail);
             Picasso.get().load(personImage).into(binding.imagePersonal);
         } else {
+            //
+            userId = firebaseAuth.getCurrentUser().getUid();
+            DocumentReference documentReference = firebaseFirestore.collection("User").document(userId);
+            documentReference.addSnapshotListener(getActivity(), new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                    String name = value.getString("name");
+                    String surname = value.getString("surname");
+                    binding.textName.setText(name + " " + surname);
+                }
+            });
             Context context = getActivity();
             SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
