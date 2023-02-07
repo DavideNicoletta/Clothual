@@ -24,7 +24,7 @@ public class HistoryFragment extends Fragment {
     private HistoryModel historyModel;
 
     public HistoryFragment() {
-        // Required empty public constructor
+
     }
 
     /**
@@ -57,7 +57,6 @@ public class HistoryFragment extends Fragment {
 
         float [] rate = historyModel.getRateTypeClothual();
         List<String> color = historyModel.getRateColor();
-        //binding.mostUsedColor.setText("Most used Color: " + color[0] + ", " + color[1] + " %");
 
 
         switch (color.size()){

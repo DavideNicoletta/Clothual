@@ -101,4 +101,7 @@ public class Clothual {
     public void setIdUserAccount(int idUserAccount) {
         this.idUserAccount = idUserAccount;
     }
+
+
+
 }

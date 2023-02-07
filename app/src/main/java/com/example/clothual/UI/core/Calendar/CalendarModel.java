@@ -31,12 +31,24 @@ public class CalendarModel {
         outfitDao = database.outfitDao();
     }
 
-    public List<Image> getImageList(){
-        return imageDao.getAllImage();
+    public List<Image> getImageList(int ID){
+        List<Image> image = imageDao.getAllImage();
+        for(int i = 0; i < image.size(); i++){
+            if(image.get(i).getDescription().equals("profile") || image.get(i).getIdAccount() != ID){
+                image.remove(i);
+            }
+        }
+        return image;
     }
 
-    public List<Clothual> getClothualList(){
-        return clothualDao.getAllClothual();
+    public List<Clothual> getClothualList(int ID){
+        List<Clothual> clothualList = clothualDao.getAllClothual();
+        for(int i = 0; i < clothualList.size(); i++){
+            if(clothualList.get(i).getIdUserAccount() != ID){
+                clothualList.remove(i);
+            }
+        }
+        return clothualList;
     }
 
     public void insertOutfit(Outfit outfit){
@@ -91,8 +103,8 @@ public class CalendarModel {
         return outfitDao.getOutfitByDate(date);
     }
 
-    public List<Clothual> getClothualOutfitDate(Outfit outfit){
-        List<Clothual> clothualList = getClothualList();
+    public List<Clothual> getClothualOutfitDate(Outfit outfit, int ID){
+        List<Clothual> clothualList = getClothualList(ID);
         List<String> listIdClothual = Converters.fromString(outfit.getClothualString());
         for(int i = 0; i < clothualList.size(); i++){
             for(int j = 0; j < listIdClothual.size(); j++){

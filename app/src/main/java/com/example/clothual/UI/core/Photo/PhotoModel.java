@@ -63,7 +63,6 @@ public class PhotoModel {
 
 
     public Uri saveImageToMemory(ContentResolver contentResolver, Bitmap bitmap, String title, String description, int id) throws IOException {
-        // Crea una nuova entrata per l'immagine nella memoria del dispositivo
         System.out.println("Salvataggio");
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, title);
@@ -71,21 +70,18 @@ public class PhotoModel {
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
         Uri uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
 
-        // Apri uno stream di output verso la nuova entrata
         OutputStream outputStream = contentResolver.openOutputStream(uri);
 
-        // Salva l'immagine nella memoria del dispositivo
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
         outputStream.close();
 
-        // Restituisce l'URI dell'immagine appena salvata
         Image image = new Image(title, description, uri.toString(), id);
         imageDao.insertImage(image);
         return uri;
     }
 
 
-    public List<Image> getImageList(int ID){//Activity act, Context ctx, ContentResolver contentResolver) {
+    public List<Image> getImageList(int ID){
 
         List<Image> image = imageDao.getAllImage();
         for(int i = 0; i < image.size(); i++){
@@ -147,15 +143,6 @@ public class PhotoModel {
         return -1;
     }
 
-    public String getNamePhotoByID(int ID){
-        List<Image> imageList = imageDao.getAllImage();
-        for(int i = 0; i < imageList.size(); i++){
-            if(imageList.get(i).getID() == ID){
-                return imageList.get(i).getTitle();
-            }
-        }
-        return null;
-    }
 
     public void deleteFromOutfit(int ID){
         List<Outfit> outfitList = outfitDao.getAlLOutfit();

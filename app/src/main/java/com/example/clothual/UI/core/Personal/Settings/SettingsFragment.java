@@ -35,8 +35,6 @@ public class SettingsFragment extends Fragment {
 
         public FragmentSettingsBinding binding;
         @SuppressLint("UseSwitchCompatOrMaterialCode")
-        //suggerimento di android studio, non so cosa faccia
-
 
         public SettingsFragment() {
         }
@@ -107,10 +105,6 @@ public class SettingsFragment extends Fragment {
                 }
             });
 
-/*
-                if (isNightModeActive(context)) {
-                    binding.myswitch.setChecked(true);
-                } else binding.myswitch.setChecked(false);*/
 
             Boolean booleanValue = share.getBoolean(DMODE, true);
             if(booleanValue){
@@ -154,9 +148,6 @@ public class SettingsFragment extends Fragment {
 
         }
 
-   /* private void setMode(){
-        recreate();
-    }*/
 
         private void setMode() {
             Configuration config = getActivity().getResources().getConfiguration();

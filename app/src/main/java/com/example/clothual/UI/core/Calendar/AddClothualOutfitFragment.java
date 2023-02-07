@@ -2,6 +2,7 @@ package com.example.clothual.UI.core.Calendar;
 
 import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
 import static com.example.clothual.Util.Constant.DATE;
+import static com.example.clothual.Util.Constant.ID;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -37,7 +38,7 @@ public class AddClothualOutfitFragment extends Fragment {
     public CalendarModel model;
 
     public AddClothualOutfitFragment() {
-        // Required empty public constructor
+
     }
 
     /**
@@ -76,11 +77,11 @@ public class AddClothualOutfitFragment extends Fragment {
 
 
         if(outfit == null){
-            List<Image> image = model.getImageList();
-            List<Clothual> clothual = model.getClothualList();
+            List<Image> image = model.getImageList(sharedPref.getInt(ID, 0));
+            List<Clothual> clothual = model.getClothualList(sharedPref.getInt(ID, 0));
             recycler(clothual, image, view);
         }else{
-            List<Clothual> clothualList = model.getClothualOutfitDate(outfit);
+            List<Clothual> clothualList = model.getClothualOutfitDate(outfit, sharedPref.getInt(ID, 0));
             List<Image> imageOutfit = model.getImageOutfit(clothualList);
             recycler(clothualList, imageOutfit, view);
         }

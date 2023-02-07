@@ -3,8 +3,6 @@ package com.example.clothual.UI.welcome.RegistrationFragment;
 public class UserModel {
     private String email, surname, name, username;
 
-    public UserModel(){
-    }
 
     public UserModel(String username, String name, String surname, String email){
         this.email = email;

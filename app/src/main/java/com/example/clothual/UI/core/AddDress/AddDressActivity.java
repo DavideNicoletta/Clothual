@@ -144,9 +144,7 @@ public class AddDressActivity extends AppCompatActivity {
     public void onBackPressed() {
         model = new AddDressModel(getApplication());
         String uri = getIntent().getExtras().getString("uri");
-        //Delite
         contentResolver.delete(Uri.parse(uri),null ,null );
-        //Delite
         List<Image> imageList = model.getAllImage();
         for(int i = 0; i < imageList.size(); i++){
             if(imageList.get(i).getUri().equals(uri)){

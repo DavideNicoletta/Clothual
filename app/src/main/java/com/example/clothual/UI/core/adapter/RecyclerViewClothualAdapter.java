@@ -190,13 +190,13 @@ public class RecyclerViewClothualAdapter extends RecyclerView.Adapter<RecyclerVi
                 case R.id.yesTotal:
                     String string = clothualList.get(getAdapterPosition()).getBrand() + " " +
                             clothualList.get(getAdapterPosition()).getTemplate() + " has been deleted";
-                    //Delite
+
                     try {
                         model.deleteElement(contentResolver, Uri.parse(imageList.get(getAdapterPosition()).getUri()), clothualList.get(getAdapterPosition()).getId());
                     } catch (FileNotFoundException e) {
                         throw new RuntimeException(e);
                     }
-                    //Delite
+
                     model.deleteImage(imageList.get(getAdapterPosition()));
                     model.deleteClothual(clothualList.get(getAdapterPosition()));
                     imageList.remove(getAdapterPosition());

@@ -79,7 +79,6 @@ public class EditProfileModel {
     }
 
     public Uri saveImageToMemory(ContentResolver contentResolver, Bitmap bitmap, String title, String description, int ID) throws IOException {
-        // Crea una nuova entrata per l'immagine nella memoria del dispositivo
         System.out.println("Salvataggio");
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, title);
@@ -87,14 +86,11 @@ public class EditProfileModel {
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
         Uri uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
 
-        // Apri uno stream di output verso la nuova entrata
         OutputStream outputStream = contentResolver.openOutputStream(uri);
 
-        // Salva l'immagine nella memoria del dispositivo
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
         outputStream.close();
 
-        // Restituisce l'URI dell'immagine appena salvata
         Image image = new Image(title, description, uri.toString(), ID);
         imageDao.insertImage(image);
         return uri;
@@ -107,7 +103,7 @@ public class EditProfileModel {
         DateTimeFormatter timeColonFormatter = DateTimeFormatter.ofPattern(PATTERN_HOUR_FORMAT).withZone(ZoneId.systemDefault());
         Clock clock = Clock.systemDefaultZone();
         Instant instant = clock.instant();
-        System.out.println("Nome stampato");
+
         return formatterDate.format(instant)+"__"+timeColonFormatter.format(instant);
     }
 

@@ -36,7 +36,7 @@ public class FavoriteFragment extends Fragment {
     public CategoryModel model;
 
     public FavoriteFragment() {
-        // Required empty public constructor
+
     }
 
     /**

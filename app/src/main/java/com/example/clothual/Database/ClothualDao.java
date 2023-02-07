@@ -21,8 +21,6 @@ public interface ClothualDao {
     @Query(SELECT_ALL_CLOTHAUL)
     List<Clothual> getAllClothual();
 
-    @Query(SELECT_ALL_SHOES)
-    List<Clothual> getAllShoes();
 
     @Query(GET_CLOTUAL_BY_ID)
     Clothual getClothualByID(int idClothual);

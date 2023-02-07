@@ -133,11 +133,9 @@ public class EditProfileActivity extends AppCompatActivity {
                 if (binding.editTextEmail.isEnabled()) {
                     if (modifyModel.checkEmail(binding.editTextEmail.getText().toString())) {
                         binding.inputViewEmail.setError(null);
-                        //editor.putString(EMAIL_CHANGE, binding.editTextEmail.getText().toString());
                         account.setEmail(binding.editTextEmail.getText().toString());
                     } else {
                         binding.inputViewEmail.setError("Mail non valida");
-                        //editor.putString(EMAIL_CHANGE, modifyModel.getEmail(sharedPref.getInt(ID_ACCOUNT, 0)));
                     }
                 }
 
@@ -148,7 +146,6 @@ public class EditProfileActivity extends AppCompatActivity {
                     } else {
                         binding.inputUsername.setError(null);
                         account.setUsername(binding.editTextUsername.getText().toString());
-                        //editor.putString(USERNAME_CHANGE, binding.editTextUsername.getText().toString());
                     }
                 }
 
@@ -159,7 +156,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
                         } else {
                             binding.inputPassword.setError(null);
-                            //editor.putString(PASSWORD_CHANGE, );
                             account.setPassword(binding.editTextPasswordNuovo.getText().toString());
                         }
                     } else {
@@ -216,9 +212,6 @@ public class EditProfileActivity extends AppCompatActivity {
                     Bitmap bitmap = modifyModel.importImageFromMemory(this, getApplicationContext(), getContentResolver(), uri);
                     Uri newUri = modifyModel.saveImage(getContentResolver(), bitmap,
                             modifyModel.getNameImage(), "profile", share.getInt(ID, 0));
-                  /*  Intent intent = new Intent(this, AddDressActivity.class);
-                    intent.putExtra("uri", newUri.toString());
-                    startActivity(intent);*/
                     binding.imagePersonal.setImageBitmap(bitmap);
 
                 } catch (FileNotFoundException e) {
@@ -232,15 +225,10 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
     void imageChooser() {
-
-        // create an instance of the
-        // intent of the type image
         Intent i = new Intent();
         i.setType("image/*");
         i.setAction(Intent.ACTION_GET_CONTENT);
 
-        // pass the constant to compare it
-        // with the returned requestCode
         startActivityForResult(Intent.createChooser(i, "Select Picture"), 1);
     }
 

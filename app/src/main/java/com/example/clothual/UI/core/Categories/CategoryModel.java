@@ -205,7 +205,6 @@ public class CategoryModel {
                 preferite.add(list.get(i));
             }
         }
-        System.out.println("Lughezza preferiti: " + preferite.size());
         return preferite;
     }
 

@@ -38,7 +38,7 @@ public class SweatshirtFragment extends Fragment {
     private CategoryModel model;
 
     public SweatshirtFragment() {
-        // Required empty public constructor
+
     }
 
     /**

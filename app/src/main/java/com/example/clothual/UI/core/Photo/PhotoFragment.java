@@ -134,73 +134,11 @@ public class PhotoFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 intent.putExtra("option", 0);
-               // someActivityResultLauncher.launch(intent);
                 startActivityForResult(intent, 0);
             }
         });
 
     }
-
-    /*
-    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @RequiresApi(api = Build.VERSION_CODES.O)
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    Intent intent = result.getData();
-                    assert intent != null;
-                    int option = intent.getIntExtra("option", 0);
-                    Uri uri;
-                    if(option == 0) {
-                        if (result == null) {
-
-                            Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
-
-                        } else {
-                            assert result != null;
-                            Bitmap immagine = (Bitmap) intent.getExtras().get("data");
-
-                            try {
-                                uri = photoModel.saveImage(getActivity().getContentResolver(), immagine, photoModel.getNameImage(), "");
-                                Intent intentToAdd = new Intent(getActivity(), AddDressActivity.class);
-                                intent.putExtra("uri", uri.toString());
-                                intent.putExtra("action", 0);
-                                startActivity(intentToAdd);
-                            } catch (IOException e) {
-
-                                Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
-
-                            }
-
-                        }
-                    }else{
-                        if (result == null) {
-                            Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
-                        }else {
-                            uri = intent.getData();
-                            if (uri != null) {
-                                try {
-                                    Bitmap bitmap = photoModel.importImageFromMemory(getActivity(), getContext(), getActivity().getContentResolver(), uri);
-                                    Uri newUri = photoModel.saveImage(getActivity().getContentResolver(), bitmap,
-                                            photoModel.getNameImage(), "");
-                                    Intent intenToAdd = new Intent(getActivity(), AddDressActivity.class);
-                                    intent.putExtra("uri", newUri.toString());
-                                    intent.putExtra("action", 0);
-                                    startActivity(intenToAdd);
-                                } catch (FileNotFoundException e) {
-                                    Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
-                                } catch (IOException e) {
-                                    Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
-                                }
-
-                            }
-                        }
-                    }
-                }
-            }
-
-    );*/
 
     void imageChooser() {
 

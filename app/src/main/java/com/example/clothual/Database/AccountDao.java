@@ -5,7 +5,6 @@ import static com.example.clothual.Util.Query.GET_ACCOUNT_BY_USERNAME;
 import static com.example.clothual.Util.Query.GET_EMAIL;
 import static com.example.clothual.Util.Query.GET_ID;
 import static com.example.clothual.Util.Query.GET_ID_BY_EMAIL;
-import static com.example.clothual.Util.Query.GET_PASSWORD;
 import static com.example.clothual.Util.Query.GET_USERNAME;
 import static com.example.clothual.Util.Query.SELECT_ALL_ACCOUNT;
 
@@ -40,9 +39,6 @@ public interface AccountDao {
 
     @Query(GET_USERNAME)
     String getUsername(int idAccount);
-
-    @Query(GET_PASSWORD)
-    String getPassword(int idAccount);
 
     @Query(GET_ACCOUNT_BY_ID)
     Account getAccountID(int idAccount);

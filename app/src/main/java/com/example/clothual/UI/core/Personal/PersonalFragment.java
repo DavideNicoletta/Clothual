@@ -103,7 +103,6 @@ public class PersonalFragment extends Fragment {
             String personEmail = acct.getEmail();
             Uri personImage = acct.getPhotoUrl();
             binding.textName.setText(personName);
-            //binding.googleEmail.setText(personEmail);
             Picasso.get().load(personImage).into(binding.imagePersonal);
         } else {
             userId = firebaseAuth.getCurrentUser().getUid();
@@ -130,14 +129,7 @@ public class PersonalFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
-            /*
-            binding.goOut.setOnClickListener(view1 -> {
-                editor.putInt(ACCESS_PREFERENCE, 0);
-                editor.apply();
-                Intent intent = new Intent(requireContext(), WelcomeActivity.class);
-                startActivity(intent);
-                signOut();
-            });*/
+
         }
 
         binding.goOut.setOnClickListener(new View.OnClickListener() {
@@ -148,37 +140,6 @@ public class PersonalFragment extends Fragment {
                 signOut();
             }
         });
-
-
-        /*
-        Context context = getActivity();
-        SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        String username = sharedPref.getString(USERNAME_PREFERENCE, "");
-        String nameSurname = personalModel.getName(username);
-        binding.textName.setText(nameSurname);
-
-        if (sharedPref.getString(URI, " ").equals(" ")) {
-            binding.imagePersonal.setImageResource(R.drawable.avatar);
-        } else {
-            try {
-                binding.imagePersonal.setImageBitmap(personalModel.importImageFromMemory(getActivity(), getContext(), getActivity().getContentResolver(),
-                        Uri.parse(sharedPref.getString(URI, " "))));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-
-
-        binding.goOut.setOnClickListener(view1 -> {
-            editor.putInt(ACCESS_PREFERENCE, 0);
-            editor.apply();
-            Intent intent = new Intent(requireContext(), WelcomeActivity.class);
-            startActivity(intent);
-            signOut();
-        });
-
-        */
 
         binding.editProfile.setOnClickListener(view12 -> {
             Intent intent = new Intent(requireContext(), EditProfileActivity.class);
@@ -204,13 +165,7 @@ public class PersonalFragment extends Fragment {
                 Navigation.findNavController(requireView()).navigate(R.id.action_personalFragment_to_historyFragment);
             }
         });
-/*
-        binding.settings.setOnClickListener(view13 -> Navigation.findNavController(requireView()).navigate(R.id.action_personalFragment_to_settingsFragment));
 
-        binding.information.setOnClickListener(view14 -> Navigation.findNavController(requireView()).navigate(R.id.action_personalFragment_to_informationFragment));
-
-        binding.history.setOnClickListener(view15 -> Navigation.findNavController(requireView()).navigate(R.id.action_personalFragment_to_historyFragment));
-*/
     }
 
     void signOut() {

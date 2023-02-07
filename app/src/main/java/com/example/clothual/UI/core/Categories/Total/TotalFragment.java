@@ -38,7 +38,7 @@ public class TotalFragment extends Fragment {
    public CategoryModel model;
 
     public TotalFragment() {
-        // Required empty public constructor
+
     }
 
     /**

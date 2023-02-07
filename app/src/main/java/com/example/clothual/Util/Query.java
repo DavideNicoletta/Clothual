@@ -1,7 +1,5 @@
 package com.example.clothual.Util;
 
-import com.example.clothual.R;
-
 public class Query {
 
     //Query User
@@ -12,7 +10,6 @@ public class Query {
 
     public static final String GET_ID = "SELECT id FROM Account WHERE username LIKE :username";
 
-    public static final String GET_PASSWORD = "SELECT password FROM Account WHERE id LIKE :idAccount";
 
     public static final String GET_EMAIL = "SELECT email FROM Account WHERE id LIKE :idAccount";
 
@@ -31,7 +28,6 @@ public class Query {
     //Query clothual
     public static final String SELECT_ALL_CLOTHAUL = "SELECT * FROM Clothual";
 
-    public static final String SELECT_ALL_SHOES = "SELECT * FROM Clothual WHERE type LIKE " + (char)34 + R.string.shoes + (char)34;
 
     public static final String GET_ID_BY_URI = "SELECT ID FROM Image WHERE uri LIKE  :uri";
 

@@ -28,7 +28,7 @@ public class HomeFragment extends Fragment {
     private static final int REQUEST_CODE = 101;
 
     public HomeFragment() {
-        // Required empty public constructor
+
     }
 
     /**

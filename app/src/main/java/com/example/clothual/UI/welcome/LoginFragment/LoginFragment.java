@@ -183,10 +183,7 @@ public class LoginFragment extends Fragment {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
                                     progressDialog.cancel();
-                                    //edit.putInt(ID, loginModel.idAccountByEmail(email));
-                                    //edit.apply();
-                                    //edit.putInt(ID, loginModel.getIDByEmail(email));
-                                    //edit.apply();
+
 
                                     //Recupero dati
                                     edit.putInt(ACCESS_PREFERENCE, 1);
@@ -249,39 +246,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        /*
-        binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString(USERNAME_PREFERENCE, binding.editTextUsername.getText().toString());
-                editor.putString(PASSWORD_PREFERENCE, binding.editTextPassword.getText().toString());
-                editor.apply();
-
-                if(loginModel.checkLogin(
-                        binding.editTextUsername.getText().toString(),
-                        binding.editTextPassword.getText().toString())
-                ) {
-                    editor.putInt(ACCESS_PREFERENCE, 1);
-                    editor.putInt(ID_ACCOUNT, loginModel.idAccount(username));
-                    editor.apply();
-                    check = false;
-                    Intent intent = new Intent(requireContext(), CoreActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                }else{
-                    binding.inputViewUsername.setError("Errore");
-                    binding.inputViewPassword.setError("Errore");
-                }
-
-            }
-        });
-        */
-
        binding.textViewRegister.setOnClickListener(view12 -> {
-
-           //    thread.interrupt();
-
            Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_fragment_registration);
        });
 
@@ -295,11 +260,6 @@ public class LoginFragment extends Fragment {
        binding.signInButton.setOnClickListener(view1 -> {
            Intent intet = gsc.getSignInIntent();
            startActivityForResult(intet, RC_SIGN_IN);
-           /*
-           Intent intent = new Intent(requireContext(), CoreActivity.class);
-           startActivity(intent);
-           getActivity().finish();
-           */
        });
 
     }
@@ -327,22 +287,10 @@ public class LoginFragment extends Fragment {
 
     private void navigateToMainActivity() {
         Intent intent = new Intent(requireContext(), CoreActivity.class);
-       // intent.putExtra("option", "old");
-        startActivity(intent);
-        getActivity().finish();
-    }
 
-    /*
-    private void navigateToMainActivityNew(String nome, String email, String username) {
-        Intent intent = new Intent(requireContext(), CoreActivity.class);
-        intent.putExtra("option", "new");
-        intent.putExtra("name", nome);
-        intent.putExtra("email", email);
-        intent.putExtra("username", username);
         startActivity(intent);
         getActivity().finish();
     }
-    */
 
     private void firebaseAuthWithGoogleAccount(GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
@@ -352,12 +300,7 @@ public class LoginFragment extends Fragment {
                     public void onSuccess(AuthResult authResult) {
                         //login success
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-/*
-                        String uid = firebaseUser.getUid();
-                        String email = firebaseUser.getEmail();
-                        String name = firebaseUser.getDisplayName();
 
- */
                         //check
                         if (authResult.getAdditionalUserInfo().isNewUser()){
                             //Account created
@@ -370,8 +313,6 @@ public class LoginFragment extends Fragment {
                             navigateToMainActivity();
                         }
 
-                        //Start
-                        //navigateToMainActivity();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

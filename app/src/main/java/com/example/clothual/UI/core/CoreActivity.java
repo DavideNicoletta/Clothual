@@ -26,18 +26,6 @@ public class CoreActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.core_layout);
 
-        /*
-        if(getIntent().getStringExtra("option").equals("new")) {
-            coreModel.createUserGoogle(
-                    getIntent().getStringExtra("username"),
-                    getIntent().getStringExtra("name"),
-                    "",
-                    getIntent().getStringExtra("email")
-
-            );
-        }*/
-
-
         ImageView clothual = findViewById(R.id.clothual);
 
         int nightModeFlags =
@@ -85,26 +73,5 @@ public class CoreActivity extends AppCompatActivity{
 
         // For the BottomNavigationView
         NavigationUI.setupWithNavController(bottomNav, navController);
-
-
-
     }
-
-
-
-
-/*
-    @Override
-    public void onBackPressed() {
-        NavBackStackEntry navBackStackEntry = Navigation.findNavController(this, R.id.nav_core).getPreviousBackStackEntry();
-        if(navBackStackEntry != null && (//navBackStackEntry.getDestination().getId() != R.id.homeFragment ||
-                navBackStackEntry.getDestination().getId() == com.google.android.gms.auth.api.R.id.all
-        )) {
-            finish();
-        }else{
-            finish();
-        }
-    }
-
- */
 }

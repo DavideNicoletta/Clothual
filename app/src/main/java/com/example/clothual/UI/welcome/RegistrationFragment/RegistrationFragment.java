@@ -38,7 +38,7 @@ public class RegistrationFragment extends Fragment {
     public RegistrationModel registrationModel;
     public RegistrationFragment() { }
 
-    //
+
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
     ProgressDialog progressDialog;
@@ -149,85 +149,5 @@ public class RegistrationFragment extends Fragment {
                 Navigation.findNavController(requireView()).navigate(R.id.action_fragment_registration_to_loginFragment);
             }
         });
-
-        /*binding.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if(checkFields
-                        (binding.editTextUsername.getText().toString(),
-                        binding.editTextName.getText().toString(),
-                        binding.editTextSurname.getText().toString(),
-                        binding.editTextPassword.getText().toString(),
-                        binding.editTextEmail.getText().toString()) == true
-                )
-                {
-                    registrationModel.createUser(binding.editTextUsername.getText().toString(),
-                            binding.editTextName.getText().toString(),
-                            binding.editTextSurname.getText().toString(),
-                            binding.editTextPassword.getText().toString(),
-                            binding.editTextEmail.getText().toString());
-                    editor.putString(USERNAME_PREFERENCE, binding.editTextUsername.getText().toString());
-                    editor.putString(PASSWORD_PREFERENCE, binding.editTextPassword.getText().toString());
-                    editor.putInt(ACCESS_PREFERENCE, 1);
-                    editor.putInt(ID_ACCOUNT, registrationModel.idAccount(binding.editTextUsername.getText().toString()));
-                    editor.apply();
-                    Intent intet = new Intent(requireContext(), CoreActivity.class);
-                    startActivity(intet);
-                }
-            }
-        });
-
     }
-
-    public boolean checkFields(String username, String name, String surname, String password, String email){
-        int correct = 0;
-        //ChechEmail
-        if(EmailValidator.getInstance().isValid(email)){
-            binding.inputViewEmail.setError(null);
-            correct++;
-        }else{
-            binding.inputViewEmail.setError("Email non valida");
-        }
-
-        //Check Cognome
-        if(surname.isEmpty()){
-            binding.inputCognome.setError("Inserire un valore");
-        }
-        else{
-            binding.inputCognome.setError(null);
-            correct++;
-        }
-
-        //Check Nome
-        if(name.isEmpty()){
-            binding.inputNome.setError("Inserire un valore");
-        } else{
-            binding.inputCognome.setError(null);
-            correct++;
-        }
-
-        //Check Username
-        if(username.isEmpty()){
-            binding.inputViewUsername.setError("Inserire un valore");
-        } else{
-            binding.inputCognome.setError(null);
-            correct++;
-        }
-
-        //Check Password
-        if(password.isEmpty()){
-            binding.inputViewPassword.setError("Inserire un valore");
-        } else{
-            binding.inputCognome.setError(null);
-            correct++;
-        }
-
-        if(correct == 5){
-            return true;
-        }else{
-            return false;
-        }*/
-    }
-
 }

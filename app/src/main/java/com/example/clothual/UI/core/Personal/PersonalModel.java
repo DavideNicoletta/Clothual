@@ -32,8 +32,6 @@ public class PersonalModel {
 
     public PersonalModel(Application application) {
         this.application = application;
-        //database = Room.databaseBuilder(application,
-        //      RoomDatabase.class, DATABASE_NAME).build();
         database = RoomDatabase.getDatabase(application);
         userDao = database.daoUser();
         accountDao = database.daoAccount();

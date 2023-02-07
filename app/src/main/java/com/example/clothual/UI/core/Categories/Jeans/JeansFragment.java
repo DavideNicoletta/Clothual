@@ -37,7 +37,7 @@ public class JeansFragment extends Fragment {
     private CategoryModel model;
     private FragmentJeansBinding binding;
     public JeansFragment() {
-        // Required empty public constructor
+
     }
 
     /**

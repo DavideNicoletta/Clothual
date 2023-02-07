@@ -31,11 +31,4 @@ public class RegistrationModel {
         });
 
     }
-
-
-
-    public int idAccount(String username){
-        return accountDao.getId(username);
-    }
-
 }
