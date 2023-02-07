@@ -37,6 +37,8 @@ public class CoreActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.core_layout);
+
+        /*
         if(getIntent().getStringExtra("option").equals("new")) {
             coreModel.createUserGoogle(
                     getIntent().getStringExtra("username"),
@@ -45,7 +47,7 @@ public class CoreActivity extends AppCompatActivity{
                     getIntent().getStringExtra("email")
 
             );
-        }
+        }*/
 
 
         ImageView clothual = findViewById(R.id.clothual);

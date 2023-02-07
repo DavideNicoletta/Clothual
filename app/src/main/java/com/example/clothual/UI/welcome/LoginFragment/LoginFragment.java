@@ -297,11 +297,12 @@ public class LoginFragment extends Fragment {
 
     private void navigateToMainActivity() {
         Intent intent = new Intent(requireContext(), CoreActivity.class);
-        intent.putExtra("option", "old");
+       // intent.putExtra("option", "old");
         startActivity(intent);
         getActivity().finish();
     }
 
+    /*
     private void navigateToMainActivityNew(String nome, String email, String username) {
         Intent intent = new Intent(requireContext(), CoreActivity.class);
         intent.putExtra("option", "new");
@@ -310,7 +311,7 @@ public class LoginFragment extends Fragment {
         intent.putExtra("username", username);
         startActivity(intent);
         getActivity().finish();
-    }
+    }*/
 
     private void firebaseAuthWithGoogleAccount(GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
@@ -320,15 +321,18 @@ public class LoginFragment extends Fragment {
                     public void onSuccess(AuthResult authResult) {
                         //login success
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-
+/*
                         String uid = firebaseUser.getUid();
                         String email = firebaseUser.getEmail();
                         String name = firebaseUser.getDisplayName();
+
+ */
                         //check
                         if (authResult.getAdditionalUserInfo().isNewUser()){
                             //Account created
                             Snackbar.make(getView(), "Welcome to Clothual", Snackbar.LENGTH_SHORT).show();
-                            navigateToMainActivityNew(name, email, uid);
+                          //  navigateToMainActivityNew(name, email, uid);
+                            navigateToMainActivity();
                         } else {
                             //Existing user - Logged In
                             Snackbar.make(getView(), "Welcome Back to Clothual", Snackbar.LENGTH_SHORT).show();

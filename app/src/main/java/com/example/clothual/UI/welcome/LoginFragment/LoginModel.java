@@ -6,7 +6,6 @@ import com.example.clothual.Database.AccountDao;
 import com.example.clothual.Database.RoomDatabase;
 import com.example.clothual.Database.UserDao;
 import com.example.clothual.Model.Account;
-import com.example.clothual.Model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -66,6 +65,7 @@ public class LoginModel {
         return accountDao.getIdByEmail(email);
     }
 
+    /*
     public void createUserGoogle(String username, String name, String surname, String email){
             Account account = new Account(username, email, null);
             accountDao.insertAccount(account);
@@ -85,5 +85,7 @@ public class LoginModel {
         }
         return toReturn;
     }
+
+     */
 
 }
