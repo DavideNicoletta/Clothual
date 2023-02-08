@@ -3,6 +3,7 @@ package com.example.clothual.UI.core.Photo;
 import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
 import static com.example.clothual.Util.Constant.ID;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -29,7 +34,6 @@ import com.example.clothual.UI.core.AddDress.AddDressActivity;
 import com.example.clothual.UI.core.adapter.RecyclerViewPhotoAdapter;
 import com.example.clothual.databinding.FragmentPhotoBinding;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -38,7 +42,7 @@ import java.util.List;
  * Use the {@link PhotoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-@SuppressWarnings("deprecation")
+
 public class PhotoFragment extends Fragment {
 
     private FragmentPhotoBinding binding;
@@ -68,7 +72,7 @@ public class PhotoFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentPhotoBinding.inflate(getLayoutInflater());
         return binding.getRoot();
@@ -87,73 +91,120 @@ public class PhotoFragment extends Fragment {
 
         isFABOpen = false;
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(!isFABOpen){
-                    binding.fab1Upload.show();
-                    binding.fab2Make.show();
-                    binding.upload.setVisibility(View.VISIBLE);
-                    binding.makePhoto.setVisibility(View.VISIBLE);
+        binding.fab.setOnClickListener(view1 -> {
+            if(!isFABOpen){
+                binding.fab1Upload.show();
+                binding.fab2Make.show();
+                binding.upload.setVisibility(View.VISIBLE);
+                binding.makePhoto.setVisibility(View.VISIBLE);
 
-                    isFABOpen = true;
-                }else{
-                    binding.fab1Upload.hide();
-                    binding.fab2Make.hide();
-                    binding.upload.setVisibility(View.GONE);
-                    binding.makePhoto.setVisibility(View.GONE);
+                isFABOpen = true;
+            }else{
+                binding.fab1Upload.hide();
+                binding.fab2Make.hide();
+                binding.upload.setVisibility(View.GONE);
+                binding.makePhoto.setVisibility(View.GONE);
 
-                    isFABOpen = false;
-                }
+                isFABOpen = false;
             }
         });
 
         RecyclerView.LayoutManager manager = new GridLayoutManager(requireContext(), 3);
             SharedPreferences sharedPref = getActivity().getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
             List<Image> image = photoModel.getImageList(sharedPref.getInt(ID, 0));
-            RecyclerViewPhotoAdapter adapter = new RecyclerViewPhotoAdapter(image, new RecyclerViewPhotoAdapter.OnItemClickListener() {
-                @Override
-                public void delete() {
-
-                }
+            RecyclerViewPhotoAdapter adapter = new RecyclerViewPhotoAdapter(image, () -> {
 
             }, getActivity().getApplication(), getContext().getContentResolver());
             binding.recyclerView.setLayoutManager(manager);
             binding.recyclerView.setAdapter(adapter);
 
 
-        binding.fab1Upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                imageChooser();
-            }
-        });
+        binding.fab1Upload.setOnClickListener(view13 -> imageChooser());
 
-        binding.fab2Make.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.putExtra("option", 0);
-                startActivityForResult(intent, 0);
-            }
+        binding.fab2Make.setOnClickListener(view12 -> {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            activityTakeResultLauncher.launch(intent);
         });
 
     }
+
+
+    ActivityResultLauncher<Intent> activityTakeResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Uri uri;
+                        Context context = getActivity();
+                        assert context != null;
+                        SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
+                        Intent data = result.getData();
+                        if (data == null) {
+                            Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
+                        }else{
+                            Bitmap immagine = (Bitmap) data.getExtras().get("data");
+                            try {
+                                uri = photoModel.saveImage(getActivity().getContentResolver(), immagine, photoModel.getNameImage(), "", sharedPref.getInt(ID, 0));
+                                Intent intent = new Intent(getActivity(), AddDressActivity.class);
+                                intent.putExtra("uri", uri.toString());
+                                intent.putExtra("action", 0);
+                                startActivity(intent);
+                            } catch (IOException e) {
+                                Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
+                            }
+                        }
+                    }
+                }
+            });
+
+    ActivityResultLauncher<Intent> activityUploadResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        Uri uri;
+                        Context context = getActivity();
+                        assert context != null;
+                        SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
+                        if (data == null) {
+                            Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
+                        }else{
+                            uri = data.getData();
+                            if (uri != null) {
+                                try {
+                                    Bitmap bitmap = photoModel.importImageFromMemory(getActivity(), getContext(), getActivity().getContentResolver(), uri);
+                                    Uri newUri = photoModel.saveImage(getActivity().getContentResolver(), bitmap,
+                                            photoModel.getNameImage(), "", sharedPref.getInt(ID, 0));
+                                    Intent intent = new Intent(getActivity(), AddDressActivity.class);
+                                    intent.putExtra("uri", newUri.toString());
+                                    intent.putExtra("action", 0);
+                                    startActivity(intent);
+                                } catch (IOException e) {
+                                    Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
 
     void imageChooser() {
-
-        // create an instance of the
-        // intent of the type image
         Intent i = new Intent();
         i.setType("image/*");
+
         i.setAction(Intent.ACTION_GET_CONTENT);
 
-        // pass the constant to compare it
-        // with the returned requestCode
-        startActivityForResult(Intent.createChooser(i, "Select Picture"), 1);
+        activityUploadResultLauncher.launch(Intent.createChooser(i, "Select Picture"));
+
     }
 
-
+/*
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent databack) {
@@ -205,6 +256,6 @@ public class PhotoFragment extends Fragment {
                     }
                 }
             }
-    }
+    }*/
 }
 

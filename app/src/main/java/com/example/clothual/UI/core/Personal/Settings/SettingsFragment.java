@@ -137,12 +137,12 @@ public class SettingsFragment extends Fragment {
         }
 
 
-       @SuppressWarnings("deprecation")
+      // @SuppressWarnings("deprecation")
         private void setLocale(String lang) {
             Locale locale = new Locale(lang);
             Locale.setDefault(locale);
             Configuration config = getActivity().getResources().getConfiguration();
-            config.locale = locale;
+            config.setLocale(locale);
             getActivity().getResources().updateConfiguration(config, getActivity().getResources().getDisplayMetrics());
             Navigation.findNavController(requireView()).navigate(R.id.action_settingsFragment_self);
 

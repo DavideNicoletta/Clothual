@@ -96,12 +96,12 @@ public class LogoFragment extends Fragment {
         }, 500);
     }
 
-    @SuppressWarnings("deprecation")
+    //@SuppressWarnings("deprecation")
     private void setLocale(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
         Configuration config = getActivity().getResources().getConfiguration();
-        config.locale = locale;
+        config.setLocale(locale);
         getActivity().getResources().updateConfiguration(config, getActivity().getResources().getDisplayMetrics());
 
     }

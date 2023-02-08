@@ -5,6 +5,7 @@ import static com.example.clothual.Util.Constant.ID;
 import static com.example.clothual.Util.Constant.ID_ACCOUNT;
 import static com.example.clothual.Util.Constant.URI;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,10 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -83,7 +88,7 @@ public class EditProfileActivity extends AppCompatActivity {
             binding.viewUpload.setVisibility(View.INVISIBLE);
             binding.modifyImage.setVisibility(View.VISIBLE);
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 0);
+            activityTakeResultLauncher.launch(intent);
         });
 
         binding.modificaEmail.setOnClickListener(view15 -> {
@@ -175,6 +180,80 @@ public class EditProfileActivity extends AppCompatActivity {
 
     }
 
+
+    ActivityResultLauncher<Intent> activityTakeResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        //Uri uri;
+                        SharedPreferences.Editor editor = share.edit();
+                        //Context context = getActivity();
+                        //assert context != null;
+                        //SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
+                        Intent data = result.getData();
+                        if (data == null) {
+                            Intent intent = new Intent(EditProfileActivity.this, EditProfileActivity.class);
+                            startActivity(intent);
+                        }else {
+                           // assert databack != null;
+                            Bitmap immagine = (Bitmap) data.getExtras().get("data");
+
+                            try {
+                                editor.putString(URI, modifyModel.saveImage(getContentResolver(), immagine, modifyModel.getNameImage(), "profile", share.getInt(ID, 0)).toString());
+                                editor.apply();
+                                binding.imagePersonal.setImageBitmap(immagine);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+
+                            }
+                        }
+                    }
+                }
+            });
+
+    ActivityResultLauncher<Intent> activityUploadResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        Uri uri;
+                        SharedPreferences.Editor editor = share.edit();
+                        //Context context = getActivity();
+                        //assert context != null;
+                        //SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
+                        if (data == null) {
+                            Intent intent = new Intent(EditProfileActivity.this, EditProfileActivity.class);
+                            startActivity(intent);
+                        }else{
+                            uri = data.getData();
+                            if (uri != null) {
+                                try {
+                                    Bitmap bitmap = modifyModel.importImageFromMemory(EditProfileActivity.this, getApplicationContext(), getContentResolver(), uri);
+                                    Uri newUri = modifyModel.saveImage(getContentResolver(), bitmap,
+                                            modifyModel.getNameImage(), "profile", share.getInt(ID, 0));
+                                    binding.imagePersonal.setImageBitmap(bitmap);
+                                    editor.putString(URI, newUri.toString());
+                                    //Intent intent = new Intent(this, AddDressActivity.class);
+                                  //  intent.putExtra("uri", newUri.toString());
+                                  //  intent.putExtra("action", 0);
+                                   // startActivity(intent);
+                                } catch (IOException e) {
+                                    Intent intent = new Intent(EditProfileActivity.this, EditProfileActivity.class);
+                                    startActivity(intent);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+    /*
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent databack) {
@@ -221,15 +300,14 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
             }
         }
-    }
+    }*/
 
 
     void imageChooser() {
         Intent i = new Intent();
         i.setType("image/*");
         i.setAction(Intent.ACTION_GET_CONTENT);
-
-        startActivityForResult(Intent.createChooser(i, "Select Picture"), 1);
+        activityUploadResultLauncher.launch(Intent.createChooser(i, "Select Picture"));
     }
 
 

@@ -12,6 +12,7 @@ import static com.example.clothual.Util.Constant.PIER_CARDIN;
 import static com.example.clothual.Util.Constant.RALPH_LAUREN;
 import static com.example.clothual.Util.Constant.USERNAME_PREFERENCE;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +26,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -61,7 +66,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
  */
 
 
-@SuppressWarnings("deprecation")
+//@SuppressWarnings("deprecation")
 public class LoginFragment extends Fragment {
 
 
@@ -257,13 +262,37 @@ public class LoginFragment extends Fragment {
                 .build();
         gsc = GoogleSignIn.getClient(getActivity(), gso);
 
-       binding.signInButton.setOnClickListener(view1 -> {
-           Intent intet = gsc.getSignInIntent();
-           startActivityForResult(intet, RC_SIGN_IN);
+        //Deprecato
+        binding.signInButton.setOnClickListener(view1 -> {
+           Intent intent = gsc.getSignInIntent();
+           //startActivityForResult(intet, RC_SIGN_IN);
+            activityLoginResultLauncher.launch(intent);
        });
 
     }
 
+    ActivityResultLauncher<Intent> activityLoginResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // There are no request codes
+                        Intent data = result.getData();
+                        //doSomeOperations();
+                        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                        try {
+                            GoogleSignInAccount account = task.getResult(ApiException.class);
+                            firebaseAuthWithGoogleAccount(account);
+                        } catch (ApiException e) {
+                            Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            });
+
+
+    /*(Deprecato
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -276,7 +305,7 @@ public class LoginFragment extends Fragment {
                 Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         }
-    }
+    }*/
 
     void checkGoogle(){
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
