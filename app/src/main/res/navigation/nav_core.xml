@@ -100,20 +100,38 @@
         android:id="@+id/shoesFragment"
         android:name="com.example.clothual.UI.core.Categories.Shoes.ShoesFragment"
         android:label="fragment_shoes"
-        tools:layout="@layout/fragment_shoes" />
+        tools:layout="@layout/fragment_shoes" >
+        <action
+            android:id="@+id/action_shoesFragment_to_clothualViewElement"
+            app:destination="@id/clothualViewElement" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/clothualViewElement"
+        android:name="com.example.clothual.UI.core.Categories.ClothualViewElementFragment"
+        android:label="fragment_view"
+        tools:layout="@layout/fragment_clothual_view_element"/>
 
 
     <fragment
         android:id="@+id/totalFragment"
         android:name="com.example.clothual.UI.core.Categories.Total.TotalFragment"
-        android:label="TotalFragment" />
+        android:label="TotalFragment" >
+        <action
+            android:id="@+id/action_totalFragment_to_clothualViewElement"
+            app:destination="@id/clothualViewElement" />
+    </fragment>
 
 
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.example.clothual.UI.core.Categories.Favorite.FavoriteFragment"
         android:label="Favorite"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_clothualViewElement"
+            app:destination="@id/clothualViewElement" />
+    </fragment>
 
 
     <fragment
@@ -134,28 +152,44 @@
         android:id="@+id/trousersFragment"
         android:name="com.example.clothual.UI.core.Categories.Trousers.TrousersFragment"
         android:label="fragment_trousers"
-        tools:layout="@layout/fragment_trousers" />
+        tools:layout="@layout/fragment_trousers" >
+        <action
+            android:id="@+id/action_trousersFragment_to_clothualViewElement"
+            app:destination="@id/clothualViewElement" />
+    </fragment>
 
 
     <fragment
         android:id="@+id/TShirtFragment"
         android:name="com.example.clothual.UI.core.Categories.TShirt.TShirtFragment"
         android:label="fragment_t_shirt"
-        tools:layout="@layout/fragment_t_shirt" />
+        tools:layout="@layout/fragment_t_shirt" >
+        <action
+            android:id="@+id/action_TShirtFragment_to_clothualViewElement"
+            app:destination="@id/clothualViewElement" />
+    </fragment>
 
 
     <fragment
         android:id="@+id/jacketsFragment"
         android:name="com.example.clothual.UI.core.Categories.Sweatshirt.SweatshirtFragment"
         android:label="fragment_jackets"
-        tools:layout="@layout/fragment_sweatshirt" />
+        tools:layout="@layout/fragment_sweatshirt" >
+        <action
+            android:id="@+id/action_jacketsFragment_to_clothualViewElement"
+            app:destination="@id/clothualViewElement" />
+    </fragment>
 
 
     <fragment
         android:id="@+id/jeansFragment"
         android:name="com.example.clothual.UI.core.Categories.Jeans.JeansFragment"
         android:label="fragment_jeans"
-        tools:layout="@layout/fragment_jeans" />
+        tools:layout="@layout/fragment_jeans" >
+        <action
+            android:id="@+id/action_jeansFragment_to_clothualViewElement"
+            app:destination="@id/clothualViewElement" />
+    </fragment>
 
 
     <fragment

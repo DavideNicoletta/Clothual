@@ -167,7 +167,8 @@
     </string>
 
     <string name="action_settings" translatable="false">Settings</string>
-    <string name="removeImage">Remove image?</string>
+    <string name="remove">Remove</string>
+    <string name="image">image ?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="favorites">Favorite</string>
@@ -179,4 +180,5 @@
     <string name="login_username_empty">Username cannot be empty</string>
     <string name="scatta_una_foto">Take a photo</string>
     <string name="carica_una_foto">Upload a photo</string>
+    <string name="removeImage">Remove image?</string>
 </resources>

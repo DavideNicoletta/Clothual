@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        >
+
+        <ImageView
+            android:id="@+id/clothualAddDress"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:background="@color/appbar"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/imageViewDress"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:contentDescription="TODO"
+        app:layout_constraintTop_toBottomOf="@id/cardView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/imageViewDress"
+        tools:layout_editor_absoluteX="0dp" />
+
+        <!-- MODIFICARE LAYOUT BELOW -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintTop_toBottomOf="@id/view"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <TextView
+                android:id="@+id/spinner"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                style="@style/Widget.App.TextInputLayout"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:background="@drawable/add_dress_border"
+                android:fontFamily="@font/inter_semibold"
+                android:textStyle="bold|italic"/>
+
+
+            <TextView
+                    android:id="@+id/textViewBrand"
+                    android:layout_below="@id/spinner"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    style="@style/Widget.App.TextInputLayout"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/add_dress_border"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textStyle="bold|italic"/>
+
+
+            <TextView
+                android:id="@+id/textViewTemplate"
+                android:layout_below="@id/textViewBrand"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                style="@style/Widget.App.TextInputLayout"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:background="@drawable/add_dress_border"
+                android:fontFamily="@font/inter_semibold"
+                android:textStyle="bold|italic"/>
+
+            <TextView
+                android:id="@+id/textViewColor"
+                android:layout_below="@id/textViewTemplate"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                style="@style/Widget.App.TextInputLayout"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:background="@drawable/add_dress_border"
+                android:fontFamily="@font/inter_semibold"
+                android:textStyle="bold|italic"/>
+
+
+
+            <TextView
+                android:id="@+id/textViewDescription"
+                android:layout_below="@id/textViewColor"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                style="@style/Widget.App.TextInputLayout"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:background="@drawable/add_dress_border"
+                android:fontFamily="@font/inter_semibold"
+                android:textStyle="bold|italic"/>
+
+
+
+
+        </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,9 +12,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -109,7 +111,20 @@ public class PhotoFragment extends Fragment {
             }
         });
 
-        RecyclerView.LayoutManager manager = new GridLayoutManager(requireContext(), 3);
+        Display display = ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        int rotation = display.getRotation();
+        RecyclerView.LayoutManager manager;
+        switch (rotation){
+            case 0:
+                manager = new GridLayoutManager(requireContext(), 2);
+                break;
+            case 1:
+                manager = new GridLayoutManager(requireContext(), 4);
+                break;
+            default:
+                manager = new GridLayoutManager(requireContext(), 2);
+        }
+      //  RecyclerView.LayoutManager manager = new GridLayoutManager(requireContext(), 2);
             SharedPreferences sharedPref = getActivity().getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
             List<Image> image = photoModel.getImageList(sharedPref.getInt(ID, 0));
             RecyclerViewPhotoAdapter adapter = new RecyclerViewPhotoAdapter(image, () -> {

@@ -39,6 +39,7 @@ public class RecyclerViewClothualAdapter extends RecyclerView.Adapter<RecyclerVi
         void buttonDelete(String notify);
         void buttonFavorite(String favorite);
         void buttonEdit(String uri, int action , int id);
+        void changeView(boolean change, int ID);
     }
 
     public RecyclerViewClothualAdapter(List<Clothual> clothualList, List<Image> imageList, ContentResolver contentResolver,
@@ -209,6 +210,8 @@ public class RecyclerViewClothualAdapter extends RecyclerView.Adapter<RecyclerVi
                     cardView.setVisibility(View.INVISIBLE);
                     break;
 
+                case R.id.imageViewAdapterClothual:
+                    onItemClickListener.changeView(true, clothualList.get(getAdapterPosition()).getId());
                 default:
                     break;
             }

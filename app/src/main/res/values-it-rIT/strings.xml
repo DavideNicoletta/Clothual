@@ -36,7 +36,8 @@
 
     <string name="login_mail_empty">L\'email non può essere vuota</string>
 
-    <string name="removeImage">Rimuovere l\'immagine?</string>
+    <string name="remove">Rimuovere</string>
+    <string name="image">l\'immagine?</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="all">TUTTO</string>
@@ -48,6 +49,7 @@
     <string name="login_username_empty">Il nome utente non può essere vuoto</string>
     <string name="scatta_una_foto">Scatta una foto</string>
     <string name="carica_una_foto">Carica una foto</string>
+    <string name="removeImage">Rimuovere l\'immagine?</string>
 
 
 </resources>

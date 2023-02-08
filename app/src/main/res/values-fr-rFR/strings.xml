@@ -33,7 +33,8 @@
     <string name="sweatshirt">Sweat-shirt</string>
     <string name="close_app">Appuyez sur le bouton d\'accueil pour quitter Clothual</string>
     <string name="already_an_user_login">Déjà utilisateur? Connexion</string>
-    <string name="removeImage">Supprimer l\'image?</string>
+    <string name="remove">Supprimer</string>
+    <string name="image">l\'image?</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="all">TOUT</string>
@@ -46,6 +47,7 @@
     <string name="login_username_empty">Nom d\'utilisateur ne peut pas etre vide</string>
     <string name="carica_una_foto">Télécharger une image</string>
     <string name="scatta_una_foto">Prendre une photo</string>
+    <string name="removeImage">Supprimer l\'image?</string>
 
 
 </resources>
