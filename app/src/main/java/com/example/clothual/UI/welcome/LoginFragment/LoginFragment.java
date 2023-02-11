@@ -329,7 +329,9 @@ public class LoginFragment extends Fragment {
                     public void onSuccess(AuthResult authResult) {
                         //login success
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-
+                        String email = account.getEmail();
+                        String surname = account.getFamilyName();
+                        String name = account.getGivenName();
                         //check
                         if (authResult.getAdditionalUserInfo().isNewUser()){
                             //Account created
