@@ -181,4 +181,8 @@
     <string name="scatta_una_foto">Take a photo</string>
     <string name="carica_una_foto">Upload a photo</string>
     <string name="removeImage">Remove image?</string>
+    
+    <string name="version">Version: 1.0</string>
+    <string name="developed">Developed by: BDENS</string>
+    <string name="language">Language: Java</string>
 </resources>

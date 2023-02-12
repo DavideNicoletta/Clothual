@@ -14,13 +14,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Image;
-import com.example.clothual.R;
 import com.example.clothual.UI.core.AddDress.AddDressActivity;
 import com.example.clothual.UI.core.Categories.CategoryModel;
 import com.example.clothual.UI.core.adapter.RecyclerViewClothualAdapter;
@@ -93,13 +91,6 @@ public class JeansFragment extends Fragment {
                 intent.putExtra("action", 1);
                 intent.putExtra("id", id);
                 startActivity(intent);
-            }
-
-            @Override
-            public void changeView(boolean change, int ID) {
-                if(change){
-                    Navigation.findNavController(requireView()).navigate(R.id.action_jeansFragment_to_clothualViewElement);
-                }
             }
         }, getActivity().getApplication());
         binding.recyclerViewShoes.setLayoutManager(manager);

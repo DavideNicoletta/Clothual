@@ -48,6 +48,9 @@
     <string name="carica_una_foto">Télécharger une image</string>
     <string name="scatta_una_foto">Prendre une photo</string>
     <string name="removeImage">Supprimer l\'image?</string>
+    <string name="version">Version: 1.0</string>
+    <string name="developed">Développé par: BDENS</string>
+    <string name="language">Langue: Java</string>
 
 
 </resources>

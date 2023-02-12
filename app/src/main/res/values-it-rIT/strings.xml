@@ -50,6 +50,9 @@
     <string name="scatta_una_foto">Scatta una foto</string>
     <string name="carica_una_foto">Carica una foto</string>
     <string name="removeImage">Rimuovere l\'immagine?</string>
+    <string name="version">Versione: 1.0</string>
+    <string name="developed">Sviluppato da: BDENS</string>
+    <string name="language">Linguaggio: Java</string>
 
 
 </resources>
