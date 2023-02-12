@@ -334,6 +334,9 @@ public class LoginFragment extends Fragment {
                         String email = account.getEmail();
                         String surname = account.getFamilyName();
                         String name = account.getGivenName();
+
+                        loginModel.createUser("google", name, surname, "google", email);
+
                         //check
                         if (authResult.getAdditionalUserInfo().isNewUser()){
                             //Account created
