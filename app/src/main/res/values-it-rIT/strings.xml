@@ -54,6 +54,8 @@
     <string name="developed">Sviluppato da: BDENS</string>
     <string name="language">Linguaggio: Java</string>
     <string name="typeClothual">Tipologia</string>
+    <string name="choose_lang">Scegli Lingua</string>
+    <string name="mode">Modalità</string>
 
 
 </resources>

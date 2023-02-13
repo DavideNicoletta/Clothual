@@ -186,4 +186,6 @@
     <string name="developed">Developed by: BDENS</string>
     <string name="language">Language: Java</string>
     <string name="typeClothual">Type</string>
+    <string name="choose_lang">Choose language</string>
+    <string name="mode">Mode</string>
 </resources>

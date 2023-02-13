@@ -25,7 +25,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/inter_semibold"
-            android:text="Scegli Lingua" />
+            android:text="@string/choose_lang" />
 
         <LinearLayout
             android:id="@+id/english"
@@ -47,7 +47,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="12dp"
                 android:drawableEnd="@drawable/united_kingdom"
-                android:text="Inglese" />
+                android:text="English" />
         </LinearLayout>
 
         <LinearLayout
@@ -71,7 +71,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="12dp"
                 android:drawableEnd="@drawable/italian_flag"
-                android:text="italiano" />
+                android:text="Italiano" />
         </LinearLayout>
 
         <LinearLayout
@@ -96,7 +96,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
                 android:drawableEnd="@drawable/french_flag"
-                android:text="Francese" />
+                android:text="Français" />
         </LinearLayout>
     </LinearLayout>
 
@@ -119,7 +119,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Modalità"
+        android:text="@string/mode"
         style="@style/textView"
         android:fontFamily="@font/inter_semibold" />
 
