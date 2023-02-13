@@ -115,170 +115,195 @@
         />
 
 
-    <TextView
-        android:id="@+id/nuovaEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/view2"
-        android:layout_marginTop="20dp"
-        android:text="@string/newEmail"
-        android:layout_marginStart="30dp"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/view2">
 
-    <TextView
-        android:id="@+id/modificaEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/edit"
-        android:layout_below="@id/nuovaEmail"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="300dp"
-        android:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginEnd="16dp">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputViewEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/nuovaEmail"
-        android:layout_marginStart="20dp"
-        app:endIconMode="clear_text"
-        app:startIconDrawable="@drawable/mail_48px"
-        >
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextEmail"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
-            android:inputType="text"
-            android:maxLength="20"
-            android:hint="@string/email"
-            android:textColorHint="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:importantForAutofill="no" />
+                <TextView
+                    android:id="@+id/nuovaEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/newEmail"
+                    android:layout_marginStart="30dp"/>
 
-    </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:id="@+id/modificaEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit"
+                    android:layout_below="@id/nuovaEmail"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="280dp"
+                    android:textStyle="bold" />
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputViewEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nuovaEmail"
+                    android:layout_marginStart="20dp"
+                    app:endIconMode="clear_text"
+                    app:hintEnabled="false"
+                    app:startIconDrawable="@drawable/mail_48px"
+                    >
 
-    <TextView
-        android:id="@+id/nuovoUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/inputViewEmail"
-        android:layout_marginTop="20dp"
-        android:text="@string/newUsername"
-        android:layout_marginStart="30dp"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextEmail"
+                        android:layout_width="250dp"
+                        android:layout_height="60dp"
+                        android:inputType="text"
+                        android:maxLength="20"
+                        android:hint="@string/email"
+                        android:textColorHint="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:importantForAutofill="no" />
 
-    <TextView
-        android:id="@+id/modificaUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/edit"
-        android:layout_below="@id/nuovoUser"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="300dp"
-        android:textStyle="bold"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-
-        android:id="@+id/inputUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/nuovoUser"
-        android:layout_marginStart="20dp"
-        app:endIconMode="clear_text"
-        app:startIconDrawable="@drawable/account_circle_48px2"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextUsername"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
-            android:hint="@string/username"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:maxLength="20"
-            android:textColorHint="@color/black"
-            android:textStyle="bold"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-    <TextView
-        android:id="@+id/vecchiaPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/inputUsername"
-        android:layout_marginTop="20dp"
-        android:text="@string/oldPassword"
-        android:layout_marginStart="30dp"/>
+                <TextView
+                    android:id="@+id/nuovoUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/inputViewEmail"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/newUsername"
+                    android:layout_marginStart="30dp"/>
+
+                <TextView
+                    android:id="@+id/modificaUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit"
+                    android:layout_below="@id/nuovoUser"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="280dp"
+                    android:textStyle="bold"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/inputUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nuovoUser"
+                    android:layout_marginStart="20dp"
+                    app:endIconMode="clear_text"
+                    app:hintEnabled="false"
+                    app:startIconDrawable="@drawable/account_circle_48px2"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextUsername"
+                        android:layout_width="250dp"
+                        android:layout_height="60dp"
+                        android:hint="@string/username"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:maxLength="20"
+                        android:textColorHint="@color/black"
+                        android:textStyle="bold"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <TextView
+                    android:id="@+id/vecchiaPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/inputUsername"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/oldPassword"
+                    android:layout_marginStart="30dp"/>
 
 
 
-    <com.google.android.material.textfield.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
 
-        android:id="@+id/inputPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/vecchiaPassword"
-        app:endIconMode="password_toggle"
-        android:layout_marginStart="20dp"
-        app:startIconDrawable="@drawable/key_48px"
-        >
+                    android:id="@+id/inputPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/vecchiaPassword"
+                    app:endIconMode="password_toggle"
+                    android:layout_marginStart="20dp"
+                    app:hintEnabled="false"
+                    app:startIconDrawable="@drawable/key_48px"
+                    >
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextPassword"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:maxLength="20"
-            android:textColorHint="@color/black"
-            android:hint="@string/password"
-            android:textStyle="bold"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextPassword"
+                        android:layout_width="250dp"
+                        android:layout_height="60dp"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:maxLength="20"
+                        android:textColorHint="@color/black"
+                        android:hint="@string/password"
+                        android:textStyle="bold"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/nuovaPasswordView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/inputPassword"
-        android:layout_marginTop="20dp"
-        android:text="@string/newPassword"
-        android:layout_marginStart="30dp"/>
+                <TextView
+                    android:id="@+id/nuovaPasswordView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/inputPassword"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/newPassword"
+                    android:layout_marginStart="30dp"/>
 
-    <TextView
-        android:id="@+id/modificaPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/edit"
-        android:layout_below="@id/inputPassword"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="300dp"
-        android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/modificaPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit"
+                    android:layout_below="@id/inputPassword"
+                    android:layout_marginStart="280dp"
+                    android:textStyle="bold"/>
 
-    <com.google.android.material.textfield.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
 
-        android:id="@+id/nuovaPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/nuovaPasswordView"
-        app:endIconMode="password_toggle"
-        android:layout_marginStart="20dp"
-        app:startIconDrawable="@drawable/key_48px"
-        >
+                    android:id="@+id/nuovaPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nuovaPasswordView"
+                    app:endIconMode="password_toggle"
+                    android:layout_marginStart="20dp"
+                    app:hintEnabled="false"
+                    app:startIconDrawable="@drawable/key_48px"
+                    >
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextPasswordNuovo"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:maxLength="20"
-            android:textColorHint="@color/black"
-            android:hint="@string/password"
-            android:textStyle="bold"
-            />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextPasswordNuovo"
+                        android:layout_width="250dp"
+                        android:layout_height="60dp"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:maxLength="20"
+                        android:textColorHint="@color/black"
+                        android:hint="@string/password"
+                        android:textStyle="bold"
+                        />
 
-    </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+
 </RelativeLayout>
