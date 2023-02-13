@@ -22,6 +22,8 @@ import androidx.navigation.Navigation;
 
 import com.example.clothual.R;
 import com.example.clothual.UI.core.CoreActivity;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.util.Locale;
 
@@ -78,6 +80,13 @@ public class LogoFragment extends Fragment {
             setLocale(lenguage);
         }
 
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                checkGoogle();
+            }
+        }, 500);
+
 
         handler.postDelayed(new Runnable() {
             @Override
@@ -106,6 +115,17 @@ public class LogoFragment extends Fragment {
 
     }
 
+    void checkGoogle(){
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
+        if (account != null) {
+            navigateToMainActivity();
+        }
+    }
+    private void navigateToMainActivity() {
+        Intent intent = new Intent(requireContext(), CoreActivity.class);
 
+        startActivity(intent);
+        getActivity().finish();
+    }
 
 }

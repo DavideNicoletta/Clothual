@@ -92,7 +92,7 @@ public class HistoryFragment extends Fragment {
         binding.rateTShirt.setText((int)rate[2] + "%");
 
         binding.jacketsCircularProgressbar.setProgress((int)rate[3]);
-        binding.rateJackets.setText((int)rate[4] + "%");
+        binding.rateJackets.setText((int)rate[3] + "%");
 
         binding.jeansCircularProgressbar.setProgress((int)rate[4]);
         binding.rateJeans.setText((int)rate[4] + "%");

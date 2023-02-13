@@ -38,6 +38,7 @@
             style="@style/textView"
             android:maxLength="100"
             android:hint="@string/email"
+            android:textSize="18sp"
             android:textColorHint="@color/grey"
             android:fontFamily="@font/inter_semibold"
             android:textStyle="bold|italic"
@@ -72,6 +73,7 @@
             android:textColorHint="@color/grey"
             android:hint="@string/password"
             style="@style/textView"
+            android:textSize="18sp"
             android:fontFamily="@font/inter_semibold"
             android:textStyle="bold|italic"
             />

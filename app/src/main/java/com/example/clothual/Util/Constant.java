@@ -37,8 +37,8 @@ public class Constant {
 
     //Stringa policy
     public static final String POLICY = "Iscrivendoti, accetti le nostre Condizioni. " +
-            "Scopri in che modo raccogliamo, usiamo e condividiamo i tuoi dati nella nostra" +
-            "informativa sulla privacy e in che modo usiamo cookie e tecnologie simili nella nostra" +
+            "Scopri in che modo raccogliamo, usiamo e condividiamo i tuoi dati nella nostra " +
+            "informativa sulla privacy e in che modo usiamo cookie e tecnologie simili nella nostra " +
             "normativa sui cookie.";
 
 

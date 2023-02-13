@@ -38,10 +38,12 @@ import androidx.navigation.Navigation;
 import com.example.clothual.R;
 import com.example.clothual.UI.core.CoreActivity;
 import com.example.clothual.databinding.FragmentLoginBinding;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -256,7 +258,7 @@ public class LoginFragment extends Fragment {
        });
 
        //Google
-        checkGoogle();
+        //checkGoogle();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -283,8 +285,11 @@ public class LoginFragment extends Fragment {
                         Intent data = result.getData();
                         //doSomeOperations();
                         Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+
                         try {
                             GoogleSignInAccount account = task.getResult(ApiException.class);
+                            GoogleSignInResult inResult = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+                            handleSignInResult(inResult);
                             firebaseAuthWithGoogleAccount(account);
                         } catch (ApiException e) {
                             Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
@@ -309,12 +314,6 @@ public class LoginFragment extends Fragment {
         }
     }*/
 
-    void checkGoogle(){
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
-        if (account != null) {
-            navigateToMainActivity();
-        }
-    }
 
     private void navigateToMainActivity() {
         Intent intent = new Intent(requireContext(), CoreActivity.class);
@@ -331,16 +330,15 @@ public class LoginFragment extends Fragment {
                     public void onSuccess(AuthResult authResult) {
                         //login success
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                        String email = account.getEmail();
-                        String surname = account.getFamilyName();
-                        String name = account.getGivenName();
-
-                        loginModel.createUser("google", name, surname, "google", email);
+                        //String email = account.getEmail();
+                        //String surname = account.getFamilyName();
+                        //String name = account.getGivenName();
 
                         //check
                         if (authResult.getAdditionalUserInfo().isNewUser()){
                             //Account created
                             Snackbar.make(getView(), "Welcome to Clothual", Snackbar.LENGTH_SHORT).show();
+                            //loginModel.createUser("google", name, surname, "google", email);
                           //  navigateToMainActivityNew(name, email, uid);
                             navigateToMainActivity();
                         } else {
@@ -358,6 +356,16 @@ public class LoginFragment extends Fragment {
                         Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+    private void handleSignInResult(GoogleSignInResult result) {
+        //Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+        if (result.isSuccess()) {
+            GoogleSignInAccount account = result.getSignInAccount();
+            String email = account.getEmail();
+            String surname = account.getFamilyName();
+            String name = account.getGivenName();
+            loginModel.createUser("google", name, surname, "google", email);
+        }
     }
 
 }

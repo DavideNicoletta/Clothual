@@ -171,9 +171,9 @@ public class RecyclerViewCalendarAdapter extends RecyclerView.Adapter<RecyclerVi
                 }
 
                 if(outfit.getClothualString().length() == 0){
-                    onItemClickListener.buttonAddRemove(true, "Clothual eliminato dall'aoutfit del " + data);
+                    onItemClickListener.buttonAddRemove(true, "Clothual eliminato dall'outfit del " + data);
                 }else{
-                    onItemClickListener.buttonAddRemove(false, "Clothual eliminato dall'aoutfit del " + data);
+                    onItemClickListener.buttonAddRemove(false, "Clothual eliminato dall'outfit del " + data);
                 }
 
             }
