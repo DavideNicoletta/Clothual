@@ -4,6 +4,7 @@ import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
 import static com.example.clothual.Util.Constant.ID;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Image;
 import com.example.clothual.UI.core.Categories.CategoryModel;
+import com.example.clothual.UI.core.Categories.ClothualElementShow;
 import com.example.clothual.UI.core.adapter.RecyclerViewFavoriteAdapter;
 import com.example.clothual.databinding.FragmentFavoriteBinding;
 import com.google.android.material.snackbar.Snackbar;
@@ -76,6 +78,18 @@ public class FavoriteFragment extends Fragment {
             @Override
             public void buttonFavorite(String favorite) {
                 Snackbar.make(view, favorite, Snackbar.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void change(Clothual clothual, Image image) {
+                Intent intent = new Intent(getActivity(), ClothualElementShow.class);
+                intent.putExtra("type", clothual.getType());
+                intent.putExtra("brand", clothual.getBrand());
+                intent.putExtra("template", clothual.getTemplate());
+                intent.putExtra("color", clothual.getColor());
+                intent.putExtra("description", clothual.getDescription());
+                intent.putExtra("uri", image.getUri());
+                startActivity(intent);
             }
         }, getActivity().getApplication());
 

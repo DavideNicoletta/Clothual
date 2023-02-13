@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clothual.Model.Clothual;
@@ -32,6 +33,8 @@ public class RecyclerViewPhotoAdapter extends RecyclerView.Adapter<RecyclerViewP
     private final ContentResolver contentResolver;
     public interface OnItemClickListener{
         void delete();
+
+        void change(Image image);
     }
 
     public RecyclerViewPhotoAdapter(List<Image> imageList, OnItemClickListener onItemClickListener,
@@ -73,6 +76,7 @@ public class RecyclerViewPhotoAdapter extends RecyclerView.Adapter<RecyclerViewP
 
         private final Button yes;
 
+        private ConstraintLayout container;
         private final Button no;
 
         public PhotoViewHolder(@NonNull View itemView) {
@@ -82,9 +86,12 @@ public class RecyclerViewPhotoAdapter extends RecyclerView.Adapter<RecyclerViewP
             yes = itemView.findViewById(R.id.yes);
             no = itemView.findViewById(R.id.no);
             model = new PhotoModel(application);
+            container = itemView.findViewById(R.id.container);
+            container.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
             yes.setOnClickListener(this);
             no.setOnClickListener(this);
+            imageView.setOnClickListener(this);
 
         }
 
@@ -121,8 +128,13 @@ public class RecyclerViewPhotoAdapter extends RecyclerView.Adapter<RecyclerViewP
                 }
                 imageList.remove(getAdapterPosition());
                 notifyItemRemoved(getAdapterPosition());
-            }else{
+            }else {
                 cardViewPhoto.setVisibility(View.INVISIBLE);
+            }
+            if(view.getId() == R.id.imageViewAdapter) {
+                if(cardViewPhoto.getVisibility() != View.VISIBLE) {
+                    onItemClickListener.change(imageList.get(getAdapterPosition()));
+                }
             }
 
         }

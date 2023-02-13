@@ -124,11 +124,22 @@ public class PhotoFragment extends Fragment {
             default:
                 manager = new GridLayoutManager(requireContext(), 2);
         }
-      //  RecyclerView.LayoutManager manager = new GridLayoutManager(requireContext(), 2);
-            SharedPreferences sharedPref = getActivity().getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
-            List<Image> image = photoModel.getImageList(sharedPref.getInt(ID, 0));
-            RecyclerViewPhotoAdapter adapter = new RecyclerViewPhotoAdapter(image, () -> {
 
+            SharedPreferences sharedPref = getActivity().getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
+            int Id = sharedPref.getInt(ID, 0);
+            List<Image> image = photoModel.getImageList(Id);
+            RecyclerViewPhotoAdapter adapter = new RecyclerViewPhotoAdapter(image, new RecyclerViewPhotoAdapter.OnItemClickListener() {
+                @Override
+                public void delete() {
+
+                }
+
+                @Override
+                public void change(Image image) {
+                    Intent intent = new Intent(getActivity(), ShowPhoto.class);
+                    intent.putExtra("uri", image.getUri());
+                    startActivity(intent);
+                }
             }, getActivity().getApplication(), getContext().getContentResolver());
             binding.recyclerView.setLayoutManager(manager);
             binding.recyclerView.setAdapter(adapter);
@@ -218,59 +229,5 @@ public class PhotoFragment extends Fragment {
         activityUploadResultLauncher.launch(Intent.createChooser(i, "Select Picture"));
 
     }
-
-/*
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent databack) {
-        Uri uri;
-        Context context = getActivity();
-        SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
-        if(requestCode == 0) {
-            if (databack == null) {
-
-                Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
-
-            } else {
-                assert databack != null;
-                Bitmap immagine = (Bitmap) databack.getExtras().get("data");
-
-                try {
-                    uri = photoModel.saveImage(getActivity().getContentResolver(), immagine, photoModel.getNameImage(), "", sharedPref.getInt(ID, 0));
-                    Intent intent = new Intent(getActivity(), AddDressActivity.class);
-                    intent.putExtra("uri", uri.toString());
-                    intent.putExtra("action", 0);
-                    startActivity(intent);
-                } catch (IOException e) {
-
-                    Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
-
-                }
-
-             }
-        }else{
-            if (databack == null) {
-                Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
-            }else {
-                    uri = databack.getData();
-                    if (uri != null) {
-                        try {
-                            Bitmap bitmap = photoModel.importImageFromMemory(getActivity(), getContext(), getActivity().getContentResolver(), uri);
-                            Uri newUri = photoModel.saveImage(getActivity().getContentResolver(), bitmap,
-                                    photoModel.getNameImage(), "", sharedPref.getInt(ID, 0));
-                            Intent intent = new Intent(getActivity(), AddDressActivity.class);
-                            intent.putExtra("uri", newUri.toString());
-                            intent.putExtra("action", 0);
-                            startActivity(intent);
-                        } catch (FileNotFoundException e) {
-                            Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
-                        } catch (IOException e) {
-                            Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
-                        }
-
-                    }
-                }
-            }
-    }*/
 }
 

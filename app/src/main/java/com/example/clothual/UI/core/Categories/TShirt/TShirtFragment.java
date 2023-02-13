@@ -21,6 +21,7 @@ import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Image;
 import com.example.clothual.UI.core.AddDress.AddDressActivity;
 import com.example.clothual.UI.core.Categories.CategoryModel;
+import com.example.clothual.UI.core.Categories.ClothualElementShow;
 import com.example.clothual.UI.core.adapter.RecyclerViewClothualAdapter;
 import com.example.clothual.databinding.FragmentTShirtBinding;
 import com.google.android.material.snackbar.Snackbar;
@@ -91,6 +92,18 @@ public class TShirtFragment extends Fragment {
                 intent.putExtra("uri", uri);
                 intent.putExtra("action", 1);
                 intent.putExtra("id", id);
+                startActivity(intent);
+            }
+
+            @Override
+            public void change(Clothual clothual, Image imageTo) {
+                Intent intent = new Intent(getActivity(), ClothualElementShow.class);
+                intent.putExtra("type", clothual.getType());
+                intent.putExtra("brand", clothual.getBrand());
+                intent.putExtra("template", clothual.getTemplate());
+                intent.putExtra("color", clothual.getColor());
+                intent.putExtra("description", clothual.getDescription());
+                intent.putExtra("uri", imageTo.getUri());
                 startActivity(intent);
             }
 

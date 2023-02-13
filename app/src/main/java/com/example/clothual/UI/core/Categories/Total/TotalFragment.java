@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Image;
 import com.example.clothual.UI.core.AddDress.AddDressActivity;
+import com.example.clothual.UI.core.Categories.ClothualElementShow;
 import com.example.clothual.UI.core.adapter.RecyclerViewClothualAdapter;
 import com.example.clothual.UI.core.Categories.CategoryModel;
 import com.example.clothual.databinding.FragmentTotalBinding;
@@ -94,6 +95,18 @@ public class TotalFragment extends Fragment {
             public void buttonFavorite(String favorite) {
                 Snackbar.make(view, favorite, Snackbar.LENGTH_LONG).show();
             }
+            @Override
+            public void change(Clothual clothual, Image imageTo) {
+                Intent intent = new Intent(getActivity(), ClothualElementShow.class);
+                intent.putExtra("type", clothual.getType());
+                intent.putExtra("brand", clothual.getBrand());
+                intent.putExtra("template", clothual.getTemplate());
+                intent.putExtra("color", clothual.getColor());
+                intent.putExtra("description", clothual.getDescription());
+                intent.putExtra("uri", imageTo.getUri());
+                startActivity(intent);
+            }
+
         }, getActivity().getApplication());
         binding.recyclerViewTotal.setLayoutManager(manager);
         binding.recyclerViewTotal.setAdapter(adapter);

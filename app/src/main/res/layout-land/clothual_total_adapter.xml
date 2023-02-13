@@ -21,7 +21,8 @@
             android:layout_marginStart="60dp"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="centerCrop"/>
 
 
         <LinearLayout
@@ -119,7 +120,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:background="@drawable/border_layout_adapter_category"
-        android:visibility="visible">
+        android:visibility="invisible">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

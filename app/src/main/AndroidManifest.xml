@@ -20,13 +20,19 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:usesCleartextTraffic="true"
         android:icon="@drawable/icon_app"
         android:label="@string/app_name"
         android:roundIcon="@drawable/icon_app"
         android:supportsRtl="true"
         android:theme="@style/Theme.LightNigthThemeMode"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".UI.core.Photo.ShowPhoto"
+            android:exported="false" />
+        <activity
+            android:name=".UI.core.Categories.ClothualElementShow"
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -40,8 +46,7 @@
 
         <activity
             android:name=".UI.welcome.WelcomeActivity"
-            android:exported="true"
-            >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -78,7 +83,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

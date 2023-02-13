@@ -51,6 +51,7 @@
     <string name="version">Version: 1.0</string>
     <string name="developed">Développé par: BDENS</string>
     <string name="language">Langue: Java</string>
+    <string name="typeClothual">Typologie</string>
 
 
 </resources>

@@ -34,6 +34,8 @@ public class RecyclerViewFavoriteAdapter extends RecyclerView.Adapter<RecyclerVi
     private Application application;
     public interface OnItemClickListener{
         void buttonFavorite(String favorite);
+
+        void change(Clothual clothual, Image image);
     }
 
     public RecyclerViewFavoriteAdapter(List<Clothual> clothualList, List<Image> imageList, ContentResolver contentResolver,
@@ -146,6 +148,8 @@ public class RecyclerViewFavoriteAdapter extends RecyclerView.Adapter<RecyclerVi
                 clothualList.remove(getAdapterPosition());
                 notifyItemRemoved(getAdapterPosition());
                 onItemClickListener.buttonFavorite("Removed by Favorite");
+            }else{
+                onItemClickListener.change(clothualList.get(getAdapterPosition()), imageList.get(getAdapterPosition()));
             }
         }
     }

@@ -82,20 +82,27 @@ public class PhotoModel {
 
 
     public List<Image> getImageList(int ID){
-     /*   List<Image> image = imageDao.getAllImage();
-        for(int i = 0; i < image.size(); i++){
-            if(image.get(i).getDescription().equals("profile") || image.get(i).getIdAccount() != ID){
-                image.remove(i);
-            }
-        }
-        return image;*/
         List<Image> imageList = imageDao.getAllImage();
+        List<Image> getList = new ArrayList<>();
         for(int i = 0; i < imageList.size(); i++){
-            if(imageList.get(i).getDescription().equals("profile") || imageList.get(i).getIdAccount() != ID){
-                imageList.remove(i);
+            if(!imageList.get(i).getDescription().equals("profile")){
+               getList.add(imageList.get(i));
             }
         }
-        return imageList;
+
+
+        for(int i = 0; i < getList.size(); i++){
+            if(getList.get(i).getIdAccount() != ID){
+                System.out.println(imageList.get(i).getIdAccount());
+                getList.remove(getList.get(i));
+            }
+        }
+
+        if(getList.size() == 1 && getList.get(0).getIdAccount() != ID){
+            return null;
+        }
+
+        return getList;
     }
 
 

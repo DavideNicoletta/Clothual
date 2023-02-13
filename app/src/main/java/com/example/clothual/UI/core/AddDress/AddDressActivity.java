@@ -87,6 +87,7 @@ public class AddDressActivity extends AppCompatActivity {
 
         if(action == 1){
             Clothual clothual = model.getClothualByID(id);
+            spinner.setSelection(clothual.getType()-1);
             brand.setText(clothual.getBrand());
             template.setText(clothual.getTemplate());
             color.setText(clothual.getColor());
@@ -142,15 +143,22 @@ public class AddDressActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        model = new AddDressModel(getApplication());
-        String uri = getIntent().getExtras().getString("uri");
-        contentResolver.delete(Uri.parse(uri),null ,null );
-        List<Image> imageList = model.getAllImage();
-        for(int i = 0; i < imageList.size(); i++){
-            if(imageList.get(i).getUri().equals(uri)){
-                model.deliteImage(imageList.get(i));
+        int action = getIntent().getExtras().getInt("action");
+        if(action == 1){
+            super.onBackPressed();
+        }else{
+            model = new AddDressModel(getApplication());
+            String uri = getIntent().getExtras().getString("uri");
+            contentResolver.delete(Uri.parse(uri),null ,null );
+            List<Image> imageList = model.getAllImage();
+            for(int i = 0; i < imageList.size(); i++){
+                if(imageList.get(i).getUri().equals(uri)){
+                    model.deliteImage(imageList.get(i));
+                }
             }
+            super.onBackPressed();
         }
-        super.onBackPressed();
+
+
     }
 }
