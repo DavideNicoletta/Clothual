@@ -2,6 +2,8 @@ package com.example.clothual.UI.core.Categories;
 
 import android.app.Application;
 import android.content.ContentResolver;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 
 import com.example.clothual.Database.ClothualDao;
@@ -14,6 +16,7 @@ import com.example.clothual.Model.Image;
 import com.example.clothual.Model.Outfit;
 
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +24,7 @@ public class CategoryModel {
 
     public Application application;
     public RoomDatabase database;
+    public ContentResolver contentResolver;
     private ImageDao imageDao;
     private ClothualDao clothualDao;
 
@@ -32,6 +36,7 @@ public class CategoryModel {
         imageDao = database.imageDao();
         clothualDao = database.clothualDao();
         outfitDao = database.outfitDao();
+        contentResolver = application.getApplicationContext().getContentResolver();
     }
 
     public List<Image> getImageList(int ID){
@@ -262,5 +267,13 @@ public class CategoryModel {
         }
         return clothualOutfit;
     }
+
+
+    //Show element
+    public Bitmap importImageFromMemory(Uri imageUri) throws FileNotFoundException {
+        InputStream inputStream = contentResolver.openInputStream(imageUri);
+        return BitmapFactory.decodeStream(inputStream);
+    }
+
 }
 

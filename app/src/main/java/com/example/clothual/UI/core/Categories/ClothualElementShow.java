@@ -18,7 +18,7 @@ public class ClothualElementShow extends AppCompatActivity {
 
     private ActivityClothualElementShowBinding binding;
 
-    private ClothualElementShowModel model;
+    private CategoryModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class ClothualElementShow extends AppCompatActivity {
         binding = ActivityClothualElementShowBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        model = new ClothualElementShowModel(getContentResolver());
+        model = new CategoryModel(getApplication());
 
         int nightModeFlags =
                 getResources().getConfiguration().uiMode &
