@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.clothual.UI.core.Personal.PersonalModel;
 import com.example.clothual.databinding.FragmentHistoryBinding;
 
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
 public class HistoryFragment extends Fragment {
 
     private FragmentHistoryBinding binding;
-    private HistoryModel historyModel;
+    private PersonalModel personalModel;
 
     public HistoryFragment() {
 
@@ -41,7 +42,7 @@ public class HistoryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        historyModel = new HistoryModel(requireActivity().getApplication());
+        personalModel = new PersonalModel(requireActivity().getApplication());
     }
 
     @Override
@@ -55,8 +56,8 @@ public class HistoryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        float [] rate = historyModel.getRateTypeClothual();
-        List<String> color = historyModel.getRateColor();
+        float [] rate = personalModel.getRateTypeClothual();
+        List<String> color = personalModel.getRateColor();
 
 
         switch (color.size()){

@@ -27,16 +27,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.clothual.Model.Account;
 import com.example.clothual.R;
 import com.example.clothual.UI.core.CoreActivity;
+import com.example.clothual.UI.core.Personal.PersonalModel;
 import com.example.clothual.databinding.EditProfileLayoutBinding;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-@SuppressWarnings("deprecation")
+
 public class EditProfileActivity extends AppCompatActivity {
 
     private EditProfileLayoutBinding binding;
-    private EditProfileModel modifyModel;
+    private PersonalModel personalModel;
     public SharedPreferences share;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class EditProfileActivity extends AppCompatActivity {
         binding = EditProfileLayoutBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        modifyModel = new EditProfileModel(getApplication());
+        personalModel = new PersonalModel(getApplication());
         share = getSharedPreferences(CREDENTIALS_LOGIN_FILE, MODE_PRIVATE);
         SharedPreferences sharedPref = getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
 
@@ -52,15 +53,15 @@ public class EditProfileActivity extends AppCompatActivity {
             binding.imagePersonal.setImageResource(R.drawable.avatar);
         }else{
             try {
-                binding.imagePersonal.setImageBitmap(modifyModel.importImageFromMemory(this, getApplicationContext(), getContentResolver(),
+                binding.imagePersonal.setImageBitmap(personalModel.importImageFromMemory(this, getApplicationContext(), getContentResolver(),
                         Uri.parse(sharedPref.getString(URI, " "))));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
 
-        binding.editTextEmail.setText(modifyModel.getEmail(sharedPref.getInt(ID_ACCOUNT, 0)));
-        binding.editTextUsername.setText(modifyModel.getUsername(sharedPref.getInt(ID_ACCOUNT, 0)));
+        binding.editTextEmail.setText(personalModel.getEmail(sharedPref.getInt(ID_ACCOUNT, 0)));
+        binding.editTextUsername.setText(personalModel.getUsername(sharedPref.getInt(ID_ACCOUNT, 0)));
 
         binding.editTextEmail.setEnabled(false);
         binding.editTextPassword.setEnabled(false);
@@ -134,9 +135,9 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view18) {
                 int id = sharedPref.getInt(ID_ACCOUNT, 0);
-                Account account = modifyModel.getAccountByID(id);
+                Account account = personalModel.getAccountByID(id);
                 if (binding.editTextEmail.isEnabled()) {
-                    if (modifyModel.checkEmail(binding.editTextEmail.getText().toString())) {
+                    if (personalModel.checkEmail(binding.editTextEmail.getText().toString())) {
                         binding.inputViewEmail.setError(null);
                         account.setEmail(binding.editTextEmail.getText().toString());
                     } else {
@@ -155,7 +156,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
 
                 if (binding.editTextPassword.isEnabled()) {
-                    if (modifyModel.checkPassword(binding.editTextUsername.getText().toString(), sharedPref.getInt(ID_ACCOUNT, 0))) {
+                    if (personalModel.checkPassword(binding.editTextUsername.getText().toString(), sharedPref.getInt(ID_ACCOUNT, 0))) {
                         if (binding.editTextPasswordNuovo.getText().toString().isEmpty()) {
                             binding.inputPassword.setError("Password non valida");
 
@@ -169,7 +170,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     }
                 }
 
-                modifyModel.upoloadEditAccount(account);
+                personalModel.upoloadEditAccount(account);
             }
         });
 
@@ -202,7 +203,7 @@ public class EditProfileActivity extends AppCompatActivity {
                             Bitmap immagine = (Bitmap) data.getExtras().get("data");
 
                             try {
-                                editor.putString(URI, modifyModel.saveImage(getContentResolver(), immagine, modifyModel.getNameImage(), "profile", share.getInt(ID, 0)).toString());
+                                editor.putString(URI, personalModel.saveImage(getContentResolver(), immagine, personalModel.getNameImage(), "profile", share.getInt(ID, 0)).toString());
                                 editor.apply();
                                 binding.imagePersonal.setImageBitmap(immagine);
                             } catch (IOException e) {
@@ -234,9 +235,9 @@ public class EditProfileActivity extends AppCompatActivity {
                             uri = data.getData();
                             if (uri != null) {
                                 try {
-                                    Bitmap bitmap = modifyModel.importImageFromMemory(EditProfileActivity.this, getApplicationContext(), getContentResolver(), uri);
-                                    Uri newUri = modifyModel.saveImage(getContentResolver(), bitmap,
-                                            modifyModel.getNameImage(), "profile", share.getInt(ID, 0));
+                                    Bitmap bitmap = personalModel.importImageFromMemoryEditProfile(EditProfileActivity.this, getApplicationContext(), getContentResolver(), uri);
+                                    Uri newUri = personalModel.saveImage(getContentResolver(), bitmap,
+                                            personalModel.getNameImage(), "profile", share.getInt(ID, 0));
                                     binding.imagePersonal.setImageBitmap(bitmap);
                                     editor.putString(URI, newUri.toString());
                                     //Intent intent = new Intent(this, AddDressActivity.class);
