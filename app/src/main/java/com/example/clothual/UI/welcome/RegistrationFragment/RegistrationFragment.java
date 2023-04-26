@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.clothual.R;
+import com.example.clothual.UI.welcome.WelcomeModel;
 import com.example.clothual.databinding.FragmentRegistrationBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -36,6 +37,8 @@ public class RegistrationFragment extends Fragment {
 
     private FragmentRegistrationBinding binding;
     public RegistrationModel registrationModel;
+
+    public WelcomeModel welcomeModel;
     public RegistrationFragment() { }
 
 
@@ -58,6 +61,7 @@ public class RegistrationFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         registrationModel = new RegistrationModel(requireActivity().getApplication());
+        welcomeModel = new WelcomeModel(requireActivity().getApplication());
     }
 
     @Override
@@ -138,7 +142,7 @@ public class RegistrationFragment extends Fragment {
                                     progressDialog.cancel();
                                 }
                             });
-                    registrationModel.createUser(username, name, surname, password, email);
+                    welcomeModel.createUser(username, name, surname, password, email);
                 }
             }
         });
