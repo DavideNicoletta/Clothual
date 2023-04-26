@@ -21,7 +21,7 @@ import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Image;
 import com.example.clothual.UI.core.Categories.CategoryModel;
 import com.example.clothual.UI.core.Categories.ClothualElementShow;
-import com.example.clothual.UI.core.adapter.RecyclerViewFavoriteAdapter;
+import com.example.clothual.Adapter.RecyclerViewFavoriteAdapter;
 import com.example.clothual.databinding.FragmentFavoriteBinding;
 import com.google.android.material.snackbar.Snackbar;
 

@@ -6,10 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 
-import com.example.clothual.Database.ClothualDao;
-import com.example.clothual.Database.ImageDao;
-import com.example.clothual.Database.OutfitDao;
-import com.example.clothual.Database.RoomDatabase;
+import com.example.clothual.Data.Database.RoomDatabase;
+import com.example.clothual.Data.Repository.CoreRepository;
 import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Converters;
 import com.example.clothual.Model.Image;
@@ -25,22 +23,28 @@ public class CategoryModel {
     public Application application;
     public RoomDatabase database;
     public ContentResolver contentResolver;
-    private ImageDao imageDao;
+    public CoreRepository coreRepository;
+   /* private ImageDao imageDao;
     private ClothualDao clothualDao;
 
     private OutfitDao outfitDao;
 
+    */
+
     public CategoryModel(Application application) {
         this.application = application;
         database = RoomDatabase.getDatabase(application);
-        imageDao = database.imageDao();
+       /* imageDao = database.imageDao();
         clothualDao = database.clothualDao();
         outfitDao = database.outfitDao();
+
+        */
         contentResolver = application.getApplicationContext().getContentResolver();
+        coreRepository = new CoreRepository(application);
     }
 
     public List<Image> getImageList(int ID){
-        List<Image> listImage = imageDao.getAllImage();
+        List<Image> listImage = coreRepository.getAllImage();//imageDao.getAllImage();
         List<Image> returnList = new ArrayList<>();
         for( int i = 0; i < listImage.size(); i++){
             if(listImage.get(i).getIdAccount() == ID) {
@@ -52,7 +56,7 @@ public class CategoryModel {
     }
 
     public List<Image> getImageShoesList(List<Clothual> clothualList, int ID) {
-        List<Image> imageList = imageDao.getAllImage();
+        List<Image> imageList = coreRepository.getAllImage();//imageDao.getAllImage();
         List<Image> shoes = new ArrayList<>();
         for(int i = 0; i < clothualList.size(); i++){
             for(int j = 0; j < imageList.size(); j++){
@@ -65,7 +69,7 @@ public class CategoryModel {
     }
 
     public List<Image> getImagePreferiteList(List<Clothual> clothualList, int ID) {
-        List<Image> imageList = imageDao.getAllImage();
+        List<Image> imageList = coreRepository.getAllImage();//imageDao.getAllImage();
         List<Image> preferite = new ArrayList<>();
         for(int i = 0; i < clothualList.size(); i++){
             for(int j = 0; j < imageList.size(); j++){
@@ -78,7 +82,7 @@ public class CategoryModel {
     }
 
    public List<Clothual> getShoesList(int ID){
-        List<Clothual> list = clothualDao.getAllClothual();
+        List<Clothual> list = coreRepository.getAllClothual();//clothualDao.getAllClothual();
         List<Clothual> shoes = new ArrayList<>();
         for(int i = 0; i < list.size(); i++){
             if(list.get(i).getType() == 1 && list.get(i).getIdUserAccount() == ID){
@@ -91,7 +95,7 @@ public class CategoryModel {
     }
 
     public List<Clothual> getTrousersList(int ID){
-        List<Clothual> list = clothualDao.getAllClothual();
+        List<Clothual> list = coreRepository.getAllClothual();//clothualDao.getAllClothual();
         List<Clothual> trousers = new ArrayList<>();
         for(int i = 0; i < list.size(); i++){
             if(list.get(i).getType() == 2 && list.get(i).getIdUserAccount() == ID){
@@ -103,7 +107,7 @@ public class CategoryModel {
     }
 
     public List<Image> getImageTrousersList(List<Clothual> clothualList, int ID) {
-        List<Image> imageList = imageDao.getAllImage();
+        List<Image> imageList = coreRepository.getAllImage();//imageDao.getAllImage();
         List<Image> trousers = new ArrayList<>();
         for(int i = 0; i < clothualList.size(); i++){
             for(int j = 0; j < imageList.size(); j++){
@@ -116,7 +120,7 @@ public class CategoryModel {
     }
 
     public List<Clothual> getJacketsList(int ID){
-        List<Clothual> list = clothualDao.getAllClothual();
+        List<Clothual> list = coreRepository.getAllClothual();//clothualDao.getAllClothual();
         List<Clothual> jackets = new ArrayList<>();
         for(int i = 0; i < list.size(); i++){
             if(list.get(i).getType() == 4 && list.get(i).getIdUserAccount() == ID){
@@ -128,7 +132,7 @@ public class CategoryModel {
     }
 
     public List<Image> getImageJacketsList(List<Clothual> clothualList, int ID) {
-        List<Image> imageList = imageDao.getAllImage();
+        List<Image> imageList = coreRepository.getAllImage();//imageDao.getAllImage();
         List<Image> jackets = new ArrayList<>();
         for(int i = 0; i < clothualList.size(); i++){
             for(int j = 0; j < imageList.size(); j++){
@@ -141,7 +145,7 @@ public class CategoryModel {
     }
 
     public List<Clothual> getTShirtList(int ID){
-        List<Clothual> list = clothualDao.getAllClothual();
+        List<Clothual> list = coreRepository.getAllClothual();//clothualDao.getAllClothual();
         List<Clothual> tShirt = new ArrayList<>();
         for(int i = 0; i < list.size(); i++){
             if(list.get(i).getType() == 3 && list.get(i).getIdUserAccount() == ID){
@@ -153,7 +157,7 @@ public class CategoryModel {
     }
 
     public List<Image> getImageTShirtList(List<Clothual> clothualList, int ID) {
-        List<Image> imageList = imageDao.getAllImage();
+        List<Image> imageList = coreRepository.getAllImage();//imageDao.getAllImage();
         List<Image> tShirt = new ArrayList<>();
         for(int i = 0; i < clothualList.size(); i++){
             for(int j = 0; j < imageList.size(); j++){
@@ -166,7 +170,7 @@ public class CategoryModel {
     }
 
     public List<Clothual> getJeansList(int ID){
-        List<Clothual> list = clothualDao.getAllClothual();
+        List<Clothual> list = coreRepository.getAllClothual();//o.getAllClothual();
         List<Clothual> jeans = new ArrayList<>();
         for(int i = 0; i < list.size(); i++){
             if(list.get(i).getType() == 5 && list.get(i).getIdUserAccount() == ID){
@@ -178,7 +182,7 @@ public class CategoryModel {
     }
 
     public List<Image> getImageJeansList(List<Clothual> clothualList, int ID) {
-        List<Image> imageList = imageDao.getAllImage();
+        List<Image> imageList = coreRepository.getAllImage();//imageDao.getAllImage();
         List<Image> jeans = new ArrayList<>();
         for(int i = 0; i < clothualList.size(); i++){
             for(int j = 0; j < imageList.size(); j++){
@@ -192,7 +196,7 @@ public class CategoryModel {
 
 
     public List<Clothual> getClothualList(int ID){
-        List<Clothual> listClothual = clothualDao.getAllClothual();
+        List<Clothual> listClothual = coreRepository.getAllClothual();//clothualDao.getAllClothual();
         List<Clothual> returnList = new ArrayList<>();
         for( int i = 0; i < listClothual.size(); i++){
             if(listClothual.get(i).getIdUserAccount() == ID) {
@@ -203,7 +207,7 @@ public class CategoryModel {
     }
 
     public List<Clothual> getPreferiteList(int ID){
-        List<Clothual> list = clothualDao.getAllClothual();
+        List<Clothual> list = coreRepository.getAllClothual();//clothualDao.getAllClothual();
         List<Clothual> preferite = new ArrayList<>();
         for(int i = 0; i < list.size(); i++){
             if(list.get(i).isPreferite() && list.get(i).getIdUserAccount() == ID){
@@ -214,15 +218,18 @@ public class CategoryModel {
     }
 
     public void deleteClothual(Clothual clothual){
-        clothualDao.deleteClothual(clothual);
+        coreRepository.deleteClothual(clothual);
+        //clothualDao.deleteClothual(clothual);
     }
 
     public void deleteImage(Image image){
-        imageDao.deleteImage(image);
+        coreRepository.deleteImage(image);
+        //imageDao.deleteImage(image);
     }
 
     public void updateClothaulElement(Clothual clothual){
-        clothualDao.updateClothual(clothual);
+        coreRepository.updateClothual(clothual);
+        //clothualDao.updateClothual(clothual);
     }
 
     public void deleteElement(ContentResolver contentResolver, Uri uri, int ID) throws FileNotFoundException {
@@ -231,7 +238,7 @@ public class CategoryModel {
     }
 
     public void deleteFromOutfit(int ID){
-        List<Outfit> outfitList = outfitDao.getAlLOutfit();
+        List<Outfit> outfitList = coreRepository.getAllOutfit();//outfitDao.getAlLOutfit();
         if(outfitList.size()!=0) {
             for (int i = 0; i < outfitList.size(); i++) {
                 Outfit outfit = outfitList.get(i);
@@ -247,7 +254,8 @@ public class CategoryModel {
                 outfit.setClothualListByList(clothualList);
                 outfit.converter();
                 outfit.removeClothualList();
-                outfitDao.updateOutfit(outfit);
+                coreRepository.updateOutfit(outfit);
+                //outfitDao.updateOutfit(outfit);
 
             }
         }
@@ -255,7 +263,7 @@ public class CategoryModel {
 
 
     public List<Clothual> getClothualOutfit(Outfit outfit){
-        List<Clothual> clothualList = clothualDao.getAllClothual();
+        List<Clothual> clothualList = coreRepository.getAllClothual();//clothualDao.getAllClothual();
         List<String> listIdClothual = Converters.fromString(outfit.getClothualString());
         List<Clothual> clothualOutfit = new ArrayList<>();
         for(int i = 0; i < clothualList.size(); i++){

@@ -4,9 +4,9 @@ import android.app.Application;
 
 import com.example.clothual.Model.Account;
 import com.example.clothual.Model.User;
-import com.example.clothual.Database.AccountDao;
-import com.example.clothual.Database.RoomDatabase;
-import com.example.clothual.Database.UserDao;
+import com.example.clothual.Data.Database.AccountDao;
+import com.example.clothual.Data.Database.RoomDatabase;
+import com.example.clothual.Data.Database.UserDao;
 
 public class RegistrationModel {
 

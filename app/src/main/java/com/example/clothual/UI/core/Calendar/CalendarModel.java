@@ -2,10 +2,8 @@ package com.example.clothual.UI.core.Calendar;
 
 import android.app.Application;
 
-import com.example.clothual.Database.ClothualDao;
-import com.example.clothual.Database.ImageDao;
-import com.example.clothual.Database.OutfitDao;
-import com.example.clothual.Database.RoomDatabase;
+import com.example.clothual.Data.Database.RoomDatabase;
+import com.example.clothual.Data.Repository.CoreRepository;
 import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Converters;
 import com.example.clothual.Model.Image;
@@ -19,20 +17,28 @@ public class CalendarModel {
 
     public Application application;
     public RoomDatabase database;
-    private final ImageDao imageDao;
+    public CoreRepository coreRepository;
+    /*private final ImageDao imageDao;
     private final ClothualDao clothualDao;
     private final OutfitDao outfitDao;
+
+     */
+
+
 
     public CalendarModel(Application application) {
         this.application = application;
         database = RoomDatabase.getDatabase(application);
-        imageDao = database.imageDao();
+        coreRepository = new CoreRepository(application);
+       /* imageDao = database.imageDao();
         clothualDao = database.clothualDao();
         outfitDao = database.outfitDao();
+
+        */
     }
 
     public List<Image> getImageList(int ID){
-        List<Image> image = imageDao.getAllImage();
+        List<Image> image = coreRepository.getAllImage();//imageDao.getAllImage();
         for(int i = 0; i < image.size(); i++){
             if(image.get(i).getDescription().equals("profile") || image.get(i).getIdAccount() != ID){
                 image.remove(i);
@@ -42,7 +48,7 @@ public class CalendarModel {
     }
 
     public List<Clothual> getClothualList(int ID){
-        List<Clothual> clothualList = clothualDao.getAllClothual();
+        List<Clothual> clothualList = coreRepository.getAllClothual();//clothualDao.getAllClothual();
         for(int i = 0; i < clothualList.size(); i++){
             if(clothualList.get(i).getIdUserAccount() != ID){
                 clothualList.remove(i);
@@ -52,15 +58,18 @@ public class CalendarModel {
     }
 
     public void insertOutfit(Outfit outfit){
-        outfitDao.insertOutfit(outfit);
+        coreRepository.insertOutfit(outfit);
+       //outfitDao.insertOutfit(outfit);
     }
 
     public void updateOutfit(Outfit outfit){
-        outfitDao.updateOutfit(outfit);
+        coreRepository.updateOutfit(outfit);
+       // outfitDao.updateOutfit(outfit);
     }
 
     public Clothual getClothualByID(int id){
-        return clothualDao.getClothualByID(id);
+        return coreRepository.getClothualByID(id);
+//        return clothualDao.getClothualByID(id);
     }
 
     public List<Clothual> getClothualOutfit(String date){
@@ -78,7 +87,7 @@ public class CalendarModel {
     }
 
     public List<Image> getImageOutfit(List<Clothual> clothualList) {
-        List<Image> imageList = imageDao.getAllImage();
+        List<Image> imageList = coreRepository.getAllImage();//imageDao.getAllImage();
         List<Image> outfit = new ArrayList<>();
         for(int i = 0; i < clothualList.size(); i++){
             for(int j = 0; j < imageList.size(); j++){
@@ -91,16 +100,18 @@ public class CalendarModel {
     }
 
     public void checkOutfitList(){
-        List<Outfit> outfit = outfitDao.getAlLOutfit();
+        List<Outfit> outfit = coreRepository.getAllOutfit();//outfitDao.getAlLOutfit();
         for(int i = 0; i < outfit.size();  i++){
             if(outfit.get(i).getClothualString().equals("")){
-                outfitDao.deliteOutfit(outfit.get(i));
+                coreRepository.deliteOutfit(outfit.get(i));
+                //outfitDao.deliteOutfit(outfit.get(i));
             }
         }
     }
 
     public Outfit getOutfitByDate(String date){
-        return outfitDao.getOutfitByDate(date);
+        return coreRepository.getOutfitByDate(date);
+       // return outfitDao.getOutfitByDate(date);
     }
 
     public List<Clothual> getClothualOutfitDate(Outfit outfit, int ID){

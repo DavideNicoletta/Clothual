@@ -21,7 +21,7 @@ import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Image;
 import com.example.clothual.UI.core.AddDress.AddDressActivity;
 import com.example.clothual.UI.core.Categories.ClothualElementShow;
-import com.example.clothual.UI.core.adapter.RecyclerViewClothualAdapter;
+import com.example.clothual.Adapter.RecyclerViewClothualAdapter;
 import com.example.clothual.UI.core.Categories.CategoryModel;
 import com.example.clothual.databinding.FragmentTotalBinding;
 import com.google.android.material.snackbar.Snackbar;

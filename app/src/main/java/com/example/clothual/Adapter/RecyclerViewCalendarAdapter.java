@@ -1,4 +1,4 @@
-package com.example.clothual.UI.core.adapter;
+package com.example.clothual.Adapter;
 
 import android.app.Application;
 import android.content.ContentResolver;

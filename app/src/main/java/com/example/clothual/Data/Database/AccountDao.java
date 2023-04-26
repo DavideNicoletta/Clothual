@@ -1,4 +1,4 @@
-package com.example.clothual.Database;
+package com.example.clothual.Data.Database;
 
 import static com.example.clothual.Util.Query.GET_ACCOUNT_BY_ID;
 import static com.example.clothual.Util.Query.GET_ACCOUNT_BY_USERNAME;

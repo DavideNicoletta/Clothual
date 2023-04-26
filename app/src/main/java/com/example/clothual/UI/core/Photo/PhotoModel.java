@@ -20,10 +20,8 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.clothual.Database.ClothualDao;
-import com.example.clothual.Database.ImageDao;
-import com.example.clothual.Database.OutfitDao;
-import com.example.clothual.Database.RoomDatabase;
+import com.example.clothual.Data.Database.RoomDatabase;
+import com.example.clothual.Data.Repository.CoreRepository;
 import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Converters;
 import com.example.clothual.Model.Image;
@@ -44,18 +42,26 @@ public class PhotoModel {
 
     public Application application;
     public RoomDatabase database;
-    private final ImageDao imageDao;
-    private final ClothualDao clothualDao;
+    //private final ImageDao imageDao;
 
-    public final OutfitDao outfitDao;
+    public final ContentResolver contentResolver;
+    //private final ClothualDao clothualDao;
+
+    //public final OutfitDao outfitDao;
+
+    public CoreRepository coreRepository;
 
     public PhotoModel(Application application) {
         this.application = application;
+        contentResolver = application.getContentResolver();
         database = RoomDatabase.getDatabase(application);
-        imageDao = database.imageDao();
-        clothualDao = database.clothualDao();
-        outfitDao = database.outfitDao();
+       // imageDao = database.imageDao();
+       // clothualDao = database.clothualDao();
+       // outfitDao = database.outfitDao();
+        coreRepository = new CoreRepository(application);
     }
+
+
 
     public Uri saveImage(ContentResolver contentResolver, Bitmap image, String title, String description, int id) throws IOException {
         return saveImageToMemory( contentResolver,  image,  title,  description, id);
@@ -76,13 +82,14 @@ public class PhotoModel {
         outputStream.close();
 
         Image image = new Image(title, description, uri.toString(), id);
-        imageDao.insertImage(image);
+        //imageDao.insertImage(image);
+        coreRepository.insertImage(image);
         return uri;
     }
 
 
     public List<Image> getImageList(int ID){
-        List<Image> imageList = imageDao.getAllImage();
+        List<Image> imageList = coreRepository.getAllImage();//imageDao.getAllImage();
         List<Image> getList = new ArrayList<>();
         for(int i = 0; i < imageList.size(); i++){
             if(!imageList.get(i).getDescription().equals("profile")){
@@ -127,15 +134,18 @@ public class PhotoModel {
     }
 
     public void deliteImage(Image image){
-        imageDao.deleteImage(image);
+        coreRepository.deleteImage(image);
+        //imageDao.deleteImage(image);
     }
 
     public void deliteClothual(Clothual clothual){
-        clothualDao.deleteClothual(clothual);
+        coreRepository.deleteClothual(clothual);
+        //clothualDao.deleteClothual(clothual);
     }
 
     public List<Clothual> getAllClothual(){
-        return clothualDao.getAllClothual();
+        return coreRepository.getAllClothual();
+       // return clothualDao.getAllClothual();
     }
 
 
@@ -146,7 +156,7 @@ public class PhotoModel {
     }
 
     public int takeIDClothualByIDImage(int idImage){
-        List<Clothual> clothualList = clothualDao.getAllClothual();
+        List<Clothual> clothualList = coreRepository.getAllClothual();//clothualDao.getAllClothual();
         for(int i = 0; i < clothualList.size(); i++){
             if(clothualList.get(i).getIdImage() == idImage){
                 return clothualList.get(i).getId();
@@ -157,7 +167,7 @@ public class PhotoModel {
 
 
     public void deleteFromOutfit(int ID){
-        List<Outfit> outfitList = outfitDao.getAlLOutfit();
+        List<Outfit> outfitList = coreRepository.getAllOutfit();//outfitDao.getAlLOutfit();
         if(outfitList.size() != 0){
             for (int i = 0; i < outfitList.size(); i++) {
                 Outfit outfit = outfitList.get(i);
@@ -172,14 +182,15 @@ public class PhotoModel {
                 outfit.setClothualListByList(clothualList);
                 outfit.converter();
                 outfit.removeClothualList();
-                outfitDao.updateOutfit(outfit);
+                coreRepository.updateOutfit(outfit);
+                //outfitDao.updateOutfit(outfit);
 
             }
         }
     }
 
     public List<Clothual> getClothualOutfit(Outfit outfit){
-        List<Clothual> clothualList = clothualDao.getAllClothual();
+        List<Clothual> clothualList = coreRepository.getAllClothual();//clothualDao.getAllClothual();
         List<String> listIdClothual = Converters.fromString(outfit.getClothualString());
         List<Clothual> clothualOutfit = new ArrayList<>();
         for(int i = 0; i < clothualList.size(); i++){
@@ -190,6 +201,11 @@ public class PhotoModel {
             }
         }
         return clothualOutfit;
+    }
+
+    public Bitmap importImageFromMemoryShowPhoto(Uri imageUri) throws FileNotFoundException {
+        InputStream inputStream = contentResolver.openInputStream(imageUri);
+        return BitmapFactory.decodeStream(inputStream);
     }
 
 }

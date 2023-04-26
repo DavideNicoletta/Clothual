@@ -20,11 +20,8 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.clothual.Database.AccountDao;
-import com.example.clothual.Database.ClothualDao;
-import com.example.clothual.Database.ImageDao;
-import com.example.clothual.Database.RoomDatabase;
-import com.example.clothual.Database.UserDao;
+import com.example.clothual.Data.Database.RoomDatabase;
+import com.example.clothual.Data.Repository.CoreRepository;
 import com.example.clothual.Model.Account;
 import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Image;
@@ -50,24 +47,30 @@ public class PersonalModel {
 
     public Application application;
     public RoomDatabase database;
-    private final UserDao userDao;
+   /* private final UserDao userDao;
     private final AccountDao accountDao;
 
     private final ImageDao imageDao;
     private final ClothualDao clothualDao;
 
+    */
+
+    public CoreRepository coreRepository;
+
     public PersonalModel(Application application) {
         this.application = application;
         database = RoomDatabase.getDatabase(application);
-        userDao = database.daoUser();
+       /* userDao = database.daoUser();
         accountDao = database.daoAccount();
         clothualDao = database.clothualDao();
         imageDao = database.imageDao();
+        */
+        coreRepository = new CoreRepository(application);
     }
 
     public String getName(String username){
-        List<Account> account = accountDao.getAllAccount();
-        List<User> user = userDao.getAllUser();
+        List<Account> account = coreRepository.getAllAccount();//accountDao.getAllAccount();
+        List<User> user = coreRepository.getAllUser();//userDao.getAllUser();
 
         for(int i = 0; i <account.size(); i++){
             if(account.get(i).getUsername().equals(username)){
@@ -95,7 +98,7 @@ public class PersonalModel {
 
     //History
     public float[] getRateTypeClothual(){
-        List<Clothual> clothualList = clothualDao.getAllClothual();
+        List<Clothual> clothualList = coreRepository.getAllClothual();//clothualDao.getAllClothual();
         float [] rate = {0, 0, 0, 0, 0};
         for(int i = 0; i < clothualList.size(); i++){
             switch (clothualList.get(i).getType()){
@@ -138,7 +141,7 @@ public class PersonalModel {
     }
 
     public List<String> getRateColor(){
-        List<Clothual> clothualList = clothualDao.getAllClothual();
+        List<Clothual> clothualList = coreRepository.getAllClothual();//clothualDao.getAllClothual();
         List<String> result = new ArrayList<>();
         HashMap<String, Integer> rate = new HashMap<String, Integer>();
         for(int i = 0; i < clothualList.size(); i++){
@@ -165,7 +168,7 @@ public class PersonalModel {
 
     //Edit Profile
     public boolean checkPassword(String password, int id){
-        List<Account> account = accountDao.getAllAccount();
+        List<Account> account = coreRepository.getAllAccount();//accountDao.getAllAccount();
         for(int i = 0; i < account.size(); i++){
             if(account.get(i).getId() == id && account.get(i).getPassword().equals(password)){
                 return true;
@@ -179,11 +182,11 @@ public class PersonalModel {
     }
 
     public String getEmail(int id ){
-        return accountDao.getEmail(id);
+        return coreRepository.getEmail(id);//accountDao.getEmail(id);
     }
 
     public String getUsername(int id ){
-        return accountDao.getUsername(id);
+        return coreRepository.getUsername(id);//accountDao.getUsername(id);
     }
 
 
@@ -205,7 +208,7 @@ public class PersonalModel {
         outputStream.close();
 
         Image image = new Image(title, description, uri.toString(), ID);
-        imageDao.insertImage(image);
+        coreRepository.insertImage(image);//imageDao.insertImage(image);
         return uri;
     }
 
@@ -222,7 +225,7 @@ public class PersonalModel {
 
     public void createImage(String title, String description, String uri, int ID){
         Image image = new Image(title, description, uri, ID);
-        imageDao.insertImage(image);
+        coreRepository.insertImage(image);//imageDao.insertImage(image);
     }
 
     public Bitmap importImageFromMemoryEditProfile(Activity act, Context ctx, ContentResolver contentResolver, Uri imageUri) throws FileNotFoundException {
@@ -231,11 +234,11 @@ public class PersonalModel {
     }
 
     public Account getAccountByID(int id){
-        return accountDao.getAccountID(id);
+        return coreRepository.getAccountID(id);//accountDao.getAccountID(id);
     }
 
     public void upoloadEditAccount(Account account){
-        accountDao.updateAccount(account);
+        coreRepository.updateAccount(account);//accountDao.updateAccount(account);
     }
 
 

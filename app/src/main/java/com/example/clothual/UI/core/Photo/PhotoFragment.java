@@ -33,7 +33,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.clothual.Model.Image;
 import com.example.clothual.R;
 import com.example.clothual.UI.core.AddDress.AddDressActivity;
-import com.example.clothual.UI.core.adapter.RecyclerViewPhotoAdapter;
+import com.example.clothual.Adapter.RecyclerViewPhotoAdapter;
 import com.example.clothual.databinding.FragmentPhotoBinding;
 
 import java.io.IOException;

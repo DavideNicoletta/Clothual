@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Image;
 import com.example.clothual.R;
-import com.example.clothual.UI.core.adapter.RecyclerViewCalendarAdapter;
+import com.example.clothual.Adapter.RecyclerViewCalendarAdapter;
 import com.example.clothual.databinding.FragmentCalendarBinding;
 import com.google.android.material.snackbar.Snackbar;
 

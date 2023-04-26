@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Image;
 import com.example.clothual.Model.Outfit;
-import com.example.clothual.UI.core.adapter.RecyclerViewOutfitAddAdapter;
+import com.example.clothual.Adapter.RecyclerViewOutfitAddAdapter;
 import com.example.clothual.databinding.FragmentAddClothualOutfitBinding;
 import com.google.android.material.snackbar.Snackbar;
 

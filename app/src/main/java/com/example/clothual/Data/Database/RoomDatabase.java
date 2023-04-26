@@ -1,4 +1,4 @@
-package com.example.clothual.Database;
+package com.example.clothual.Data.Database;
 
 import static com.example.clothual.Util.Constant.DATABASE_NAME;
 

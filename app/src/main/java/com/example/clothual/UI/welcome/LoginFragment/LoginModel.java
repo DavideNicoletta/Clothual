@@ -2,9 +2,9 @@ package com.example.clothual.UI.welcome.LoginFragment;
 
 import android.app.Application;
 
-import com.example.clothual.Database.AccountDao;
-import com.example.clothual.Database.RoomDatabase;
-import com.example.clothual.Database.UserDao;
+import com.example.clothual.Data.Database.AccountDao;
+import com.example.clothual.Data.Database.RoomDatabase;
+import com.example.clothual.Data.Database.UserDao;
 import com.example.clothual.Model.Account;
 import com.example.clothual.Model.User;
 
