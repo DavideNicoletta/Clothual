@@ -30,5 +30,16 @@ public class WelcomeModel {
 
     }
 
+    public int getIDByEmail(String email){
+        return authenticationRepository.getIDByEmail(email);//accountDao.getIdByEmail(email);
+    }
+
+    public boolean userEsxiste(String username){
+        if(authenticationRepository.getAccountByUerName(username).getUsername().equals(username)){
+            return true;
+        }
+        return false;
+    }
+
 
 }

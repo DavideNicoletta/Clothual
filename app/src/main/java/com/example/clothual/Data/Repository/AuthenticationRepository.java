@@ -39,4 +39,12 @@ public class AuthenticationRepository {
         userDao.insertUser(user);
     }
 
+    public int getIDByEmail(String email){
+        return accountDao.getIdByEmail(email);
+    }
+
+    public Account getAccountByUerName(String username){
+        return accountDao.getAccountByUerName(username);
+    }
+
 }

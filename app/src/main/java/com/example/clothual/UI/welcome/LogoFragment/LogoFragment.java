@@ -105,7 +105,7 @@ public class LogoFragment extends Fragment {
         }, 500);
     }
 
-    //@SuppressWarnings("deprecation")
+
     private void setLocale(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);

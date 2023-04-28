@@ -36,7 +36,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class RegistrationFragment extends Fragment {
 
     private FragmentRegistrationBinding binding;
-    public RegistrationModel registrationModel;
+    //public RegistrationModel registrationModel;
 
     public WelcomeModel welcomeModel;
     public RegistrationFragment() { }
@@ -60,7 +60,7 @@ public class RegistrationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        registrationModel = new RegistrationModel(requireActivity().getApplication());
+      //  registrationModel = new RegistrationModel(requireActivity().getApplication());
         welcomeModel = new WelcomeModel(requireActivity().getApplication());
     }
 

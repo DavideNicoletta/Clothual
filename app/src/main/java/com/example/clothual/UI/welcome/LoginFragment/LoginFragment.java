@@ -37,6 +37,7 @@ import androidx.navigation.Navigation;
 
 import com.example.clothual.R;
 import com.example.clothual.UI.core.CoreActivity;
+import com.example.clothual.UI.welcome.WelcomeModel;
 import com.example.clothual.databinding.FragmentLoginBinding;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -72,9 +73,10 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 public class LoginFragment extends Fragment {
 
 
+    public WelcomeModel welcomeModel;
     private FragmentLoginBinding binding;
     Handler handler = new Handler();
-    LoginModel loginModel;
+  // LoginModel loginModel;
     private Thread thread;
     boolean check = true;
 
@@ -101,8 +103,8 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loginModel = new LoginModel(requireActivity().getApplication());
-
+        //loginModel = new LoginModel(requireActivity().getApplication());
+        welcomeModel = new WelcomeModel(requireActivity().getApplication());
        }
 
     @Override
@@ -119,12 +121,15 @@ public class LoginFragment extends Fragment {
         Context context = getActivity();
         SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPref.edit();
+
+        //Dati ultimo utente loggato
         String username = sharedPref.getString(USERNAME_PREFERENCE, "");
         String password = sharedPref.getString(PASSWORD_PREFERENCE, "");
         binding.editTextUsername.setText(username);
         binding.editTextPassword.setText(password);
 
 
+        //Controllo NigthMode
         int nightModeFlags =
                 getContext().getResources().getConfiguration().uiMode &
                         Configuration.UI_MODE_NIGHT_MASK;
@@ -140,6 +145,7 @@ public class LoginFragment extends Fragment {
 
 
 
+        //Loop Scritte
         Runnable runnable = new Runnable() {
             int i = 0;
             String [] strings = {GIANNI_VERSACE, RALPH_LAUREN, PIER_CARDIN, DONATELLA_VERSACE, GIORGIO_ARMANI, COCO_CHANEL};
@@ -165,6 +171,8 @@ public class LoginFragment extends Fragment {
         thread = new Thread(runnable);
         thread.start();
 
+
+
         //Firebase
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(getContext());
@@ -175,7 +183,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 String email = binding.editTextUsername.getText().toString().trim();
                 String password = binding.editTextPassword.getText().toString().trim();
-                edit.putInt(ID, loginModel.getIDByEmail(email));
+                edit.putInt(ID, welcomeModel.getIDByEmail(email));
                 edit.apply();
                 progressDialog.show();
                 if (email.isEmpty()){
@@ -203,8 +211,8 @@ public class LoginFragment extends Fragment {
                                             String name = value.getString("name");
                                             String surname = value.getString("surname");
                                             String username = value.getString("username");
-                                            if(!loginModel.userEsxiste(username)) {
-                                                loginModel.createUser(username, name, surname, password, email);
+                                            if(!welcomeModel.userEsxiste(username)) {
+                                                welcomeModel.createUser(username, name, surname, password, email);
                                             }
                                         }
                                     });
@@ -364,7 +372,7 @@ public class LoginFragment extends Fragment {
             String email = account.getEmail();
             String surname = account.getFamilyName();
             String name = account.getGivenName();
-            loginModel.createUser("google", name, surname, "google", email);
+            welcomeModel.createUser("google", name, surname, "google", email);
         }
     }
 
