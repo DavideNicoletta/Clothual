@@ -1,4 +1,4 @@
-package com.example.clothual.Data.Repository;
+package com.example.clothual.Data.Repository.Core;
 
 import android.app.Application;
 

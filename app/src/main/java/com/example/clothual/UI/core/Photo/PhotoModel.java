@@ -21,7 +21,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.clothual.Data.Database.RoomDatabase;
-import com.example.clothual.Data.Repository.CoreRepository;
+import com.example.clothual.Data.Repository.Core.CoreRepository;
 import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Converters;
 import com.example.clothual.Model.Image;

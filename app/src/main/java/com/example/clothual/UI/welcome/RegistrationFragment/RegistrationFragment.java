@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.clothual.R;
@@ -61,7 +62,7 @@ public class RegistrationFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
       //  registrationModel = new RegistrationModel(requireActivity().getApplication());
-        welcomeModel = new WelcomeModel(requireActivity().getApplication());
+        welcomeModel = new ViewModelProvider(requireActivity()).get(WelcomeModel.class);
     }
 
     @Override
@@ -99,6 +100,10 @@ public class RegistrationFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         progressDialog = new ProgressDialog(getContext());
+
+
+
+
 
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,11 +152,39 @@ public class RegistrationFragment extends Fragment {
             }
         });
 
+/*
+        binding.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = binding.editTextEmail.getText().toString();
+                String surname = binding.editTextSurname.getText().toString();
+                String name = binding.editTextName.getText().toString();
+                String username = binding.editTextUsername.getText().toString();
+                String password = binding.editTextPassword.getText().toString();
+
+                if(!surname.isEmpty() && !name.isEmpty() && !username.isEmpty() &&
+                        welcomeModel.isEmailOk(email) && welcomeModel.isPasswordOk(password)){
+                    progressDialog.show();
+                    welcomeModel.signUp(email, password, surname, name, username);
+                    progressDialog.cancel();
+                    Navigation.findNavController(requireView()).navigate(R.id.action_fragment_registration_to_loginFragment);
+
+                }
+
+            }
+        });
+*/
         binding.redirectLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(requireView()).navigate(R.id.action_fragment_registration_to_loginFragment);
             }
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }
