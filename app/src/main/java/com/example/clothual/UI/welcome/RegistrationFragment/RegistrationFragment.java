@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.example.clothual.Model.User;
 import com.example.clothual.R;
 import com.example.clothual.UI.welcome.WelcomeModel;
 import com.example.clothual.databinding.FragmentRegistrationBinding;
@@ -27,6 +28,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -133,10 +136,10 @@ public class RegistrationFragment extends Fragment {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     Navigation.findNavController(requireView()).navigate(R.id.action_fragment_registration_to_loginFragment);
                                     progressDialog.cancel();
-
+                                    Random rand = new Random();
                                     firebaseFirestore.collection("User")
                                             .document(FirebaseAuth.getInstance().getUid())
-                                            .set(new UserModel(username, name, surname, email));
+                                            .set(new User(username, name, 1, rand.nextInt(100000) + ""));
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {

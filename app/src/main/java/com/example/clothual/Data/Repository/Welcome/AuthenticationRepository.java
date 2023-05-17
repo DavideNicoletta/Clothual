@@ -93,23 +93,33 @@ public class AuthenticationRepository{
 
     }
 
+    public User createReturnUserRepository(String username, String name, String surname, String password, String email, String id){
+        System.out.println("in create");
+        Account account = new Account(username, email, password);
+        User user = new User(surname, name, getId(username), id);
+        RoomDatabase.databaseWriteExecutor.execute(() -> {
+            insertAccount(account);
+            insertUser(user);
+        });
+        return user;
+    }
+
     public boolean firebaseAuthWithGoogleAccount(GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         firebaseAuth.signInWithCredential(credential)
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-
-                                String email = account.getEmail();
-                                String surname = account.getFamilyName();
-                                String name = account.getGivenName();
-                                createUserRepository("google", name, surname, "google", email, firebaseUser.getUid());
-                                firebaseFirestore.collection("User")
-                                        .document(FirebaseAuth.getInstance().getUid())
-                                        .set(getUserByUid(firebaseUser.getUid()));
-
-
-
+                       if(getUserByUid(account.getId()) == null) {
+                           String email = account.getEmail();
+                           String surname = account.getFamilyName();
+                           String name = account.getGivenName();
+                           createUserRepository("google", name, surname, "google", email, account.getId());
+                           firebaseFirestore.collection("User")
+                                   .document(FirebaseAuth.getInstance().getUid())
+                                   .set(createReturnUserRepository("google", name, surname, "google",
+                                           email, account.getId()));
+                       }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -123,9 +133,7 @@ public class AuthenticationRepository{
 
     public boolean handleSignInResult(GoogleSignInResult result) {
         //Log.d(TAG, "handleSignInResult:" + result.isSuccess());
-        System.out.println("in handel");
         if (result.isSuccess()) {
-            System.out.println("in handel Success");
             return true;
         }
         return false;

@@ -6,7 +6,6 @@ import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
 import static com.example.clothual.Util.Constant.DONATELLA_VERSACE;
 import static com.example.clothual.Util.Constant.GIANNI_VERSACE;
 import static com.example.clothual.Util.Constant.GIORGIO_ARMANI;
-import static com.example.clothual.Util.Constant.ID;
 import static com.example.clothual.Util.Constant.PASSWORD_PREFERENCE;
 import static com.example.clothual.Util.Constant.PIER_CARDIN;
 import static com.example.clothual.Util.Constant.RALPH_LAUREN;
@@ -181,8 +180,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 String email = binding.editTextUsername.getText().toString().trim();
                 String password = binding.editTextPassword.getText().toString().trim();
-                edit.putInt(ID, welcomeModel.getIDByEmail(email));
-                edit.apply();
+                //sharePreferenceReadWrite.writeString(ID, welcomeModel.getIDByEmail(email));
                 progressDialog.show();
                 if (email.isEmpty()){
                     progressDialog.cancel();
@@ -196,7 +194,6 @@ public class LoginFragment extends Fragment {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
                                     progressDialog.cancel();
-
                                     //Recupero dati
                                     edit.putInt(ACCESS_PREFERENCE, 1);
                                     edit.apply();
@@ -211,6 +208,7 @@ public class LoginFragment extends Fragment {
                                             if(!welcomeModel.userEsxiste(username)) {
                                                 welcomeModel.createUser(username, name, surname, password, email);
                                             }
+
                                         }
                                     });
                                     Intent intet = new Intent(requireContext(), CoreActivity.class);
@@ -263,7 +261,7 @@ public class LoginFragment extends Fragment {
            Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_fragment_registration);
        });
 
-       //Google
+        //Google
         //checkGoogle();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
