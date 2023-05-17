@@ -8,6 +8,8 @@ import com.example.clothual.Data.Database.RoomDatabase;
 import com.example.clothual.Data.Repository.Welcome.AuthenticationRepository;
 import com.example.clothual.Model.Account;
 import com.example.clothual.Model.User;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
@@ -16,22 +18,23 @@ public class WelcomeModel extends ViewModel {
     public Application application;
     public AuthenticationRepository authenticationRepository;
 
-    public WelcomeModel(Application application) {
+    public WelcomeModel(Application application){
         this.application = application;
         authenticationRepository = new AuthenticationRepository(application);
-
     }
+
+
 
     public void signUp(String email, String password, String surname, String name, String username){
         authenticationRepository.signUp(email, password, surname, name, username);
     }
 
-    public void createUser(String username, String name, String surname, String passowrd, String email){
+    public void createUser(String username, String name, String surname, String password, String email){
         RoomDatabase.databaseWriteExecutor.execute(() -> {
-            Account account = new Account(username, email, passowrd);
+            Account account = new Account(username, email, password);
             authenticationRepository.insertAccount(account);
             //accountDao.insertAccount(account);
-            User user = new User(surname, name, authenticationRepository.getId(username));
+            User user = new User(surname, name, authenticationRepository.getId(username), "2");
             authenticationRepository.insertUser(user);
             //userDao.insertUser(user);
         });
@@ -70,6 +73,14 @@ public class WelcomeModel extends ViewModel {
            // binding.textInputLayoutPassword.setError(null);
             return true;
         }
+    }
+
+    public boolean firebaseAuthWithGoogleAccount(GoogleSignInAccount account){
+        return authenticationRepository.firebaseAuthWithGoogleAccount(account);
+    }
+
+    public boolean handleSignInResult(GoogleSignInResult result){
+         return authenticationRepository.handleSignInResult(result);
     }
 
 

@@ -5,6 +5,9 @@ public class Query {
     //Query User
     public static final String SELECT_ALL_USER = "SELECT * FROM User";
 
+    public static final String GET_USER_BY_UID = "SELECT * FROM User WHERE id LIKE :Uid";
+
+
     //Query Account
     public static final String SELECT_ALL_ACCOUNT = "SELECT * FROM Account";
 

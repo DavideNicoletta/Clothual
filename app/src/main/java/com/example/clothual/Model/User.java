@@ -7,26 +7,26 @@ import androidx.room.PrimaryKey;
 @Entity
 public class User {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-    //private int idAccount;
-
+    @PrimaryKey(autoGenerate = false)
+    @NonNull
+    private String id;
     private String surname;
     private String name;
     private int idAccount;
 
 
-    public User(String surname, String name, int idAccount) {
+    public User(String surname, String name, int idAccount, String id) {
         this.surname = surname;
         this.name = name;
         this.idAccount = idAccount;
+        this.id = id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -38,6 +38,7 @@ import androidx.navigation.Navigation;
 import com.example.clothual.R;
 import com.example.clothual.UI.core.CoreActivity;
 import com.example.clothual.UI.welcome.WelcomeModel;
+import com.example.clothual.Util.SharePreferenceReadWrite;
 import com.example.clothual.databinding.FragmentLoginBinding;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -49,12 +50,8 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -69,7 +66,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
  */
 
 
-//@SuppressWarnings("deprecation")
+@SuppressWarnings("deprecation")
 public class LoginFragment extends Fragment {
 
 
@@ -86,13 +83,12 @@ public class LoginFragment extends Fragment {
     FirebaseFirestore firebaseFirestore;
     String userId;
 
+
     ProgressDialog progressDialog;
 
-    //Google
-    private static final int RC_SIGN_IN = 100;
     private GoogleSignInClient gsc;
 
-    private static final String TAG = "GOOGLE_SIGN_IN_TAG";
+    public SharePreferenceReadWrite sharePreferenceReadWrite;
 
     public LoginFragment() { }
 
@@ -103,16 +99,17 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //loginModel = new LoginModel(requireActivity().getApplication());
         welcomeModel = new WelcomeModel(requireActivity().getApplication());
-       }
+        sharePreferenceReadWrite = new SharePreferenceReadWrite(requireActivity().getApplication());
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentLoginBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        return view;
+        return binding.getRoot();
+
     }
 
     @Override
@@ -128,6 +125,11 @@ public class LoginFragment extends Fragment {
         binding.editTextUsername.setText(username);
         binding.editTextPassword.setText(password);
 
+
+        //Firebase
+        firebaseAuth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(getContext());
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         //Controllo NigthMode
         int nightModeFlags =
@@ -173,10 +175,6 @@ public class LoginFragment extends Fragment {
 
 
 
-        //Firebase
-        firebaseAuth = FirebaseAuth.getInstance();
-        progressDialog = new ProgressDialog(getContext());
-        firebaseFirestore = FirebaseFirestore.getInstance();
 
         binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,7 +196,6 @@ public class LoginFragment extends Fragment {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
                                     progressDialog.cancel();
-
 
                                     //Recupero dati
                                     edit.putInt(ACCESS_PREFERENCE, 1);
@@ -236,6 +233,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String email = binding.editTextUsername.getText().toString();
+
                 //controllo
                 if (email.isEmpty()){
                     Toast.makeText(getContext(), R.string.login_mail_empty, Toast.LENGTH_SHORT).show();
@@ -275,10 +273,11 @@ public class LoginFragment extends Fragment {
         gsc = GoogleSignIn.getClient(getActivity(), gso);
 
         //Deprecato
+
+
         binding.signInButton.setOnClickListener(view1 -> {
            Intent intent = gsc.getSignInIntent();
-           //startActivityForResult(intet, RC_SIGN_IN);
-            activityLoginResultLauncher.launch(intent);
+           activityLoginResultLauncher.launch(intent);
        });
 
     }
@@ -297,8 +296,13 @@ public class LoginFragment extends Fragment {
                         try {
                             GoogleSignInAccount account = task.getResult(ApiException.class);
                             GoogleSignInResult inResult = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-                            handleSignInResult(inResult);
-                            firebaseAuthWithGoogleAccount(account);
+
+                            if(welcomeModel.handleSignInResult(inResult)){
+                                if(welcomeModel.firebaseAuthWithGoogleAccount(account)){
+                                    navigateToMainActivity();
+                                }
+                            }
+
                         } catch (ApiException e) {
                             Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
@@ -307,73 +311,10 @@ public class LoginFragment extends Fragment {
             });
 
 
-    /*(Deprecato
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_SIGN_IN){
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogleAccount(account);
-            } catch (ApiException e) {
-                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }*/
-
-
     private void navigateToMainActivity() {
         Intent intent = new Intent(requireContext(), CoreActivity.class);
-
         startActivity(intent);
         getActivity().finish();
-    }
-
-    private void firebaseAuthWithGoogleAccount(GoogleSignInAccount account) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-        firebaseAuth.signInWithCredential(credential)
-                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        //login success
-                        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                        //String email = account.getEmail();
-                        //String surname = account.getFamilyName();
-                        //String name = account.getGivenName();
-
-                        //check
-                        if (authResult.getAdditionalUserInfo().isNewUser()){
-                            //Account created
-                            Snackbar.make(getView(), "Welcome to Clothual", Snackbar.LENGTH_SHORT).show();
-                            //loginModel.createUser("google", name, surname, "google", email);
-                          //  navigateToMainActivityNew(name, email, uid);
-                            navigateToMainActivity();
-                        } else {
-                            //Existing user - Logged In
-                            Snackbar.make(getView(), "Welcome Back to Clothual", Snackbar.LENGTH_SHORT).show();
-                            navigateToMainActivity();
-                        }
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        //login failed
-                        Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-    private void handleSignInResult(GoogleSignInResult result) {
-        //Log.d(TAG, "handleSignInResult:" + result.isSuccess());
-        if (result.isSuccess()) {
-            GoogleSignInAccount account = result.getSignInAccount();
-            String email = account.getEmail();
-            String surname = account.getFamilyName();
-            String name = account.getGivenName();
-            welcomeModel.createUser("google", name, surname, "google", email);
-        }
     }
 
 }

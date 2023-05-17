@@ -16,7 +16,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.clothual.R;
@@ -62,7 +61,7 @@ public class RegistrationFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
       //  registrationModel = new RegistrationModel(requireActivity().getApplication());
-        welcomeModel = new ViewModelProvider(requireActivity()).get(WelcomeModel.class);
+        welcomeModel = new WelcomeModel(requireActivity().getApplication());
     }
 
     @Override

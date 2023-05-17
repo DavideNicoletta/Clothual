@@ -48,6 +48,7 @@ dependencies {
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'com.google.firebase:firebase-firestore:24.4.2'
     implementation 'com.google.firebase:firebase-auth:21.1.0'
+    implementation 'com.google.firebase:firebase-database:11.6.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     def nav_version = "2.5.3"
     def room_version = "2.4.3"

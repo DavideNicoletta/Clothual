@@ -9,7 +9,10 @@ import static com.example.clothual.Util.Constant.WEAK_PASSWORD_ERROR;
 import androidx.annotation.NonNull;
 
 import com.example.clothual.Model.UserModelFirebase;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
@@ -55,22 +58,25 @@ public class UserAuthenticationRemoteDataSource extends BaseUserAuthenticationRe
     }
 
     @Override
+
     public void signUp(String email, String password) {
-        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                if (firebaseUser != null) {
-                    userResponseCallback.onSuccessFromAuthentication(new UserModelFirebase(
-                            firebaseUser.getDisplayName(), email, firebaseUser.getUid()));
+        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                    if (firebaseUser != null) {
+                        userResponseCallback.onSuccessFromAuthentication(new UserModelFirebase(
+                                firebaseUser.getDisplayName(), email, firebaseUser.getUid()));
+                    } else {
+                        userResponseCallback.onFailureFromAuthentication(UserAuthenticationRemoteDataSource.this.getErrorMessage(task.getException()));
+                    }
                 } else {
-                    userResponseCallback.onFailureFromAuthentication(getErrorMessage(task.getException()));
+                    userResponseCallback.onFailureFromAuthentication(UserAuthenticationRemoteDataSource.this.getErrorMessage(task.getException()));
                 }
-            } else {
-                userResponseCallback.onFailureFromAuthentication(getErrorMessage(task.getException()));
             }
         });
     }
-
     @Override
     public void signIn(String email, String password) {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {

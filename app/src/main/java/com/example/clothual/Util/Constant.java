@@ -56,4 +56,9 @@ public class Constant {
     public static final String USER_COLLISION_ERROR = "userCollisionError";
     public static final String INVALID_USER_ERROR = "invalidUserError";
     public static final String UNEXPECTED_ERROR = "unexpected_error";
+
+
+    //Firebase
+
+    public static final String DEFAULT_WEB_CLIENT_ID = "149067861032-i8o3cd406e1t7bgdhdolkrm3a60rjuji.apps.googleusercontent.com";
 }

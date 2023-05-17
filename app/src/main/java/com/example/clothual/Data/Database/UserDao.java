@@ -1,5 +1,6 @@
 package com.example.clothual.Data.Database;
 
+import static com.example.clothual.Util.Query.GET_USER_BY_UID;
 import static com.example.clothual.Util.Query.SELECT_ALL_USER;
 
 import androidx.room.Dao;
@@ -19,5 +20,8 @@ public interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertUser(User user);
+
+    @Query(GET_USER_BY_UID)
+    public User getUserByUid(String Uid);
 
 }

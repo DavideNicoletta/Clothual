@@ -1,67 +1,49 @@
 package com.example.clothual.Util;
 
+import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
+
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import java.util.Set;
-
 public class SharePreferenceReadWrite {
 
     private final Application application;
-
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
     public SharePreferenceReadWrite(Application application) {
         this.application = application;
+        this.sharedPref = application.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
     }
 
-    public void writeStringData(String sharedPreferencesFileName, String key, String value) {
-        SharedPreferences sharedPref = application.getSharedPreferences(sharedPreferencesFileName,
-                Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(key, value);
+    public void writeString(String id, String string){
+        editor = sharedPref.edit();
+        editor.putString(id, string);
         editor.apply();
     }
 
-    public void writeBooleanData(String sharedPreferencesFileName, String key, boolean value) {
-        SharedPreferences sharedPref = application.getSharedPreferences(sharedPreferencesFileName,
-                Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putBoolean(key, value);
+    public void writeInt(String id, int data){
+        editor = sharedPref.edit();
+        editor.putInt(id, data);
         editor.apply();
     }
 
-    public void writeStringSetData(String sharedPreferencesFileName, String key, Set<String> value) {
-        SharedPreferences sharedPref = application.getSharedPreferences(sharedPreferencesFileName,
-                Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putStringSet(key, value);
+    public void writeBoolean(String id, boolean bool){
+        editor = sharedPref.edit();
+        editor.putBoolean(id, bool);
         editor.apply();
     }
 
-    public String readStringData(String sharedPreferencesFileName, String key) {
-        SharedPreferences sharedPref = application.getSharedPreferences(sharedPreferencesFileName,
-                Context.MODE_PRIVATE);
-        return sharedPref.getString(key, null);
+    public String readString(String id){
+        return sharedPref.getString(id, "");
     }
 
-    public boolean readBooleanData(String sharedPreferencesFileName, String key) {
-        SharedPreferences sharedPref = application.getSharedPreferences(sharedPreferencesFileName,
-                Context.MODE_PRIVATE);
-        return sharedPref.getBoolean(key, false);
+    public int readInt(String id){
+        return sharedPref.getInt(id, 0);
     }
 
-    public Set<String> readStringSetData(String sharedPreferencesFileName, String key) {
-        SharedPreferences sharedPref = application.getSharedPreferences(sharedPreferencesFileName,
-                Context.MODE_PRIVATE);
-        return sharedPref.getStringSet(key, null);
-    }
-
-    public void deleteAll(String sharedPreferencesFileName) {
-        SharedPreferences sharedPref = application.getSharedPreferences(sharedPreferencesFileName,
-                Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.clear();
-        editor.apply();
+    public boolean readBoolean(String id){
+        return sharedPref.getBoolean(id, false);
     }
 
 }
