@@ -4,9 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.ViewModel;
 
-import com.example.clothual.Data.Database.RoomDatabase;
 import com.example.clothual.Data.Repository.Welcome.AuthenticationRepository;
-import com.example.clothual.Model.Account;
 import com.example.clothual.Model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
@@ -29,15 +27,10 @@ public class WelcomeModel extends ViewModel {
         authenticationRepository.signUp(email, password, surname, name, username);
     }
 
-    public void createUser(String username, String name, String surname, String password, String email){
-        RoomDatabase.databaseWriteExecutor.execute(() -> {
-            Account account = new Account(username, email, password);
-            authenticationRepository.insertAccount(account);
-            //accountDao.insertAccount(account);
-            User user = new User(surname, name, authenticationRepository.getId(username), "2");
+    public void insetUser(User user){
             authenticationRepository.insertUser(user);
             //userDao.insertUser(user);
-        });
+
 
     }
 

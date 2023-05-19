@@ -80,13 +80,10 @@ public class AuthenticationRepository{
        // createUserRepository(username, name, surname, password, email);
     }
 
-    public void createUserRepository(String username, String name, String surname, String passowrd, String email, String id){
+    public void createUserRepository(String username, String name, String surname, String password, String email, String id){
         System.out.println("in create");
         RoomDatabase.databaseWriteExecutor.execute(() -> {
-            Account account = new Account(username, email, passowrd);
-            insertAccount(account);
-            System.out.println("Account create");
-            User user = new User(surname, name, getId(username), id);
+            User user = new User(surname, name, id, username, email , password);
             insertUser(user);
             System.out.println("User create");
         });
@@ -94,11 +91,10 @@ public class AuthenticationRepository{
     }
 
     public User createReturnUserRepository(String username, String name, String surname, String password, String email, String id){
-        System.out.println("in create");
-        Account account = new Account(username, email, password);
-        User user = new User(surname, name, getId(username), id);
+
+
+        User user = new User(surname, name, id, username, email , password);
         RoomDatabase.databaseWriteExecutor.execute(() -> {
-            insertAccount(account);
             insertUser(user);
         });
         return user;

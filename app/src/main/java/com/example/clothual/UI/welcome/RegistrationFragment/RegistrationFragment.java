@@ -137,9 +137,11 @@ public class RegistrationFragment extends Fragment {
                                     Navigation.findNavController(requireView()).navigate(R.id.action_fragment_registration_to_loginFragment);
                                     progressDialog.cancel();
                                     Random rand = new Random();
+                                    User user = new User(username, name, rand.nextInt(100000) + "", username, email , password);
+                                    welcomeModel.insetUser(user);
                                     firebaseFirestore.collection("User")
                                             .document(FirebaseAuth.getInstance().getUid())
-                                            .set(new User(username, name, 1, rand.nextInt(100000) + ""));
+                                            .set(user);
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -149,7 +151,7 @@ public class RegistrationFragment extends Fragment {
                                     progressDialog.cancel();
                                 }
                             });
-                    welcomeModel.createUser(username, name, surname, password, email);
+
                 }
             }
         });

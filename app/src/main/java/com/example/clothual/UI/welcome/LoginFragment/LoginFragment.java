@@ -202,12 +202,15 @@ public class LoginFragment extends Fragment {
                                     documentReference.addSnapshotListener(getActivity(), new EventListener<DocumentSnapshot>() {
                                         @Override
                                         public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                           /*
                                             String name = value.getString("name");
                                             String surname = value.getString("surname");
                                             String username = value.getString("username");
                                             if(!welcomeModel.userEsxiste(username)) {
                                                 welcomeModel.createUser(username, name, surname, password, email);
                                             }
+
+                                            */
 
                                         }
                                     });

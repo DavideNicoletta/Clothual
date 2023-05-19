@@ -76,9 +76,11 @@ public class PersonalModel {
             if(account.get(i).getUsername().equals(username)){
                 int id = account.get(i).getId();
                 for(int j = 0; j < user.size(); j++){
-                    if(user.get(j).getIdAccount() == id){
+                    /*if(user.get(j).getIdAccount() == id){
                         return user.get(j).getName() + " " + user.get(j).getSurname();
                     }
+
+                     */
                 }
             }
         }
