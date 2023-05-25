@@ -47,7 +47,7 @@ public interface AccountDao {
     void updateAccount(Account account);
 
     @Query(GET_ID_BY_EMAIL)
-    int getIdByEmail(String email);
+    String getIdByEmail(String email);
 
     @Query(GET_ACCOUNT_BY_USERNAME)
     Account getAccountByUerName(String username);

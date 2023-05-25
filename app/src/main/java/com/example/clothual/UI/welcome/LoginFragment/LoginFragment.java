@@ -6,6 +6,7 @@ import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
 import static com.example.clothual.Util.Constant.DONATELLA_VERSACE;
 import static com.example.clothual.Util.Constant.GIANNI_VERSACE;
 import static com.example.clothual.Util.Constant.GIORGIO_ARMANI;
+import static com.example.clothual.Util.Constant.ID;
 import static com.example.clothual.Util.Constant.PASSWORD_PREFERENCE;
 import static com.example.clothual.Util.Constant.PIER_CARDIN;
 import static com.example.clothual.Util.Constant.RALPH_LAUREN;
@@ -180,7 +181,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 String email = binding.editTextUsername.getText().toString().trim();
                 String password = binding.editTextPassword.getText().toString().trim();
-                //sharePreferenceReadWrite.writeString(ID, welcomeModel.getIDByEmail(email));
+                sharePreferenceReadWrite.writeString(ID, welcomeModel.getIDByEmail(email));
                 progressDialog.show();
                 if (email.isEmpty()){
                     progressDialog.cancel();

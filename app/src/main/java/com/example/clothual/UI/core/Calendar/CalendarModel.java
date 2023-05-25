@@ -48,9 +48,9 @@ public class CalendarModel {
     }
 
     public List<Clothual> getClothualList(int ID){
-        List<Clothual> clothualList = coreRepository.getAllClothual();//clothualDao.getAllClothual();
+        List<Clothual> clothualList = coreRepository.getAllClothual();
         for(int i = 0; i < clothualList.size(); i++){
-            if(clothualList.get(i).getIdUserAccount() != ID){
+            if(clothualList.get(i).getIdUser() != ID){
                 clothualList.remove(i);
             }
         }

@@ -67,7 +67,7 @@ public class AuthenticationRepository{
         userDao.insertUser(user);
     }
 
-    public int getIDByEmail(String email){
+    public String getIDByEmail(String email){
         return accountDao.getIdByEmail(email);
     }
 

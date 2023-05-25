@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "f574983306f1e92047ef83d0b5e6eda5",
+    "identityHash": "f4c13e5fe9871fe22e7d475766ad4c2b",
     "entities": [
       {
         "tableName": "User",
@@ -138,7 +138,7 @@
       },
       {
         "tableName": "Clothual",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `brand` TEXT, `description` TEXT, `color` TEXT, `template` TEXT, `idImage` INTEGER NOT NULL, `isPreferite` INTEGER NOT NULL, `idUserAccount` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `brand` TEXT, `description` TEXT, `color` TEXT, `template` TEXT, `idImage` INTEGER NOT NULL, `isPreferite` INTEGER NOT NULL, `idUser` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -189,8 +189,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "idUserAccount",
-            "columnName": "idUserAccount",
+            "fieldPath": "idUser",
+            "columnName": "idUser",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -240,7 +240,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f574983306f1e92047ef83d0b5e6eda5')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f4c13e5fe9871fe22e7d475766ad4c2b')"
     ]
   }
 }

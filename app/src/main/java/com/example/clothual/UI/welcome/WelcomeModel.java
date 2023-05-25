@@ -34,7 +34,7 @@ public class WelcomeModel extends ViewModel {
 
     }
 
-    public int getIDByEmail(String email){
+    public String getIDByEmail(String email){
         return authenticationRepository.getIDByEmail(email);//accountDao.getIdByEmail(email);
     }
 
