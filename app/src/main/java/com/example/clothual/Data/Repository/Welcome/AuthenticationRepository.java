@@ -4,11 +4,9 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 
-import com.example.clothual.Data.Database.AccountDao;
 import com.example.clothual.Data.Database.RoomDatabase;
 import com.example.clothual.Data.Database.UserDao;
 import com.example.clothual.Data.Source.User.UserAuthenticationRemoteDataSource;
-import com.example.clothual.Model.Account;
 import com.example.clothual.Model.User;
 import com.example.clothual.Util.SharePreferenceReadWrite;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -28,7 +26,7 @@ public class AuthenticationRepository{
 
     public RoomDatabase database;
     private final UserDao userDao;
-    private final AccountDao accountDao;
+
 
     FirebaseFirestore firebaseFirestore;
     private final FirebaseUser firebaseUser;
@@ -42,7 +40,6 @@ public class AuthenticationRepository{
         this.application = application;
         this.database = RoomDatabase.getDatabase(application);
         this.userDao = database.daoUser();
-        this.accountDao = database.daoAccount();
         this.userAuthenticationRemoteDataSource = new UserAuthenticationRemoteDataSource();
         this.firebaseAuth = FirebaseAuth.getInstance();
         this.firebaseUser = firebaseAuth.getCurrentUser();
@@ -53,12 +50,8 @@ public class AuthenticationRepository{
 
     //AccountDao
 
-    public void insertAccount(Account account){
-        accountDao.insertAccount(account);
-    }
-
-    public int getId(String username){
-        return accountDao.getId(username);
+    public String getId(String username){
+        return userDao.getID(username);
     }
 
     //UserDao
@@ -68,11 +61,11 @@ public class AuthenticationRepository{
     }
 
     public String getIDByEmail(String email){
-        return accountDao.getIdByEmail(email);
+        return userDao.getIdByEmail(email);
     }
 
-    public Account getAccountByUerName(String username){
-        return accountDao.getAccountByUerName(username);
+    public User getUserByUsername(String username){
+        return userDao.getUserByUsername(username);
     }
 
     public void signUp(String email, String password, String surname, String name, String username) {

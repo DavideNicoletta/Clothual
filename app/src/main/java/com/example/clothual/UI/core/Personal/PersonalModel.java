@@ -22,7 +22,6 @@ import androidx.core.content.ContextCompat;
 
 import com.example.clothual.Data.Database.RoomDatabase;
 import com.example.clothual.Data.Repository.Core.CoreRepository;
-import com.example.clothual.Model.Account;
 import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Image;
 import com.example.clothual.Model.User;
@@ -69,12 +68,11 @@ public class PersonalModel {
     }
 
     public String getName(String username){
-        List<Account> account = coreRepository.getAllAccount();//accountDao.getAllAccount();
         List<User> user = coreRepository.getAllUser();//userDao.getAllUser();
 
-        for(int i = 0; i <account.size(); i++){
-            if(account.get(i).getUsername().equals(username)){
-                int id = account.get(i).getId();
+        for(int i = 0; i <user.size(); i++){
+            if(user.get(i).getUsername().equals(username)){
+                String id = user.get(i).getId();
                 for(int j = 0; j < user.size(); j++){
                     /*if(user.get(j).getIdAccount() == id){
                         return user.get(j).getName() + " " + user.get(j).getSurname();
@@ -169,10 +167,10 @@ public class PersonalModel {
 
 
     //Edit Profile
-    public boolean checkPassword(String password, int id){
-        List<Account> account = coreRepository.getAllAccount();//accountDao.getAllAccount();
-        for(int i = 0; i < account.size(); i++){
-            if(account.get(i).getId() == id && account.get(i).getPassword().equals(password)){
+    public boolean checkPassword(String password, String id){
+        List<User> users = coreRepository.getAllUser();//accountDao.getAllAccount();
+        for(int i = 0; i < users.size(); i++){
+            if(users.get(i).getId().equals(id) && users.get(i).getPassword().equals(password)){
                 return true;
             }
         }
@@ -183,11 +181,11 @@ public class PersonalModel {
         return EmailValidator.getInstance().isValid(email);
     }
 
-    public String getEmail(int id ){
+    public String getEmail(String id ){
         return coreRepository.getEmail(id);//accountDao.getEmail(id);
     }
 
-    public String getUsername(int id ){
+    public String getUsername(String id ){
         return coreRepository.getUsername(id);//accountDao.getUsername(id);
     }
 
@@ -235,12 +233,12 @@ public class PersonalModel {
         return BitmapFactory.decodeStream(inputStream);
     }
 
-    public Account getAccountByID(int id){
-        return coreRepository.getAccountID(id);//accountDao.getAccountID(id);
+    public User getUserByID(String id){
+        return coreRepository.getUserByID(id);//accountDao.getAccountID(id);
     }
 
-    public void upoloadEditAccount(Account account){
-        coreRepository.updateAccount(account);//accountDao.updateAccount(account);
+    public void updateUser(User user){
+        coreRepository.updateUser(user);//accountDao.updateAccount(account);
     }
 
 

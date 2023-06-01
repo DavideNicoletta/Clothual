@@ -2,13 +2,11 @@ package com.example.clothual.Data.Repository.Core;
 
 import android.app.Application;
 
-import com.example.clothual.Data.Database.AccountDao;
 import com.example.clothual.Data.Database.ClothualDao;
 import com.example.clothual.Data.Database.ImageDao;
 import com.example.clothual.Data.Database.OutfitDao;
 import com.example.clothual.Data.Database.RoomDatabase;
 import com.example.clothual.Data.Database.UserDao;
-import com.example.clothual.Model.Account;
 import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Image;
 import com.example.clothual.Model.Outfit;
@@ -23,7 +21,7 @@ public class CoreRepository {
     private final ImageDao imageDao;
     private final ClothualDao clothualDao;
     public final OutfitDao outfitDao;
-    public final AccountDao accountDao;
+
     public final UserDao userDao;
 
     public CoreRepository(Application application){
@@ -32,7 +30,7 @@ public class CoreRepository {
         imageDao = database.imageDao();
         clothualDao = database.clothualDao();
         outfitDao = database.outfitDao();
-        accountDao = database.daoAccount();
+
         userDao = database.daoUser();
     }
 
@@ -101,24 +99,20 @@ public class CoreRepository {
 
     //AccountDao
 
-    public List<Account> getAllAccount(){
-        return accountDao.getAllAccount();
+    public String getEmail(String id){
+        return userDao.getEmail(id);
     }
 
-    public String getEmail(int id){
-        return accountDao.getEmail(id);
+    public String getUsername(String id){
+        return userDao.getUsername(id);
     }
 
-    public String getUsername(int id){
-        return accountDao.getUsername(id);
+    public User getUserByID(String id){
+        return  userDao.getUserByUid(id);
     }
 
-    public Account getAccountID(int id){
-        return  accountDao.getAccountID(id);
-    }
-
-    public void updateAccount(Account account){
-        accountDao.updateAccount(account);
+    public void updateUser(User user){
+        userDao.updateUser(user);
     }
 
     //UserDao

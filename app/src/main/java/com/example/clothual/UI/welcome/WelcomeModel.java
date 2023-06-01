@@ -39,7 +39,7 @@ public class WelcomeModel extends ViewModel {
     }
 
     public boolean userEsxiste(String username){
-        if(authenticationRepository.getAccountByUerName(username).getUsername().equals(username)){
+        if(authenticationRepository.getUserByUsername(username).getUsername().equals(username)){
             return true;
         }
         return false;

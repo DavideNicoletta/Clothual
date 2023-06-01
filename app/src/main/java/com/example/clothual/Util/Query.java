@@ -8,21 +8,17 @@ public class Query {
     public static final String GET_USER_BY_UID = "SELECT * FROM User WHERE id LIKE :Uid";
 
 
-    //Query Account
-    public static final String SELECT_ALL_ACCOUNT = "SELECT * FROM Account";
+    public static final String GET_ID = "SELECT id FROM User WHERE username LIKE :username";
 
-    public static final String GET_ID = "SELECT id FROM Account WHERE username LIKE :username";
+    public static final String GET_EMAIL = "SELECT email FROM User WHERE id LIKE :idUser";
 
-
-    public static final String GET_EMAIL = "SELECT email FROM Account WHERE id LIKE :idAccount";
-
-    public static final String GET_USERNAME = "SELECT username FROM Account WHERE id LIKE :idAccount";
+    public static final String GET_USERNAME = "SELECT username FROM User WHERE id LIKE :idUser";
 
     public static final String GET_ACCOUNT_BY_ID = "SELECT * FROM Account WHERE id LIKE :idAccount";
 
     public static final String GET_ID_BY_EMAIL = "SELECT id FROM User WHERE email LIKE :email";
 
-    public static final String GET_ACCOUNT_BY_USERNAME = "SELECT * FROM Account WHERE username LIKE :username";
+    public static final String GET_USER_BY_USERNAME = "SELECT * FROM User WHERE username LIKE :username";
 
     //Query Image
     public static final String SELECT_ALL_IMAGE = "SELECT * FROM Image";

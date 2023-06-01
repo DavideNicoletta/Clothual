@@ -7,7 +7,6 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 
-import com.example.clothual.Model.Account;
 import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Image;
 import com.example.clothual.Model.Outfit;
@@ -16,11 +15,11 @@ import com.example.clothual.Model.User;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Account.class, Image.class, Clothual.class, Outfit.class}, version = 1)
+@Database(entities = {User.class, Image.class, Clothual.class, Outfit.class}, version = 1)
 public abstract class RoomDatabase extends androidx.room.RoomDatabase {
 
     public abstract UserDao daoUser();
-    public abstract AccountDao daoAccount();
+
     public abstract ImageDao imageDao();
     public abstract ClothualDao clothualDao();
     public abstract OutfitDao outfitDao();

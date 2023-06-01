@@ -24,7 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.clothual.Model.Account;
+import com.example.clothual.Model.User;
 import com.example.clothual.R;
 import com.example.clothual.UI.core.CoreActivity;
 import com.example.clothual.UI.core.Personal.PersonalModel;
@@ -60,8 +60,8 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         }
 
-        binding.editTextEmail.setText(personalModel.getEmail(sharedPref.getInt(ID_ACCOUNT, 0)));
-        binding.editTextUsername.setText(personalModel.getUsername(sharedPref.getInt(ID_ACCOUNT, 0)));
+        binding.editTextEmail.setText(personalModel.getEmail(sharedPref.getString(ID_ACCOUNT, "")));
+        binding.editTextUsername.setText(personalModel.getUsername(sharedPref.getString(ID_ACCOUNT, "")));
 
         binding.editTextEmail.setEnabled(false);
         binding.editTextPassword.setEnabled(false);
@@ -134,12 +134,12 @@ public class EditProfileActivity extends AppCompatActivity {
         binding.close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view18) {
-                int id = sharedPref.getInt(ID_ACCOUNT, 0);
-                Account account = personalModel.getAccountByID(id);
+                String id = sharedPref.getString(ID_ACCOUNT, "");
+                User user = personalModel.getUserByID(id);
                 if (binding.editTextEmail.isEnabled()) {
                     if (personalModel.checkEmail(binding.editTextEmail.getText().toString())) {
                         binding.inputViewEmail.setError(null);
-                        account.setEmail(binding.editTextEmail.getText().toString());
+                        user.setEmail(binding.editTextEmail.getText().toString());
                     } else {
                         binding.inputViewEmail.setError("Mail non valida");
                     }
@@ -151,18 +151,18 @@ public class EditProfileActivity extends AppCompatActivity {
 
                     } else {
                         binding.inputUsername.setError(null);
-                        account.setUsername(binding.editTextUsername.getText().toString());
+                        user.setUsername(binding.editTextUsername.getText().toString());
                     }
                 }
 
                 if (binding.editTextPassword.isEnabled()) {
-                    if (personalModel.checkPassword(binding.editTextUsername.getText().toString(), sharedPref.getInt(ID_ACCOUNT, 0))) {
+                    if (personalModel.checkPassword(binding.editTextUsername.getText().toString(), sharedPref.getString(ID_ACCOUNT, ""))) {
                         if (binding.editTextPasswordNuovo.getText().toString().isEmpty()) {
                             binding.inputPassword.setError("Password non valida");
 
                         } else {
                             binding.inputPassword.setError(null);
-                            account.setPassword(binding.editTextPasswordNuovo.getText().toString());
+                            user.setPassword(binding.editTextPasswordNuovo.getText().toString());
                         }
                     } else {
                         binding.inputPassword.setError("Password Errata");
@@ -170,7 +170,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     }
                 }
 
-                personalModel.upoloadEditAccount(account);
+                personalModel.updateUser(user);
             }
         });
 
