@@ -59,6 +59,7 @@ public class Constant {
 
 
     //Firebase
-
     public static final String DEFAULT_WEB_CLIENT_ID = "149067861032-i8o3cd406e1t7bgdhdolkrm3a60rjuji.apps.googleusercontent.com";
+
+    public static final int REQUEST_CODE = 101;
 }

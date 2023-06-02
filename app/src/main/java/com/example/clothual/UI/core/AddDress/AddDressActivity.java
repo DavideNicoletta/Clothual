@@ -1,12 +1,9 @@
 package com.example.clothual.UI.core.AddDress;
 
-import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
 import static com.example.clothual.Util.Constant.ID;
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -23,6 +20,7 @@ import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Image;
 import com.example.clothual.R;
 import com.example.clothual.UI.core.CoreActivity;
+import com.example.clothual.Util.SharedPreferenceReadWrite;
 
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -42,11 +40,13 @@ public class AddDressActivity extends AppCompatActivity {
 
     public ImageView clothual;
 
+    public SharedPreferenceReadWrite sharedPreferenceReadWrite;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_dress_layout);
-        SharedPreferences sharedPref = getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
+        sharedPreferenceReadWrite = new SharedPreferenceReadWrite(getApplication());
         contentResolver = getApplication().getContentResolver();
 
         clothual = findViewById(R.id.clothualAddDress);
@@ -117,7 +117,7 @@ public class AddDressActivity extends AppCompatActivity {
                 case 0:
                     model.createClothual(spinnerValue, brand.getText().toString(), description
                             .getText().toString(), color.getText().toString(), template.getText().toString(),
-                            model.getIdByUri(uri), sharedPref.getString(ID, ""));
+                            model.getIdByUri(uri), sharedPreferenceReadWrite.readString((ID)));//sharedPref.getString(ID, ""));
                     Intent intentFirstAction = new Intent(AddDressActivity.this, CoreActivity.class);
                     startActivity(intentFirstAction);
                     break;

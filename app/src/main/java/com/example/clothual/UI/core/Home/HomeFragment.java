@@ -1,5 +1,7 @@
 package com.example.clothual.UI.core.Home;
 
+import static com.example.clothual.Util.Constant.REQUEST_CODE;
+
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -25,7 +27,7 @@ import com.example.clothual.databinding.FragmentHomeBinding;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private static final int REQUEST_CODE = 101;
+
 
     public HomeFragment() {
 

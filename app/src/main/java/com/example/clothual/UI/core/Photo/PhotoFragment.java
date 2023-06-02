@@ -1,12 +1,10 @@
 package com.example.clothual.UI.core.Photo;
 
-import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
 import static com.example.clothual.Util.Constant.ID;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -30,10 +28,11 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.clothual.Adapter.RecyclerViewPhotoAdapter;
 import com.example.clothual.Model.Image;
 import com.example.clothual.R;
 import com.example.clothual.UI.core.AddDress.AddDressActivity;
-import com.example.clothual.Adapter.RecyclerViewPhotoAdapter;
+import com.example.clothual.Util.SharedPreferenceReadWrite;
 import com.example.clothual.databinding.FragmentPhotoBinding;
 
 import java.io.IOException;
@@ -51,7 +50,7 @@ public class PhotoFragment extends Fragment {
 
     public PhotoModel photoModel;
     private boolean isFABOpen;
-
+    private SharedPreferenceReadWrite sharedPreferenceReadWrite;
 
     public PhotoFragment() { }
 
@@ -70,6 +69,7 @@ public class PhotoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         photoModel = new PhotoModel(requireActivity().getApplication());
+        sharedPreferenceReadWrite = new SharedPreferenceReadWrite(getActivity().getApplication());
 
     }
 
@@ -125,8 +125,7 @@ public class PhotoFragment extends Fragment {
                 manager = new GridLayoutManager(requireContext(), 2);
         }
 
-            SharedPreferences sharedPref = getActivity().getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
-            String Id = sharedPref.getString(ID, "");
+            String Id = sharedPreferenceReadWrite.readString(ID);
             List<Image> image = photoModel.getImageList(Id);
             RecyclerViewPhotoAdapter adapter = new RecyclerViewPhotoAdapter(image, new RecyclerViewPhotoAdapter.OnItemClickListener() {
                 @Override
@@ -165,14 +164,14 @@ public class PhotoFragment extends Fragment {
                         Uri uri;
                         Context context = getActivity();
                         assert context != null;
-                        SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
                         Intent data = result.getData();
                         if (data == null) {
                             Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
                         }else{
                             Bitmap immagine = (Bitmap) data.getExtras().get("data");
                             try {
-                                uri = photoModel.saveImage(getActivity().getContentResolver(), immagine, photoModel.getNameImage(), "", sharedPref.getString(ID, ""));
+                                uri = photoModel.saveImage(getActivity().getContentResolver(), immagine,
+                                        photoModel.getNameImage(), "", sharedPreferenceReadWrite.readString(ID));
                                 Intent intent = new Intent(getActivity(), AddDressActivity.class);
                                 intent.putExtra("uri", uri.toString());
                                 intent.putExtra("action", 0);
@@ -196,7 +195,6 @@ public class PhotoFragment extends Fragment {
                         Uri uri;
                         Context context = getActivity();
                         assert context != null;
-                        SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
                         if (data == null) {
                             Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_homeFragment);
                         }else{
@@ -205,7 +203,7 @@ public class PhotoFragment extends Fragment {
                                 try {
                                     Bitmap bitmap = photoModel.importImageFromMemory(getActivity(), getContext(), getActivity().getContentResolver(), uri);
                                     Uri newUri = photoModel.saveImage(getActivity().getContentResolver(), bitmap,
-                                            photoModel.getNameImage(), "", sharedPref.getString(ID, ""));
+                                            photoModel.getNameImage(), "", sharedPreferenceReadWrite.readString(ID));
                                     Intent intent = new Intent(getActivity(), AddDressActivity.class);
                                     intent.putExtra("uri", newUri.toString());
                                     intent.putExtra("action", 0);

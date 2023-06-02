@@ -1,12 +1,10 @@
 package com.example.clothual.UI.core.Personal.Settings;
 
-import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
 import static com.example.clothual.Util.Constant.DMODE;
 import static com.example.clothual.Util.Constant.LANGUAGE;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.clothual.R;
+import com.example.clothual.Util.SharedPreferenceReadWrite;
 import com.example.clothual.databinding.FragmentSettingsBinding;
 
 import java.util.Locale;
@@ -34,6 +33,7 @@ import java.util.Locale;
 public class SettingsFragment extends Fragment {
 
         public FragmentSettingsBinding binding;
+        private SharedPreferenceReadWrite sharedPreferenceReadWrite;
         @SuppressLint("UseSwitchCompatOrMaterialCode")
 
         public SettingsFragment() {
@@ -52,6 +52,7 @@ public class SettingsFragment extends Fragment {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            sharedPreferenceReadWrite = new SharedPreferenceReadWrite(getActivity().getApplication());
         }
 
         @Override
@@ -70,19 +71,16 @@ public class SettingsFragment extends Fragment {
             super.onViewCreated(view, savedInstanceState);
 
             Context context = getActivity();
-            SharedPreferences share = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = share.edit();
 
-            if(!share.getString(LANGUAGE, " ").equals(" ")) {
-                setImage(share.getString(LANGUAGE, " "));
+            if(!sharedPreferenceReadWrite.readString(LANGUAGE).equals(" ")) {
+                setImage(sharedPreferenceReadWrite.readString(LANGUAGE));
             }else{
                 setImage(Locale.getDefault().getLanguage());
             }
             binding.english.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    editor.putString(LANGUAGE, "en");
-                    editor.apply();
+                    sharedPreferenceReadWrite.writeString(LANGUAGE, "en");
                     setLocale("en");
                 }
             });
@@ -90,8 +88,7 @@ public class SettingsFragment extends Fragment {
             binding.italian.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    editor.putString(LANGUAGE, "it");
-                    editor.apply();
+                    sharedPreferenceReadWrite.writeString(LANGUAGE, "it");
                     setLocale("it");
                 }
             });
@@ -99,14 +96,13 @@ public class SettingsFragment extends Fragment {
             binding.french.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    editor.putString(LANGUAGE, "fr");
-                    editor.apply();
+                    sharedPreferenceReadWrite.writeString(LANGUAGE, "fr");
                     setLocale("fr");
                 }
             });
 
 
-            Boolean booleanValue = share.getBoolean(DMODE, true);
+            Boolean booleanValue = sharedPreferenceReadWrite.readBoolean(DMODE);
             if(booleanValue){
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 binding.myswitch.setChecked(true);
@@ -119,15 +115,13 @@ public class SettingsFragment extends Fragment {
                     if (isChecked) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                         binding.myswitch.setChecked(true);
-                        editor.putBoolean(DMODE, true);
-                        editor.commit();
+                        sharedPreferenceReadWrite.writeBoolean(DMODE, true);
                         setMode();
 
                     } else {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                         binding.myswitch.setChecked(false);
-                        editor.putBoolean(DMODE, false);
-                        editor.commit();
+                        sharedPreferenceReadWrite.writeBoolean(DMODE, true);
                         setMode();
 
                     }

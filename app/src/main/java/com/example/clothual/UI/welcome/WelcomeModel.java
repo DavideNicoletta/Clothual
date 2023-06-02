@@ -23,9 +23,6 @@ public class WelcomeModel extends ViewModel {
 
 
 
-    public void signUp(String email, String password, String surname, String name, String username){
-        authenticationRepository.signUp(email, password, surname, name, username);
-    }
 
     public void insetUser(User user){
             authenticationRepository.insertUser(user);

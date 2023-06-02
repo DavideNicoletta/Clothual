@@ -6,12 +6,12 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class SharePreferenceReadWrite {
+public class SharedPreferenceReadWrite {
 
     private final Application application;
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
-    public SharePreferenceReadWrite(Application application) {
+    public SharedPreferenceReadWrite(Application application) {
         this.application = application;
         this.sharedPref = application.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
     }

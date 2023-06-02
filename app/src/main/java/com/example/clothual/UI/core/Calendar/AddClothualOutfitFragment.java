@@ -1,11 +1,8 @@
 package com.example.clothual.UI.core.Calendar;
 
-import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
 import static com.example.clothual.Util.Constant.DATE;
 import static com.example.clothual.Util.Constant.ID;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.clothual.Adapter.RecyclerViewOutfitAddAdapter;
 import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Image;
 import com.example.clothual.Model.Outfit;
-import com.example.clothual.Adapter.RecyclerViewOutfitAddAdapter;
+import com.example.clothual.Util.SharedPreferenceReadWrite;
 import com.example.clothual.databinding.FragmentAddClothualOutfitBinding;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -36,6 +34,7 @@ public class AddClothualOutfitFragment extends Fragment {
     String data;
     public FragmentAddClothualOutfitBinding binding;
     public CalendarModel model;
+    private SharedPreferenceReadWrite sharedPreferenceReadWrite;
 
     public AddClothualOutfitFragment() {
 
@@ -56,6 +55,7 @@ public class AddClothualOutfitFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         model = new CalendarModel(requireActivity().getApplication());
+        sharedPreferenceReadWrite = new SharedPreferenceReadWrite(getActivity().getApplication());
     }
 
     @Override
@@ -68,8 +68,7 @@ public class AddClothualOutfitFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SharedPreferences sharedPref = getActivity().getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
-        data = sharedPref.getString(DATE, "");
+        data = sharedPreferenceReadWrite.readString(DATE);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(requireContext());
         binding.recyclerView.setLayoutManager(manager);
 
@@ -77,11 +76,11 @@ public class AddClothualOutfitFragment extends Fragment {
 
 
         if(outfit == null){
-            List<Image> image = model.getImageList(sharedPref.getString(ID, ""));
-            List<Clothual> clothual = model.getClothualList(sharedPref.getString(ID, ""));
+            List<Image> image = model.getImageList(sharedPreferenceReadWrite.readString(ID));
+            List<Clothual> clothual = model.getClothualList(sharedPreferenceReadWrite.readString(ID));
             recycler(clothual, image, view);
         }else{
-            List<Clothual> clothualList = model.getClothualOutfitDate(outfit, sharedPref.getString(ID, ""));
+            List<Clothual> clothualList = model.getClothualOutfitDate(outfit, sharedPreferenceReadWrite.readString(ID));
             List<Image> imageOutfit = model.getImageOutfit(clothualList);
             recycler(clothualList, imageOutfit, view);
         }

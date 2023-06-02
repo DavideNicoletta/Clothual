@@ -28,6 +28,7 @@ import com.example.clothual.Model.User;
 import com.example.clothual.R;
 import com.example.clothual.UI.core.CoreActivity;
 import com.example.clothual.UI.core.Personal.PersonalModel;
+import com.example.clothual.Util.SharedPreferenceReadWrite;
 import com.example.clothual.databinding.EditProfileLayoutBinding;
 
 import java.io.FileNotFoundException;
@@ -38,7 +39,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private EditProfileLayoutBinding binding;
     private PersonalModel personalModel;
-    public SharedPreferences share;
+    private SharedPreferenceReadWrite sharedPreferenceReadWrite;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,7 @@ public class EditProfileActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         personalModel = new PersonalModel(getApplication());
-        share = getSharedPreferences(CREDENTIALS_LOGIN_FILE, MODE_PRIVATE);
+        sharedPreferenceReadWrite = new SharedPreferenceReadWrite(getApplication());
         SharedPreferences sharedPref = getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
 
         if(sharedPref.getString(URI, " ").equals(" ")){
@@ -190,7 +191,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         //Uri uri;
-                        SharedPreferences.Editor editor = share.edit();
                         //Context context = getActivity();
                         //assert context != null;
                         //SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
@@ -203,8 +203,8 @@ public class EditProfileActivity extends AppCompatActivity {
                             Bitmap immagine = (Bitmap) data.getExtras().get("data");
 
                             try {
-                                editor.putString(URI, personalModel.saveImage(getContentResolver(), immagine, personalModel.getNameImage(), "profile", share.getString(ID, "")).toString());
-                                editor.apply();
+                                sharedPreferenceReadWrite.writeString(URI, personalModel.saveImage(getContentResolver(), immagine,
+                                        personalModel.getNameImage(), "profile", sharedPreferenceReadWrite.readString(ID)).toString());
                                 binding.imagePersonal.setImageBitmap(immagine);
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -224,10 +224,6 @@ public class EditProfileActivity extends AppCompatActivity {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         Uri uri;
-                        SharedPreferences.Editor editor = share.edit();
-                        //Context context = getActivity();
-                        //assert context != null;
-                        //SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
                         if (data == null) {
                             Intent intent = new Intent(EditProfileActivity.this, EditProfileActivity.class);
                             startActivity(intent);
@@ -237,13 +233,9 @@ public class EditProfileActivity extends AppCompatActivity {
                                 try {
                                     Bitmap bitmap = personalModel.importImageFromMemoryEditProfile(EditProfileActivity.this, getApplicationContext(), getContentResolver(), uri);
                                     Uri newUri = personalModel.saveImage(getContentResolver(), bitmap,
-                                            personalModel.getNameImage(), "profile", share.getString(ID, ""));
+                                            personalModel.getNameImage(), "profile", sharedPreferenceReadWrite.readString(ID));
                                     binding.imagePersonal.setImageBitmap(bitmap);
-                                    editor.putString(URI, newUri.toString());
-                                    //Intent intent = new Intent(this, AddDressActivity.class);
-                                  //  intent.putExtra("uri", newUri.toString());
-                                  //  intent.putExtra("action", 0);
-                                   // startActivity(intent);
+                                    sharedPreferenceReadWrite.writeString(URI, newUri.toString());
                                 } catch (IOException e) {
                                     Intent intent = new Intent(EditProfileActivity.this, EditProfileActivity.class);
                                     startActivity(intent);
@@ -253,55 +245,6 @@ public class EditProfileActivity extends AppCompatActivity {
                     }
                 }
             });
-
-    /*
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent databack) {
-        super.onActivityResult(requestCode, resultCode, databack);
-
-        SharedPreferences.Editor editor = share.edit();
-
-        Uri uri;
-        if (requestCode == 0) {
-            if (databack == null) {
-               Intent intent = new Intent(EditProfileActivity.this, EditProfileActivity.class);
-               startActivity(intent);
-            }else {
-                assert databack != null;
-                Bitmap immagine = (Bitmap) databack.getExtras().get("data");
-
-                try {
-                    editor.putString(URI, modifyModel.saveImage(getContentResolver(), immagine, modifyModel.getNameImage(), "profile", share.getInt(ID, 0)).toString());
-                    editor.apply();
-                    binding.imagePersonal.setImageBitmap(immagine);
-                } catch (IOException e) {
-                    e.printStackTrace();
-
-                }
-            }
-        }else{
-            if (databack == null) {
-                Intent intent = new Intent(EditProfileActivity.this, EditProfileActivity.class);
-                startActivity(intent);
-            }
-            uri = databack.getData();
-            if(uri != null){
-                modifyModel.createImage(modifyModel.getNameImage(), "", uri.toString(), share.getInt(ID, 0));
-                try {
-                    Bitmap bitmap = modifyModel.importImageFromMemory(this, getApplicationContext(), getContentResolver(), uri);
-                    Uri newUri = modifyModel.saveImage(getContentResolver(), bitmap,
-                            modifyModel.getNameImage(), "profile", share.getInt(ID, 0));
-                    binding.imagePersonal.setImageBitmap(bitmap);
-
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }*/
 
 
     void imageChooser() {

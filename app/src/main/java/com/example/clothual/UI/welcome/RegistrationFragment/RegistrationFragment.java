@@ -1,11 +1,8 @@
 package com.example.clothual.UI.welcome.RegistrationFragment;
 
-import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
 import static com.example.clothual.Util.Constant.POLICY;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -78,10 +75,6 @@ public class RegistrationFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Context context = getActivity();
-        SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-
 
         int nightModeFlags =
                 getContext().getResources().getConfiguration().uiMode &
@@ -156,28 +149,6 @@ public class RegistrationFragment extends Fragment {
             }
         });
 
-/*
-        binding.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = binding.editTextEmail.getText().toString();
-                String surname = binding.editTextSurname.getText().toString();
-                String name = binding.editTextName.getText().toString();
-                String username = binding.editTextUsername.getText().toString();
-                String password = binding.editTextPassword.getText().toString();
-
-                if(!surname.isEmpty() && !name.isEmpty() && !username.isEmpty() &&
-                        welcomeModel.isEmailOk(email) && welcomeModel.isPasswordOk(password)){
-                    progressDialog.show();
-                    welcomeModel.signUp(email, password, surname, name, username);
-                    progressDialog.cancel();
-                    Navigation.findNavController(requireView()).navigate(R.id.action_fragment_registration_to_loginFragment);
-
-                }
-
-            }
-        });
-*/
         binding.redirectLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

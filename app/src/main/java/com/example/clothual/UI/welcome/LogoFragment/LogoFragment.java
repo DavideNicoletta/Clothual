@@ -2,12 +2,10 @@ package com.example.clothual.UI.welcome.LogoFragment;
 
 
 import static com.example.clothual.Util.Constant.ACCESS_PREFERENCE;
-import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
 import static com.example.clothual.Util.Constant.LANGUAGE;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +20,7 @@ import androidx.navigation.Navigation;
 
 import com.example.clothual.R;
 import com.example.clothual.UI.core.CoreActivity;
+import com.example.clothual.Util.SharedPreferenceReadWrite;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
@@ -34,7 +33,7 @@ import java.util.Locale;
  */
 public class LogoFragment extends Fragment {
     Handler handler = new Handler();
-
+    public SharedPreferenceReadWrite sharedPreferenceReadWrite;
     public LogoFragment() {
 
     }
@@ -71,11 +70,9 @@ public class LogoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-
         Context context = getActivity();
-        SharedPreferences share = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
-        String lenguage = share.getString(LANGUAGE, " ");
+        sharedPreferenceReadWrite = new SharedPreferenceReadWrite(requireActivity().getApplication());
+        String lenguage = sharedPreferenceReadWrite.readString(LANGUAGE);
         if(!lenguage.equals(" ")){
             setLocale(lenguage);
         }
@@ -91,9 +88,7 @@ public class LogoFragment extends Fragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Context context = getActivity();
-                SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
-                int check = sharedPref.getInt(ACCESS_PREFERENCE, 0);
+                int check = sharedPreferenceReadWrite.readInt(ACCESS_PREFERENCE);
                 if(check == 1){
                     Intent intent = new Intent(requireContext(), CoreActivity.class);
                     startActivity(intent);

@@ -1,11 +1,8 @@
 package com.example.clothual.UI.core.Categories.Jeans;
 
-import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
 import static com.example.clothual.Util.Constant.ID;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +14,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.clothual.Adapter.RecyclerViewClothualAdapter;
 import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Image;
 import com.example.clothual.UI.core.AddDress.AddDressActivity;
 import com.example.clothual.UI.core.Categories.CategoryModel;
 import com.example.clothual.UI.core.Categories.ClothualElementShow;
-import com.example.clothual.Adapter.RecyclerViewClothualAdapter;
+import com.example.clothual.Util.SharedPreferenceReadWrite;
 import com.example.clothual.databinding.FragmentJeansBinding;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -37,6 +35,7 @@ public class JeansFragment extends Fragment {
 
     private CategoryModel model;
     private FragmentJeansBinding binding;
+    private SharedPreferenceReadWrite sharedPreferenceReadWrite;
     public JeansFragment() {
 
     }
@@ -56,6 +55,7 @@ public class JeansFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         model = new CategoryModel(requireActivity().getApplication());
+        sharedPreferenceReadWrite = new SharedPreferenceReadWrite(getActivity().getApplication());
     }
 
     @Override
@@ -69,10 +69,8 @@ public class JeansFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(requireContext());
-        Context context = getActivity();
-        SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
-        List<Clothual> clothual = model.getJeansList(sharedPref.getString(ID, ""));
-        List<Image> image = model.getImageJeansList(clothual, sharedPref.getString(ID, ""));
+        List<Clothual> clothual = model.getJeansList(sharedPreferenceReadWrite.readString(ID));
+        List<Image> image = model.getImageJeansList(clothual, sharedPreferenceReadWrite.readString(ID));
         RecyclerViewClothualAdapter adapter = new RecyclerViewClothualAdapter(clothual, image,
                 getActivity().getContentResolver(), new RecyclerViewClothualAdapter.OnItemClickListener() {
             @Override

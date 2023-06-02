@@ -8,9 +8,8 @@ import androidx.annotation.NonNull;
 
 import com.example.clothual.Data.Database.RoomDatabase;
 import com.example.clothual.Data.Database.UserDao;
-import com.example.clothual.Data.Source.User.UserAuthenticationRemoteDataSource;
 import com.example.clothual.Model.User;
-import com.example.clothual.Util.SharePreferenceReadWrite;
+import com.example.clothual.Util.SharedPreferenceReadWrite;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -34,19 +33,18 @@ public class AuthenticationRepository{
     private final FirebaseUser firebaseUser;
     private final FirebaseAuth firebaseAuth;
 
-    private SharePreferenceReadWrite sharePreferenceReadWrite;
-    private UserAuthenticationRemoteDataSource userAuthenticationRemoteDataSource;
+    private SharedPreferenceReadWrite sharedPreferenceReadWrite;
+
 
 
     public AuthenticationRepository(Application application){
         this.application = application;
         this.database = RoomDatabase.getDatabase(application);
         this.userDao = database.daoUser();
-        this.userAuthenticationRemoteDataSource = new UserAuthenticationRemoteDataSource();
         this.firebaseAuth = FirebaseAuth.getInstance();
         this.firebaseUser = firebaseAuth.getCurrentUser();
         this.firebaseFirestore = FirebaseFirestore.getInstance();
-        sharePreferenceReadWrite = new SharePreferenceReadWrite(application);
+        sharedPreferenceReadWrite = new SharedPreferenceReadWrite(application);
 
     }
 
@@ -70,10 +68,6 @@ public class AuthenticationRepository{
         return userDao.getUserByUsername(username);
     }
 
-    public void signUp(String email, String password, String surname, String name, String username) {
-        userAuthenticationRemoteDataSource.signUp(email, password);
-       // createUserRepository(username, name, surname, password, email);
-    }
 
     public void createUserRepository(String username, String name, String surname, String password, String email, String id){
         System.out.println("in create");
@@ -110,9 +104,9 @@ public class AuthenticationRepository{
                                    .document(FirebaseAuth.getInstance().getUid())
                                    .set(createReturnUserRepository("google", name, surname, "google",
                                            email, account.getId()));
-                           sharePreferenceReadWrite.writeString(ID, account.getId());
+                           sharedPreferenceReadWrite.writeString(ID, account.getId());
                        }else{
-                           sharePreferenceReadWrite.writeString(ID, account.getId());
+                           sharedPreferenceReadWrite.writeString(ID, account.getId());
                        }
                     }
                 }).addOnFailureListener(new OnFailureListener() {

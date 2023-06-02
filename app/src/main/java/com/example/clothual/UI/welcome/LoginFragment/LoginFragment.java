@@ -13,7 +13,6 @@ import static com.example.clothual.Util.Constant.USERNAME_PREFERENCE;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -36,7 +35,7 @@ import androidx.navigation.Navigation;
 import com.example.clothual.R;
 import com.example.clothual.UI.core.CoreActivity;
 import com.example.clothual.UI.welcome.WelcomeModel;
-import com.example.clothual.Util.SharePreferenceReadWrite;
+import com.example.clothual.Util.SharedPreferenceReadWrite;
 import com.example.clothual.databinding.FragmentLoginBinding;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -79,7 +78,7 @@ public class LoginFragment extends Fragment {
 
     private GoogleSignInClient gsc;
 
-    public SharePreferenceReadWrite sharePreferenceReadWrite;
+    public SharedPreferenceReadWrite sharedPreferenceReadWrite;
 
     public LoginFragment() { }
 
@@ -91,7 +90,7 @@ public class LoginFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         welcomeModel = new WelcomeModel(requireActivity().getApplication());
-        sharePreferenceReadWrite = new SharePreferenceReadWrite(requireActivity().getApplication());
+        sharedPreferenceReadWrite = new SharedPreferenceReadWrite(requireActivity().getApplication());
 
     }
 
@@ -106,11 +105,10 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Context context = getActivity();
 
         //Dati ultimo utente loggato
-        binding.editTextUsername.setText(sharePreferenceReadWrite.readString(USERNAME_PREFERENCE));
-        binding.editTextPassword.setText(sharePreferenceReadWrite.readString(PASSWORD_PREFERENCE));
+        binding.editTextUsername.setText(sharedPreferenceReadWrite.readString(USERNAME_PREFERENCE));
+        binding.editTextPassword.setText(sharedPreferenceReadWrite.readString(PASSWORD_PREFERENCE));
 
 
         //Firebase
@@ -168,7 +166,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 String email = binding.editTextUsername.getText().toString().trim();
                 String password = binding.editTextPassword.getText().toString().trim();
-                sharePreferenceReadWrite.writeString(ID, welcomeModel.getIDByEmail(email));
+                sharedPreferenceReadWrite.writeString(ID, welcomeModel.getIDByEmail(email));
                 progressDialog.show();
                 if (email.isEmpty()){
                     progressDialog.cancel();
@@ -183,7 +181,7 @@ public class LoginFragment extends Fragment {
                                 public void onSuccess(AuthResult authResult) {
                                     progressDialog.cancel();
                                     //Recupero dati
-                                    sharePreferenceReadWrite.writeInt(ACCESS_PREFERENCE, 1);
+                                    sharedPreferenceReadWrite.writeInt(ACCESS_PREFERENCE, 1);
                                     userId = firebaseAuth.getCurrentUser().getUid();
                                     DocumentReference documentReference = firebaseFirestore.collection("User").document(userId);
                                     documentReference.addSnapshotListener(getActivity(), new EventListener<DocumentSnapshot>() {

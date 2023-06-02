@@ -1,10 +1,7 @@
 package com.example.clothual.UI.core.Calendar;
 
-import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
 import static com.example.clothual.Util.Constant.DATE;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +14,11 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.clothual.Adapter.RecyclerViewCalendarAdapter;
 import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Image;
 import com.example.clothual.R;
-import com.example.clothual.Adapter.RecyclerViewCalendarAdapter;
+import com.example.clothual.Util.SharedPreferenceReadWrite;
 import com.example.clothual.databinding.FragmentCalendarBinding;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -40,7 +38,7 @@ public class CalendarFragment extends Fragment {
 
     public CalendarModel model;
     private FragmentCalendarBinding binding;
-
+    private SharedPreferenceReadWrite sharedPreferenceReadWrite;
     public CalendarFragment() {
     }
 
@@ -59,6 +57,7 @@ public class CalendarFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         model = new CalendarModel(requireActivity().getApplication());
+        sharedPreferenceReadWrite = new SharedPreferenceReadWrite(getActivity().getApplication());
     }
 
     @Override
@@ -81,10 +80,7 @@ public class CalendarFragment extends Fragment {
         recycler(view);
 
         binding.addButton.setOnClickListener(view1 -> {
-            SharedPreferences sharedPref = getActivity().getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString(DATE, date);
-            editor.apply();
+            sharedPreferenceReadWrite.writeString(DATE, date);
             Navigation.findNavController(requireView()).navigate(R.id.action_calendarFragment_to_addClothualOutfitFragment);
 
         });

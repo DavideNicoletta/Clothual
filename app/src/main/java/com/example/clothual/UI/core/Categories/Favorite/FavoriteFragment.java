@@ -1,11 +1,8 @@
 package com.example.clothual.UI.core.Categories.Favorite;
 
-import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
 import static com.example.clothual.Util.Constant.ID;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +14,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.clothual.Adapter.RecyclerViewFavoriteAdapter;
 import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Image;
 import com.example.clothual.UI.core.Categories.CategoryModel;
 import com.example.clothual.UI.core.Categories.ClothualElementShow;
-import com.example.clothual.Adapter.RecyclerViewFavoriteAdapter;
+import com.example.clothual.Util.SharedPreferenceReadWrite;
 import com.example.clothual.databinding.FragmentFavoriteBinding;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -36,6 +34,7 @@ public class FavoriteFragment extends Fragment {
 
     private FragmentFavoriteBinding binding;
     public CategoryModel model;
+    private SharedPreferenceReadWrite sharedPreferenceReadWrite;
 
     public FavoriteFragment() {
 
@@ -56,6 +55,7 @@ public class FavoriteFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         model = new CategoryModel(getActivity().getApplication());
+        sharedPreferenceReadWrite = new SharedPreferenceReadWrite(getActivity().getApplication());
     }
 
     @Override
@@ -69,10 +69,8 @@ public class FavoriteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(requireContext());
-        Context context = getActivity();
-        SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
-        List<Clothual> clothual = model.getPreferiteList(sharedPref.getString(ID, ""));
-        List<Image> image = model.getImagePreferiteList(clothual, sharedPref.getString(ID, ""));
+        List<Clothual> clothual = model.getPreferiteList(sharedPreferenceReadWrite.readString(ID));
+        List<Image> image = model.getImagePreferiteList(clothual, sharedPreferenceReadWrite.readString(ID));
         RecyclerViewFavoriteAdapter adapter = new RecyclerViewFavoriteAdapter(clothual, image,
                 getActivity().getContentResolver(), new RecyclerViewFavoriteAdapter.OnItemClickListener() {
             @Override
