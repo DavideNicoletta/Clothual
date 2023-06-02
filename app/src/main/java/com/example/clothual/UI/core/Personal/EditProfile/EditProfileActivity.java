@@ -203,7 +203,7 @@ public class EditProfileActivity extends AppCompatActivity {
                             Bitmap immagine = (Bitmap) data.getExtras().get("data");
 
                             try {
-                                editor.putString(URI, personalModel.saveImage(getContentResolver(), immagine, personalModel.getNameImage(), "profile", share.getInt(ID, 0)).toString());
+                                editor.putString(URI, personalModel.saveImage(getContentResolver(), immagine, personalModel.getNameImage(), "profile", share.getString(ID, "")).toString());
                                 editor.apply();
                                 binding.imagePersonal.setImageBitmap(immagine);
                             } catch (IOException e) {
@@ -237,7 +237,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                 try {
                                     Bitmap bitmap = personalModel.importImageFromMemoryEditProfile(EditProfileActivity.this, getApplicationContext(), getContentResolver(), uri);
                                     Uri newUri = personalModel.saveImage(getContentResolver(), bitmap,
-                                            personalModel.getNameImage(), "profile", share.getInt(ID, 0));
+                                            personalModel.getNameImage(), "profile", share.getString(ID, ""));
                                     binding.imagePersonal.setImageBitmap(bitmap);
                                     editor.putString(URI, newUri.toString());
                                     //Intent intent = new Intent(this, AddDressActivity.class);

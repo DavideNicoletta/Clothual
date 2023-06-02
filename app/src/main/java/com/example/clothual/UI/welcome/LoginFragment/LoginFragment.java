@@ -2,7 +2,6 @@ package com.example.clothual.UI.welcome.LoginFragment;
 
 import static com.example.clothual.Util.Constant.ACCESS_PREFERENCE;
 import static com.example.clothual.Util.Constant.COCO_CHANEL;
-import static com.example.clothual.Util.Constant.CREDENTIALS_LOGIN_FILE;
 import static com.example.clothual.Util.Constant.DONATELLA_VERSACE;
 import static com.example.clothual.Util.Constant.GIANNI_VERSACE;
 import static com.example.clothual.Util.Constant.GIORGIO_ARMANI;
@@ -16,7 +15,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -59,16 +57,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LoginFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-
 
 @SuppressWarnings("deprecation")
 public class LoginFragment extends Fragment {
-
 
     public WelcomeModel welcomeModel;
     private FragmentLoginBinding binding;
@@ -116,14 +107,10 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Context context = getActivity();
-        SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit = sharedPref.edit();
 
         //Dati ultimo utente loggato
-        String username = sharedPref.getString(USERNAME_PREFERENCE, "");
-        String password = sharedPref.getString(PASSWORD_PREFERENCE, "");
-        binding.editTextUsername.setText(username);
-        binding.editTextPassword.setText(password);
+        binding.editTextUsername.setText(sharePreferenceReadWrite.readString(USERNAME_PREFERENCE));
+        binding.editTextPassword.setText(sharePreferenceReadWrite.readString(PASSWORD_PREFERENCE));
 
 
         //Firebase
@@ -196,8 +183,7 @@ public class LoginFragment extends Fragment {
                                 public void onSuccess(AuthResult authResult) {
                                     progressDialog.cancel();
                                     //Recupero dati
-                                    edit.putInt(ACCESS_PREFERENCE, 1);
-                                    edit.apply();
+                                    sharePreferenceReadWrite.writeInt(ACCESS_PREFERENCE, 1);
                                     userId = firebaseAuth.getCurrentUser().getUid();
                                     DocumentReference documentReference = firebaseFirestore.collection("User").document(userId);
                                     documentReference.addSnapshotListener(getActivity(), new EventListener<DocumentSnapshot>() {

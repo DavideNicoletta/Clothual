@@ -117,7 +117,7 @@ public class AddDressActivity extends AppCompatActivity {
                 case 0:
                     model.createClothual(spinnerValue, brand.getText().toString(), description
                             .getText().toString(), color.getText().toString(), template.getText().toString(),
-                            model.getIdByUri(uri), sharedPref.getInt(ID, 0));
+                            model.getIdByUri(uri), sharedPref.getString(ID, ""));
                     Intent intentFirstAction = new Intent(AddDressActivity.this, CoreActivity.class);
                     startActivity(intentFirstAction);
                     break;

@@ -72,8 +72,8 @@ public class TotalFragment extends Fragment {
         RecyclerView.LayoutManager manager = new LinearLayoutManager(requireContext());
         Context context = getActivity();
         SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
-        List<Image> image = model.getImageList(sharedPref.getInt(ID, 0));
-        List<Clothual> clothual = model.getClothualList(sharedPref.getInt(ID, 0));
+        List<Image> image = model.getImageList(sharedPref.getString(ID, ""));
+        List<Clothual> clothual = model.getClothualList(sharedPref.getString(ID, ""));
         RecyclerViewClothualAdapter adapter = new RecyclerViewClothualAdapter(clothual, image,
                 getActivity().getContentResolver(), new RecyclerViewClothualAdapter.OnItemClickListener() {
 

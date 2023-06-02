@@ -77,11 +77,11 @@ public class AddClothualOutfitFragment extends Fragment {
 
 
         if(outfit == null){
-            List<Image> image = model.getImageList(sharedPref.getInt(ID, 0));
-            List<Clothual> clothual = model.getClothualList(sharedPref.getInt(ID, 0));
+            List<Image> image = model.getImageList(sharedPref.getString(ID, ""));
+            List<Clothual> clothual = model.getClothualList(sharedPref.getString(ID, ""));
             recycler(clothual, image, view);
         }else{
-            List<Clothual> clothualList = model.getClothualOutfitDate(outfit, sharedPref.getInt(ID, 0));
+            List<Clothual> clothualList = model.getClothualOutfitDate(outfit, sharedPref.getString(ID, ""));
             List<Image> imageOutfit = model.getImageOutfit(clothualList);
             recycler(clothualList, imageOutfit, view);
         }

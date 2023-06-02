@@ -1,5 +1,7 @@
 package com.example.clothual.Data.Repository.Welcome;
 
+import static com.example.clothual.Util.Constant.ID;
+
 import android.app.Application;
 
 import androidx.annotation.NonNull;
@@ -108,6 +110,9 @@ public class AuthenticationRepository{
                                    .document(FirebaseAuth.getInstance().getUid())
                                    .set(createReturnUserRepository("google", name, surname, "google",
                                            email, account.getId()));
+                           sharePreferenceReadWrite.writeString(ID, account.getId());
+                       }else{
+                           sharePreferenceReadWrite.writeString(ID, account.getId());
                        }
                     }
                 }).addOnFailureListener(new OnFailureListener() {

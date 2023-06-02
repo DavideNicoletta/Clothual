@@ -190,11 +190,11 @@ public class PersonalModel {
     }
 
 
-    public Uri saveImage(ContentResolver contentResolver, Bitmap image, String title, String description, int ID) throws IOException {
+    public Uri saveImage(ContentResolver contentResolver, Bitmap image, String title, String description, String ID) throws IOException {
         return saveImageToMemory( contentResolver,  image,  title,  description, ID);
     }
 
-    public Uri saveImageToMemory(ContentResolver contentResolver, Bitmap bitmap, String title, String description, int ID) throws IOException {
+    public Uri saveImageToMemory(ContentResolver contentResolver, Bitmap bitmap, String title, String description, String ID) throws IOException {
         System.out.println("Salvataggio");
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, title);
@@ -223,7 +223,7 @@ public class PersonalModel {
         return formatterDate.format(instant)+"__"+timeColonFormatter.format(instant);
     }
 
-    public void createImage(String title, String description, String uri, int ID){
+    public void createImage(String title, String description, String uri, String ID){
         Image image = new Image(title, description, uri, ID);
         coreRepository.insertImage(image);//imageDao.insertImage(image);
     }

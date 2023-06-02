@@ -8,18 +8,17 @@ public class Image {
 
     @PrimaryKey(autoGenerate = true)
     private int ID;
-
     private String title;
     private String description;
     private String uri;
 
-    private int idAccount;
+    private String idUser;
 
-    public Image(String title, String description, String uri, int idAccount) {
+    public Image(String title, String description, String uri, String idUser) {
         this.title = title;
         this.description = description;
         this.uri = uri;
-        this.idAccount = idAccount;
+        this.idUser = idUser;
     }
 
     public String getTitle() {
@@ -49,11 +48,11 @@ public class Image {
         this.ID = ID;
     }
 
-    public int getIdAccount() {
-        return idAccount;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setIdAccount(int idAccount) {
-        this.idAccount = idAccount;
+    public void setIdUser(String  idUser) {
+        this.idUser = idUser;
     }
 }

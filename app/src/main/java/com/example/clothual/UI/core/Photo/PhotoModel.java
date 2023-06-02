@@ -63,12 +63,12 @@ public class PhotoModel {
 
 
 
-    public Uri saveImage(ContentResolver contentResolver, Bitmap image, String title, String description, int id) throws IOException {
+    public Uri saveImage(ContentResolver contentResolver, Bitmap image, String title, String description, String id) throws IOException {
         return saveImageToMemory( contentResolver,  image,  title,  description, id);
     }
 
 
-    public Uri saveImageToMemory(ContentResolver contentResolver, Bitmap bitmap, String title, String description, int id) throws IOException {
+    public Uri saveImageToMemory(ContentResolver contentResolver, Bitmap bitmap, String title, String description, String id) throws IOException {
         System.out.println("Salvataggio");
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, title);
@@ -88,7 +88,7 @@ public class PhotoModel {
     }
 
 
-    public List<Image> getImageList(int ID){
+    public List<Image> getImageList(String ID){
         List<Image> imageList = coreRepository.getAllImage();//imageDao.getAllImage();
         List<Image> getList = new ArrayList<>();
         for(int i = 0; i < imageList.size(); i++){
@@ -99,13 +99,13 @@ public class PhotoModel {
 
 
         for(int i = 0; i < getList.size(); i++){
-            if(getList.get(i).getIdAccount() != ID){
-                System.out.println(imageList.get(i).getIdAccount());
+            if(!getList.get(i).getIdUser().equals(ID)){
+                System.out.println(imageList.get(i).getIdUser());
                 getList.remove(getList.get(i));
             }
         }
 
-        if(getList.size() == 1 && getList.get(0).getIdAccount() != ID){
+        if(getList.size() == 1 && !getList.get(0).getIdUser().equals(ID)){
             return null;
         }
 

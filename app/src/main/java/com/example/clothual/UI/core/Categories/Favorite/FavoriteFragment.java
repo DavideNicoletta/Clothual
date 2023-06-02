@@ -71,8 +71,8 @@ public class FavoriteFragment extends Fragment {
         RecyclerView.LayoutManager manager = new LinearLayoutManager(requireContext());
         Context context = getActivity();
         SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
-        List<Clothual> clothual = model.getPreferiteList(sharedPref.getInt(ID, 0));
-        List<Image> image = model.getImagePreferiteList(clothual, sharedPref.getInt(ID, 0));
+        List<Clothual> clothual = model.getPreferiteList(sharedPref.getString(ID, ""));
+        List<Image> image = model.getImagePreferiteList(clothual, sharedPref.getString(ID, ""));
         RecyclerViewFavoriteAdapter adapter = new RecyclerViewFavoriteAdapter(clothual, image,
                 getActivity().getContentResolver(), new RecyclerViewFavoriteAdapter.OnItemClickListener() {
             @Override

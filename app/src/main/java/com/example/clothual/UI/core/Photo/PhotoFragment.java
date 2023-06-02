@@ -126,7 +126,7 @@ public class PhotoFragment extends Fragment {
         }
 
             SharedPreferences sharedPref = getActivity().getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
-            int Id = sharedPref.getInt(ID, 0);
+            String Id = sharedPref.getString(ID, "");
             List<Image> image = photoModel.getImageList(Id);
             RecyclerViewPhotoAdapter adapter = new RecyclerViewPhotoAdapter(image, new RecyclerViewPhotoAdapter.OnItemClickListener() {
                 @Override
@@ -172,7 +172,7 @@ public class PhotoFragment extends Fragment {
                         }else{
                             Bitmap immagine = (Bitmap) data.getExtras().get("data");
                             try {
-                                uri = photoModel.saveImage(getActivity().getContentResolver(), immagine, photoModel.getNameImage(), "", sharedPref.getInt(ID, 0));
+                                uri = photoModel.saveImage(getActivity().getContentResolver(), immagine, photoModel.getNameImage(), "", sharedPref.getString(ID, ""));
                                 Intent intent = new Intent(getActivity(), AddDressActivity.class);
                                 intent.putExtra("uri", uri.toString());
                                 intent.putExtra("action", 0);
@@ -205,7 +205,7 @@ public class PhotoFragment extends Fragment {
                                 try {
                                     Bitmap bitmap = photoModel.importImageFromMemory(getActivity(), getContext(), getActivity().getContentResolver(), uri);
                                     Uri newUri = photoModel.saveImage(getActivity().getContentResolver(), bitmap,
-                                            photoModel.getNameImage(), "", sharedPref.getInt(ID, 0));
+                                            photoModel.getNameImage(), "", sharedPref.getString(ID, ""));
                                     Intent intent = new Intent(getActivity(), AddDressActivity.class);
                                     intent.putExtra("uri", newUri.toString());
                                     intent.putExtra("action", 0);

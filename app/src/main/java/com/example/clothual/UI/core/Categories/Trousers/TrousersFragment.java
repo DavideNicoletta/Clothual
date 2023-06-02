@@ -72,8 +72,8 @@ public class TrousersFragment extends Fragment {
         RecyclerView.LayoutManager manager = new LinearLayoutManager(requireContext());
         Context context = getActivity();
         SharedPreferences sharedPref = context.getSharedPreferences(CREDENTIALS_LOGIN_FILE, Context.MODE_PRIVATE);
-        List<Clothual> clothual = model.getTrousersList(sharedPref.getInt(ID, 0));
-        List<Image> image = model.getImageTrousersList(clothual, sharedPref.getInt(ID, 0));
+        List<Clothual> clothual = model.getTrousersList(sharedPref.getString(ID, ""));
+        List<Image> image = model.getImageTrousersList(clothual, sharedPref.getString(ID, ""));
         RecyclerViewClothualAdapter adapter = new RecyclerViewClothualAdapter(clothual, image,
                 getActivity().getContentResolver(), new RecyclerViewClothualAdapter.OnItemClickListener() {
             @Override

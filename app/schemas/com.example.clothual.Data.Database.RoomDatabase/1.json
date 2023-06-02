@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "cd5a07f69a0eb5b1c9c07dafa0334992",
+    "identityHash": "8ceb87420a61ccc3db364cb26ccdedea",
     "entities": [
       {
         "tableName": "User",
@@ -56,7 +56,7 @@
       },
       {
         "tableName": "Image",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `description` TEXT, `uri` TEXT, `idAccount` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `description` TEXT, `uri` TEXT, `idUser` TEXT)",
         "fields": [
           {
             "fieldPath": "ID",
@@ -83,10 +83,10 @@
             "notNull": false
           },
           {
-            "fieldPath": "idAccount",
-            "columnName": "idAccount",
-            "affinity": "INTEGER",
-            "notNull": true
+            "fieldPath": "idUser",
+            "columnName": "idUser",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -100,7 +100,7 @@
       },
       {
         "tableName": "Clothual",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `brand` TEXT, `description` TEXT, `color` TEXT, `template` TEXT, `idImage` INTEGER NOT NULL, `isPreferite` INTEGER NOT NULL, `idUser` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `brand` TEXT, `description` TEXT, `color` TEXT, `template` TEXT, `idImage` INTEGER NOT NULL, `isPreferite` INTEGER NOT NULL, `idUser` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -153,8 +153,8 @@
           {
             "fieldPath": "idUser",
             "columnName": "idUser",
-            "affinity": "INTEGER",
-            "notNull": true
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -202,7 +202,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cd5a07f69a0eb5b1c9c07dafa0334992')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8ceb87420a61ccc3db364cb26ccdedea')"
     ]
   }
 }
