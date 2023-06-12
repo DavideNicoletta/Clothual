@@ -18,7 +18,7 @@
         android:gravity="end"
         android:src="@drawable/add_48px"
         android:tint="@color/white"
-        android:backgroundTint="@color/black"/>
+        android:backgroundTint="@color/md_theme_light_primary"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
         android:gravity="end"
         android:src="@drawable/upload_48px"
         android:tint="@color/white"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/md_theme_light_primary"
         app:fabSize="normal"/>
     <TextView
         android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
         android:gravity="end"
         android:src="@drawable/camera_enhance_48px"
         android:tint="@color/white"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/md_theme_light_primary"
         app:fabSize="normal"/>
     <TextView
         android:layout_width="wrap_content"

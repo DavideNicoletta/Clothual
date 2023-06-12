@@ -7,7 +7,7 @@
         />
 
     <solid
-        android:color="@color/backGroundAdapter"
+        android:color="@color/md_theme_light_surfaceVariant"
         />
 </shape>
 
