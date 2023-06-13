@@ -200,7 +200,7 @@
                 android:layout_margin="8dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="6dp"
-                android:layout_marginBottom="70dp">
+                android:layout_marginBottom="85dp">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="150dp"

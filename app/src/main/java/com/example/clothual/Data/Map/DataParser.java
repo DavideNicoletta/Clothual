@@ -1,4 +1,4 @@
-package com.example.clothual.UI.core.Map;
+package com.example.clothual.Data.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;

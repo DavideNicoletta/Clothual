@@ -22,6 +22,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:background="@drawable/border_button"
+        android:backgroundTint="@color/md_theme_light_primary"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:text="+"

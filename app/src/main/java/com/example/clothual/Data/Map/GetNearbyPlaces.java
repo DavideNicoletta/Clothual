@@ -1,4 +1,4 @@
-package com.example.clothual.UI.core.Map;
+package com.example.clothual.Data.Map;
 
 import android.os.AsyncTask;
 

@@ -41,6 +41,8 @@ public class CoreActivity extends AppCompatActivity{
                 break;
         }
 
+
+
         
         Toolbar toolbar = findViewById(R.id.top_appbar);
         setSupportActionBar(toolbar);
