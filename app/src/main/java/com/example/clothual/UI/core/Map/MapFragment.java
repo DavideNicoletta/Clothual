@@ -158,10 +158,8 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -179,7 +177,6 @@ import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.views.CustomZoomButtonsController;
-import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 /**
@@ -193,6 +190,7 @@ public class MapFragment extends Fragment {
     public FragmentMapBinding binding;
     private MyLocationNewOverlay locationOverlay;
     long pressedTime = 0;
+    private MapModel mapModel;
 
     public MapFragment() {
 
@@ -212,6 +210,7 @@ public class MapFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mapModel = new MapModel(getActivity().getApplication());
     }
 
     @Override
@@ -239,11 +238,9 @@ public class MapFragment extends Fragment {
 
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
 
-
-
         assert ctx != null;
-        GpsMyLocationProvider provider = new GpsMyLocationProvider(ctx);
-        provider.addLocationSource(LocationManager.NETWORK_PROVIDER);
+        /*
+        GpsMyLocationProvider provider = mapModel.getProvider(ctx);
         locationOverlay = new MyLocationNewOverlay(provider, binding.mapView);
         locationOverlay.enableFollowLocation();
         locationOverlay.runOnFirstFix(new Runnable() {
@@ -251,7 +248,8 @@ public class MapFragment extends Fragment {
             public void run() {
                 Log.d("MyTag", String.format("First location fix: %s", locationOverlay.getLastFix()));
             }
-        });
+        });*/
+        locationOverlay = mapModel.getLocationOverlay(ctx, binding.mapView);
         binding.mapView.getOverlayManager().add(locationOverlay);
         binding.mapView.setTileSource(TileSourceFactory.MAPNIK);
         binding.mapView.setBuiltInZoomControls(true);

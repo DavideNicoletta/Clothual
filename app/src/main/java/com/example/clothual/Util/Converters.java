@@ -1,4 +1,4 @@
-package com.example.clothual.Model;
+package com.example.clothual.Util;
 
 import java.util.ArrayList;
 import java.util.List;

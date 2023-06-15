@@ -1,6 +1,9 @@
 package com.example.clothual.Data.Repository.Core;
 
 import android.app.Application;
+import android.content.Context;
+import android.location.LocationManager;
+import android.util.Log;
 
 import com.example.clothual.Data.Database.ClothualDao;
 import com.example.clothual.Data.Database.ImageDao;
@@ -11,6 +14,10 @@ import com.example.clothual.Model.Clothual;
 import com.example.clothual.Model.Image;
 import com.example.clothual.Model.Outfit;
 import com.example.clothual.Model.User;
+
+import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.List;
 
@@ -119,6 +126,24 @@ public class CoreRepository {
 
     public List<User> getAllUser(){
         return userDao.getAllUser();
+    }
+
+    public GpsMyLocationProvider getProvider(Context ctx){
+        GpsMyLocationProvider provider = new GpsMyLocationProvider(ctx);
+        provider.addLocationSource(LocationManager.NETWORK_PROVIDER);
+        return provider;
+    }
+
+    public MyLocationNewOverlay getLocationOverlay(Context ctx, MapView mapView){
+        MyLocationNewOverlay locationOverlay = new MyLocationNewOverlay(getProvider(ctx), mapView);
+        locationOverlay.enableFollowLocation();
+        locationOverlay.runOnFirstFix(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("MyTag", String.format("First location fix: %s", locationOverlay.getLastFix()));
+            }
+        });
+        return locationOverlay;
     }
 
 }

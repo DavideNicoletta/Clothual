@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clothual.Model.Clothual;
-import com.example.clothual.Model.Converters;
+import com.example.clothual.Util.Converters;
 import com.example.clothual.Model.Image;
 import com.example.clothual.Model.Outfit;
 import com.example.clothual.R;
