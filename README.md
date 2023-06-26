@@ -86,7 +86,7 @@ primo accesso e il sign out.
 
 <br>
 
-### **ViewModels*** Utilizzati:
+### **ViewModels** Utilizzati:
 Delegano al Repository l’estrazione dei dati.
 * AddDressModel
 * CalendarModel
